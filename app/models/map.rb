@@ -361,7 +361,7 @@ class Map < ActiveRecord::Base
     #:hasJPG
   }
 
-  y0 = Date.today.year - 5
+  y0 = Date.today.year - 3
   y0 = y0 - y0 % 5
 
   MAP_YEARS = [
