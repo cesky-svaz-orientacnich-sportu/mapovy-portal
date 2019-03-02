@@ -362,15 +362,15 @@ class Map < ActiveRecord::Base
   }
 
   y0 = Date.today.year - 5
-  y0 -= y0 % 5
-
+  y0 = y0 - y0 % 5
 
   MAP_YEARS = [
-    [y, nil,    0],
-    [y-5, y-1, -15],
-    [y-10, y-6, -20],
-    [nil, y-11,  -25],
+    [y0, nil,    0],
+    [y0-5, y0-1, -15],
+    [y0-10, y0-6, -20],
+    [nil, y0-11,  -25],
   ]
+
   # MAP_YEARS = [
   #   [2010, nil,    0],
   #   [2005, 2009, -15],
