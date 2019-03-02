@@ -1,0 +1,42 @@
+%h2 Obrys mapy
+
+- if map.shape_as_coords.empty?
+
+  %div.well Pro tuto mapu není obrys dostupný.
+
+  / - if admin?
+  /   %div.well.well-sm
+  /     %strong shape_as_coords
+  /     = map.shape_as_coords.inspect
+  /   %div.well.well-sm
+  /     %strong shape_as_geojson
+  /     = map.shape_as_geojson.inspect
+  /   %div.well.well-sm
+  /     %strong shape_json
+  /     = map.shape_json.inspect
+  /   %div.well.well-sm
+  /     %strong shape_kml
+  /     = map.shape_kml.inspect
+
+- else
+  %div#inline_map_canvas(style="width:100%;min-height:400px;height:400px")
+
+  :javascript
+    var polygon;
+    var map;
+
+    $( window ).load(function() {
+
+      map = setupMap(document.getElementById('inline_map_canvas'), false);
+
+      coordList = [#{(map.shape_as_coords.map{|x| %{new google.maps.LatLng("#{x[1]}", "#{x[0]}")}} * ", ").html_safe}];
+      polygon = new google.maps.Polygon({
+        paths: coordList
+      });
+      polygon.setMap(map);
+      var bounds = new google.maps.LatLngBounds();
+      for (var i = 0; i < coordList.length; i++)
+        bounds.extend(coordList[i]);
+      map.fitBounds(bounds);
+
+    });

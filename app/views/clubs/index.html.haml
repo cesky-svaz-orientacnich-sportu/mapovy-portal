@@ -1,0 +1,51 @@
+%h1= t("mapserver.listClubHead")
+%h2= t("mapserver.listClubHeadLow")
+
+%div.container
+  %table.table.table-striped.compact#clubs{:"data-source" => clubs_url(format: "json")}
+    %colgroup
+      %col(width="20%")
+      %col
+      %col
+      %col
+    %thead
+      %tr
+        %th= t('mapserver.club_attributes.name')
+        %th= t('mapserver.club_attributes.abbreviation')
+        %th= t('mapserver.club_attributes.region')
+        %th= t('mapserver.club_attributes.district')
+    %tbody
+
+:javascript
+  $(function(){
+    $('#clubs').dataTable( {
+      "processing": true,
+      "order" : [[1, "asc"]],
+      "pagingType": "full_numbers",
+      "serverSide": true,
+      "lengthChange": false,
+      "ajax": $('#clubs').data('source'),
+      "columns": [
+          null,
+          null,
+          null,
+          null
+        ],
+      'language': {
+        "emptyTable": "#{t('datatable.emptyTable')}",
+        "info": "#{t('datatable.info')}",
+        "infoEmpty": "#{t('datatable.infoEmpty')}",
+        "infoFiltered": "#{t('datatable.infoFiltered')}",
+        "loadingRecords": "#{t('datatable.loadingRecords')}",
+        "processing": "#{t('datatable.processing')}",
+        "search": "#{t('datatable.search')}",
+        "zeroRecords": "#{t('datatable.zeroRecords')}",
+        "paginate": {
+          "first": "#{t('datatable.paginate.first')}",
+          "last": "#{t('datatable.paginate.last')}",
+          "next": "#{t('datatable.paginate.next')}",
+          "previous": "#{t('datatable.paginate.previous')}"
+        }
+      }
+    });
+  });

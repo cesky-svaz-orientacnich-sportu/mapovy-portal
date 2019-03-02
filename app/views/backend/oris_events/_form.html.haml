@@ -1,0 +1,15 @@
+= form_for [:backend, user], :html => {:role => 'form', :class => 'form-horizontal'} do |f|
+  %div.form-group
+    = f.label :email, :class => 'col-sm-2'
+    = f.text_field :email, :class => 'col-sm-6'
+  %div.form-group
+    = f.label :oris_registrations, :class => 'col-sm-2'
+    = f.text_area :oris_registrations, :class => 'col-sm-6'
+  %div.form-group
+    = f.label :role, :class => 'col-sm-2'
+    = f.select :role, User::ROLES, :include_blank => true, :class => 'col-sm-6'
+  %div.form-group
+    %div.col-sm-2
+    %div.col-sm-6
+      = f.submit 'Uložit'
+

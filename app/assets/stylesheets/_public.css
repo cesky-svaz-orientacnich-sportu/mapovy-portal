@@ -1,0 +1,35 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require bootstrap_helper
+ *= require font-awesome
+ *= require common
+ *= require 'info_table'
+ *= require select2
+ *= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
+ *= require dataTables/extras/dataTables.colReorder
+ *= require dataTables/extras/dataTables.colVis
+ *= require 'fancybox/jquery.fancybox'
+ *= require_self
+ 
+*/
+
+.dataTables_wrapper {
+  .clear {
+    clear: both;
+  }
+}
+#maps_wrapper {
+  clear: both;    
+}
+
+.menuTopContainer {
+  max-width:1170px;
+}

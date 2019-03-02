@@ -1,0 +1,32 @@
+%table.table.table-bordered.table-condensed.infoTable
+  %tbody
+    %tr
+      %th= map_attribute_label :title
+      %td(colspan=3)= map.title
+      %th= map_attribute_label :id_
+      %td #{map.id} / #{map.map_family_}
+    %tr
+      %th= map_attribute_label :year
+      %td 
+        = map.year          
+      %th= map_attribute_label :created_by
+      %td #{map.created_by ? print_user(map.created_by, has_role?(:organizer, :cartographer, :manager)) : "archiv ČSOS"}
+      %th= map_attribute_label :patron
+      %td= map.club ? link_to(map.club, map.club) : map.patron
+    - if map.oris_event
+      %tr
+        %th= map_attribute_label :main_race_title
+        %td(colspan=3)
+          = link_to map.oris_event.title.html_safe + " " + icon('globe', tooltip: "ORIS"), map.oris_event.oris_url, target: '_blank'
+        %th= map_attribute_label :main_race_date
+        %td= map.oris_event.date
+    - elsif !map.main_race_title.blank?
+      %tr
+        %th= map_attribute_label :main_race_title
+        %td(colspan=3) #{map.main_race_title}
+        %th= map_attribute_label :main_race_date
+        %td= map.main_race_date ? map.main_race_date.strftime("%d. %m. %Y") : '---'
+    - elsif map.oris_event == 0
+      %tr
+        %th= map_attribute_label :main_race_title
+        %td(colspan=5) (mapa není určena pro konkrétní závod)

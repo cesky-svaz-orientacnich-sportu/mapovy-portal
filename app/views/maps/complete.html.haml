@@ -1,0 +1,60 @@
+%h1 Doplnit informace pro mapu #{@map}
+
+- if @map.errors.any?
+  %ul.map_errors.bs-callout.bs-callout-danger
+    - @map.errors.messages.each do |key, err|
+      %li
+        %strong= Map.human_attribute_name(key)
+        #{err * " a "}
+
+- @map.shape_json ||= @map.shape_as_coords
+= nested_form_for @map, :url => url_for([:complete, @map]), :html => {:id => 'map_form', :role => 'form', :class => 'form-horizontal', :multipart => true} do |f|
+
+  %h2= t("mapserver.mapBasicData")
+
+  = render :partial => 'form_fields_basic_completion', :locals => {:f => f}
+
+  %h2= t("mapserver.mapAuthors")
+
+  = render :partial => 'form_fields_authors', :locals => {:f => f}
+
+  %h2= t("mapserver.mapPreview")
+
+  %div.well(style="overflow:auto")
+    Vložit náhled
+    = file_field_tag "file", class: 'col-sm-3'
+
+  %h2 Obrys mapy
+
+  = render :partial => 'form_inline_map', :locals => {:f => f}
+
+  %div(style="margin-top:20px;margin-bottom:40px")
+    %button(type="button" class="btn submit-btn btn-primary") Uložit mapu
+
+:javascript
+  var polygon;
+  var map;
+
+  $(function() {
+
+    map = setupMap(document.getElementById('inline_map_canvas'), false);
+    setupMapEditor(map);
+
+    coordinates = [#{(@map.shape_as_coords.map{|x| %{new google.maps.LatLng("#{x[1]}", "#{x[0]}")}} * ", ").html_safe}];
+    polygon = new google.maps.Polygon({
+      paths: coordinates,
+      editable: true
+    });
+    polygon.setMap(map);
+    var bounds = new google.maps.LatLngBounds();
+    for (var i = 0; i < coordinates.length; i++)
+      bounds.extend(coordinates[i]);
+    if (coordinates.length > 0)
+      map.fitBounds(bounds);
+
+    setupMapEditorSubmit();
+    fixMapHeight($('#inline_map_canvas'));
+
+  });
+
+

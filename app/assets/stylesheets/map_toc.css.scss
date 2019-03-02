@@ -1,0 +1,146 @@
+#cancelSearch {
+    background: #DA2626;
+    border: 1px solid #b5b6b6;
+    position: absolute;
+    right: 9px;
+    top: 121px;
+    width: 148px;
+    z-index:8;    
+    height:29px;
+    padding:5px;
+    text-align:center;
+    font-weight:bold;
+    a {
+      color:white;
+    }
+    a:hover {
+      color: yellow;
+    }
+}
+
+#toc, #areatoc {
+    background: #f1f1f1;
+    border: 1px solid #b5b6b6;
+    position: absolute;
+    right: 9px;
+    top: 121px;
+    width: 148px;
+    z-index:8;
+    
+    .options {
+      margin-top:9px;
+      margin-bottom:9px;      
+      .item {
+          height: 22px;
+          position: relative;
+          span {
+              background: #d4d4d4;
+              border: 2px solid #b0b0b0;
+              display: block;
+              height: 12px;
+              left: 30px;
+              position: absolute;
+              top: 4px;
+              width: 12px;
+          }
+      }
+
+      .item:hover {
+        background: #fff;
+      }
+
+      .item.active {
+        background: #fff;
+        label {
+          font-weight: bold;          
+        }
+      }
+
+      input[type=checkbox] {
+          left: 9px;
+          margin: 0;
+          padding: 0;
+          position: absolute;
+          top: 4px;
+          width: 14px;
+          height: 14px;
+      }
+
+      label {
+          color: #000;
+          display: block;
+          font-size: 13px;
+          height: 20px;
+          line-height: 17px;
+          padding: 2px 0 0 48px;
+      }
+    }
+
+    .separator{
+      height:1px;
+      background-color:black;
+      margin-top:9px;
+      margin-bottom:9px;
+    }
+
+    .header {
+        border-bottom: 1px solid #d5d5d5;
+        height: 27px;
+        position: relative;
+        strong {
+            color: #000;
+            display: block;
+            font-size: 12px;
+            padding: 6px 0 0 10px;
+        }
+    }
+
+    .link {
+        position: absolute;
+        width: 23px;
+        right: 4px;
+        top: 6px;
+    }
+
+    .link.toc_expand {
+        background: url('/img/bg-button-show.png');
+        height: 15px;
+    }
+
+    .link.toc_collapse {
+        background: url('/img/bg-button-minimalize.png');
+        height: 22px;
+    }
+
+    ul {
+        background: #3d3d3d;
+        height: 27px;
+        padding: 0;
+        a {
+            border-bottom: 1px solid #b5b6b6;
+        }
+    }
+
+}
+
+#areatoc {
+  right: 165px;  
+  .options {
+    label {
+      padding-left:28px;
+    }
+  }
+}
+
+#toc.minimized .header, #areatoc.minimized .header {
+    background: #3d3d3d;
+    border-bottom: 0;
+    strong {
+        font-weight: normal;
+        color: #fff;
+    }
+}
+
+
+
+

@@ -1,0 +1,13 @@
+Doplněný požadavek na evidenci mapy
+===================================
+
+Uživatelem <%= @map.created_by %> byly doplněny požadované informace k požadavku na přidělení evidenčního čísla pro mapu <%= @map %>.
+
+<% if @map.region != @region_was %>
+Krajská příslušnost mapy byla změněna z <%= Map::REGIONS[@region_was] %> na <%= Map::REGIONS[@map.region] %>.
+<% end %>
+
+Záznam zkontrolovat a následně odsouhlasit je možno zde: <%= map_url(@map, locale: :cs) %>
+
+------------------
+Mapový portál ČSOS

@@ -1,0 +1,34 @@
+%h1 Mapy s evidenčním číslem v roce #{@year}
+
+%div.btn-group
+  - (2015..Date.today.year).each do |y|
+    = link_to y, {year: y}, class: "btn btn-#{y.to_i == @year.to_i ? "primary" : "default"}"
+
+- collection = Map.where(year: @year).where('identifier_filing IS NOT NULL').where('identifier_filing <> ?', "-").where('state <> ?', Map::STATE_SAVED_WITHOUT_FILING).order(:identifier_filing)
+
+- if current_user and current_user.role == 'cartographer' and current_user.regions.any?
+  - maps = collection.where(region: current_user.regions)
+  - if maps.any?
+
+    %h3
+      Evidované mapy
+      - if (current_user.authorized_regions.size > 1)
+        (z krajů #{current_user.regions.map{|x| Map::REGIONS[x]} * ", "})
+      - else
+        (z kraje #{Map::REGIONS[current_user.regions.first]})
+
+    = render partial: 'filed_list', locals: {maps: maps}
+
+- if collection.exists?
+
+  %h3 Všechny evidované mapy
+
+  - Map::REGIONS.each do |region, region_title|
+    - maps = collection.where(region: region)
+    - if maps.exists?
+      %h4= region_title
+      = render partial: 'filed_list', locals: {maps: maps}
+
+- else
+
+  %p Žádné evidované mapy.

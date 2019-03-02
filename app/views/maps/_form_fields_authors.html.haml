@@ -1,0 +1,37 @@
+= f.fields_for :cartographers do |cartographer_form|
+  %div.form-group
+    %div.col-sm-4
+      = cartographer_form.text_field :author_id, :class => "authorSelect", :style => "width:90%"
+      = map_attribute_label(:author_name, :edit_short)
+    %div.col-sm-4
+      = cartographer_form.select :role, options_for_select(Cartographer::CARTOGRAPHER_ROLES.map{|x| [t("mapserver.cartographer_roles.#{x}"), x]}, cartographer_form.object.role), {}, :style => "width:90%", :class => "roleSelect"
+      = map_attribute_label(:author_role, :edit_short)
+    %div.col-sm-4
+      = cartographer_form.link_to_remove icon('times')
+%p= f.link_to_add "#{icon('plus-circle')} přidat autora".html_safe, :cartographers
+
+:javascript
+  function authorSelect(e) {
+    e.select2({
+      createSearchChoice:function(term, data) {
+        if ($(data).filter(function() {
+          return this.text.localeCompare(term)===0;
+        }).length===0)
+        {return {id:term, text:term};}
+      },
+      data: #{Author.all.map{|x| {'id' => x.id, 'text' => x.to_s}}.to_json.html_safe}
+    });
+  }
+
+  $(function() {
+    authorSelect($('.authorSelect'));
+    $(".roleSelect").select2();
+  });
+
+  $(document).on('nested:fieldAdded', function(event){
+    var field = event.field;
+    var authorField = field.find('.authorSelect');
+    var roleField = field.find('.roleSelect');
+    authorSelect(authorField);
+    roleField.select2();
+  });

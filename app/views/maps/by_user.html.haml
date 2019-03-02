@@ -1,0 +1,69 @@
+%h1 Mapy vložené uživatelem #{@user.name}
+
+- maps = @user.created_maps.where(state: Map::STATE_PROPOSED)
+- if maps.exists?
+
+  %h2 Žádosti o evidenční číslo
+
+  = render partial: 'list', locals: {maps: maps}
+
+- maps = @user.created_maps.where(state: Map::STATE_CHANGE_REQUESTED)
+- if maps.exists?
+
+  %h2 Žádosti o doplnění od krajského kartografa
+  
+  %p Mapy, jejichž číslo nebylo přiděleno a záznam byl vrácen krajským kartografem k doplnění.
+
+  = render partial: 'list', locals: {maps: maps}
+
+- maps = @user.created_maps.where(state: Map::STATE_APPROVED)
+- if maps.exists?
+
+  %h2 Mapy se schváleným číslem
+  
+  %p Mapy čekající na doplnění dalších údajů po vydání mapy.
+
+  = render partial: 'list', locals: {maps: maps}
+
+- maps = @user.created_maps.where(state: Map::STATE_FINAL_CHANGE_REQUESTED)
+- if maps.exists?
+
+  %h2 Žádosti o doplnění od krajského kartografa
+  
+  %p Mapy s doplněnými údaji po vydání, jejichž záznam byl vrácen krajským kartografem k doplnění.
+
+  = render partial: 'list', locals: {maps: maps}
+
+- maps = @user.created_maps.where(state: Map::STATE_COMPLETED)
+- if maps.exists?
+
+  %h2 Doplněné mapy
+  
+  %p Mapy čekající na konečné schválení krajským kartografem.
+
+  = render partial: 'list', locals: {maps: maps}
+
+- maps = @user.created_maps.where(state: Map::STATE_FINALIZED)
+- if maps.exists?
+
+  %h2 Schválené a uzavřené mapy
+  
+  %p Mapy s doplněnými údaji po vydání a schválené krajským kartografem.
+
+  = render partial: 'list', locals: {maps: maps}
+
+- maps = @user.created_maps.where(state: Map::STATE_ARCHIVED)
+- if maps.exists?
+
+  %h2 Archivované mapy
+  
+  %p Mapy uložené do archivu ČSOS.
+
+  = render partial: 'list', locals: {maps: maps, archive: true}
+  
+- maps = @user.created_maps.where(map_family: Map::MAP_FAMILY_MAP).where(state: Map::STATE_SAVED_WITHOUT_FILING)
+- if maps.exists?
+
+  %h2 Vložené a otevřené mapy
+
+  = render partial: 'list', locals: {maps: maps}

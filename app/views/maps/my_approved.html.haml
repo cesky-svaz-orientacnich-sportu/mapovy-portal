@@ -1,0 +1,10 @@
+%h1 Moje mapy čekající na doplnění
+
+- maps = current_user.created_maps.where(state: Map::STATE_APPROVED)
+- if maps.exists?
+
+  = render partial: 'list', locals: {maps: maps}
+
+- else
+
+  %p Žádné mapy.

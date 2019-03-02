@@ -1,0 +1,1 @@
+Rails.application.config.assets.precompile += %w( _map.css _public.css _map.js _minimap.js _public.js mapserver/locale/cs.js  mapserver/locale/en.js )

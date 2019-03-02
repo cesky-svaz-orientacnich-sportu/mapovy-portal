@@ -1,0 +1,169 @@
+%h1
+  - if @map.state == Map::STATE_CHANGE_REQUESTED
+    Doplnit ohlášení připravované mapy #{@map.title}
+  - else
+    Ohlásit připravovanou mapu
+
+- allowed_clubs = (current_user.has_role?(:cartographer,:manager) ? Club.sorted : Club.where(abbreviation: current_user.clubs).sorted)
+- if allowed_clubs.size == 1
+  - @map.patron = allowed_clubs.first.abbreviation
+
+- if @map.errors.any?
+  %ul.map_errors.bs-callout.bs-callout-danger
+    - @map.errors.messages.each do |key, err|
+      %li
+        %strong= Map.human_attribute_name(key)
+        #{err.uniq * " a "}
+- else
+  %div.well
+    - if @map.state == Map::STATE_CHANGE_REQUESTED
+      Koordinátor / krajský kartograf vrátil žádost zpět žadateli o evidenční číslo. Po opravě / doplnění bude žádost opět postoupena příslušnému krajskému kartografovi ke schválení.
+    - else
+      Tento formulář slouží k žádosti o přidělení evidenčního čísla pro mapu na připravovaný oficiální závod ČSOS. O žádosti bude informován krajský kartograf a po jeho schválení bude evidenční číslo definitivně přiděleno.
+
+= nested_form_for @map, :url => register_maps_path, :method => :post, :html => {:id => 'map_form', :role => 'form', :class => 'form-horizontal', :multipart => true} do |f|
+
+  %h2= t("mapserver.mapBasicData")
+
+  = f.hidden_field :created_by_id
+  = f.hidden_field :id
+  = f.hidden_field :identifier_filing
+  = f.hidden_field :state
+  = f.hidden_field :map_family
+
+  %div.form-group
+    = f.label :title, map_attribute_label(:title), :class => 'col-sm-2'
+    = f.text_field :title, :class => 'col-sm-6'
+    = f.label :patron, map_attribute_label(:patron), :class => 'col-sm-1'
+    - if allowed_clubs.size == 1
+      %span.col-sm-3 #{allowed_clubs.first.abbreviation} -- #{allowed_clubs.first.name}
+      = f.hidden_field :patron
+    - elsif allowed_clubs.any?
+      = f.text_field :patron, :class => 'col-sm-3'
+    = f.hidden_field :patron_accuracy
+
+  %div.form-group
+    = f.label :region, map_attribute_label(:region), :class => 'col-sm-2'
+    = f.select :region, Map::REGIONS_OPTIONS, {:include_blank => true}, :class => 'col-sm-2'
+    = f.label :locality, map_attribute_label(:locality), :class => 'col-sm-2'
+    = f.text_field :locality, :class => 'col-sm-6'
+
+  %div.form-group
+    = f.label :year, map_attribute_label(:year), :class => 'col-sm-2'
+    = f.select :year, [Date.today.year, Date.today.year+1], {}, :class => 'col-sm-2'
+    = f.hidden_field :year_accuracy
+    = f.label :oris_event_id, map_attribute_label(:main_race), :class => 'col-sm-2'
+    = f.select :oris_event_id, "<option value=\"0\"#{f.object.oris_event_id == 0 ? 'selected' : ''}>(žádný závod)</option>".html_safe + options_from_collection_for_select(f.object.year ? OrisEvent.in_year(f.object.year) : OrisEvent.sorted, :id, :to_label, f.object.oris_event_id), {:include_blank => true}, :class => 'col-sm-6'
+
+  %div.form-group
+    - if f.object.identifier_filing.blank?
+      %span.col-sm-4
+    - else
+      = f.label :identifier_filing, map_attribute_label(:identifier_filing), :class => 'col-sm-2'
+      %span.col-sm-2= f.object.identifier_filing
+    = f.label :main_race_title, map_attribute_label(:main_race_title), :class => 'col-sm-2'
+    = f.text_field :main_race_title, :class => 'col-sm-2'
+    = f.label :main_race_date, map_attribute_label(:main_race_date), :class => 'col-sm-2'
+    = f.text_field :main_race_date, :class => 'col-sm-2', :type => 'date'
+
+  %div.form-group
+    = f.label :map_sport, map_attribute_label(:map_sport), :class => 'col-sm-2'
+    = f.select :map_sport, Map::MAP_SPORTS.map{|x| [t("mapserver.map_enums.map_sport.#{x}"), x]}, {:include_blank => true}, :class => 'col-sm-2'
+    = f.label :map_type, map_attribute_label(:map_type), :class => 'col-sm-2'
+    = f.select :map_type, Map::MAP_TYPES.map{|x| [t("mapserver.map_enums.map_type.#{x}"), x]}, {:include_blank => true}, :class => 'col-sm-2'
+    %div.col-sm-2
+      = f.label :scale, map_attribute_label(:scale)
+      1:
+      /= f.select :scale, %w{20000 15000 12500 10000 7500 5000 4000 2500}, :include_blank => true
+      = f.text_field :scale, style: 'width: 80px'
+    %div.col-sm-2
+      = f.label :equidistance, map_attribute_label(:equidistance)
+      = f.text_field :equidistance, style: 'width: 60px'
+      /= f.select :equidistance, %w{10 5 2.5 2}, :include_blank => true
+      m
+
+  :javascript
+    $(function() {
+      $('#map_equidistance').select2({
+        createSearchChoice:function(term, data) {
+          if ($(data).filter(function() {
+            return this.text.localeCompare(term)===0;
+          }).length===0)
+          {return {id:term, text:term};}
+        },
+        data: #{(%w{10.0 5.0 2.5 2.0} + [@map.equidistance ? @map.equidistance.to_s : nil]).compact.uniq.map{|x| {'id' => x, 'text' => x}}.to_json.html_safe}
+      });
+      $('#map_scale').select2({
+        createSearchChoice:function(term, data) {
+          if ($(data).filter(function() {
+            return this.text.localeCompare(term)===0;
+          }).length===0)
+          {return {id:term, text:term};}
+        },
+        data: #{%w{20000 15000 12500 10000 7500 5000 4000 2500}.map{|x| {'id' => x, 'text' => x}}.to_json.html_safe}
+      });
+    });
+  - if allowed_clubs.size != 1
+    :javascript
+      $('#map_patron').select2({
+        createSearchChoice:function(term, data) {
+          if ($(data).filter(function() {
+            return this.text.localeCompare(term)===0;
+          }).length===0)
+          {return {id:term, text:term};}
+        },
+        data: #{allowed_clubs.map{|x| {'id' => x.abbreviation, 'text' => "#{x.abbreviation} - #{x.name}"}}.to_json.html_safe}
+      });
+
+  / t.string   "preview_identifier"
+  / t.integer  "layer_index"
+
+  / %h2= t("mapserver.mapBasicData")
+  /
+  / = render :partial => 'form_fields_basic', :locals => {:f => f}
+  /
+  / %h2 Autoři
+  /
+  / = render :partial => 'form_fields_authors', :locals => {:f => f}
+
+  %h2 Obrys mapy
+
+  = render :partial => 'form_inline_map', :locals => {:f => f}
+
+  %div(style="margin-top:20px;margin-bottom:40px;")
+    %button(type="button" class="btn btn-primary submit-btn" id="map_form_submit_button") Uložit mapu
+
+:javascript
+  var map;
+  var polygon;
+
+  $(function() {
+    map = setupMap(document.getElementById('inline_map_canvas'), false);
+    setupMapEditor(map);
+    setPolygon(map);
+    setupMapEditorSubmit();
+    fixMapHeight($('#inline_map_canvas'));
+
+    $("#map_oris_event_id").select2({allowClear: true}).select2('val', '#{@map.oris_event_id}');
+
+  });
+
+- if @map.shape_json.blank?
+  :javascript
+    function setPolygon(themap) {}
+- else
+  :javascript
+    function setPolygon(themap) {
+      coordinates = [#{(JSON[@map.shape_json].map{|x| %{new google.maps.LatLng("#{x[0]}", "#{x[1]}")}} * ", ").html_safe}];
+      polygon = new google.maps.Polygon({
+        paths: coordinates,
+        editable: true
+      });
+      polygon.setMap(map);
+      var bounds = new google.maps.LatLngBounds();
+      for (var i = 0; i < coordinates.length; i++)
+        bounds.extend(coordinates[i]);
+      if (coordinates.length > 0)
+        map.fitBounds(bounds);
+    }
+

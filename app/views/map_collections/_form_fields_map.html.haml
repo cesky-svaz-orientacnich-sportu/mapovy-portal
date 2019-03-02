@@ -1,0 +1,34 @@
+= f.fields_for :map_collection_memberships do |map_collection_membership_form|
+  %div.form-group
+    %div.col-sm-4
+      = map_collection_membership_form.text_field :map_id, :class => "mapSelect", :style => "width:100%"
+    %div.col-sm-3
+      = map_collection_membership_form.text_field :year, :style => "width:100%", :placeholder => "Rok"
+    %div.col-sm-3
+      = map_collection_membership_form.text_field :note, :style => "width:100%", :placeholder => "Poznámka"
+    %div.col-sm-2
+      = map_collection_membership_form.link_to_remove icon('times')
+%p= f.link_to_add "#{icon('plus-circle')} přidat mapu".html_safe, :map_collection_memberships
+
+:javascript
+  function mapSelect(e) {
+    e.select2({
+      // createSearchChoice:function(term, data) {
+      //   if ($(data).filter(function() {
+      //     return this.text.localeCompare(term)===0;
+      //   }).length===0)
+      //   {return {id:term, text:term};}
+      // },
+      data: #{Map.order(:title).map{|x| {'id' => x.id, 'text' => "#{x} [#{x.id}]"}}.to_json.html_safe}
+    });
+  }
+
+  $(function() {
+    mapSelect($('.mapSelect'));
+  });
+
+  $(document).on('nested:fieldAdded', function(event){
+    var field = event.field;
+    var mapField = field.find('.mapSelect');
+    mapSelect(mapField);
+  });

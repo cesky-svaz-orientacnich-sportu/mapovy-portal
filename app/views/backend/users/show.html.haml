@@ -1,0 +1,35 @@
+%h1 Uživatel #{@user}
+
+%p &nbsp;
+
+%table.table
+  %tr
+    %th= User.human_attribute_name(:id)
+    %td= @user.id
+  %tr
+    %th= User.human_attribute_name(:full_name)
+    %td= @user.full_name
+  %tr
+    %th= User.human_attribute_name(:name)
+    %td= @user.name
+  %tr
+    %th= User.human_attribute_name(:email)
+    %td= @user.email
+  %tr
+    %th= User.human_attribute_name(:role)
+    %td= @user.role_to_s
+  %tr
+    %th= User.human_attribute_name(:oris_registrations)
+    %td= @user.oris_registrations
+  %tr
+    %th= User.human_attribute_name(:authorized_clubs)
+    %td= @user.authorized_clubs
+  %tr
+    %th= User.human_attribute_name(:authorized_regions)
+    %td= @user.authorized_regions
+
+%div.panel.panel-primary
+  %div.panel.panel-heading Ověření proti ORISu
+  %div.panel.panel-body
+    = (@check_against_oris.map{|x| h(x)} * "<br />").html_safe
+  

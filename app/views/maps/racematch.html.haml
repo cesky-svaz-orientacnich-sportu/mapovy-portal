@@ -1,0 +1,55 @@
+= form_tag do
+  - [2013, 2014].each do |y|
+    %h2 Závody v roce #{y}
+    %table.table
+      %colgroup
+        %col.col-sm-2
+        %col.col-sm-1
+        %col.col-sm-4
+        %col.col-sm-3
+        %col.col-sm-1
+      %thead
+        %tr
+          %th Název
+          %th Datum
+          %th Mapa v ORISu
+          %th vybrat mapu
+          %th
+      %tbody
+        - OrisEvent.in_year(y).each do |oris_event|
+          - maps = Map.where(oris_event_id: oris_event.id)
+          - if !maps.exists? and !oris_event.oris_data['Map'].blank?
+            %tr
+              %td= oris_event.title
+              %td= oris_event.date
+              %td= oris_event.oris_data['Map']
+              %td= text_field_tag "map[#{oris_event.id}]", "", style: 'width: 100%', class: "mapSelect-#{y}", id: "assign_#{oris_event.id}"
+              %td= icon('eye', :"data-id" => oris_event.id, :class => "fa fa-eye mapView")
+    :javascript
+      $(function() {
+        $('.mapSelect-#{y}').select2({
+          allowClear: true,
+          data: #{Map.where(year: y).map{|x| {'id' => x.id, 'text' => x.to_label}}.to_json.html_safe}
+        });
+      });
+  = submit_tag "Spárovat"
+:javascript
+  $(function() {
+    $('.mapView').on('click', function() {
+      var eid = $(this).data('id');
+      var mid = $("#assign_" + eid).val();
+      if (mid && mid != '') {
+        console.log(mid);
+        $.fancybox({
+        'href': ('/cs/maps/' + mid + '/info_table'),
+        'width': 740,
+        'height': 630,
+        'autoScale': false,
+        'transitionIn': 'none',
+        'transitionOut': 'none',
+        'type': 'iframe',
+        'titleShow': false
+        });
+      }
+    });
+  });

@@ -1,0 +1,35 @@
+%h1 
+  Upravit moje údaje
+
+%p &nbsp;
+
+= form_tag do
+  %table.table
+    %tr
+      %th= User.human_attribute_name(:id)
+      %td= current_user.id
+    %tr
+      %th= User.human_attribute_name(:full_name)
+      %td
+        = text_field_tag "full_name", current_user.full_name
+        = icon 'question-circle', tooltip: 'vyplňte ve tvaru shodném s ORISem'
+    %tr
+      %th= User.human_attribute_name(:name)
+      %td= current_user.name
+    %tr
+      %th= User.human_attribute_name(:email)
+      %td= current_user.email
+    %tr
+      %th= User.human_attribute_name(:role)
+      %td= current_user.role
+    %tr
+      %th= User.human_attribute_name(:oris_registrations)
+      %td= current_user.oris_registrations
+    %tr
+      %th= User.human_attribute_name(:authorized_clubs)
+      %td= current_user.authorized_clubs
+    %tr
+      %th= User.human_attribute_name(:authorized_regions)
+      %td= current_user.authorized_regions
+
+  = submit_tag "Uložit"

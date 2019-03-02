@@ -1,0 +1,23 @@
+%div#toolbar
+  %div.folder
+    = link_to image_tag("/img/mapovy-portal-csos-#{I18n.locale}.png", :id => 'logo', :alt => t("mapserver.mainLogoTitle"), :title => t("mapserver.mainLogoTitle")), :root
+    - if @map_title
+      %div.text= @map_title
+    - else 
+      %div#formSearch
+        %fieldset
+          %div.inputtext
+            %input#simpleSearchName{:type => "text", :name => "search", :value => t("mapserver.searchBoxForm"), :title => t("mapserver.searchBoxForm")}
+          %div.submitWrapper
+            %div.searchSubmit.input(onclick="searchSimple.search()")= t("mapserver.search")
+            %input{:type => "submit", :value => t("mapserver.search"), :class => "oos"}
+      = link_to t("mapserver.advancedSearch"), "#", :class => "linkAdvSearch", :title => t("mapserver.advancedSearch")
+      %ul.toolsList
+        / TODO : rename tool-XX to semantic names
+        %li= link_to image_tag("/img/tool-01.png", alt: t("mapserver.buttonPrint")), "javascript:void(0)", id: "map_tool_print_button", title: t("mapserver.buttonPrint")
+        %li= mail_to "mapovyportal@orientacnisporty.cz?subject=#{t("mapserver.emailSubject")}", image_tag("/img/tool-02.png", alt: t("mapserver.buttonMail")), title: t("mapserver.buttonMail")
+        %li= link_to image_tag("/img/tool-03.png", alt: t("mapserver.buttonUrlLink")), "javascript:void(0)", id: "map_tool_url_button", title: t("mapserver.buttonUrlLink")
+        %li= link_to image_tag("/img/tool-04.png", alt: t("mapserver.buttonMeasure")), "javascript:void(0)", id: "map_tool_measure_button", title: t("mapserver.buttonMeasure")
+        %li= link_to image_tag("/img/tool-05.png", alt: t("mapserver.buttonHelp")), "javascript:void(0)", id: "map_tool_help_button", title: t("mapserver.buttonHelp")
+  - unless @map_title
+    = render :partial => 'advanced_search'

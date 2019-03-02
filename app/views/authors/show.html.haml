@@ -1,0 +1,38 @@
+%h1 
+  #{@author.full_name}
+  - if has_role?(:manager)
+    = link_to icon('pencil-square-o', tooltip: 'upravit'), [:edit, @author]
+    - unless @author.cartographers.exists?
+      = link_to icon('times', tooltip: 'smazat'), @author, method: :delete, data: {confirm: "Opravdu chceš SMAZAT záznam autora #{@author}?"}
+
+%table.table.table-striped
+  %tbody
+    %tr
+      %td Oddíl 
+      %td= @author.club
+    - if @author.year_of_birth and @author.year_of_birth.to_i > 0  
+      %tr
+        %td Rok narození
+        %td= @author.year_of_birth
+    %tr
+      %td Období působení
+      %td= @author.activity
+    %tr
+      %td Poznámka
+      %td= @author.note
+
+- if @author.maps.any?
+  %h2
+    = t('mapserver.club_attributes.maps')
+    = link_to icon('globe', tooltip: t('mapserver.listAuthTableLink2Map')), map_by_author_path(@author.id)
+
+  = render :partial => 'maps/data_table', :locals => {:source => maps_url(format: "json", filter_by_author: @author.id)}
+
+- if has_role?(:manager)
+  %div.panel.panel-warning 
+    %div.panel-heading Sloučení s jiným autorem
+    %div.panel-body
+      %p Zrušit tohoto autora a převést jeho mapy na:
+      = form_tag(merge_author_path(@author)) do
+        = select_tag "target_author_id", options_from_collection_for_select(Author.sorted.where("id <> :id", id: @author.id).all, :id, :to_label)
+        = submit_tag "Sloučit", class: "btn btn-danger"

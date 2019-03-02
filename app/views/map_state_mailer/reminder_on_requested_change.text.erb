@@ -1,0 +1,11 @@
+Připomínka -- požadavek na evidenci mapy byl vrácen k doplnění
+==============================================================
+
+Uživatelem <%= @map.approved_by %> byl <%= @map.state_changed_at.strftime("%d. %m. %Y")%> zamítnut požadavek na přidělení evidenčního čísla pro mapu <%= @map %> s následujícím komentářem:
+
+<%= @comment %>
+
+Záznam zkontrolovat a následně odsouhlasit je možno zde: <%= map_url(@map, locale: :cs) %>
+
+------------------
+Mapový portál ČSOS

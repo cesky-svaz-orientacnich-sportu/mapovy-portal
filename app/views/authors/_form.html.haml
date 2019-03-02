@@ -1,0 +1,20 @@
+= form_for author, :html => {:role => 'form', :class => 'form-horizontal'} do |f|
+  %div.form-group
+    = f.label :full_name, author_attribute_label(:full_name, :edit), :class => 'col-sm-2'
+    = f.text_field :full_name, :class => 'col-sm-6'
+  %div.form-group
+    = f.label :activity, author_attribute_label(:activity, :edit), :class => 'col-sm-2'
+    = f.text_field :activity, :class => 'col-sm-6'
+  %div.form-group
+    = f.label :club, author_attribute_label(:club, :edit), :class => 'col-sm-2'
+    = f.text_field :club, :class => 'col-sm-6'
+  %div.form-group
+    = f.label :year_of_birth, author_attribute_label(:year_of_birth, :edit), :class => 'col-sm-2'
+    = f.text_field :year_of_birth, :class => 'col-sm-6'
+  %div.form-group
+    = f.label :note, author_attribute_label(:note, :edit), :class => 'col-sm-2'
+    = f.text_field :note, :class => 'col-sm-6'
+  %div.form-group
+    %div.col-sm-2
+    %div.col-sm-6
+      = f.submit 'Uložit'

@@ -1,0 +1,7 @@
+%h1= t("mapserver.listSearchHead")
+
+- if @list and @list.size > 0
+  %p= t("mapserver.downloadSearchResults", :count => @list.size)
+  = render :partial => 'maps/data_table', :locals => {:source => maps_url(format: "json", filter_by_ids: @list)}
+- else
+  %p Pravděpodobně došlo k chybě při hledání, zkuste to, prosím, znovu.

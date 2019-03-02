@@ -1,0 +1,48 @@
+%h1 Žádosti o evidenční číslo
+
+- if current_user and current_user.role == 'cartographer' 
+  - maps = Map.where(state: Map::STATE_PROPOSED, region: current_user.regions)
+  - if maps.exists?
+
+    %h3 
+      Žádosti k vyřešení  
+      - if (current_user.authorized_regions.size > 1)
+        (z krajů #{current_user.regions.map{|x| Map::REGIONS[x]} * ", "})
+      - else
+        (z kraje #{Map::REGIONS[current_user.regions.first]})
+
+    = render partial: 'list', locals: {maps: maps}
+
+  - maps = Map.where(state: Map::STATE_CHANGE_REQUESTED, region: current_user.regions)
+  - if maps.exists?
+
+    %h3 
+      Zamítnutné žádosti
+      - if (current_user.authorized_regions.size > 1)
+        (z krajů #{current_user.regions.map{|x| Map::REGIONS[x]} * ", "})
+      - else
+        (z kraje #{Map::REGIONS[current_user.regions.first]})
+
+    = render partial: 'list', locals: {maps: maps}
+
+- maps = Map.where(state: Map::STATE_PROPOSED)
+- if maps.exists?
+
+  %h3 Všechny otevřené žádosti
+
+  = render partial: 'list', locals: {maps: maps}
+
+- else
+
+  %p Žádné otevřené žádosti.
+  
+- maps = Map.where(state: Map::STATE_CHANGE_REQUESTED)
+- if maps.exists?
+
+  %h3 Všechny zamítnuté žádosti
+
+  = render partial: 'list', locals: {maps: maps}
+
+- else
+
+  %p Žádné zamítnuté žádosti.

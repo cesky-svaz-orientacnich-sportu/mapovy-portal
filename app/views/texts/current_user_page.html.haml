@@ -1,0 +1,80 @@
+%h1 
+  Moje stránka
+  = link_to icon('edit', tooltip: 'upravit údaje'), :edit_current_user_page 
+
+%p &nbsp;
+
+%table.table
+  %tr
+    %th= User.human_attribute_name(:id)
+    %td= current_user.id
+  %tr
+    %th= User.human_attribute_name(:full_name)
+    %td= current_user.full_name
+  %tr
+    %th= User.human_attribute_name(:name)
+    %td= current_user.name
+  %tr
+    %th= User.human_attribute_name(:email)
+    %td= current_user.email
+  %tr
+    %th= User.human_attribute_name(:role)
+    %td= current_user.role_to_s
+  %tr
+    %th= User.human_attribute_name(:oris_registrations)
+    %td= current_user.oris_registrations
+  %tr
+    %th= User.human_attribute_name(:authorized_clubs)
+    %td= current_user.authorized_clubs
+  %tr
+    %th= User.human_attribute_name(:authorized_regions)
+    %td= current_user.authorized_regions
+
+- if current_user.name == current_user.email
+  %div.panel.panel-danger
+    %div.panel-heading 
+      %h4.panel-title Není vyplněno jméno a příjmení
+    %div.panel-body
+      %p
+        V tomto případě nebude možné provést ověření identity proti ORISu.
+      %p
+        Vyplňte, prosím, svoje jméno a příjmení ve tvaru shodném s tím, které je zadáno v ORISu.
+      = button_to 'Zadat jméno', :edit_current_user_page, class: 'btn btn-primary', method: :get
+
+
+- if current_user.role.blank?
+  %div.panel.panel-danger
+    %div.panel-heading 
+      %h4.panel-title Není přiřazeno žádné oprávnění
+    %div.panel-body
+      %p
+        Práva pro přístup se přidělují automaticky na základě informací z ORISu (oprávnění "přispěvatel" pro všechny registrované členy ČSOS a oprávnění "vydavatel" pro ty, kdo mají v ORISu přiděleno klubové právo evidence map).
+      %p
+        Požádejte vedoucího klubu o přidělení práva evidence map v ORIS. V případě přetrvávání potíží se obraťte na #{mail_to "mapovyportal@orientacnisporty.cz"}.
+      / %p
+      / Pokud účet v ORISu nejste a máte za to, že byste práva k úkonům mít měli, dejte nám vědět na #{mail_to "mapovyportal@orientacnisporty.cz"}. Pokusíme se žádost vyřídit brzy, ale zejména pokud si nebudeme jistí, o koho vlastně jde, to může chvíli trvat.
+
+- if current_user.role == 'contributor'
+  %div.panel.panel-primary
+    %div.panel-heading 
+      %h4.panel-title Není přiřazeno oprávnění vydavatel
+    %div.panel-body
+      %p Práva pro přístup se přidělují automaticky na základě informací z ORISu (oprávnění "přispěvatel" pro všechny registrované členy ČSOS a oprávnění "vydavatel" pro ty, kdo mají v ORISu přiděleno klubové právo evidence map).
+      %p Požádejte vedoucího klubu o přidělení práva evidence map v ORIS. V případě přetrvávání potíží se obraťte na #{mail_to "mapovyportal@orientacnisporty.cz"}.
+
+
+- if current_user.oris_registrations.blank?
+  %div.panel.panel-warning
+    %div.panel-heading 
+      %h4.panel-title Párování s ORISem se nezdařilo
+    %div.panel-body
+      %p
+        Pro kombinaci jméno [#{current_user.name}] a email [#{current_user.email}] nevrátil ORIS žádné registrační číslo. Kontrola pomocí jména a emailu je v současnosti jediný způsob, jak ověřit identitu uživatelů.
+      %p
+        Změnte si e-mailovou adresu v ORIS (nebo požádejte vedoucího klubu o změnu) na tu, kterou používáte pro registraci do Mapového portálu ČSOS.
+
+%div.panel.panel-primary
+  %div.panel.panel-heading Ověření proti ORISu
+  %div.panel.panel-body
+    = (@check_against_oris.map{|x| h(x)} * "<br />").html_safe
+        

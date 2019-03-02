@@ -1,0 +1,12 @@
+%pre#list
+- Map.find_each do |map|
+  - unless map.shape_json.blank?
+    :javascript
+      $(function(){
+        var xshape = #{map.shape_json};
+        var shape = xshape.map(function(x) {
+          return(new google.maps.LatLng(x[1], x[0]));
+        });
+        var area = Math.round(google.maps.geometry.spherical.computeArea(shape) / 10000) / 100.0;
+        $("#list").append("\n#{map.id} => " + area + ", ");
+      });

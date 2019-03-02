@@ -1,0 +1,87 @@
+%h1
+  #{t('mapserver.mapTitle')} #{@map}
+
+%h2= t("mapserver.mapBasicData")
+
+- if @map.is__proposal?
+
+  %table.table.table-bordered.table-condensed.infoTable
+    %tbody
+      %tr
+        %th= t("mapserver.map_attributes.scale")
+        %td 1:#{@map.scale}
+        %th= t("mapserver.map_attributes.equidistance")
+        %td #{@map.equidistance}m
+        %th= t("mapserver.map_attributes.map_sport")
+        %td= t("mapserver.map_enums.map_sport.#{@map.map_sport}") unless @map.map_sport.blank?
+        %th= t("mapserver.map_attributes.map_type")
+        %td
+          - unless @map.map_type.blank?
+            = t("mapserver.map_enums.map_type.#{@map.map_type}")
+            = icon('question-circle', tooltip: t("mapserver.map_enum_descriptions.map_type.#{@map.map_type}") )
+      %tr
+        %th= t("mapserver.map_attributes.year")
+        %td
+          = @map.year
+        %th= t("mapserver.map_attributes.created_by")
+        %td(colspan=3) #{@map.created_by ? print_user(@map.created_by) : "archiv ČSOS"}
+        %th= t("mapserver.map_attributes.patron")
+        %td= link_to @map.club, @map.club
+      - if @map.oris_event
+        %tr
+          %th= t("mapserver.map_attributes.main_race_title")
+          %td(colspan=4)= @map.oris_event.title
+          %td(colspan=1)= link_to "ORIS", @map.oris_event.oris_url
+          %th= t("mapserver.map_attributes.main_race_date")
+          %td= @map.oris_event.date
+
+- else
+
+  = render :partial => 'maps/info_table', :locals => {:map => @map}
+
+- unless @map.shape_as_coords.empty?
+
+  %h2 Obrys mapy
+
+  %div#inline_map_canvas(style="width:100%;min-height:400px;height:400px")
+
+  :javascript
+    var polygon;
+    var map;
+
+    $( window ).load(function() {
+
+      map = setupMap(document.getElementById('inline_map_canvas'), false);
+
+      coordList = [#{(@map.shape_as_coords.map{|x| %{new google.maps.LatLng("#{x[1]}", "#{x[0]}")}} * ", ").html_safe}];
+      polygon = new google.maps.Polygon({
+        paths: coordList
+      });
+      polygon.setMap(map);
+      var bounds = new google.maps.LatLngBounds();
+      for (var i = 0; i < coordList.length; i++)
+        bounds.extend(coordList[i]);
+      map.fitBounds(bounds);
+
+    });
+
+%h2 Náhled
+
+- if @map.has_jpg
+
+  - if @map.has_jpg?
+    = image_tag @map.preview_path, :style => 'max-width:100%'
+  - else
+    %div.well Pro tuto mapu není náhled dostupný (chyba na straně serveru).
+
+  %div.well
+    = t("mapserver.previewCopyright")
+    - unless @map.administrator_email.blank?
+      = mail_to @map.administrator_email, icon('envelope', tooltip: 'e-mail na správce mapy')
+
+- else
+
+  %div.well Pro tuto mapu není náhled dostupný.
+
+
+%p &nbsp;

@@ -1,0 +1,10 @@
+%h1 Srovnání více map
+
+- @maps.each do |map|
+  %div.map-item{id: "map_#{map.id}"}
+    %h2
+      = link_to "Mapa #{map}", map
+      = map_buttons(map)
+      %span.pull-right
+        = link_to icon('minus-circle', tooltip: 'vyhodit ze srovnání'), "javascript:void(0);", class: 'maps_compare_remove_button'
+    = render :partial => 'maps/info_table', :locals => {:map => map, :hide_authors => true}    

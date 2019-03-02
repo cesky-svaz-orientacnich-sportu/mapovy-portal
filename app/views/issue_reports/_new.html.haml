@@ -1,0 +1,5 @@
+%div.panel.panel-danger#issue_report
+  %div.panel-heading
+    %span.panel-title Nahlásit nesrovnalost v záznamu
+  %div.panel-body  
+    = render partial: 'form', locals: {issue_report: issue_report, remote: true}

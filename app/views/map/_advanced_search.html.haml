@@ -1,0 +1,64 @@
+%div#advaSearch(style="display:none")
+  %div.inner
+    %strong.title #{t("mapserver.advancedSearch")}:
+    %div.cleaned(name="advancedSearch")
+      %fieldset
+        %dl.col
+          %dt
+            %label(for="item01")= t("mapserver.map_attributes.title")
+          %dd
+            %input(class="advancedSearchInputs" id="advancedSearchName" tabindex="1" type="text" value="" onkeydown="executeAdvEnter(event)")
+          %dt
+            %label(for="item04")= t("mapserver.map_attributes.year")
+          %dd
+            %input{:id => "advancedSearchYearFrom", :tabindex => "2", :type => "text", :value => "", :placeholder => t("mapserver.advancedSearchYearFrom"), :class => "date from", :onkeydown => "executeAdvEnter(event)"}
+            %input{:tabindex => "3", :id => "advancedSearchYearTo", :type => "text", :value => "", :placeholder => t("mapserver.advancedSearchYearTo"), :class => "date", :onkeydown =>"executeAdvEnter(event)"}
+        %dl.col
+          %dt
+            %label(for="item07")
+              = t("mapserver.map_attributes.map_sport")
+          %dd
+            %select{:id => 'advancedSearchMapSport', :name => 'advancedSearchMapSport'}
+              %option(selected="selected")
+              - Map::MAP_SPORTS.each do |key|
+                %option{:value => key}= t("mapserver.map_enums.map_sport.#{key}")
+          %dt
+            %label(for="item09") #{t("mapserver.advancedSearchScale")}:&nbsp;&nbsp;1:
+          %dd
+            %input.advancedSearchInputs#advancedSearchScale(tabindex="4" type="text" value="" onkeydown="executeAdvEnter(event)")
+        %dl.col
+          %dt
+            %label(for="item02")= t("mapserver.map_attributes.patron")
+          %dd
+            %select#advancedSearchClub
+              %option(selected="selected")
+              - Club.all.each do |club|
+                %option{:value => club.abbreviation}= club
+          %dt
+            %label(for="item03")= t("mapserver.advancedSearchAuthor")
+          %dd
+            %select#advancedSearchAuthor
+              %option(selected="selected")
+              - Author.order(:full_name).each do |author|
+                %option{:value => author.id}= author
+        %dl.col
+          %dt
+            %label(for="item05")= t("mapserver.advancedSearchGPS")
+          %dd
+            %input#advancedSearchGPS.advancedSearchInputs{:tabindex => "7", :type => "text", :placeholder => t("mapserver.advancedSearchGPStext")}
+            = link_to image_tag("/img/tool-gps.png", :alt => t("mapserver.gpsFromMap")), "javascript:void(0)", id: 'advanced_search_gps_button'
+          %dt
+            %label(for="item06")= t("mapserver.advancedSearchPlace")
+          %dd
+            %input#advancedSearchPlace.advancedSearchInputs(tabindex="8" type="text" value="" onkeydown="executeAdvEnter(event)")
+          %dt
+            %label(for="item08")= t("mapserver.advancedSearchDistance")
+          %dd
+            %input.advancedSearchInputs#advancedSearchDistance{:tabindex => "9", :type => "text", :placeholder => t("mapserver.advancedSearchDistanceText"), :value => "", :onkeydown => "executeAdvEnter(event)"}
+        %div.submitFolder
+          %div.submit
+            %div.sinner(onclick="searchAdvanced.search();")= t("mapserver.search")
+    %p
+      %a#advancedSearchResetForm(href="#")= t("mapserver.advancedSearchReset")
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      %a.linkAdvSearchHide(href="#")= t("mapserver.advancedSearchClose")

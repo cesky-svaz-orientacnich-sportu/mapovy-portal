@@ -1,0 +1,24 @@
+= form_for issue_report, remote: remote, :html => {:role => 'form', :class => 'form-horizontal'} do |f|
+  = f.hidden_field :map_id
+  - if issue_report.user
+    %div.form-group
+      = f.label :user_id, 'Vloženo uživatelem', class: 'col-sm-2'
+      = f.hidden_field :user_id
+      %span.col-sm-4= issue_report.user.name
+    %div.form-group
+      = f.label :email, 'E-mail', class: 'col-sm-2'
+      = f.hidden_field :email
+      %span.col-sm-4= issue_report.email
+  - else
+    %div.form-group
+      = f.label :email, 'E-mail', class: 'col-sm-2'
+      %div.col-sm-6
+        = f.text_field :email, style: "width: 100%"
+      %span.col-sm-4 Prosíme, vyplňte svůj email, abychom se mohli případně ozvat, pokud bychom potřebovali nějaké upřesnění, anebo aspoň poděkovat.
+  %div.form-group
+    = f.label :message, 'Text zprávy', class: 'col-sm-2'
+    %div.col-sm-6
+      = f.text_area :message, style: 'height:140px;width:100%'
+  %div.form-group
+    %div.col-sm-2.col-sm-offset-2
+      = f.submit 'Odeslat', class: 'btn btn-danger'

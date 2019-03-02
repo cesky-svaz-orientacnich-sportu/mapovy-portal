@@ -1,0 +1,44 @@
+%a.linkShow{:href => "#", :title => t("mapserver.panelMax")}
+  %span.oos= t("mapserver.panelMax")
+%a.linkShowResults{:href => "#", :title => t("mapserver.showSideBar")}
+  %span.oos= t("mapserver.showSideBar")
+= render :partial => 'search_results'
+%div#map_canvas
+= render :partial => 'basemap_switch'
+= render :partial => 'toc'
+= render :partial => 'logos'
+%div#showUrlLink.popupShadow(style="display:none")
+  %div.popup.simple.dialog
+    %div.header
+      %span= t("mapserver.urlLinkHeading")
+      = link_to image_tag("/img/ico-close.png", :alt => t("mapserver.urlLinkClose")), "javascript:void(0)", id: 'tools_link_close_button', class: 'close'
+    %div.content
+      %div
+        %input(id="urlInp" type="text" value="" style="border:2px inset; width:215px")
+        = link_to t("mapserver.urlLinkUpdate"), "javascript:void(0)", id: 'tools_link_update_button'
+%div#showMeasure.popupShadow(style="display:none")
+  %div.popup.simple.dialog
+    %div.header
+      %span= t("mapserver.measureHeading")
+      = link_to image_tag("/img/ico-close.png", :alt => t("mapserver.urlLinkClose")), "javascript:void(0)", id: 'tools_measure_clear_button', class: 'close'
+    %div.content
+      #{t("mapserver.measureLength")}:
+      %span#span-length 0
+      km
+      %br
+      #{t("mapserver.measureArea")}:
+      %span#span-area 0
+      km²
+      %br
+      = link_to t("mapserver.measureReset"), "javascript:void(0)", id: 'tools_measure_reset_button'
+
+:javascript
+  $(function() {
+    initMap();
+    initMapsLayer();
+    initMapComponents();
+    initLayout();
+    toc.refresh();
+    sidebar.show();
+  })
+  

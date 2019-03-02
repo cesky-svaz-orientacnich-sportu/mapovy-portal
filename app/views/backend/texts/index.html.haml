@@ -1,0 +1,20 @@
+%h1 Texty
+
+%div.panel.panel-default
+  %div.panel-heading= link_to "#{icon('plus-circle')} Přidat text".html_safe, new_backend_text_path
+
+%table.table.table-striped
+  %thead
+    %tr
+      %td Identifikátor
+      %td Text (cs)
+      %td Text (en)
+  %tbody
+    - @texts.each do |text|
+      %tr
+        %td= text.name
+        %td= truncate(text.body_cs || '', :length => 40)
+        %td= truncate(text.body_en || '', :length => 40)
+        %td
+          = link_to 'upravit', [:edit, :backend, text]
+          = link_to 'smazat', [:backend, text], :method => :delete, :confirm => "Opravdu chcete smazat stránku #{text}?"

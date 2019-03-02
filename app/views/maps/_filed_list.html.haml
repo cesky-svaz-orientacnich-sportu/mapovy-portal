@@ -1,0 +1,54 @@
+%table.table.table-striped
+  %colgroup
+    %col
+    %col(width=130)
+    %col(width=90)
+    %col(width=90)
+    %col(width=65)
+    %col(width=80)
+    %col(width=180)
+    %col(width=150)
+    %col(width=50)
+    %col(width=60)
+  %thead
+    %tr
+      %th= map_attribute_label :title
+      %th= map_attribute_label :state
+      %th= map_attribute_label :updated_at
+      %th= map_attribute_label :identifier_filing
+      %th= map_attribute_label :patron
+      %th= map_attribute_label :map_sport
+      %th= map_attribute_label :region
+      %th= map_attribute_label :locality
+      %th= map_attribute_label :id
+      %th= map_attribute_label :archive
+  %tbody
+    - maps.each do |map|
+      - if map.identifier_filing&.match(/\d\d[A-Z]\d\d\d[A-Z]/)
+        %tr.map_list_row{class: (map.state == Map::STATE_REMOVED) ? 'muted' : ''}
+          %td
+            = link_to map.title, _map_path(map)
+            %span.buttons(style="display:none")= map_buttons(map)
+          %td= map.state_
+          %td= (map.user_updated_at || map.updated_at).localtime.strftime("%d.%m. %H:%M")
+          %td= map.identifier_filing
+          %td= map.patron
+          %td= map.map_sport_
+          %td= map.region_
+          %td= map.locality
+          %td= map.id
+          %td= map.archive_
+
+:javascript
+  $('tr.map_list_row').on('mouseover', function() {
+    $(this).find('.buttons').show();
+  });
+  $('tr.map_list_row').on('mouseout', function() {
+    $(this).find('.buttons').hide();
+  });
+  $('tr.map_list_row').on('mouseover', 'td', function() {
+    $(this).find('.buttons').show();
+  });
+  $('tr.map_list_row').on('mouseout', 'td', function() {
+    $(this).find('.buttons').hide();
+  });

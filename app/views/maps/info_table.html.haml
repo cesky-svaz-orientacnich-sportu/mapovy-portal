@@ -1,0 +1,5 @@
+%div.content
+  %div.inside(style="height:400px")
+    %h2.orange 
+      #{link_to @map.title, @map, :target => '_top'} 
+    = render :partial => 'maps/info_table', :locals => {:map => @map}    

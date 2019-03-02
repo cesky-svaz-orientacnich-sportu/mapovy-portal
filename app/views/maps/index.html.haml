@@ -1,0 +1,12 @@
+%h1= t("mapserver.listMapHead")
+%h2= t("mapserver.listMapHeadLow").html_safe
+
+= render :partial => 'maps/data_table', :locals => {:source => maps_url(format: "json")}
+
+- if has_role?(:manager, :organizer, :contributor, :cartographer)  
+  %div.well.well-sm
+    = link_to "Podrobná tabulka se všemi údaji", :list_maps
+    %br
+    = link_to "Export celé databáze (XLS)", download_all_maps_path(format: :xls)
+    %br
+    = link_to "Export celé databáze (CSV)", download_all_maps_path(format: :csv)

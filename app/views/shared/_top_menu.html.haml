@@ -1,0 +1,100 @@
+- n_proposed = 0
+- n_completed = 0
+- n_issues = 0
+- n_approved = 0
+- n_change_requested = 0
+- if has_role?(:manager)
+  - n_proposed = Map.where(state: Map::STATE_PROPOSED).count
+  - n_issues = IssueReport.unresolved.count
+  - n_completed = Map.where(state: Map::STATE_COMPLETED).count
+- elsif has_role?(:cartographer)
+  - n_proposed = Map.where(state: Map::STATE_PROPOSED).where(region: current_user.regions).count
+  - n_completed = Map.where(state: Map::STATE_COMPLETED).where(region: current_user.regions).count
+- if current_user
+  - n_approved = current_user.created_maps.where(state: Map::STATE_APPROVED).count
+  - n_change_requested = current_user.created_maps.where(state: [Map::STATE_FINAL_CHANGE_REQUESTED, Map::STATE_CHANGE_REQUESTED]).count
+
+%div#menuTop.navbar.navbar-inverse.navbar-fixed-top(role="navigation")
+  %div.container-fluid.menuTopContainer
+    %div.navbar-header
+      %button(type="button" class="navbar-toggle" data-toggle="collapse" data-target="#example-navbar-collapse")
+        %span.sr-only Toggle navigation
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
+      %a.navbar-brand.visible-xs(href="#")= t('mapserver.title')
+    %div.collapse.navbar-collapse#example-navbar-collapse
+      %ul.nav.navbar-nav
+        %li= link_to t('mapserver.header_menu.archive'), :maps_map
+        %li= link_to t('mapserver.header_menu.maps'), :maps
+        %li= link_to t('mapserver.header_menu.authors'), :authors
+        %li= link_to t('mapserver.header_menu.clubs'), :clubs
+        %li= link_to t('mapserver.header_menu.convergence'), :convergence
+        %li= link_to t('mapserver.header_menu.about'), text_path('about')
+        %li= link_to t('mapserver.header_menu.links'), text_path('links')
+        %li= link_to t('mapserver.header_menu.help'), text_path('help')
+      %ul.nav.navbar-nav.navbar-right
+        - if current_user
+          %li.navbar-text.hidden-sm.hidden-xs
+            - if n_issues > 0
+              %span.label.label-danger= link_to "#{n_issues} #{flex n_issues, "problém", "problémy", "problémů"}", :issue_reports
+            - if n_proposed > 0
+              %span.label.label-success= link_to "#{n_proposed} #{flex n_proposed, "žádost", "žádosti", "žádostí"}", :proposed_maps
+            - if n_completed > 0
+              %span.label.label-primary= link_to "#{n_completed} #{flex n_completed, "doplněná", "doplněné", "doplněných"}", :completed_maps
+            - if n_change_requested > 0
+              %span.label.label-primary= link_to "#{n_change_requested} #{flex n_change_requested, "vrácená", "vrácené", "vrácených"}", :my_change_requested_maps
+          %li.dropdown
+            %a.dropdown-toggle(data-toggle="dropdown" href="#")
+              #{current_user.name}
+              %b.caret
+            %ul.dropdown-menu
+              %li= link_to "Moje stránka", :current_user_page
+              - if n_approved > 0
+                %li
+                  = link_to :my_approved_maps do
+                    Moje mapy k doplnění
+                    %span.badge.pull-right(style="font-size:inherit")= n_approved
+              %li.divider
+              - if has_role?(:organizer, :cartographer, :manager)
+                - if has_role?(:cartographer, :manager) or current_user.clubs.any?
+                  %li= link_to "Ohlásit připravovanou mapu #{icon('question-circle', tooltip: "Zde můžete ohlásit připravovanou mapu a získat její evidenční číslo", tooltip_placement: 'left')}".html_safe, register_maps_path
+                - if has_role?(:cartographer, :manager)
+                  %li
+                    = link_to proposed_maps_path do
+                      Žádosti o číslo
+                      - if n_proposed > 0
+                        %span.badge.pull-right(style="font-size:inherit")= n_proposed
+                - if has_role?(:cartographer, :manager)
+                  %li= link_to "Mapy k doplnění", noncompleted_maps_path
+                  %li
+                    = link_to completed_maps_path do
+                      Mapy ke schválení
+                      - if n_completed > 0
+                        %span.badge.pull-right(style="font-size:inherit")= n_completed
+                - if has_role?(:manager)
+                  %li= link_to "Mapy k archivaci", finalized_maps_path
+                  %li= link_to "Kontrola integrity", check_maps_path
+                  %li
+                    = link_to issue_reports_path do
+                      Nahlášené problémy
+                      - if n_issues > 0
+                        %span.badge.pull-right(style="font-size:inherit")= n_issues
+                %li= link_to "Seznam evidovaných map", filed_maps_path
+                %li.divider
+              - if has_role?(:contributor, :organizer, :cartographer, :manager)
+                %li= link_to "Přidat mapu bez evidence #{icon('question-circle', tooltip: "Přidat mapu, která nedostane evidenční číslo – pouze pro mapy mimo oficiální závody", tooltip_placement: 'left')}".html_safe, new_map_path
+                %li= link_to "Moje mapy", by_user_maps_path(:user_id => current_user.id)
+                %li.divider
+              %li= link_to "Odhlásit", destroy_user_session_path
+              %li.divider
+              %li= link_to "Soubory map", :map_collections
+              - if admin?
+                %li= link_to "Texty", [:backend, :texts]
+                %li= link_to "Uživatelé", [:backend, :users]
+        - else
+          %li= link_to t('mapserver.header_menu.sign_in'), new_user_session_path
+        - unless current_user
+          - [:cs, :en].each do |locale|
+            - unless locale == I18n.locale
+              %li= link_to image_tag("/img/flag-#{locale}.png", :alt => "#{locale} version"), {:locale => locale}, {class: 'navbar-link'}

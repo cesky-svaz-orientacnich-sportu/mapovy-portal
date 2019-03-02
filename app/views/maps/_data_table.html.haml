@@ -1,0 +1,90 @@
+%table.table.table-striped.compact#maps{:"data-source" => source}
+  %colgroup
+    %col
+    %col(width="80")
+    %col(width="80")
+    %col(width="80")
+    %col(width="80")
+    %col(width="100")
+    %col(width="70")
+  %thead
+    %tr
+      %th= t('mapserver.map_attributes.title')
+      %th= t('mapserver.map_attributes.patron')
+      %th= t('mapserver.map_attributes.year')
+      %th= t('mapserver.map_attributes.scale')
+      %th= t('mapserver.map_attributes.sport')
+      %th= t('mapserver.map_attributes.locality')
+      %th
+      %th= t('mapserver.map_attributes.id')
+      %th= t('mapserver.map_attributes.archive')
+  %tbody
+
+- if has_role?(:manager, :organizer, :contributor, :cartographer)  
+  %div.well.well-sm
+    = link_to "Srovnat všechny zobrazené záznamy", "javascript:void(0)", id: "compare_maps"
+  
+:javascript
+  $(function(){
+    $("#compare_maps").on('click', function() {
+      var table = $('#maps').DataTable();
+      array = [];
+      for (i in table.column(0).data()) {
+        h = jQuery.parseHTML(table.column(0).data()[i]);
+        if (h) {
+          array.push($(h[0]).data('id'));
+        }
+      }
+      if (array.length > 0) {
+        console.log(array);
+        window.location = ("#{compare_maps_path}?" + $.param({ids: array}));  
+      } else {
+        alert("V tabulce nejsou žádné mapy!");
+      }      
+    });
+    $('#maps').dataTable( {
+      "processing": true,
+      "pagingType": "full_numbers",
+      "serverSide": true,
+      "lengthChange": false,
+      "ajax": $('#maps').data('source'),
+      "columns": [
+          null,
+          null,
+          null,
+          { "orderable": false },
+          { "orderable": false },
+          null,
+          { "orderable": false },
+          null,
+          { "orderable": false }
+        ],
+      'fnDrawCallback': initPreviewAndInfo, 
+      'language': {
+        "emptyTable": "#{t('datatable.emptyTable')}",
+        "info": "#{t('datatable.info')}",
+        "infoEmpty": "#{t('datatable.infoEmpty')}",
+        "infoFiltered": "#{t('datatable.infoFiltered')}",
+        "loadingRecords": "#{t('datatable.loadingRecords')}",
+        "processing": "#{t('datatable.processing')}",
+        "search": "#{t('datatable.search_maps')}",
+        "zeroRecords": "#{t('datatable.zeroRecords')}",
+        "paginate": {
+          "first": "#{t('datatable.paginate.first')}",
+          "last": "#{t('datatable.paginate.last')}",
+          "next": "#{t('datatable.paginate.next')}",
+          "previous": "#{t('datatable.paginate.previous')}"
+        }
+      }
+    });
+
+ 
+    $('#maps').on( 'page.dt', function () {
+      var table = $('#maps').DataTable();
+      var info = table.page.info();
+      console.dir( 'Showing page: '+info.page+' of '+info.pages );
+      console.dir( info );
+      window.location.hash = "page:"+info.page;
+    } );
+
+  });

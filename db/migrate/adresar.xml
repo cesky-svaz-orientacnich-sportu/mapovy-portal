@@ -1,0 +1,1747 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<adresar>
+  <oddil>
+    <id>ABM</id>
+    <nazev>KOB Moira Brno                          </nazev>
+    <http>http://abm.eob.cz                                 </http>
+    <naz_obl>Jihomoravská        </naz_obl>
+    <naz_kra>Jihomoravský        </naz_kra>
+    <naz_okr>Brno-město          </naz_okr>
+  </oddil>
+  <oddil>
+    <id>ABR</id>
+    <nazev>A-TEAM Bruntál                          </nazev>
+    <http>http://ob-abr.webnode.cz                          </http>
+    <naz_obl>Hanácká             </naz_obl>
+    <naz_kra>Moravskoslezský     </naz_kra>
+    <naz_okr>Bruntál             </naz_okr>
+  </oddil>
+  <oddil>
+    <id>ACB</id>
+    <nazev>ABK České Budějovice - Šumava           </nazev>
+    <http>                                                  </http>
+    <naz_obl>Jihočeská           </naz_obl>
+    <naz_kra>Jihočeský           </naz_kra>
+    <naz_okr>České Budějovice    </naz_okr>
+  </oddil>
+  <oddil>
+    <id>ADA</id>
+    <nazev>OOB TJ Spartak Adamov                   </nazev>
+    <http>http://spartak-adamov.php5.cz                     </http>
+    <naz_obl>Jihomoravská        </naz_obl>
+    <naz_kra>Jihomoravský        </naz_kra>
+    <naz_okr>Blansko             </naz_okr>
+  </oddil>
+  <oddil>
+    <id>ALB</id>
+    <nazev>OOB Albrechtice nad Orlicí              </nazev>
+    <http>http://www.alb.borec.cz                           </http>
+    <naz_obl>Východočeská        </naz_obl>
+    <naz_kra>Královéhradecký     </naz_kra>
+    <naz_okr>Rychnov n. Kněž.    </naz_okr>
+  </oddil>
+  <oddil>
+    <id>AOP</id>
+    <nazev>POBO - přátelé OB Opava                 </nazev>
+    <http>http://aop2.nord-service.cz                       </http>
+    <naz_obl>Moravskoslezská     </naz_obl>
+    <naz_kra>Moravskoslezský     </naz_kra>
+    <naz_okr>Opava               </naz_okr>
+  </oddil>
+  <oddil>
+    <id>AOV</id>
+    <nazev>OOB TJ Baník Ostrava                    </nazev>
+    <http>http://oob-tjbanik.wz.cz                          </http>
+    <naz_obl>Moravskoslezská     </naz_obl>
+    <naz_kra>Moravskoslezský     </naz_kra>
+    <naz_okr>Ostrava-město       </naz_okr>
+  </oddil>
+  <oddil>
+    <id>API</id>
+    <nazev>OK Andante Písek                        </nazev>
+    <http>                                                  </http>
+    <naz_obl>Jihočeská           </naz_obl>
+    <naz_kra>Jihočeský           </naz_kra>
+    <naz_okr>Písek               </naz_okr>
+  </oddil>
+  <oddil>
+    <id>ARO</id>
+    <nazev>Zap.A bike klub                         </nazev>
+    <http>http://www.zapabike.cz                            </http>
+    <naz_obl>Západočeská         </naz_obl>
+    <naz_kra>Plzeňský            </naz_kra>
+    <naz_okr>Rokycany            </naz_okr>
+  </oddil>
+  <oddil>
+    <id>ASU</id>
+    <nazev>Magnus Orienteering                     </nazev>
+    <http>http://www.aljosa.org                             </http>
+    <naz_obl>Hanácká             </naz_obl>
+    <naz_kra>Olomoucký           </naz_kra>
+    <naz_okr>Šumperk             </naz_okr>
+  </oddil>
+  <oddil>
+    <id>AZL</id>
+    <nazev>SKOB ARIS Zlín                          </nazev>
+    <http>                                                  </http>
+    <naz_obl>Valašská            </naz_obl>
+    <naz_kra>Zlínský             </naz_kra>
+    <naz_okr>Zlín                </naz_okr>
+  </oddil>
+  <oddil>
+    <id>BBM</id>
+    <nazev>BETA URSUS Orienteering                 </nazev>
+    <http>http://www.beta-ursus.wz.cz                       </http>
+    <naz_obl>Jihomoravská        </naz_obl>
+    <naz_kra>Jihomoravský        </naz_kra>
+    <naz_okr>Brno-město          </naz_okr>
+  </oddil>
+  <oddil>
+    <id>BFM</id>
+    <nazev>SKOB Frýdek - Místek                    </nazev>
+    <http>http://skob-bfm.estranky.cz                       </http>
+    <naz_obl>Moravskoslezská     </naz_obl>
+    <naz_kra>Moravskoslezský     </naz_kra>
+    <naz_okr>Frýdek-Místek       </naz_okr>
+  </oddil>
+  <oddil>
+    <id>BLI</id>
+    <nazev>MTBO Bludný kořen                       </nazev>
+    <http>http://www.bludnykoren.estranky.cz                </http>
+    <naz_obl>Ještědská           </naz_obl>
+    <naz_kra>Liberecký           </naz_kra>
+    <naz_okr>Liberec             </naz_okr>
+  </oddil>
+  <oddil>
+    <id>BOR</id>
+    <nazev>OK Jiskra Nový Bor                      </nazev>
+    <http>http://www.ok-bor.cz                              </http>
+    <naz_obl>Ještědská           </naz_obl>
+    <naz_kra>Liberecký           </naz_kra>
+    <naz_okr>Česká Lípa          </naz_okr>
+  </oddil>
+  <oddil>
+    <id>BOV</id>
+    <nazev>TJ Baník Ostrava OKD                    </nazev>
+    <http>                                                  </http>
+    <naz_obl>Moravskoslezská     </naz_obl>
+    <naz_kra>Moravskoslezský     </naz_kra>
+    <naz_okr>Ostrava-město       </naz_okr>
+  </oddil>
+  <oddil>
+    <id>BRM</id>
+    <nazev>Sokol Burdych                           </nazev>
+    <http>http://www.burdych.com                            </http>
+    <naz_obl>Východočeská        </naz_obl>
+    <naz_kra>Královéhradecký     </naz_kra>
+    <naz_okr>Náchod              </naz_okr>
+  </oddil>
+  <oddil>
+    <id>BRU</id>
+    <nazev>Ulita-HOBRA Orienteering Broumov        </nazev>
+    <http>http://ulita.org/hlavni.php?hlavni=orientacnibeh  </http>
+    <naz_obl>Východočeská        </naz_obl>
+    <naz_kra>Královéhradecký     </naz_kra>
+    <naz_okr>Náchod              </naz_okr>
+  </oddil>
+  <oddil>
+    <id>BSO</id>
+    <nazev>KOB Baník Sokolov                       </nazev>
+    <http>http://obsokolov.cz                               </http>
+    <naz_obl>Západočeská         </naz_obl>
+    <naz_kra>Karlovarský         </naz_kra>
+    <naz_okr>Sokolov             </naz_okr>
+  </oddil>
+  <oddil>
+    <id>CEL</id>
+    <nazev>TJ Sokol Čelechovice na Hané            </nazev>
+    <http>                                                  </http>
+    <naz_obl>Hanácká             </naz_obl>
+    <naz_kra>Olomoucký           </naz_kra>
+    <naz_okr>Prostějov           </naz_okr>
+  </oddil>
+  <oddil>
+    <id>CET</id>
+    <nazev>TJ Loko Česká Třebová                   </nazev>
+    <http>                                                  </http>
+    <naz_obl>Východočeská        </naz_obl>
+    <naz_kra>Pardubický          </naz_kra>
+    <naz_okr>Ústí nad Orlicí     </naz_okr>
+  </oddil>
+  <oddil>
+    <id>CST</id>
+    <nazev>OOB TJ ČZ Strakonice                    </nazev>
+    <http>http://ob.wz.cz                                   </http>
+    <naz_obl>Jihočeská           </naz_obl>
+    <naz_kra>Jihočeský           </naz_kra>
+    <naz_okr>Strakonice          </naz_okr>
+  </oddil>
+  <oddil>
+    <id>CTB</id>
+    <nazev>SK OB Chotěboř                          </nazev>
+    <http>http://www.skchotebor.cz                          </http>
+    <naz_obl>Vysočina            </naz_obl>
+    <naz_kra>Vysočina            </naz_kra>
+    <naz_okr>Havlíčkův Brod      </naz_okr>
+  </oddil>
+  <oddil>
+    <id>DCE</id>
+    <nazev>KOB Dobřichovice                        </nazev>
+    <http>http://www.jhsoft.cz/obweb/                       </http>
+    <naz_obl>Středočeská         </naz_obl>
+    <naz_kra>Středočeský         </naz_kra>
+    <naz_okr>Praha-západ         </naz_okr>
+  </oddil>
+  <oddil>
+    <id>DKL</id>
+    <nazev>KOB Kladno                              </nazev>
+    <http>http://kobkladno.unas.cz/                         </http>
+    <naz_obl>Středočeská         </naz_obl>
+    <naz_kra>Středočeský         </naz_kra>
+    <naz_okr>Kladno              </naz_okr>
+  </oddil>
+  <oddil>
+    <id>DKP</id>
+    <nazev>Oddíl OB Kotlářka                       </nazev>
+    <http>http://dkp.orienteering.cz                        </http>
+    <naz_obl>Pražská             </naz_obl>
+    <naz_kra>Praha               </naz_kra>
+    <naz_okr>Praha hl.m.         </naz_okr>
+  </oddil>
+  <oddil>
+    <id>DLT</id>
+    <nazev>KrOB Rozmarýn Litoměřice                </nazev>
+    <http>                                                  </http>
+    <naz_obl>Ještědská           </naz_obl>
+    <naz_kra>Ústecký             </naz_kra>
+    <naz_okr>Litoměřice          </naz_okr>
+  </oddil>
+  <oddil>
+    <id>DOB</id>
+    <nazev>KOB Dobruška                            </nazev>
+    <http>http://www.dobruska.cz/kob/                       </http>
+    <naz_obl>Východočeská        </naz_obl>
+    <naz_kra>Královéhradecký     </naz_kra>
+    <naz_okr>Rychnov n. Kněž.    </naz_okr>
+  </oddil>
+  <oddil>
+    <id>DOK</id>
+    <nazev>OK Doksy                                </nazev>
+    <http>                                                  </http>
+    <naz_obl>Ještědská           </naz_obl>
+    <naz_kra>Liberecký           </naz_kra>
+    <naz_okr>Česká Lípa          </naz_okr>
+  </oddil>
+  <oddil>
+    <id>DOR</id>
+    <nazev>OK Dobříš                               </nazev>
+    <http>okdobris@seznam.cz                                </http>
+    <naz_obl>Středočeská         </naz_obl>
+    <naz_kra>Středočeský         </naz_kra>
+    <naz_okr>Příbram             </naz_okr>
+  </oddil>
+  <oddil>
+    <id>DPU</id>
+    <nazev>DDM Pardubice                           </nazev>
+    <http>                                                  </http>
+    <naz_obl>Východočeská        </naz_obl>
+    <naz_kra>Pardubický          </naz_kra>
+    <naz_okr>Pardubice           </naz_okr>
+  </oddil>
+  <oddil>
+    <id>DVP</id>
+    <nazev>Sokol Praha Spořilov - Roztyly          </nazev>
+    <http>http://dvp-praha.ic.cz                            </http>
+    <naz_obl>Pražská             </naz_obl>
+    <naz_kra>Praha               </naz_kra>
+    <naz_okr>Praha hl.m.         </naz_okr>
+  </oddil>
+  <oddil>
+    <id>EKP</id>
+    <nazev>VŠTJ Ekonom Praha                       </nazev>
+    <http>http://ob.vse.cz                                  </http>
+    <naz_obl>Pražská             </naz_obl>
+    <naz_kra>Praha               </naz_kra>
+    <naz_okr>Praha hl.m.         </naz_okr>
+  </oddil>
+  <oddil>
+    <id>EZL</id>
+    <nazev>PEV Zlín                                </nazev>
+    <http>http://www.pevzlin.cz                             </http>
+    <naz_obl>Valašská            </naz_obl>
+    <naz_kra>Zlínský             </naz_kra>
+    <naz_okr>Zlín                </naz_okr>
+  </oddil>
+  <oddil>
+    <id>FJI</id>
+    <nazev>SK Free Jihlava                         </nazev>
+    <http>                                                  </http>
+    <naz_obl>Vysočina            </naz_obl>
+    <naz_kra>Vysočina            </naz_kra>
+    <naz_okr>Jihlava             </naz_okr>
+  </oddil>
+  <oddil>
+    <id>FSP</id>
+    <nazev>VŠTJ Stavební fakulta Praha             </nazev>
+    <http>http://www.fspraha.cz                             </http>
+    <naz_obl>Pražská             </naz_obl>
+    <naz_kra>Praha               </naz_kra>
+    <naz_okr>Praha hl.m.         </naz_okr>
+  </oddil>
+  <oddil>
+    <id>FYD</id>
+    <nazev>Jizerský klub OB Frýdlant               </nazev>
+    <http>                                                  </http>
+    <naz_obl>Ještědská           </naz_obl>
+    <naz_kra>Liberecký           </naz_kra>
+    <naz_okr>Liberec             </naz_okr>
+  </oddil>
+  <oddil>
+    <id>HAR</id>
+    <nazev>OK Harcov                               </nazev>
+    <http>                                                  </http>
+    <naz_obl>Ještědská           </naz_obl>
+    <naz_kra>Liberecký           </naz_kra>
+    <naz_okr>Liberec             </naz_okr>
+  </oddil>
+  <oddil>
+    <id>HAV</id>
+    <nazev>SKOB Baník Havířov                      </nazev>
+    <http>http://skobhav.webzdarma.cz                       </http>
+    <naz_obl>Moravskoslezská     </naz_obl>
+    <naz_kra>Moravskoslezský     </naz_kra>
+    <naz_okr>Karviná             </naz_okr>
+  </oddil>
+  <oddil>
+    <id>HCE</id>
+    <nazev>TJ Sokol Hostivice                      </nazev>
+    <http>                                                  </http>
+    <naz_obl>Středočeská         </naz_obl>
+    <naz_kra>Středočeský         </naz_kra>
+    <naz_okr>Praha-západ         </naz_okr>
+  </oddil>
+  <oddil>
+    <id>HLV</id>
+    <nazev>OOB TJ Sokol Holešov                    </nazev>
+    <http>http://obholesov.webnode.cz                       </http>
+    <naz_obl>Valašská            </naz_obl>
+    <naz_kra>Zlínský             </naz_kra>
+    <naz_okr>Kroměříž            </naz_okr>
+  </oddil>
+  <oddil>
+    <id>HOB</id>
+    <nazev>SKOB Horní Benešov                      </nazev>
+    <http>                                                  </http>
+    <naz_obl>Moravskoslezská     </naz_obl>
+    <naz_kra>Moravskoslezský     </naz_kra>
+    <naz_okr>Bruntál             </naz_okr>
+  </oddil>
+  <oddil>
+    <id>HOR</id>
+    <nazev>TJ Jiskra Hořice                        </nazev>
+    <http>                                                  </http>
+    <naz_obl>Východočeská        </naz_obl>
+    <naz_kra>Královéhradecký     </naz_kra>
+    <naz_okr>Jičín               </naz_okr>
+  </oddil>
+  <oddil>
+    <id>HOS</id>
+    <nazev>TJ Tatran Hostinné                      </nazev>
+    <http>http://www.dragonet.cz/obhos/                     </http>
+    <naz_obl>Východočeská        </naz_obl>
+    <naz_kra>Královéhradecký     </naz_kra>
+    <naz_okr>Trutnov             </naz_okr>
+  </oddil>
+  <oddil>
+    <id>HSU</id>
+    <nazev>Horizont klub Šumperk                   </nazev>
+    <http>                                                  </http>
+    <naz_obl>Hanácká             </naz_obl>
+    <naz_kra>Olomoucký           </naz_kra>
+    <naz_okr>Šumperk             </naz_okr>
+  </oddil>
+  <oddil>
+    <id>HVC</id>
+    <nazev>SK Hlinsko                              </nazev>
+    <http>                                                  </http>
+    <naz_obl>Vysočina            </naz_obl>
+    <naz_kra>Pardubický          </naz_kra>
+    <naz_okr>Chrudim             </naz_okr>
+  </oddil>
+  <oddil>
+    <id>CHA</id>
+    <nazev>OK Chrastava                            </nazev>
+    <http>http://www.okcha.net                              </http>
+    <naz_obl>Ještědská           </naz_obl>
+    <naz_kra>Liberecký           </naz_kra>
+    <naz_okr>Liberec             </naz_okr>
+  </oddil>
+  <oddil>
+    <id>CHC</id>
+    <nazev>KOB Choceň                              </nazev>
+    <http>http://www.kobchocen.cz                           </http>
+    <naz_obl>Východočeská        </naz_obl>
+    <naz_kra>Pardubický          </naz_kra>
+    <naz_okr>Ústí nad Orlicí     </naz_okr>
+  </oddil>
+  <oddil>
+    <id>CHP</id>
+    <nazev>VSK Chemie Praha                        </nazev>
+    <http>                                                  </http>
+    <naz_obl>Pražská             </naz_obl>
+    <naz_kra>Praha               </naz_kra>
+    <naz_okr>Praha hl.m.         </naz_okr>
+  </oddil>
+  <oddil>
+    <id>CHT</id>
+    <nazev>OOB SK Chrast                           </nazev>
+    <http>http://www.obchrast.com                           </http>
+    <naz_obl>Vysočina            </naz_obl>
+    <naz_kra>Pardubický          </naz_kra>
+    <naz_okr>Chrudim             </naz_okr>
+  </oddil>
+  <oddil>
+    <id>JAM</id>
+    <nazev>SK Jamnice                              </nazev>
+    <http>http://jam.xf.cz/                                 </http>
+    <naz_obl>Moravskoslezská     </naz_obl>
+    <naz_kra>Moravskoslezský     </naz_kra>
+    <naz_okr>Opava               </naz_okr>
+  </oddil>
+  <oddil>
+    <id>JEN</id>
+    <nazev>OB Jenišovice                           </nazev>
+    <http>http://objen.xf.cz                                </http>
+    <naz_obl>Ještědská           </naz_obl>
+    <naz_kra>Liberecký           </naz_kra>
+    <naz_okr>Jablonec nad Nisou  </naz_okr>
+  </oddil>
+  <oddil>
+    <id>JEP</id>
+    <nazev>Jehlanka Team                           </nazev>
+    <http>                                                  </http>
+    <naz_obl>Pražská             </naz_obl>
+    <naz_kra>Praha               </naz_kra>
+    <naz_okr>Praha hl.m.         </naz_okr>
+  </oddil>
+  <oddil>
+    <id>JES</id>
+    <nazev>KOS Jesenice                            </nazev>
+    <http>http://www.kosjesenice.cz                         </http>
+    <naz_obl>Západočeská         </naz_obl>
+    <naz_kra>Středočeský         </naz_kra>
+    <naz_okr>Rakovník            </naz_okr>
+  </oddil>
+  <oddil>
+    <id>JHB</id>
+    <nazev>TJ Jiskra Havlíčkův Brod                </nazev>
+    <http>http://www.objhb.cz                               </http>
+    <naz_obl>Vysočina            </naz_obl>
+    <naz_kra>Vysočina            </naz_kra>
+    <naz_okr>Havlíčkův Brod      </naz_okr>
+  </oddil>
+  <oddil>
+    <id>JIL</id>
+    <nazev>OK Jilemnice                            </nazev>
+    <http>http://www.ok-jilemnice.cz                        </http>
+    <naz_obl>Východočeská        </naz_obl>
+    <naz_kra>Liberecký           </naz_kra>
+    <naz_okr>Semily              </naz_okr>
+  </oddil>
+  <oddil>
+    <id>JPI</id>
+    <nazev>Junák Písek                             </nazev>
+    <http>                                                  </http>
+    <naz_obl>Jihočeská           </naz_obl>
+    <naz_kra>Jihočeský           </naz_kra>
+    <naz_okr>Písek               </naz_okr>
+  </oddil>
+  <oddil>
+    <id>JPV</id>
+    <nazev>SK Prostějov                            </nazev>
+    <http>http://ob.skprostejov.cz                          </http>
+    <naz_obl>Hanácká             </naz_obl>
+    <naz_kra>Olomoucký           </naz_kra>
+    <naz_okr>Prostějov           </naz_okr>
+  </oddil>
+  <oddil>
+    <id>JZL</id>
+    <nazev>TJ Jižní svahy Zlín                     </nazev>
+    <http>                                                  </http>
+    <naz_obl>Valašská            </naz_obl>
+    <naz_kra>Zlínský             </naz_kra>
+    <naz_okr>Zlín                </naz_okr>
+  </oddil>
+  <oddil>
+    <id>KAD</id>
+    <nazev>Originální Vivalín team Kadaň           </nazev>
+    <http>                                                  </http>
+    <naz_obl>Západočeská         </naz_obl>
+    <naz_kra>Ústecký             </naz_kra>
+    <naz_okr>Chomutov            </naz_okr>
+  </oddil>
+  <oddil>
+    <id>KAM</id>
+    <nazev>SK Kamenice                             </nazev>
+    <http>http://obkamenice.dccomp.cz                       </http>
+    <naz_obl>Středočeská         </naz_obl>
+    <naz_kra>Středočeský         </naz_kra>
+    <naz_okr>Benešov             </naz_okr>
+  </oddil>
+  <oddil>
+    <id>KAR</id>
+    <nazev>SK Karlovice                            </nazev>
+    <http>http://regesport-2.blog.cz/rubrika/sk-karlovice   </http>
+    <naz_obl>Moravskoslezská     </naz_obl>
+    <naz_kra>Moravskoslezský     </naz_kra>
+    <naz_okr>Bruntál             </naz_okr>
+  </oddil>
+  <oddil>
+    <id>KAS</id>
+    <nazev>KOB Kamenický Šenov                     </nazev>
+    <http>                                                  </http>
+    <naz_obl>Ještědská           </naz_obl>
+    <naz_kra>Liberecký           </naz_kra>
+    <naz_okr>Česká Lípa          </naz_okr>
+  </oddil>
+  <oddil>
+    <id>KBP</id>
+    <nazev>KBP Praha                               </nazev>
+    <http>                                                  </http>
+    <naz_obl>Pražská             </naz_obl>
+    <naz_kra>Praha               </naz_kra>
+    <naz_okr>Praha hl.m.         </naz_okr>
+  </oddil>
+  <oddil>
+    <id>KCK</id>
+    <nazev>KOB Český Krumlov                       </nazev>
+    <http>                                                  </http>
+    <naz_obl>Jihočeská           </naz_obl>
+    <naz_kra>Jihočeský           </naz_kra>
+    <naz_okr>Český Krumlov       </naz_okr>
+  </oddil>
+  <oddil>
+    <id>KNC</id>
+    <nazev>OOS TJ Sokol Kostelec n. Č.l.           </nazev>
+    <http>http://www.obknc.cz                               </http>
+    <naz_obl>Středočeská         </naz_obl>
+    <naz_kra>Středočeský         </naz_kra>
+    <naz_okr>Kolín               </naz_okr>
+  </oddil>
+  <oddil>
+    <id>KON</id>
+    <nazev>KOB Konice                              </nazev>
+    <http>http://www.kobkonice.cz                           </http>
+    <naz_obl>Hanácká             </naz_obl>
+    <naz_kra>Olomoucký           </naz_kra>
+    <naz_okr>Prostějov           </naz_okr>
+  </oddil>
+  <oddil>
+    <id>KPY</id>
+    <nazev>SKOB TJ Sokol Kralupy n.Vlt.            </nazev>
+    <http>http://skobkralupy.unas.cz                        </http>
+    <naz_obl>Středočeská         </naz_obl>
+    <naz_kra>Středočeský         </naz_kra>
+    <naz_okr>Mělník              </naz_okr>
+  </oddil>
+  <oddil>
+    <id>KRE</id>
+    <nazev>OOB TJ Sokol Křemže                     </nazev>
+    <http>http://www.ob-kremze.cz                           </http>
+    <naz_obl>Jihočeská           </naz_obl>
+    <naz_kra>Jihočeský           </naz_kra>
+    <naz_okr>Český Krumlov       </naz_okr>
+  </oddil>
+  <oddil>
+    <id>KRL</id>
+    <nazev>Kometa Kralovice                        </nazev>
+    <http>http://www.kometakrl.cz                           </http>
+    <naz_obl>Západočeská         </naz_obl>
+    <naz_kra>Plzeňský            </naz_kra>
+    <naz_okr>Plzeň-sever         </naz_okr>
+  </oddil>
+  <oddil>
+    <id>KRN</id>
+    <nazev>KOS TJ Lokomotiva Krnov                 </nazev>
+    <http>http://www.skol.cz/KOS/                           </http>
+    <naz_obl>Moravskoslezská     </naz_obl>
+    <naz_kra>Moravskoslezský     </naz_kra>
+    <naz_okr>Bruntál             </naz_okr>
+  </oddil>
+  <oddil>
+    <id>KRP</id>
+    <nazev>SK KOURA                                </nazev>
+    <http>                                                  </http>
+    <naz_obl>Pražská             </naz_obl>
+    <naz_kra>Praha               </naz_kra>
+    <naz_okr>Praha hl.m.         </naz_okr>
+  </oddil>
+  <oddil>
+    <id>KSH</id>
+    <nazev>OOB TJ Kašperské Hory                   </nazev>
+    <http>http://ksh.wz.cz                                  </http>
+    <naz_obl>Západočeská         </naz_obl>
+    <naz_kra>Plzeňský            </naz_kra>
+    <naz_okr>Klatovy             </naz_okr>
+  </oddil>
+  <oddil>
+    <id>KSU</id>
+    <nazev>Klub vytrvalostních sportů Šumperk      </nazev>
+    <http>http://www.ksu.cz                                 </http>
+    <naz_obl>Hanácká             </naz_obl>
+    <naz_kra>Olomoucký           </naz_kra>
+    <naz_okr>Šumperk             </naz_okr>
+  </oddil>
+  <oddil>
+    <id>KTA</id>
+    <nazev>SK Kotnov Tábor                         </nazev>
+    <http>http://kta.wz.cz                                  </http>
+    <naz_obl>Jihočeská           </naz_obl>
+    <naz_kra>Jihočeský           </naz_kra>
+    <naz_okr>Tábor               </naz_okr>
+  </oddil>
+  <oddil>
+    <id>KTP</id>
+    <nazev>Koloshop Team                           </nazev>
+    <http>http://www.koloshopteam.cz                        </http>
+    <naz_obl>Ještědská           </naz_obl>
+    <naz_kra>Ústecký             </naz_kra>
+    <naz_okr>Teplice             </naz_okr>
+  </oddil>
+  <oddil>
+    <id>KUL</id>
+    <nazev>KOB Ústí nad Labem                      </nazev>
+    <http>http://www.kobul.cz                               </http>
+    <naz_obl>Ještědská           </naz_obl>
+    <naz_kra>Liberecký           </naz_kra>
+    <naz_okr>Liberec             </naz_okr>
+  </oddil>
+  <oddil>
+    <id>KUN</id>
+    <nazev>TJ Sokol Kunvald                        </nazev>
+    <http>http://obkunvald.sweb.cz                          </http>
+    <naz_obl>Východočeská        </naz_obl>
+    <naz_kra>Pardubický          </naz_kra>
+    <naz_okr>Ústí nad Orlicí     </naz_okr>
+  </oddil>
+  <oddil>
+    <id>KVP</id>
+    <nazev>Orientační oddíl SKV Praha              </nazev>
+    <http>http://www.skvpraha.org/ozv/                      </http>
+    <naz_obl>Pražská             </naz_obl>
+    <naz_kra>Praha               </naz_kra>
+    <naz_okr>Praha hl.m.         </naz_okr>
+  </oddil>
+  <oddil>
+    <id>KVS</id>
+    <nazev>SKOB Kobra Vsetín                       </nazev>
+    <http>http://www.kobravs.com                            </http>
+    <naz_obl>Valašská            </naz_obl>
+    <naz_kra>Zlínský             </naz_kra>
+    <naz_okr>Vsetín              </naz_okr>
+  </oddil>
+  <oddil>
+    <id>KYL</id>
+    <nazev>SK SP Kylešovice                        </nazev>
+    <http>http://www.spk.opava.cz                           </http>
+    <naz_obl>Moravskoslezská     </naz_obl>
+    <naz_kra>Moravskoslezský     </naz_kra>
+    <naz_okr>Opava               </naz_okr>
+  </oddil>
+  <oddil>
+    <id>LBE</id>
+    <nazev>TJ Lokomotiva Beroun                    </nazev>
+    <http>http://ob_lbe.sweb.cz                             </http>
+    <naz_obl>Středočeská         </naz_obl>
+    <naz_kra>Středočeský         </naz_kra>
+    <naz_okr>Beroun              </naz_okr>
+  </oddil>
+  <oddil>
+    <id>LBM</id>
+    <nazev>TJ Lokomotiva Ingstav Brno              </nazev>
+    <http>http://www.zrukol.cz/lbm/                         </http>
+    <naz_obl>Jihomoravská        </naz_obl>
+    <naz_kra>Jihomoravský        </naz_kra>
+    <naz_okr>Brno-město          </naz_okr>
+  </oddil>
+  <oddil>
+    <id>LCE</id>
+    <nazev>OOB TJ Slovan Luhačovice                </nazev>
+    <http>http://www.ob-luhacovice.cz                       </http>
+    <naz_obl>Valašská            </naz_obl>
+    <naz_kra>Zlínský             </naz_kra>
+    <naz_okr>Zlín                </naz_okr>
+  </oddil>
+  <oddil>
+    <id>LCV</id>
+    <nazev>TJ Loko Chomutov                        </nazev>
+    <http>                                                  </http>
+    <naz_obl>Západočeská         </naz_obl>
+    <naz_kra>Ústecký             </naz_kra>
+    <naz_okr>Chomutov            </naz_okr>
+  </oddil>
+  <oddil>
+    <id>LDC</id>
+    <nazev>KOB Děčín                               </nazev>
+    <http>http://www.kobdecin.cz                            </http>
+    <naz_obl>Ještědská           </naz_obl>
+    <naz_kra>Ústecký             </naz_kra>
+    <naz_okr>Děčín               </naz_okr>
+  </oddil>
+  <oddil>
+    <id>LEN</id>
+    <nazev>SKI Klub Lenora                         </nazev>
+    <http>                                                  </http>
+    <naz_obl>Jihočeská           </naz_obl>
+    <naz_kra>Jihočeský           </naz_kra>
+    <naz_okr>Prachatice          </naz_okr>
+  </oddil>
+  <oddil>
+    <id>LIT</id>
+    <nazev>KOB Chemopetrol Litvínov                </nazev>
+    <http>http://lit.ine.cz                                 </http>
+    <naz_obl>Ještědská           </naz_obl>
+    <naz_kra>Ústecký             </naz_kra>
+    <naz_okr>Most                </naz_okr>
+  </oddil>
+  <oddil>
+    <id>LIV</id>
+    <nazev>Krušnohorský rogainingový klub Litvínov </nazev>
+    <http>http://www.tojnar.cz/krk/                         </http>
+    <naz_obl>Západočeská         </naz_obl>
+    <naz_kra>Ústecký             </naz_kra>
+    <naz_okr>Most                </naz_okr>
+  </oddil>
+  <oddil>
+    <id>LJN</id>
+    <nazev>OOB TJ LIAZ Jablonec nad Nisou          </nazev>
+    <http>                                                  </http>
+    <naz_obl>Ještědská           </naz_obl>
+    <naz_kra>Liberecký           </naz_kra>
+    <naz_okr>Jablonec nad Nisou  </naz_okr>
+  </oddil>
+  <oddil>
+    <id>LKV</id>
+    <nazev>Klub vodáků Karlovy Vary                </nazev>
+    <http>                                                  </http>
+    <naz_obl>Západočeská         </naz_obl>
+    <naz_kra>Karlovarský         </naz_kra>
+    <naz_okr>Karlovy Vary        </naz_okr>
+  </oddil>
+  <oddil>
+    <id>LLI</id>
+    <nazev>TJ Loko Liberec                         </nazev>
+    <http>http://lli.czechtrams.com                         </http>
+    <naz_obl>Ještědská           </naz_obl>
+    <naz_kra>Liberecký           </naz_kra>
+    <naz_okr>Liberec             </naz_okr>
+  </oddil>
+  <oddil>
+    <id>LOL</id>
+    <nazev>OK Olomouc                              </nazev>
+    <http>                                                  </http>
+    <naz_obl>Hanácká             </naz_obl>
+    <naz_kra>Olomoucký           </naz_kra>
+    <naz_okr>Olomouc             </naz_okr>
+  </oddil>
+  <oddil>
+    <id>LOV</id>
+    <nazev>lepus.cz                                </nazev>
+    <http>http://www.lepus.cz                               </http>
+    <naz_obl>Moravskoslezská     </naz_obl>
+    <naz_kra>Moravskoslezský     </naz_kra>
+    <naz_okr>Ostrava-město       </naz_okr>
+  </oddil>
+  <oddil>
+    <id>LPM</id>
+    <nazev>OK Lokomotiva Plzeň                     </nazev>
+    <http>http://lpm.zcu.cz                                 </http>
+    <naz_obl>Západočeská         </naz_obl>
+    <naz_kra>Plzeňský            </naz_kra>
+    <naz_okr>Plzeň-město         </naz_okr>
+  </oddil>
+  <oddil>
+    <id>LPU</id>
+    <nazev>OK Lokomotiva Pardubice                 </nazev>
+    <http>http://www.lpu.cz                                 </http>
+    <naz_obl>Východočeská        </naz_obl>
+    <naz_kra>Pardubický          </naz_kra>
+    <naz_okr>Pardubice           </naz_okr>
+  </oddil>
+  <oddil>
+    <id>LTP</id>
+    <nazev>OOB TJ Lokomotiva Teplice               </nazev>
+    <http>http://www.loko-teplice.info                      </http>
+    <naz_obl>Ještědská           </naz_obl>
+    <naz_kra>Ústecký             </naz_kra>
+    <naz_okr>Teplice             </naz_okr>
+  </oddil>
+  <oddil>
+    <id>LTU</id>
+    <nazev>OOB TJ Lokomotiva Trutnov               </nazev>
+    <http>http://www.ltu-ob.cz                              </http>
+    <naz_obl>Východočeská        </naz_obl>
+    <naz_kra>Královéhradecký     </naz_kra>
+    <naz_okr>Trutnov             </naz_okr>
+  </oddil>
+  <oddil>
+    <id>MAS</id>
+    <nazev>KČT Aš                                  </nazev>
+    <http>http://sweb.cz/kct.ob                             </http>
+    <naz_obl>Západočeská         </naz_obl>
+    <naz_kra>Karlovarský         </naz_kra>
+    <naz_okr>Cheb                </naz_okr>
+  </oddil>
+  <oddil>
+    <id>MFP</id>
+    <nazev>VŠSK MFF UK Praha                       </nazev>
+    <http>http://www.ms.mff.cuni.cz/mfp/                    </http>
+    <naz_obl>Pražská             </naz_obl>
+    <naz_kra>Praha               </naz_kra>
+    <naz_okr>Praha hl.m.         </naz_okr>
+  </oddil>
+  <oddil>
+    <id>MIL</id>
+    <nazev>Tesil Milevsko                          </nazev>
+    <http>                                                  </http>
+    <naz_obl>Jihočeská           </naz_obl>
+    <naz_kra>Jihočeský           </naz_kra>
+    <naz_okr>Písek               </naz_okr>
+  </oddil>
+  <oddil>
+    <id>MJC</id>
+    <nazev>Maraton centrum Jičín                   </nazev>
+    <http>                                                  </http>
+    <naz_obl>Východočeská        </naz_obl>
+    <naz_kra>Královéhradecký     </naz_kra>
+    <naz_okr>Jičín               </naz_okr>
+  </oddil>
+  <oddil>
+    <id>MKP</id>
+    <nazev>SK Meteor Kačerov Praha                 </nazev>
+    <http>http://mkp.zde.cz                                 </http>
+    <naz_obl>Pražská             </naz_obl>
+    <naz_kra>Praha               </naz_kra>
+    <naz_okr>Praha hl.m.         </naz_okr>
+  </oddil>
+  <oddil>
+    <id>MLA</id>
+    <nazev>MLOK Mariánské Lázně                    </nazev>
+    <http>http://mlok.wz.cz                                 </http>
+    <naz_obl>Západočeská         </naz_obl>
+    <naz_kra>Karlovarský         </naz_kra>
+    <naz_okr>Cheb                </naz_okr>
+  </oddil>
+  <oddil>
+    <id>MOV</id>
+    <nazev>SKOB Ostrava                            </nazev>
+    <http>http://skob-ostrava.cz                            </http>
+    <naz_obl>Moravskoslezská     </naz_obl>
+    <naz_kra>Moravskoslezský     </naz_kra>
+    <naz_okr>Ostrava-město       </naz_okr>
+  </oddil>
+  <oddil>
+    <id>NEJ</id>
+    <nazev>TJ Jiskra Nejdek                        </nazev>
+    <http>http://ob.nejdek.net                              </http>
+    <naz_obl>Západočeská         </naz_obl>
+    <naz_kra>Karlovarský         </naz_kra>
+    <naz_okr>Karlovy Vary        </naz_okr>
+  </oddil>
+  <oddil>
+    <id>NNH</id>
+    <nazev>KVS Náměšť na Hané                      </nazev>
+    <http>http://www.kvsnamest.atlasweb.cz/                 </http>
+    <naz_obl>Hanácká             </naz_obl>
+    <naz_kra>Olomoucký           </naz_kra>
+    <naz_okr>Olomouc             </naz_okr>
+  </oddil>
+  <oddil>
+    <id>NOB</id>
+    <nazev>SIX Numbers                             </nazev>
+    <http>http://www.sixnumbers.cz                          </http>
+    <naz_obl>Ještědská           </naz_obl>
+    <naz_kra>Liberecký           </naz_kra>
+    <naz_okr>Česká Lípa          </naz_okr>
+  </oddil>
+  <oddil>
+    <id>NPA</id>
+    <nazev>SK LOB Nová Paka                        </nazev>
+    <http>http://www.npa.cz                                 </http>
+    <naz_obl>Východočeská        </naz_obl>
+    <naz_kra>Královéhradecký     </naz_kra>
+    <naz_okr>Jičín               </naz_okr>
+  </oddil>
+  <oddil>
+    <id>OCB</id>
+    <nazev>Orienteering club České Budějovice      </nazev>
+    <http>                                                  </http>
+    <naz_obl>Jihočeská           </naz_obl>
+    <naz_kra>Jihočeský           </naz_kra>
+    <naz_okr>České Budějovice    </naz_okr>
+  </oddil>
+  <oddil>
+    <id>ODR</id>
+    <nazev>SKOB Odry                               </nazev>
+    <http>                                                  </http>
+    <naz_obl>Moravskoslezská     </naz_obl>
+    <naz_kra>Moravskoslezský     </naz_kra>
+    <naz_okr>Opava               </naz_okr>
+  </oddil>
+  <oddil>
+    <id>ODV</id>
+    <nazev>TJ AERO Odolena Voda                    </nazev>
+    <http>http://www.spoluhraci.cz/odv-ob/                  </http>
+    <naz_obl>Středočeská         </naz_obl>
+    <naz_kra>Středočeský         </naz_kra>
+    <naz_okr>Praha-východ        </naz_okr>
+  </oddil>
+  <oddil>
+    <id>OKP</id>
+    <nazev>SK OK 24 Praha                          </nazev>
+    <http>http://www.ok24.digres.cz                         </http>
+    <naz_obl>Pražská             </naz_obl>
+    <naz_kra>Praha               </naz_kra>
+    <naz_okr>Praha hl.m.         </naz_okr>
+  </oddil>
+  <oddil>
+    <id>OLP</id>
+    <nazev>PSK Olymp Praha                         </nazev>
+    <http>http://olymp.jaro.biz                             </http>
+    <naz_obl>Pražská             </naz_obl>
+    <naz_kra>Praha               </naz_kra>
+    <naz_okr>Praha hl.m.         </naz_okr>
+  </oddil>
+  <oddil>
+    <id>ONO</id>
+    <nazev>SKOB Ostrov                             </nazev>
+    <http>http://www.skobostrov.wz.cz                       </http>
+    <naz_obl>Západočeská         </naz_obl>
+    <naz_kra>Karlovarský         </naz_kra>
+    <naz_okr>Karlovy Vary        </naz_okr>
+  </oddil>
+  <oddil>
+    <id>OOL</id>
+    <nazev>SK Haná orienteering                    </nazev>
+    <http>http://sk.hanaorienteering.cz                     </http>
+    <naz_obl>Hanácká             </naz_obl>
+    <naz_kra>Olomoucký           </naz_kra>
+    <naz_okr>Olomouc             </naz_okr>
+  </oddil>
+  <oddil>
+    <id>OOP</id>
+    <nazev>TJ Opava                                </nazev>
+    <http>http://www.orientacnibeh.opava.cz                 </http>
+    <naz_obl>Moravskoslezská     </naz_obl>
+    <naz_kra>Moravskoslezský     </naz_kra>
+    <naz_okr>Opava               </naz_okr>
+  </oddil>
+  <oddil>
+    <id>OPT</id>
+    <nazev>SK Libín 1096 Prachatice                </nazev>
+    <http>                                                  </http>
+    <naz_obl>Jihočeská           </naz_obl>
+    <naz_kra>Jihočeský           </naz_kra>
+    <naz_okr>Prachatice          </naz_okr>
+  </oddil>
+  <oddil>
+    <id>OSN</id>
+    <nazev>SK OS Nové Město n. M.                  </nazev>
+    <http>http://osn-cz.eu/                                 </http>
+    <naz_obl>Vysočina            </naz_obl>
+    <naz_kra>Vysočina            </naz_kra>
+    <naz_okr>Žďár nad Sázavou    </naz_okr>
+  </oddil>
+  <oddil>
+    <id>OTK</id>
+    <nazev>OOB TJ Jiskra Otrokovice                </nazev>
+    <http>                                                  </http>
+    <naz_obl>Valašská            </naz_obl>
+    <naz_kra>Zlínský             </naz_kra>
+    <naz_okr>Zlín                </naz_okr>
+  </oddil>
+  <oddil>
+    <id>PBM</id>
+    <nazev>TJ Spartak 1. Brněnská                  </nazev>
+    <http>http://www.orientak.cz                            </http>
+    <naz_obl>Jihomoravská        </naz_obl>
+    <naz_kra>Jihomoravský        </naz_kra>
+    <naz_okr>Brno-město          </naz_okr>
+  </oddil>
+  <oddil>
+    <id>PCB</id>
+    <nazev>SKP České Budějovice                    </nazev>
+    <http>http://www.pcb.wgz.cz                             </http>
+    <naz_obl>Jihočeská           </naz_obl>
+    <naz_kra>Jihočeský           </naz_kra>
+    <naz_okr>České Budějovice    </naz_okr>
+  </oddil>
+  <oddil>
+    <id>PEN</id>
+    <nazev>OK RECO Sport                           </nazev>
+    <http>http://www.okrecosport.estranky.cz                </http>
+    <naz_obl>Ještědská           </naz_obl>
+    <naz_kra>Liberecký           </naz_kra>
+    <naz_okr>Liberec             </naz_okr>
+  </oddil>
+  <oddil>
+    <id>PFP</id>
+    <nazev>VŠSK PedF UK Praha                      </nazev>
+    <http>                                                  </http>
+    <naz_obl>Pražská             </naz_obl>
+    <naz_kra>Středočeský         </naz_kra>
+    <naz_okr>Praha-východ        </naz_okr>
+  </oddil>
+  <oddil>
+    <id>PGP</id>
+    <nazev>SK Praga                                </nazev>
+    <http>http://www.skpraga.cz                             </http>
+    <naz_obl>Pražská             </naz_obl>
+    <naz_kra>Praha               </naz_kra>
+    <naz_okr>Praha hl.m.         </naz_okr>
+  </oddil>
+  <oddil>
+    <id>PHK</id>
+    <nazev>OK 99 Hradec Králové                    </nazev>
+    <http>http://www.ok99.cz                                </http>
+    <naz_obl>Východočeská        </naz_obl>
+    <naz_kra>Královéhradecký     </naz_kra>
+    <naz_okr>Hradec Králové      </naz_okr>
+  </oddil>
+  <oddil>
+    <id>PLU</id>
+    <nazev>TJ Sokol Plumlov                        </nazev>
+    <http>                                                  </http>
+    <naz_obl>Hanácká             </naz_obl>
+    <naz_kra>Olomoucký           </naz_kra>
+    <naz_okr>Prostějov           </naz_okr>
+  </oddil>
+  <oddil>
+    <id>PPU</id>
+    <nazev>KOB Pardubice                           </nazev>
+    <http>                                                  </http>
+    <naz_obl>Východočeská        </naz_obl>
+    <naz_kra>Pardubický          </naz_kra>
+    <naz_okr>Pardubice           </naz_okr>
+  </oddil>
+  <oddil>
+    <id>PTE</id>
+    <nazev>TJ Sokol Ptení                          </nazev>
+    <http>http://www.sokol-pteni.cz/rubrika/orientacni-beh/ </http>
+    <naz_obl>Hanácká             </naz_obl>
+    <naz_kra>Olomoucký           </naz_kra>
+    <naz_okr>Prostějov           </naz_okr>
+  </oddil>
+  <oddil>
+    <id>PUL</id>
+    <nazev>OOB USK Slavie Ústí n.L.                </nazev>
+    <http>                                                  </http>
+    <naz_obl>Ještědská           </naz_obl>
+    <naz_kra>Ústecký             </naz_kra>
+    <naz_okr>Ústí nad Labem      </naz_okr>
+  </oddil>
+  <oddil>
+    <id>PVD</id>
+    <nazev>OOB TJ Sokol Pražák                     </nazev>
+    <http>                                                  </http>
+    <naz_obl>Jihočeská           </naz_obl>
+    <naz_kra>Jihočeský           </naz_kra>
+    <naz_okr>Prachatice          </naz_okr>
+  </oddil>
+  <oddil>
+    <id>PVP</id>
+    <nazev>VSK Přírodověda                         </nazev>
+    <http>http://priro.hyperlink.cz                         </http>
+    <naz_obl>Pražská             </naz_obl>
+    <naz_kra>Praha               </naz_kra>
+    <naz_okr>Praha hl.m.         </naz_okr>
+  </oddil>
+  <oddil>
+    <id>PZR</id>
+    <nazev>UNITOP SKP Žďár nad Sázavou             </nazev>
+    <http>http://pzr.siok.cz                                </http>
+    <naz_obl>Vysočina            </naz_obl>
+    <naz_kra>Vysočina            </naz_kra>
+    <naz_okr>Žďár nad Sázavou    </naz_okr>
+  </oddil>
+  <oddil>
+    <id>RAD</id>
+    <nazev>TJ Sokol Radslavice                     </nazev>
+    <http>                                                  </http>
+    <naz_obl>Hanácká             </naz_obl>
+    <naz_kra>Olomoucký           </naz_kra>
+    <naz_okr>Přerov              </naz_okr>
+  </oddil>
+  <oddil>
+    <id>RBK</id>
+    <nazev>SK Radioklub Blansko                    </nazev>
+    <http>http://rbk.wz.cz                                  </http>
+    <naz_obl>Jihomoravská        </naz_obl>
+    <naz_kra>Jihomoravský        </naz_kra>
+    <naz_okr>Blansko             </naz_okr>
+  </oddil>
+  <oddil>
+    <id>RDC</id>
+    <nazev>Reactor Bike Team Děčín                 </nazev>
+    <http>http://reactor.php5.cz                            </http>
+    <naz_obl>Ještědská           </naz_obl>
+    <naz_kra>Ústecký             </naz_kra>
+    <naz_okr>Děčín               </naz_okr>
+  </oddil>
+  <oddil>
+    <id>ROU</id>
+    <nazev>SKOB Roudnice nad Labem                 </nazev>
+    <http>http://rou.wz.cz                                  </http>
+    <naz_obl>Středočeská         </naz_obl>
+    <naz_kra>Ústecký             </naz_kra>
+    <naz_okr>Litoměřice          </naz_okr>
+  </oddil>
+  <oddil>
+    <id>ROV</id>
+    <nazev>OK Rožnov                               </nazev>
+    <http>http://obroznov.wz.cz                             </http>
+    <naz_obl>Valašská            </naz_obl>
+    <naz_kra>Zlínský             </naz_kra>
+    <naz_okr>Vsetín              </naz_okr>
+  </oddil>
+  <oddil>
+    <id>ROZ</id>
+    <nazev>OK Roztoky                              </nazev>
+    <http>http://roz.ini.cz                                 </http>
+    <naz_obl>Středočeská         </naz_obl>
+    <naz_kra>Středočeský         </naz_kra>
+    <naz_okr>Praha-západ         </naz_okr>
+  </oddil>
+  <oddil>
+    <id>RUZ</id>
+    <nazev>TJ Růžená                               </nazev>
+    <http>http://orientak.schrapnel.cz                      </http>
+    <naz_obl>Vysočina            </naz_obl>
+    <naz_kra>Vysočina            </naz_kra>
+    <naz_okr>Jihlava             </naz_okr>
+  </oddil>
+  <oddil>
+    <id>SBK</id>
+    <nazev>KOB Start Blansko                       </nazev>
+    <http>http://www.sbk-ob.com                             </http>
+    <naz_obl>Jihomoravská        </naz_obl>
+    <naz_kra>Jihomoravský        </naz_kra>
+    <naz_okr>Blansko             </naz_okr>
+  </oddil>
+  <oddil>
+    <id>SBR</id>
+    <nazev>SKOB Bruntál                            </nazev>
+    <http>http://skobbruntal.webz.cz                        </http>
+    <naz_obl>Hanácká             </naz_obl>
+    <naz_kra>Moravskoslezský     </naz_kra>
+    <naz_okr>Bruntál             </naz_okr>
+  </oddil>
+  <oddil>
+    <id>SCP</id>
+    <nazev>OK Sparta Praha                         </nazev>
+    <http>http://www.oksparta.cz                            </http>
+    <naz_obl>Pražská             </naz_obl>
+    <naz_kra>Praha               </naz_kra>
+    <naz_okr>Praha hl.m.         </naz_okr>
+  </oddil>
+  <oddil>
+    <id>SFM</id>
+    <nazev>OOB TJ Sokol Frýdek-Místek              </nazev>
+    <http>                                                  </http>
+    <naz_obl>Moravskoslezská     </naz_obl>
+    <naz_kra>Moravskoslezský     </naz_kra>
+    <naz_okr>Frýdek-Místek       </naz_okr>
+  </oddil>
+  <oddil>
+    <id>SHK</id>
+    <nazev>TJ Slavia Hradec Králové                </nazev>
+    <http>http://www.shk-ob.cz                              </http>
+    <naz_obl>Východočeská        </naz_obl>
+    <naz_kra>Královéhradecký     </naz_kra>
+    <naz_okr>Hradec Králové      </naz_okr>
+  </oddil>
+  <oddil>
+    <id>SCH</id>
+    <nazev>TJ Skalka Cheb                          </nazev>
+    <http>                                                  </http>
+    <naz_obl>Západočeská         </naz_obl>
+    <naz_kra>Karlovarský         </naz_kra>
+    <naz_okr>Cheb                </naz_okr>
+  </oddil>
+  <oddil>
+    <id>SIP</id>
+    <nazev>SILD team Praha                         </nazev>
+    <http>                                                  </http>
+    <naz_obl>Pražská             </naz_obl>
+    <naz_kra>Praha               </naz_kra>
+    <naz_okr>Praha hl.m.         </naz_okr>
+  </oddil>
+  <oddil>
+    <id>SJC</id>
+    <nazev>Sportcentrum Jičín                      </nazev>
+    <http>http://objicin.tpc.cz                             </http>
+    <naz_obl>Východočeská        </naz_obl>
+    <naz_kra>Královéhradecký     </naz_kra>
+    <naz_okr>Jičín               </naz_okr>
+  </oddil>
+  <oddil>
+    <id>SJH</id>
+    <nazev>SJH Jindřichův Hradec                   </nazev>
+    <http>http://www.e-poradna.eu/slovan/                   </http>
+    <naz_obl>Vysočina            </naz_obl>
+    <naz_kra>Jihočeský           </naz_kra>
+    <naz_okr>Jindřichův Hradec   </naz_okr>
+  </oddil>
+  <oddil>
+    <id>SJI</id>
+    <nazev>OK Jihlava                              </nazev>
+    <http>http://www.okjihlava.com                          </http>
+    <naz_obl>Vysočina            </naz_obl>
+    <naz_kra>Vysočina            </naz_kra>
+    <naz_okr>Jihlava             </naz_okr>
+  </oddil>
+  <oddil>
+    <id>SJP</id>
+    <nazev>Slavoj Praha                            </nazev>
+    <http>                                                  </http>
+    <naz_obl>Pražská             </naz_obl>
+    <naz_kra>Praha               </naz_kra>
+    <naz_okr>Praha hl.m.         </naz_okr>
+  </oddil>
+  <oddil>
+    <id>SKL</id>
+    <nazev>SMS Team Kladno                         </nazev>
+    <http>                                                  </http>
+    <naz_obl>Středočeská         </naz_obl>
+    <naz_kra>Středočeský         </naz_kra>
+    <naz_okr>Kladno              </naz_okr>
+  </oddil>
+  <oddil>
+    <id>SKM</id>
+    <nazev>KOB Směr Kroměříž                       </nazev>
+    <http>http://www.smerkromeriz.cz                        </http>
+    <naz_obl>Valašská            </naz_obl>
+    <naz_kra>Zlínský             </naz_kra>
+    <naz_okr>Kroměříž            </naz_okr>
+  </oddil>
+  <oddil>
+    <id>SKV</id>
+    <nazev>TJ Slovan Karlovy Vary                  </nazev>
+    <http>                                                  </http>
+    <naz_obl>Západočeská         </naz_obl>
+    <naz_kra>Karlovarský         </naz_kra>
+    <naz_okr>Karlovy Vary        </naz_okr>
+  </oddil>
+  <oddil>
+    <id>SLA</id>
+    <nazev>SKOB Slaný                              </nazev>
+    <http>http://skobslany.unas.cz                          </http>
+    <naz_obl>Středočeská         </naz_obl>
+    <naz_kra>Středočeský         </naz_kra>
+    <naz_okr>Kladno              </naz_okr>
+  </oddil>
+  <oddil>
+    <id>SLP</id>
+    <nazev>OOB Slavia Praha                        </nazev>
+    <http>http://obslp.blog.cz                              </http>
+    <naz_obl>Pražská             </naz_obl>
+    <naz_kra>Praha               </naz_kra>
+    <naz_okr>Praha hl.m.         </naz_okr>
+  </oddil>
+  <oddil>
+    <id>SMB</id>
+    <nazev>SKOB Sig-Mat Mladá Boleslav             </nazev>
+    <http>http://www.sigmat.cz/sport/                       </http>
+    <naz_obl>Ještědská           </naz_obl>
+    <naz_kra>Středočeský         </naz_kra>
+    <naz_okr>Mladá Boleslav      </naz_okr>
+  </oddil>
+  <oddil>
+    <id>SMR</id>
+    <nazev>SK SNS Smržovka                         </nazev>
+    <http>http://www.sns.cz                                 </http>
+    <naz_obl>Ještědská           </naz_obl>
+    <naz_kra>Liberecký           </naz_kra>
+    <naz_okr>Jablonec nad Nisou  </naz_okr>
+  </oddil>
+  <oddil>
+    <id>SNA</id>
+    <nazev>TJ START Náchod                         </nazev>
+    <http>http://www.startnachod.wz.cz                      </http>
+    <naz_obl>Východočeská        </naz_obl>
+    <naz_kra>Královéhradecký     </naz_kra>
+    <naz_okr>Náchod              </naz_okr>
+  </oddil>
+  <oddil>
+    <id>SOB</id>
+    <nazev>Sdruž. organizátorů bank. sport. akcí   </nazev>
+    <http>http://www.sobsa.cz                               </http>
+    <naz_obl>Pražská             </naz_obl>
+    <naz_kra>Praha               </naz_kra>
+    <naz_okr>Praha hl.m.         </naz_okr>
+  </oddil>
+  <oddil>
+    <id>SOP</id>
+    <nazev>OOB TJ Slezan Opava                     </nazev>
+    <http>http://www.sop.noblesa-opava.cz                   </http>
+    <naz_obl>Moravskoslezská     </naz_obl>
+    <naz_kra>Moravskoslezský     </naz_kra>
+    <naz_okr>Opava               </naz_okr>
+  </oddil>
+  <oddil>
+    <id>SRK</id>
+    <nazev>SOOB Spartak Rychnov nad Kněžnou        </nazev>
+    <http>http://www.srk.borec.cz                           </http>
+    <naz_obl>Východočeská        </naz_obl>
+    <naz_kra>Královéhradecký     </naz_kra>
+    <naz_okr>Rychnov n. Kněž.    </naz_okr>
+  </oddil>
+  <oddil>
+    <id>SSP</id>
+    <nazev>SK Stopa Praha                          </nazev>
+    <http>                                                  </http>
+    <naz_obl>Pražská             </naz_obl>
+    <naz_kra>Praha               </naz_kra>
+    <naz_okr>Praha hl.m.         </naz_okr>
+  </oddil>
+  <oddil>
+    <id>SSU</id>
+    <nazev>SK Severka Šumperk                      </nazev>
+    <http>http://www.ssu.cz                                 </http>
+    <naz_obl>Hanácká             </naz_obl>
+    <naz_kra>Olomoucký           </naz_kra>
+    <naz_okr>Šumperk             </naz_okr>
+  </oddil>
+  <oddil>
+    <id>STB</id>
+    <nazev>TJ Stadion Nový Bor                     </nazev>
+    <http>http://www.stb.mistecko.cz                        </http>
+    <naz_obl>Ještědská           </naz_obl>
+    <naz_kra>Liberecký           </naz_kra>
+    <naz_okr>Česká Lípa          </naz_okr>
+  </oddil>
+  <oddil>
+    <id>STE</id>
+    <nazev>SK SKI-OB Šternberk                     </nazev>
+    <http>http://ste.eso9.cz                                </http>
+    <naz_obl>Hanácká             </naz_obl>
+    <naz_kra>Olomoucký           </naz_kra>
+    <naz_okr>Olomouc             </naz_okr>
+  </oddil>
+  <oddil>
+    <id>STH</id>
+    <nazev>SK Studenec                             </nazev>
+    <http>http://www.skstudenec.cz/oos/                     </http>
+    <naz_obl>Východočeská        </naz_obl>
+    <naz_kra>Liberecký           </naz_kra>
+    <naz_okr>Semily              </naz_okr>
+  </oddil>
+  <oddil>
+    <id>STZ</id>
+    <nazev>PS Výři                                 </nazev>
+    <http>                                                  </http>
+    <naz_obl>Ještědská           </naz_obl>
+    <naz_kra>Liberecký           </naz_kra>
+    <naz_okr>Česká Lípa          </naz_okr>
+  </oddil>
+  <oddil>
+    <id>SUL</id>
+    <nazev>OOB TJ Slavoj Severotuk Ústí n. L.      </nazev>
+    <http>                                                  </http>
+    <naz_obl>Ještědská           </naz_obl>
+    <naz_kra>Ústecký             </naz_kra>
+    <naz_okr>Ústí nad Labem      </naz_okr>
+  </oddil>
+  <oddil>
+    <id>SVS</id>
+    <nazev>Orientklub Vsetín                       </nazev>
+    <http>                                                  </http>
+    <naz_obl>Valašská            </naz_obl>
+    <naz_kra>Zlínský             </naz_kra>
+    <naz_okr>Vsetín              </naz_okr>
+  </oddil>
+  <oddil>
+    <id>SZP</id>
+    <nazev>TJ Slovan Zdravotník Praha              </nazev>
+    <http>http://zdravotnik-praha.webnode.cz                </http>
+    <naz_obl>Pražská             </naz_obl>
+    <naz_kra>Praha               </naz_kra>
+    <naz_okr>Praha hl.m.         </naz_okr>
+  </oddil>
+  <oddil>
+    <id>TAP</id>
+    <nazev>KOB TRETRA Praha                        </nazev>
+    <http>http://www.tretra.org                             </http>
+    <naz_obl>Pražská             </naz_obl>
+    <naz_kra>Praha               </naz_kra>
+    <naz_okr>Praha hl.m.         </naz_okr>
+  </oddil>
+  <oddil>
+    <id>TBM</id>
+    <nazev>KOS TJ Tesla Brno                       </nazev>
+    <http>http://www.tbm.cz                                 </http>
+    <naz_obl>Jihomoravská        </naz_obl>
+    <naz_kra>Jihomoravský        </naz_kra>
+    <naz_okr>Brno-město          </naz_okr>
+  </oddil>
+  <oddil>
+    <id>TCB</id>
+    <nazev>SK Technik České Budějovice             </nazev>
+    <http>                                                  </http>
+    <naz_obl>Jihočeská           </naz_obl>
+    <naz_kra>Jihočeský           </naz_kra>
+    <naz_okr>České Budějovice    </naz_okr>
+  </oddil>
+  <oddil>
+    <id>TEH</id>
+    <nazev>Sokol Tehov                             </nazev>
+    <http>                                                  </http>
+    <naz_obl>Středočeská         </naz_obl>
+    <naz_kra>Středočeský         </naz_kra>
+    <naz_okr>Praha-východ        </naz_okr>
+  </oddil>
+  <oddil>
+    <id>TEP</id>
+    <nazev>Tempo Praha                             </nazev>
+    <http>                                                  </http>
+    <naz_obl>Pražská             </naz_obl>
+    <naz_kra>Praha               </naz_kra>
+    <naz_okr>Praha hl.m.         </naz_okr>
+  </oddil>
+  <oddil>
+    <id>TJH</id>
+    <nazev>TJ OK Tolar Jindřichův Hradec           </nazev>
+    <http>                                                  </http>
+    <naz_obl>Jihočeská           </naz_obl>
+    <naz_kra>Jihočeský           </naz_kra>
+    <naz_okr>Jindřichův Hradec   </naz_okr>
+  </oddil>
+  <oddil>
+    <id>TJN</id>
+    <nazev>OOB TJ Tatran Jablonec nad Nisou        </nazev>
+    <http>http://tatran.org                                 </http>
+    <naz_obl>Ještědská           </naz_obl>
+    <naz_kra>Liberecký           </naz_kra>
+    <naz_okr>Jablonec nad Nisou  </naz_okr>
+  </oddil>
+  <oddil>
+    <id>TJP</id>
+    <nazev>OOB TJ Sokol Troja                      </nazev>
+    <http>                                                  </http>
+    <naz_obl>Pražská             </naz_obl>
+    <naz_kra>Praha               </naz_kra>
+    <naz_okr>Praha hl.m.         </naz_okr>
+  </oddil>
+  <oddil>
+    <id>TRC</id>
+    <nazev>SKOB BETA Třinec                        </nazev>
+    <http>http://betatrinec.wz.cz                           </http>
+    <naz_obl>Moravskoslezská     </naz_obl>
+    <naz_kra>Moravskoslezský     </naz_kra>
+    <naz_okr>Frýdek-Místek       </naz_okr>
+  </oddil>
+  <oddil>
+    <id>TRI</id>
+    <nazev>TJ TŽ Třinec                            </nazev>
+    <http>http://www.flc.cz/atletika/                       </http>
+    <naz_obl>Moravskoslezská     </naz_obl>
+    <naz_kra>Moravskoslezský     </naz_kra>
+    <naz_okr>Frýdek-Místek       </naz_okr>
+  </oddil>
+  <oddil>
+    <id>TSU</id>
+    <nazev>LKT 80 Šumperk                          </nazev>
+    <http>http://www.lkt80.cz                               </http>
+    <naz_obl>Hanácká             </naz_obl>
+    <naz_kra>Olomoucký           </naz_kra>
+    <naz_okr>Šumperk             </naz_okr>
+  </oddil>
+  <oddil>
+    <id>TTR</id>
+    <nazev>OOB Třebíč                              </nazev>
+    <http>http://www.oobtrebic.cz                           </http>
+    <naz_obl>Vysočina            </naz_obl>
+    <naz_kra>Vysočina            </naz_kra>
+    <naz_okr>Třebíč              </naz_okr>
+  </oddil>
+  <oddil>
+    <id>TUR</id>
+    <nazev>OOB TJ Turnov / MTBO TJ Turnov          </nazev>
+    <http>http://www.tur.cz                                 </http>
+    <naz_obl>Ještědská           </naz_obl>
+    <naz_kra>Liberecký           </naz_kra>
+    <naz_okr>Semily              </naz_okr>
+  </oddil>
+  <oddil>
+    <id>TUV</id>
+    <nazev>SOK TJ Turnov                           </nazev>
+    <http>http://sok-turnov.sweb.cz                         </http>
+    <naz_obl>Ještědská           </naz_obl>
+    <naz_kra>Liberecký           </naz_kra>
+    <naz_okr>Semily              </naz_okr>
+  </oddil>
+  <oddil>
+    <id>TYN</id>
+    <nazev>OOB SK Týniště nad Orlicí               </nazev>
+    <http>http://www.ob-tyniste.cz                          </http>
+    <naz_obl>Východočeská        </naz_obl>
+    <naz_kra>Královéhradecký     </naz_kra>
+    <naz_okr>Rychnov n. Kněž.    </naz_okr>
+  </oddil>
+  <oddil>
+    <id>TZL</id>
+    <nazev>SKOB Zlín                               </nazev>
+    <http>http://www.skob-zlin.cz/                          </http>
+    <naz_obl>Valašská            </naz_obl>
+    <naz_kra>Zlínský             </naz_kra>
+    <naz_okr>Zlín                </naz_okr>
+  </oddil>
+  <oddil>
+    <id>UBM</id>
+    <nazev>OOB TJ Průkopník Brno                   </nazev>
+    <http>http://www.ubm.wz.cz                              </http>
+    <naz_obl>Jihomoravská        </naz_obl>
+    <naz_kra>Jihomoravský        </naz_kra>
+    <naz_okr>Brno-město          </naz_okr>
+  </oddil>
+  <oddil>
+    <id>UOL</id>
+    <nazev>SK UP Olomouc                           </nazev>
+    <http>http://www.obolomouc.cz                           </http>
+    <naz_obl>Hanácká             </naz_obl>
+    <naz_kra>Olomoucký           </naz_kra>
+    <naz_okr>Olomouc             </naz_okr>
+  </oddil>
+  <oddil>
+    <id>UVP</id>
+    <nazev>Slovan Praha                            </nazev>
+    <http>                                                  </http>
+    <naz_obl>Pražská             </naz_obl>
+    <naz_kra>Praha               </naz_kra>
+    <naz_okr>Praha hl.m.         </naz_okr>
+  </oddil>
+  <oddil>
+    <id>VAM</id>
+    <nazev>OOB Vamberk                             </nazev>
+    <http>http://www.obvamberk.estranky.cz                  </http>
+    <naz_obl>Východočeská        </naz_obl>
+    <naz_kra>Královéhradecký     </naz_kra>
+    <naz_okr>Rychnov n. Kněž.    </naz_okr>
+  </oddil>
+  <oddil>
+    <id>VBM</id>
+    <nazev>VSK Mendelu Brno                        </nazev>
+    <http>http://www.vsk-mendelu.cz                         </http>
+    <naz_obl>Jihomoravská        </naz_obl>
+    <naz_kra>Jihomoravský        </naz_kra>
+    <naz_okr>Brno-město          </naz_okr>
+  </oddil>
+  <oddil>
+    <id>VCB</id>
+    <nazev>TJ OB České Budějovice                  </nazev>
+    <http>http://www.tjobcb.cz/ob/                          </http>
+    <naz_obl>Jihočeská           </naz_obl>
+    <naz_kra>Jihočeský           </naz_kra>
+    <naz_okr>České Budějovice    </naz_okr>
+  </oddil>
+  <oddil>
+    <id>VEY</id>
+    <nazev>YETTI Vejprty                           </nazev>
+    <http>                                                  </http>
+    <naz_obl>Západočeská         </naz_obl>
+    <naz_kra>Ústecký             </naz_kra>
+    <naz_okr>Chomutov            </naz_okr>
+  </oddil>
+  <oddil>
+    <id>VIC</id>
+    <nazev>OB Vizovice                             </nazev>
+    <http>http://www.obvizovice.cz                          </http>
+    <naz_obl>Valašská            </naz_obl>
+    <naz_kra>Zlínský             </naz_kra>
+    <naz_okr>Zlín                </naz_okr>
+  </oddil>
+  <oddil>
+    <id>VIP</id>
+    <nazev>SK VIPrahlo                             </nazev>
+    <http>http://www.viprahlo.snadno.eu                     </http>
+    <naz_obl>Pražská             </naz_obl>
+    <naz_kra>Praha               </naz_kra>
+    <naz_okr>Praha hl.m.         </naz_okr>
+  </oddil>
+  <oddil>
+    <id>VIV</id>
+    <nazev>GIGANT orienteering                     </nazev>
+    <http>http://www.facebook.com/gigant.orienteering       </http>
+    <naz_obl>Valašská            </naz_obl>
+    <naz_kra>Zlínský             </naz_kra>
+    <naz_okr>Zlín                </naz_okr>
+  </oddil>
+  <oddil>
+    <id>VIZ</id>
+    <nazev>TJ Sokol Vizovice                       </nazev>
+    <http>                                                  </http>
+    <naz_obl>Valašská            </naz_obl>
+    <naz_kra>Zlínský             </naz_kra>
+    <naz_okr>Zlín                </naz_okr>
+  </oddil>
+  <oddil>
+    <id>VLI</id>
+    <nazev>Slavia Liberec orienteering             </nazev>
+    <http>http://www.vlio.cz                                </http>
+    <naz_obl>Ještědská           </naz_obl>
+    <naz_kra>Liberecký           </naz_kra>
+    <naz_okr>Liberec             </naz_okr>
+  </oddil>
+  <oddil>
+    <id>VOV</id>
+    <nazev>VSK VŠB TU Ostrava                      </nazev>
+    <http>http://ob.vsb.cz                                  </http>
+    <naz_obl>Moravskoslezská     </naz_obl>
+    <naz_kra>Moravskoslezský     </naz_kra>
+    <naz_okr>Ostrava-město       </naz_okr>
+  </oddil>
+  <oddil>
+    <id>VPM</id>
+    <nazev>KOS Slavia VŠ Plzeň                     </nazev>
+    <http>http://vpm.eob.cz                                 </http>
+    <naz_obl>Západočeská         </naz_obl>
+    <naz_kra>Plzeňský            </naz_kra>
+    <naz_okr>Plzeň-město         </naz_okr>
+  </oddil>
+  <oddil>
+    <id>VRB</id>
+    <nazev>SK při gymnáziu OOB Vrbno p.P.          </nazev>
+    <http>http://www.skvrbno.cz                             </http>
+    <naz_obl>Moravskoslezská     </naz_obl>
+    <naz_kra>Moravskoslezský     </naz_kra>
+    <naz_okr>Bruntál             </naz_okr>
+  </oddil>
+  <oddil>
+    <id>VRL</id>
+    <nazev>OOS TJ Spartak Vrchlabí                 </nazev>
+    <http>http://ob.spartak-vrchlabi.cz                     </http>
+    <naz_obl>Východočeská        </naz_obl>
+    <naz_kra>Královéhradecký     </naz_kra>
+    <naz_okr>Trutnov             </naz_okr>
+  </oddil>
+  <oddil>
+    <id>VSP</id>
+    <nazev>USK Praha                               </nazev>
+    <http>http://www.uskob.cz                               </http>
+    <naz_obl>Pražská             </naz_obl>
+    <naz_kra>Praha               </naz_kra>
+    <naz_okr>Praha hl.m.         </naz_okr>
+  </oddil>
+  <oddil>
+    <id>XBM</id>
+    <nazev>PELL&amp;#8217;S MTBO TEAM                  </nazev>
+    <http>                                                  </http>
+    <naz_obl>Jihomoravská        </naz_obl>
+    <naz_kra>Jihomoravský        </naz_kra>
+    <naz_okr>Brno-město          </naz_okr>
+  </oddil>
+  <oddil>
+    <id>XPU</id>
+    <nazev>Pardubice Bikers                        </nazev>
+    <http>http://www.pardubicebikers.cz                     </http>
+    <naz_obl>Východočeská        </naz_obl>
+    <naz_kra>Pardubický          </naz_kra>
+    <naz_okr>Pardubice           </naz_okr>
+  </oddil>
+  <oddil>
+    <id>YBM</id>
+    <nazev>Klub turistů a lyžařů Brno              </nazev>
+    <http>http://ybm.php5.cz                                </http>
+    <naz_obl>Jihomoravská        </naz_obl>
+    <naz_kra>Jihomoravský        </naz_kra>
+    <naz_okr>Brno-město          </naz_okr>
+  </oddil>
+  <oddil>
+    <id>ZAK</id>
+    <nazev>SK Netopýr Zákupy                       </nazev>
+    <http>                                                  </http>
+    <naz_obl>Ještědská           </naz_obl>
+    <naz_kra>Liberecký           </naz_kra>
+    <naz_okr>Česká Lípa          </naz_okr>
+  </oddil>
+  <oddil>
+    <id>ZAM</id>
+    <nazev>OB TJ Sokol Žamberk                     </nazev>
+    <http>http://ob-zam.blog.cz                             </http>
+    <naz_obl>Východočeská        </naz_obl>
+    <naz_kra>Pardubický          </naz_kra>
+    <naz_okr>Ústí nad Orlicí     </naz_okr>
+  </oddil>
+  <oddil>
+    <id>ZAT</id>
+    <nazev>TJ Lokomotiva Žatec                     </nazev>
+    <http>http://oobzatec.wz.cz                             </http>
+    <naz_obl>Západočeská         </naz_obl>
+    <naz_kra>Ústecký             </naz_kra>
+    <naz_okr>Louny               </naz_okr>
+  </oddil>
+  <oddil>
+    <id>ZBM</id>
+    <nazev>SK Žabovřesky Brno                      </nazev>
+    <http>http://zhusta.sky.cz                              </http>
+    <naz_obl>Jihomoravská        </naz_obl>
+    <naz_kra>Jihomoravský        </naz_kra>
+    <naz_okr>Brno-město          </naz_okr>
+  </oddil>
+  <oddil>
+    <id>ZBP</id>
+    <nazev>OOB SK Zbraslav                         </nazev>
+    <http>http://skobzbraslav.wz.cz                         </http>
+    <naz_obl>Pražská             </naz_obl>
+    <naz_kra>Praha               </naz_kra>
+    <naz_okr>Praha hl.m.         </naz_okr>
+  </oddil>
+  <oddil>
+    <id>ZHR</id>
+    <nazev>TJ Zhoř                                 </nazev>
+    <http>                                                  </http>
+    <naz_obl>Vysočina            </naz_obl>
+    <naz_kra>Vysočina            </naz_kra>
+    <naz_okr>Jihlava             </naz_okr>
+  </oddil>
+  <oddil>
+    <id>ZLH</id>
+    <nazev>OOB TJ Zlaté Hory                       </nazev>
+    <http>http://www.zlh.banda.cz                           </http>
+    <naz_obl>Hanácká             </naz_obl>
+    <naz_kra>Olomoucký           </naz_kra>
+    <naz_okr>Jeseník             </naz_okr>
+  </oddil>
+  <oddil>
+    <id>ZPV</id>
+    <nazev>KOB Prostějov                           </nazev>
+    <http>http://www.kobprostejov.cz                        </http>
+    <naz_obl>Hanácká             </naz_obl>
+    <naz_kra>Olomoucký           </naz_kra>
+    <naz_okr>Prostějov           </naz_okr>
+  </oddil>
+  <oddil>
+    <id>ZUP</id>
+    <nazev>MTBO ČZU Praha                          </nazev>
+    <http>http://rolnici.unas.cz                            </http>
+    <naz_obl>Pražská             </naz_obl>
+    <naz_kra>Praha               </naz_kra>
+    <naz_okr>Praha hl.m.         </naz_okr>
+  </oddil>
+  <oddil>
+    <id>ZVO</id>
+    <nazev>OB SK Zvole                             </nazev>
+    <http>http://ob.skzvole.cz                              </http>
+    <naz_obl>Středočeská         </naz_obl>
+    <naz_kra>Středočeský         </naz_kra>
+    <naz_okr>Praha-západ         </naz_okr>
+  </oddil>
+  <oddil>
+    <id>ZVS</id>
+    <nazev>TJ Zbrojovka Vsetín                     </nazev>
+    <http>                                                  </http>
+    <naz_obl>Valašská            </naz_obl>
+    <naz_kra>Zlínský             </naz_kra>
+    <naz_okr>Vsetín              </naz_okr>
+  </oddil>
+</adresar>

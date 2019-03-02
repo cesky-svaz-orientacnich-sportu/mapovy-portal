@@ -1,0 +1,26 @@
+%h1 Mapy čekající na doplnění údajů po vydání
+
+- maps = Map.where(state: [Map::STATE_APPROVED, Map::STATE_FINAL_CHANGE_REQUESTED]).order(:region, :title)
+
+- if current_user and current_user.role == 'cartographer' 
+  - xmaps = maps.where(region: current_user.regions)
+  - if xmaps.any?
+
+    %h3 
+      Mapy k doplnění
+      - if (current_user.authorized_regions.size > 1)
+        (z krajů #{current_user.regions.map{|x| Map::REGIONS[x]} * ", "})
+      - else
+        (z kraje #{Map::REGIONS[current_user.regions.first]})
+
+    = render partial: 'list', locals: {maps: xmaps}
+
+- if maps.exists?
+
+  %h3 Všechny mapy k doplnění
+
+  = render partial: 'list', locals: {maps: maps}
+
+- else
+
+  %p Žádné nedoplněné mapy.  

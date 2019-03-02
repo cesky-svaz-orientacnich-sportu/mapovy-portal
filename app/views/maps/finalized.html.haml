@@ -1,0 +1,10 @@
+%h1 Mapy čekající na archivaci
+
+- maps = Map.where(state: [Map::STATE_SAVED_WITHOUT_FILING, Map::STATE_FINALIZED]).order(:title)
+- if maps.exists?
+
+  = render partial: 'list', locals: {maps: maps}
+
+- else
+
+  %p Žádné mapy k archivaci.

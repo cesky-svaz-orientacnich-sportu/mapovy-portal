@@ -1,0 +1,11 @@
+%h1
+  = @club
+  - unless @club.oris_data.empty?
+    = link_to icon('folder', tooltip: t('clubs.oris_link')), @club.oris_link
+
+- if @club.maps.any?
+  %h2
+    = t('mapserver.club_attributes.maps')
+    = link_to icon('globe', tooltip: t('mapserver.listClubTableMap')), map_by_club_path(@club.friendly_id)
+
+  = render :partial => 'maps/data_table', :locals => {:source => maps_url(format: "json", filter_by_club: @club.abbreviation)}

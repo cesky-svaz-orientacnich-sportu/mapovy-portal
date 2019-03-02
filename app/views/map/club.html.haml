@@ -1,0 +1,25 @@
+%div#titlebar
+  %div.folder
+    = link_to image_tag("/img/mapovy-portal-csos-#{I18n.locale}.png", :id => 'logo', :alt => t("mapserver.mainLogoTitle"), :title => t("mapserver.mainLogoTitle")), :root
+    %div.text
+      #{t('mapserver.listClubContentMap')} #{@club}
+%a.linkShow{:href => "#", :title => t("mapserver.panelMax")}
+  %span.oos= t("mapserver.panelMax")
+%a.linkShowResults{:href => "#", :title => t("mapserver.showSideBar")}
+  %span.oos= t("mapserver.showSideBar")
+= render :partial => 'search_results'
+%div#map_canvas
+= render :partial => 'basemap_switch'
+= render :partial => 'toc'
+= render :partial => 'logos'
+
+:javascript
+  $(function() {
+    initMap();
+    initMapsLayer();
+    initMapComponents();
+    initLayout();
+    toc.refresh();
+    sidebar.show();
+    searchSimple.searchByFilter("PATRON CONTAINS '#{@club.abbreviation}'");
+  });

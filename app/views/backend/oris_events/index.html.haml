@@ -1,0 +1,30 @@
+%h1 Správa závodů
+
+%table.table.table-striped
+  %thead
+    %colgroup
+      %col(width=80)
+      %col(width=120)
+      %col
+      %col
+      %col(width=60)
+      %col(width=25)
+    %tr
+      %th ORIS ID
+      %th datum
+      %th jméno
+      %th místo
+      %th pořádá
+      %th
+  %tbody
+    - OrisEvent.order(:date).each do |oris_event|
+      %tr
+        %td= oris_event.oris_id
+        %td= oris_event.date
+        %td= oris_event.title
+        %td= oris_event.place
+        %td= oris_event.organizers * ", "
+        %td
+          = link_to icon('question-circle', tooltip: "Stránka závodu v ORISu"), oris_event.oris_url
+          / = link_to icon('edit'), [:edit, :backend, oris_event]
+          / = link_to icon('times'), [:backend, oris_event], method: :delete, confirm: "Opravdu chceš smazat uživatele #{oris_event}?"

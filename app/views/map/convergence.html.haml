@@ -1,0 +1,161 @@
+%div#map_canvas(style="left:300px")
+= render :partial => 'basemap_switch'
+= render :partial => 'logos'
+
+%div#convergence_info
+
+  %div.well.help= t('mapserver.convergence.help')
+
+  %h5= t('mapserver.convergence.sections.latlng')
+  %p
+    %strong WGS84: #{icon 'info-circle', tooltip: 'WGS84 -- EPSG:4326'}
+    %br
+    %span.wgs
+  %h5= t('mapserver.convergence.sections.planar')
+  %p
+    %strong S-JSTK: #{icon 'info-circle', tooltip: 'S-JTSK / Krovak East North (EPSG:5514)'}
+    %br
+    %span.sjstk
+  %p
+    %strong UTM 33N: #{icon 'info-circle', tooltip: 'WGS84 / UTM zone 33N (EPSG:32633)'}
+    %br
+    %span.utm33
+  %p
+    %strong UTM 34N: #{icon 'info-circle', tooltip: 'WGS84 / UTM zone 34N (EPSG:32634)'}
+    %br
+    %span.utm34
+  %h5= t('mapserver.convergence.sections.convergence')
+  %p
+    %strong S-JSTK:
+    %span.a_sjstk
+    %br
+    %strong UTM33N:
+    %span.a_utm33
+    %br
+    %strong UTM34N:
+    %span.a_utm34
+  %h5
+    = t('mapserver.convergence.sections.declination')
+    %br
+    (IGRF-12 (2015) Model)
+  %p
+    (vztaženo k dnešnímu datu)
+
+  %p
+    %strong Magnetická deklinace:
+    %span.mag
+  %p
+    %strong Roční změna:
+    %span.magc
+  %p
+    %strong Grivace (S-JSTK):
+    %span.g_sjstk
+    %br
+    %strong Grivace (UTM33N):
+    %span.g_utm33
+    %br
+    %strong Grivace (UTM34N):
+    %span.g_utm34
+  %h5
+    Nahlížení do KN
+  %p.kn_link
+
+
+:javascript
+  $(function() {
+    // basic map setup
+    initMap();
+    initMapsLayer();
+    initMapComponents();
+
+    map.setOptions({draggableCursor: 'crosshair'});
+
+    // adjust for missing top panel
+    $("#map_canvas").css('top', '41px');
+    $("#baseMapSwitch").css("top", 118);
+    $("#baseMapSwitch").css("right", 5);
+
+    google.maps.event.addListener(map, 'click', function(e) {
+      $("#convergence_info .help").fadeOut();
+      var lat = e.latLng.lat();
+      var lng = e.latLng.lng();
+
+      var wgs = proj4(Config.proj4_LL, 'WGS84', [lng, lat]);
+      console.dir("WGS84 = " + wgs );
+
+      var utm33 = proj4(Config.proj4_LL, Config.proj4_UTM33, [lng, lat]);
+      var utm34 = proj4(Config.proj4_LL, Config.proj4_UTM34, [lng, lat]);
+      var sjstk = proj4(Config.proj4_LL, Config.proj4_SJSTK, [lng, lat]);
+
+      console.dir("S-JSTK = " + sjstk );
+      console.dir("UTM33 = " + utm33 );
+      console.dir("UTM34 = " + utm34 );
+
+      var lat_ = lat+0.00001;
+      var lng_ = lng;
+
+      var sjstk_ = proj4(Config.proj4_LL, Config.proj4_SJSTK, [lng_, lat_]);
+      var dx_sjstk = sjstk_[0] - sjstk[0];
+      var dy_sjstk = sjstk_[1] - sjstk[1];
+      var a_sjstk = Math.atan(dx_sjstk/dy_sjstk) / Math.PI * 180.0;
+      console.dir("a_sjstk = " + a_sjstk );
+
+      var utm33_ = proj4(Config.proj4_LL, Config.proj4_UTM33, [lng_, lat_]);
+      var dx_utm33 = utm33_[0] - utm33[0];
+      var dy_utm33 = utm33_[1] - utm33[1];
+      var a_utm33 = Math.atan(dx_utm33/dy_utm33) / Math.PI * 180.0;
+      console.dir("a_utm = " + a_utm33 );
+
+      var utm34_ = proj4(Config.proj4_LL, Config.proj4_UTM34, [lng_, lat_]);
+      var dx_utm34 = utm34_[0] - utm34[0];
+      var dy_utm34 = utm34_[1] - utm34[1];
+      var a_utm34 = Math.atan(dx_utm34/dy_utm34) / Math.PI * 180.0;
+      console.dir("a_utm = " + a_utm34 );
+
+      $('#convergence_info .wgs').html(
+        "Lat: " + wgs[1].toFixed(5) + " Long: " + wgs[0].toFixed(5) + "<br />" +
+        "Lat: " + Math.floor(wgs[1]) + "&deg;" + Math.floor((wgs[1]-Math.floor(wgs[1]))*60) + "'"+ Math.floor((wgs[1]*60-Math.floor(wgs[1]*60))*60) + "''" + " " +
+        "Long: " + Math.floor(wgs[0]) + "&deg;" + Math.floor((wgs[0]-Math.floor(wgs[0]))*60) + "'"+ Math.floor((wgs[0]*60-Math.floor(wgs[0]*60))*60) + "''"
+      );
+      $('#convergence_info .sjstk').html(
+        "X=" + sjstk[0].toFixed(2) + " m Y=" + sjstk[1].toFixed(2) + " m"
+      );
+      $('#convergence_info .kn_link').html(
+        "<a href=\"https://nahlizenidokn.cuzk.cz/mapaidentifikace.aspx?x=" + sjstk[0].toFixed(0) + "&y=" + sjstk[1].toFixed(0) + "\" target=\"_blank\">aplikace ČÚZK</a>"
+      )
+      $('#convergence_info .utm33').html(
+        'E=' + utm33[0].toFixed(2) + " m N=" + utm33[1].toFixed(2) + " m"
+      );
+      $('#convergence_info .utm34').html(
+        'E=' + utm34[0].toFixed(2) + " m N=" + utm34[1].toFixed(2) + " m"
+      );
+
+      $('#convergence_info .a_sjstk').html( a_sjstk.toFixed(4) + "&deg;" );
+      $('#convergence_info .a_utm33').html( a_utm33.toFixed(4) + "&deg;" );
+      $('#convergence_info .a_utm34').html( a_utm34.toFixed(4) + "&deg;" );
+
+      $('#convergence_info .mag').html("...");
+      $('#convergence_info .magc').html("...");
+      $('#convergence_info .g_sjstk').html("...");
+      $('#convergence_info .g_utm33').html("...");
+      $('#convergence_info .g_utm34').html("...");
+      $.get('/convergence/calculator?lat='+lat+'&lng='+lng).done(function(data){
+        console.dir(data);
+        if (data['status'] == 'OK') {
+          $('#convergence_info .mag').html( data['mag_text'] + " | " + data.mag.toFixed(4) + "&deg;");
+          $('#convergence_info .magc').html( data['chg'].toFixed(4) + "&deg;");
+          $('#convergence_info .g_sjstk').html( (a_sjstk + data['mag']).toFixed(4) + "&deg;" );
+          $('#convergence_info .g_utm33').html( (a_utm33 + data['mag']).toFixed(4) + "&deg;" );
+          $('#convergence_info .g_utm34').html( (a_utm34 + data['mag']).toFixed(4) + "&deg;" );
+        } else {
+          $('#convergence_info .mag').html( data['message'] );
+          $('#convergence_info .magc').html( "---" );
+          $('#convergence_info .g_sjstk').html( "---" );
+          $('#convergence_info .g_utm33').html( "---" );
+          $('#convergence_info .g_utm34').html( "---" );
+        }
+      });
+    });
+  })
+  // Math.floor(a_utm) + "&deg;" + Math.floor((a_utm-Math.floor(a_utm))*60) + "'"+ Math.floor((a_utm*60-Math.floor(a_utm*60))*60) + "''"
+  // Math.floor(a_sjstk) + "&deg;" + Math.floor((a_sjstk-Math.floor(a_sjstk))*60) + "'"+ Math.floor((a_sjstk*60-Math.floor(a_sjstk*60))*60) + "''"

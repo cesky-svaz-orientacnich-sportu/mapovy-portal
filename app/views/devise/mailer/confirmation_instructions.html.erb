@@ -1,0 +1,5 @@
+<p>Ahoj <%= @resource.name %>, zdraví tě mapový portál ČSOS!</p>
+
+<p>Svůj účet na mapovém portálu můžeš aktivovat kliknutím na tento odkaz:</p>
+
+<p><%= link_to 'aktivovat účet', user_confirmation_url(:confirmation_token => @token) %></p>

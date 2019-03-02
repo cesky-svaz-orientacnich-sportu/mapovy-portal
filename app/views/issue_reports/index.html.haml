@@ -1,0 +1,54 @@
+%h1 Nahlášené problémy
+
+%h3 Otevřené
+
+%table.table
+  %colgroup
+    %col(width="220")
+    %col(width="120")
+    %col(width="120")
+    %col
+    %col(width="160")
+    %col(width="30")
+  %thead
+    %tr
+      %th Mapa
+      %th Uživatel
+      %th E-mail
+      %th Zpráva
+      %th Datum/čas
+  %tbody
+    - IssueReport.unresolved.order('created_at DESC').find_each do |ir|
+      %tr{id: "issue_report_#{ir.id}"}
+        %td= link_to ir.map, ir.map
+        %td= ir.user
+        %td= mail_to ir.email
+        %td= ir.message    
+        %td= ir.created_at.localtime.strftime "%d. %m. %Y %H:%M"
+        %td= link_to icon('check-circle-o', tooltip: 'označit jako vyřešený'), [:resolve, ir], remote: true, method: :post
+
+%h3 Vyřešené
+
+%table.table
+  %colgroup
+    %col(width="220")
+    %col(width="120")
+    %col(width="120")
+    %col
+    %col(width="160")
+  %thead
+    %tr
+      %th Mapa
+      %th Uživatel
+      %th E-mail
+      %th Zpráva
+      %th Datum/čas
+  %tbody#resolved_issues
+    - IssueReport.resolved.order('created_at DESC').find_each do |ir|
+      %tr{id: "issue_report_#{ir.id}"}
+        %td= link_to ir.map, ir.map
+        %td= ir.user
+        %td= mail_to ir.email
+        %td= ir.message    
+        %td= ir.created_at.localtime.strftime "%d. %m. %Y %H:%M"
+    

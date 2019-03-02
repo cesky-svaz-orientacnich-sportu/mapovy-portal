@@ -1,0 +1,12 @@
+%div#searchResult.jspScrollable
+  %div.content.cleaned
+    %div.header
+      %div.cleaned
+        %h2#sideHeading= t("mapserver.sideBarQuickHelpH1")
+        %h2#sideHeadingResults.hidden= t("mapserver.sideBarResults")
+        %a.hide_search_results_button(href="#")= t("mapserver.hideSideBar") 
+      %div#sideHeadingLinks
+    %ul#resultsList.cleaned
+    %div#news.contentText= text(:news)
+    %div#quickHelp.contentText= text(:quick_help)
+    %div#waiting(style="display:none")= image_tag("/img/working.gif")

@@ -1,0 +1,403 @@
+%h1 Upravit mapu #{@map}
+
+
+- if @map.errors.any?
+  %ul.map_errors.bs-callout.bs-callout-danger
+    - @map.errors.messages.each do |key, err|
+      %li
+        %strong= Map.human_attribute_name(key)
+        #{err * " a "}
+
+- @map.shape_json ||= @map.shape_as_coords
+= nested_form_for @map, :html => {:id => 'map_form', :role => 'form', :class => 'form-horizontal', :multipart => true} do |f|
+
+  %h2= t("mapserver.mapBasicData")
+
+  = render :partial => 'form_fields_basic', :locals => {:f => f}
+
+  %div(style="margin-top:20px;margin-bottom:20px")
+    %button(type="button" class="btn btn-primary submit-btn") Uložit mapu
+
+  %h2 Autoři
+
+  = render :partial => 'form_fields_authors', :locals => {:f => f}
+
+  %h2
+    Náhled mapy
+    = map_attribute_label(:preview, :edit_short)
+
+  - if @map.has_jpg?
+
+    = image_tag @map.preview_path, :style => 'max-width:100%'
+
+    - if @map.created_by == current_user or has_role?(:manager)
+      %div.well(style="overflow:auto")
+        = check_box_tag "remove_file", 1
+        Odstranit náhled
+        - if @map.has_tif?
+          (mapa je uložena i s TIFF skenem, ten bude odstraněn spolu s náhledem)
+        - if @map.has_kml?
+          (mapa je uložena i s KML referenčním souborem, ten bude odstraněn spolu s náhledem)
+    %div.well(style="overflow:auto")
+      Nahradit náhled
+      - if @map.has_tif?
+        (mapa je uložena i s TIFF skenem, ten bude odstraněn spolu s náhledem)
+      - if @map.has_kml?
+        (mapa je uložena i s KML referenčním souborem, ten bude odstraněn spolu s náhledem)
+      = file_field_tag "file", class: 'col-sm-3'
+
+  - else
+
+    %div.well(style="overflow:auto")
+      Vložit náhled
+      = file_field_tag "file", class: 'col-sm-3'
+
+
+
+  %h2
+    Obrys mapy
+    = map_attribute_label(:shape, :edit_short)
+
+  = render :partial => 'form_inline_map', :locals => {:f => f}
+
+  - if @map.has_jpg?
+    %div.pull-right
+      = link_to "zobrazit",    "javascript:void()", class: "po-show" "if(!previewOverlay){ showPreviewInMap();  previewOverlay.matchSW();previewOverlay.updateInput();} else { previewOverlay.setMap(map); }"
+      = link_to "skrýt",       "javascript:void()", class: "po-hide" "hidePreviewInMap();"
+      = link_to "vycentrovat", "javascript:void()", class: "po-center" "if (previewOverlay) {previewOverlay.matchSW();previewOverlay.updateInput();}"
+      = link_to "napasovat",   "javascript:void()", class: "po-match" "if (previewOverlay) {startMatching();}"
+      = link_to "zoom+",       "javascript:void()", class: "po-zoomin" "if (previewOverlay) {previewOverlay.zoomIn();previewOverlay.updateInput();}"
+      = link_to "zoom-",       "javascript:void()", class: "po-zoomout" "if (previewOverlay) {previewOverlay.zoomOut();previewOverlay.updateInput();}"
+      = link_to "X/Y+",        "javascript:void()", class: "po-xyp" "if (previewOverlay) {previewOverlay.distortToX();previewOverlay.updateInput();}"
+      = link_to "Y/X+",        "javascript:void()", class: "po-yxp" "if (previewOverlay) {previewOverlay.distortToY();previewOverlay.updateInput();}"
+      = link_to "L",           "javascript:void()", class: "po-l" "if (previewOverlay) {previewOverlay.nudgeLeft();previewOverlay.updateInput();}"
+      = link_to "R",           "javascript:void()", class: "po-r" "if (previewOverlay) {previewOverlay.nudgeRight();previewOverlay.updateInput();}"
+      = link_to "U",           "javascript:void()", class: "po-u" "if (previewOverlay) {previewOverlay.nudgeUp();previewOverlay.updateInput();}"
+      = link_to "D",           "javascript:void()", class: "po-d" "if (previewOverlay) {previewOverlay.nudgeDown();previewOverlay.updateInput();}"
+      X:
+      = text_field_tag "po_lat", "49.9", id: "preview_overlay_lat", size: 6
+      Y:
+      = text_field_tag "po_lng", "15.5", id: "preview_overlay_lng", size: 6
+      Z:
+      = text_field_tag "po_zoom", "1.0", id: "preview_overlay_zoom", size: 6
+      R:
+      = text_field_tag "po_rotation", "0.0", id: "preview_overlay_rotation", size: 6
+      D:
+      = text_field_tag "po_distortion", "1.0", id: "preview_overlay_distortion", size: 4
+      O:
+      = text_field_tag "po_opacity", "0.75", id: "preview_overlay_opacity", size: 4
+  :javascript
+    $(function() {
+      $(".po-show").on("click", function(){ if(!previewOverlay){ showPreviewInMap();  previewOverlay.matchSW();previewOverlay.updateInput();} else { previewOverlay.setMap(map); } });
+      $(".po-hide").on("click", function(){ hidePreviewInMap(); });
+      $(".po-center").on("click", function(){ if (previewOverlay) {previewOverlay.matchSW();previewOverlay.updateInput();}});
+      $(".po-match").on("click", function(){ if (previewOverlay) {startMatching();}});
+      $(".po-zoomin").on("click", function(){ if (previewOverlay) {previewOverlay.zoomIn();previewOverlay.updateInput();}});
+      $(".po-zoomout").on("click", function(){ if (previewOverlay) {previewOverlay.zoomOut();previewOverlay.updateInput();}});
+      $(".po-xyp").on("click", function(){ if (previewOverlay) {previewOverlay.distortToX();previewOverlay.updateInput();}});
+      $(".po-yxp").on("click", function(){ if (previewOverlay) {previewOverlay.distortToY();previewOverlay.updateInput();}});
+      $(".po-l").on("click", function(){ if (previewOverlay) {previewOverlay.nudgeLeft();previewOverlay.updateInput();}});
+      $(".po-r").on("click", function(){ if (previewOverlay) {previewOverlay.nudgeRight();previewOverlay.updateInput();}});
+      $(".po-u").on("click", function(){ if (previewOverlay) {previewOverlay.nudgeUp();previewOverlay.updateInput();}});
+      $(".po-d").on("click", function(){ if (previewOverlay) {previewOverlay.nudgeDown();previewOverlay.updateInput();}});
+    });
+    var matchqueue = [];
+    var matchlistener = null;
+    function startMatching() {
+      matchqueue = [];
+      alert('Vyber dva body v náhledu a pak dva body v mapě');
+      drawingManager.setDrawingMode(null);
+      matchlistener = google.maps.event.addListener(map, 'mousedown', function(mouseEvent) {
+        console.dir(mouseEvent);
+        addMatchPoint(mouseEvent.latLng);
+      });
+    }
+    function addMatchPoint(latlng) {
+      console.dir(latlng);
+      matchqueue.push(latlng);
+      //if (matchqueue.length == 2) alert('Vyber dva body v mapě');
+      if (matchqueue.length == 4) finishMatching(matchqueue[0], matchqueue[1], matchqueue[2], matchqueue[3]);
+    }
+    function finishMatching(a1, b1, a2, b2) {
+      google.maps.event.removeListener(matchlistener);
+
+      var dlat = a1.lat() - a2.lat();
+      var dlng = a1.lng() - a2.lng();
+
+      var dxlat = (b2.lat() - a2.lat()) / (b1.lat() - a1.lat());
+      var dxlng = (b2.lng() - a2.lng()) / (b1.lng() - a1.lng());
+
+      var z1 = previewOverlay.zoom_;
+      var z2 = previewOverlay.zoom_ * dxlng;
+      var d1 = previewOverlay.distortion_;
+      var d2 = previewOverlay.distortion_ * dxlat / dxlng;
+
+      console.dir("Change zoom " + z1 + " -> " + z2);
+      console.dir("Change distortion " + d1 + " -> " + d2);
+
+      previewOverlay.setSW(
+        a2.lat() + (previewOverlay.lat_ - a1.lat()) * z2 / z1 * d2 / d1,
+        a2.lng() + (previewOverlay.lng_ - a1.lng()) * z2 / z1
+      );
+
+      previewOverlay.zoom(z2);
+      previewOverlay.distortion(d2);
+      previewOverlay.updateInput();
+    }
+    function initPreviewOverlay() {
+      $("#preview_overlay_zoom").on('input change propertychange paste', function() {
+        var z = $(this).val() + 0.0;
+        if (z > 0) previewOverlay.zoom(z);
+      });
+      $("#preview_overlay_distortion").on('input change propertychange paste', function() {
+        var z = $(this).val() + 0.0;
+        if (z > 0) previewOverlay.distortion(z);
+      });
+      $("#preview_overlay_opacity").on('input change propertychange paste', function() {
+        var z = $(this).val() + 0.0;
+        if (z > 0) previewOverlay.opacity(z);
+      });
+      $("#preview_overlay_rotation").on('input change propertychange paste', function() {
+        var z = $(this).val() + 0.0;
+        if (z > 0) previewOverlay.rotation(z);
+      });
+    };
+
+  %div(style="margin-top:20px;margin-bottom:40px")
+    %button(type="button" class="btn btn-primary submit-btn") Uložit mapu
+
+:javascript
+  var polygon;
+  var map;
+  var drawingManager;
+
+  PreviewOverlay.prototype = new google.maps.OverlayView();
+
+  // [START region_constructor]
+  /** @constructor */
+  function PreviewOverlay(lat, lng, extent, distortion, rotation, zoom, image, opacity, map) {
+
+    // Initialize all properties.
+    this.extent_ = extent;
+    this.distortion_ = distortion;
+    this.opacity_ = opacity;
+    this.rotation_ = rotation;
+    this.lat_ = lat;
+    this.lng_ = lng;
+    this.image_ = image;
+    this.map_ = map;
+    this.zoom_ = zoom;
+
+    // Define a property to hold the image's div. We'll
+    // actually create this div upon receipt of the onAdd()
+    // method so we'll leave it null for now.
+    this.div_ = null;
+
+    // Explicitly call setMap on this overlay.
+    this.setMap(map);
+  }
+  // [END region_constructor]
+
+
+  PreviewOverlay.prototype.updateInput = function() {
+    $("#preview_overlay_lat").val(this.lat_);
+    $("#preview_overlay_lng").val(this.lng_);
+    $("#preview_overlay_rotation").val(this.rotation_);
+    $("#preview_overlay_zoom").val(this.zoom_);
+    $("#preview_overlay_distortion").val(this.distortion_);
+    $("#preview_overlay_opacity").val(this.opacity_);
+  }
+
+  PreviewOverlay.prototype.setSW = function(lat, lng) {
+    var map = this.map_;
+    this.setMap(null);
+
+    this.lat_ = lat;
+    this.lng_ = lng;
+
+    this.setMap(map);
+  }
+
+  PreviewOverlay.prototype.nudgeLeft = function() {
+    this.setSW(this.lat_, this.lng_-0.00003);
+  }
+
+  PreviewOverlay.prototype.nudgeRight = function() {
+    this.setSW(this.lat_, this.lng_+0.00003);
+  }
+
+  PreviewOverlay.prototype.nudgeUp = function() {
+    this.setSW(this.lat_+0.00003, this.lng_);
+  }
+
+  PreviewOverlay.prototype.nudgeDown = function() {
+    this.setSW(this.lat_-0.00003, this.lng_);
+  }
+
+  PreviewOverlay.prototype.matchSW = function() {
+    this.setSW(map.center.lat(), map.center.lng());
+  }
+
+  PreviewOverlay.prototype.rotation = function(angle) {
+    var map = this.map_;
+    this.setMap(null);
+
+    this.rotation_ = angle;
+
+    this.setMap(map);
+  }
+
+  PreviewOverlay.prototype.zoom = function(factor) {
+    var map = this.map_;
+    this.setMap(null);
+
+    this.zoom_ = factor;
+
+    this.setMap(map);
+  }
+
+  PreviewOverlay.prototype.distortion = function(factor) {
+    var map = this.map_;
+    this.setMap(null);
+
+    this.distortion_ = factor;
+
+    this.setMap(map);
+  }
+
+  PreviewOverlay.prototype.opacity = function(factor) {
+    var map = this.map_;
+    this.setMap(null);
+
+    this.opacity_ = factor;
+
+    this.setMap(map);
+  }
+
+  PreviewOverlay.prototype.zoomIn = function() {
+    this.zoom(this.zoom_ * 1.01);
+  }
+
+  PreviewOverlay.prototype.distortToX = function() {
+    this.distortion(this.distortion_ / 1.01);
+  }
+
+  PreviewOverlay.prototype.distortToY = function() {
+    this.distortion(this.distortion_ * 1.01);
+  }
+
+  PreviewOverlay.prototype.zoomOut = function() {
+    this.zoom(this.zoom_ / 1.01);
+  }
+
+  // [START region_attachment]
+  /**
+   * onAdd is called when the map's panes are ready and the overlay has been
+   * added to the map.
+   */
+  PreviewOverlay.prototype.onAdd = function() {
+
+    var swBound = new google.maps.LatLng(this.lat_, this.lng_);
+    var neBound = new google.maps.LatLng(this.lat_+this.zoom_*this.extent_*this.distortion_, this.lng_+this.zoom_*this.extent_);
+    var bounds = new google.maps.LatLngBounds(swBound, neBound);
+    this.bounds_ = bounds;
+
+    var div = document.createElement('div');
+    div.style.borderStyle = 'none';
+    div.style.borderWidth = '0px';
+    div.style.position = 'absolute';
+
+    // Create the img element and attach it to the div.
+    var img = document.createElement('img');
+    img.src = this.image_;
+    img.style.width = '100%';
+    img.style.height = '100%';
+    img.style.position = 'absolute';
+    img.style.opacity = this.opacity_;
+    $(img).css({"-webkit-transform": "rotate("+this.rotation_+"deg)"});
+
+    div.appendChild(img);
+
+    this.div_ = div;
+
+    // Add the element to the "overlayLayer" pane.
+    var panes = this.getPanes();
+    panes.overlayLayer.appendChild(div);
+  };
+  // [END region_attachment]
+
+  // [START region_drawing]
+  PreviewOverlay.prototype.draw = function() {
+
+    // We use the south-west and north-east
+    // coordinates of the overlay to peg it to the correct position and size.
+    // To do this, we need to retrieve the projection from the overlay.
+    var overlayProjection = this.getProjection();
+
+    // Retrieve the south-west and north-east coordinates of this overlay
+    // in LatLngs and convert them to pixel coordinates.
+    // We'll use these coordinates to resize the div.
+    var sw = overlayProjection.fromLatLngToDivPixel(this.bounds_.getSouthWest());
+    var ne = overlayProjection.fromLatLngToDivPixel(this.bounds_.getNorthEast());
+
+    // Resize the image's div to fit the indicated dimensions.
+    var div = this.div_;
+    div.style.left = sw.x + 'px';
+    div.style.top = ne.y + 'px';
+    div.style.width = (ne.x - sw.x) + 'px';
+    div.style.height = (sw.y - ne.y) + 'px';
+  };
+  // [END region_drawing]
+
+  // [START region_removal]
+  // The onRemove() method will be called automatically from the API if
+  // we ever set the overlay's map property to 'null'.
+  PreviewOverlay.prototype.onRemove = function() {
+    this.div_.parentNode.removeChild(this.div_);
+    this.div_ = null;
+  };
+  // [END region_removal]
+
+  var previewOverlay = null;
+
+  $(function() {
+
+    map = setupMap(document.getElementById('inline_map_canvas'), false);
+    drawingManager = setupMapEditor(map);
+
+    coordinates = [#{(@map.shape_as_coords.map{|x| %{new google.maps.LatLng("#{x[1]}", "#{x[0]}")}} * ", ").html_safe}];
+    polygon = new google.maps.Polygon({
+      paths: coordinates,
+      editable: true
+    });
+    polygon.setMap(map);
+    var bounds = new google.maps.LatLngBounds();
+    for (var i = 0; i < coordinates.length; i++)
+      bounds.extend(coordinates[i]);
+    if (coordinates.length > 0)
+      map.fitBounds(bounds);
+
+    setupMapEditorSubmit();
+    fixMapHeight($('#inline_map_canvas'));
+
+    $("#map_oris_event_id").select2({allowClear: true});
+  });
+
+- if @map.has_jpg?
+  - string = `identify #{@map.preview_filename}`.split[2]
+  - w, h = *string.strip.split('x')
+  :javascript
+    $(function() {
+      $('#preview_overlay_distortion').val(#{w}/#{h}/2.9);
+      $('#preview_overlay_lat').val(map.center.lat());
+      $('#preview_overlay_lng').val(map.center.lng());
+    })
+    function hidePreviewInMap() {
+      if (previewOverlay) {
+        previewOverlay.setMap(null);
+      }
+    }
+    function showPreviewInMap() {
+      previewOverlay = new PreviewOverlay($('#preview_overlay_lat').val(), $('#preview_overlay_lng').val(), 0.05, $('#preview_overlay_distortion').val(), $('#preview_overlay_rotation').val(), $('#preview_overlay_zoom').val(), "#{@map.preview_path}", $('#preview_overlay_opacity').val(), map);
+      initPreviewOverlay();
+    }

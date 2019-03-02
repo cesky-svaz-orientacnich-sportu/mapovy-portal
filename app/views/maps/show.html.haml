@@ -1,0 +1,197 @@
+%h1
+  Mapa #{@map}
+  = map_buttons(@map, maps_path)
+  - if current_user and current_user.has_role?(:organizer)
+    %span.pull-right
+      = link_to icon("sign-out", tooltip: "ohlásit připravovanou mapu se stejným obrysem"), register_maps_path(copy_shape_id: @map.id)
+
+- if @map.state == Map::STATE_PROPOSED
+  - if @map.authorized_cartographer?(current_user)
+    = render partial: 'maps/approval_dialog_proposal', locals: {map: @map}
+
+- if @map.state == Map::STATE_COMPLETED
+  - if @map.authorized_cartographer?(current_user)
+    = render partial: 'maps/approval_dialog_completion', locals: {map: @map}
+
+- if @map.state == Map::STATE_PROPOSED
+  %div.bs-callout.bs-callout-primary
+    Byla podána žádost o přidělení evidenčního čísla, čeká na schválení koordinátorem (krajským kartografem).
+- elsif @map.state == Map::STATE_APPROVED
+  %div.bs-callout.bs-callout-success
+    Evidenční číslo mapy bylo přiděleno.
+    %br
+    Čeká se na doplnění údajů vydavatelem mapy (po jejím vydání).
+- elsif @map.state == Map::STATE_CHANGE_REQUESTED
+  %div.bs-callout.bs-callout-danger
+    Mapě nebylo přiděleno evidenční číslo, koordinátor (krajský kartograf) žádá vydavatele o doplnění.
+- elsif @map.state == Map::STATE_COMPLETED
+  %div.bs-callout.bs-callout-primary
+    Mapa čeká na definitivní schválení koordinátorem (krajským kartografem).
+- elsif @map.state == Map::STATE_FINALIZED
+  %div.bs-callout.bs-callout-success
+    Mapa byla schválena.
+- elsif @map.state == Map::STATE_FINAL_CHANGE_REQUESTED
+  %div.bs-callout.bs-callout-danger
+    Mapa nebyla schválena, koordinátor (krajský kartograf) žádá vydavatele o doplnění.
+
+%h2= t("mapserver.mapBasicData")
+
+- if false
+  - if has_role?(:manager) and !@map.fusion_table_record
+    %div.bs-callout.bs-callout-danger
+      %p Neexistuje Fusion Table záznam!
+      - if (rid = @map.fusion_table_rowid).blank?
+        %p Ve FT není mapa s tímto ID. Mělo by pomoci mapu znovu uložit.
+      - else
+        %p Row ID je #{rid}. Pravděpodobně se jedná o chybu spojení s FT, zkuste se podívat za chvíli znovu.
+
+- if @map.map_family == Map::MAP_FAMILY_EMBARGO
+
+  = render partial: 'maps/info_table_embargo', locals: {map: @map}
+
+- elsif @map.state == Map::STATE_PROPOSED
+
+  = render partial: 'maps/info_table_proposal', locals: {map: @map}
+
+- elsif @map.state == Map::STATE_APPROVED
+
+  = render partial: 'maps/info_table_proposal', locals: {map: @map}
+
+  - if @map.authorized_organizer?(current_user)
+    %div.bs-callout.bs-callout-success
+      %p Čeká se na doplnění informací vydavatelem (po vydání mapy).
+      = button_to "Doplnit záznam", [:complete, @map], method: 'get', class: "btn btn-success"
+
+- elsif @map.state == Map::STATE_FINAL_CHANGE_REQUESTED
+
+  - if @map.authorized_organizer?(current_user)
+    %div.bs-callout.bs-callout-danger
+      %p Záznam byl koordinátorem / krajským kartografem #{print_user @map.approved_by, true} vrácen k doplnění.
+      = button_to "Opravit / doplnit záznam", [:complete, @map], method: 'get', class: "btn btn-danger"
+      %p= (@map.record_log.split("\n") * "<br />").html_safe
+
+  = render partial: 'maps/info_table', locals: {map: @map}
+
+- elsif @map.state == Map::STATE_CHANGE_REQUESTED
+
+  - if @map.authorized_organizer?(current_user)
+    %div.bs-callout.bs-callout-danger
+      %p Žádost byla koordinátorem / krajským kartografem #{print_user @map.approved_by, true} vrácena k doplnění.
+      = button_to "Opravit / doplnit záznam", [:re_register, @map], method: 'get', class: "btn btn-danger", form: {id: 're_register_map_form'}
+      %p= (@map.record_log.split("\n") * "<br />").html_safe
+
+  = render partial: 'maps/info_table_proposal', locals: {map: @map}
+
+- else
+
+  = render :partial => 'maps/info_table', :locals => {:map => @map}
+
+= render :partial => 'maps/shape', :locals => {:map => @map}
+
+%h2= t('mapserver.mapPreview')
+
+- if @map.has_jpg
+
+  - if @map.has_jpg?
+    = image_tag @map.preview_path, :style => 'max-width:100%;margin-bottom:20px'
+  - else
+    %div.well Pro tuto mapu není náhled dostupný (chyba na straně serveru).
+
+  - if has_role?(:manager)
+    %div.well.well-sm
+      - if @map.has_original_jpg?
+        = link_to "náhled v plném rozlišení a bez vodoznaku (#{File.basename(@map.preview_full_jpg_filename)}, #{(File.size(@map.preview_full_jpg_filename) / 1024.0).round} kB)", [:original_jpg, @map]
+      - else
+        Náhled bez vodoznaku není na serveru dostupný.
+
+    %div.well.well-sm
+      - if @map.has_original_preview?
+        = link_to "originál náhledu (#{File.basename(@map.preview_original_filename)}, #{(File.size(@map.preview_original_filename) / 1024.0).round} kB)", [:original_jpg, @map]
+      - else
+        Originál bez vodoznaku není na serveru dostupný.
+
+  %div.well.well-sm
+    = t("mapserver.previewCopyright")
+    - unless @map.administrator_email.blank?
+      = mail_to @map.administrator_email, icon('envelope', tooltip: 'e-mail na správce mapy')
+
+- else
+
+  %div.well Pro tuto mapu není náhled dostupný.
+
+%h2 OB postupy
+
+- if @map.oris_event
+  - if @map.oris_event.obpostupy_url.blank?
+    %div.well Závod #{@map.oris_event} nemá záznam v aplikaci OB postupy.
+  - else
+    %div.well= link_to "Přejít na stránku záznamu v OB postupech", @map.oris_event.obpostupy_url
+    - unless @map.oris_event.obpostupy_map_url.blank?
+      = image_tag @map.oris_event.obpostupy_map_url, :style => 'max-width:100%'
+- else
+  %div.well Tato mapa není spárována s žádným závodem z ORISu.
+
+- if [Map::STATE_ARCHIVED, Map::STATE_SAVED_WITHOUT_FILING].include?(@map.state)
+  %div#issue_report.well.clearfix
+    = button_to 'Nahlásit problém', new_issue_report_path(map_id: @map.id), remote: true, class: 'btn btn-danger pull-right', method: :get
+    Našli jste problém v záznamu (nesprávné nebo chybějící údaje, špatný obrys)?
+    Budeme rádi, pokud nám o tom řeknete.
+
+%p &nbsp;
+
+- if current_user and !@map.record_log.blank?
+  %h2 Informace o správě záznamu
+  %div.well= (@map.record_log.split("\n") * "<br />").html_safe
+
+- if admin?
+  %h2 Historie změn záznamu
+  %table.table
+    %colgroup
+      %col(width="30")
+      %col(width="80")
+      %col(width="120")
+      %col(width="120")
+      %col
+    %thead
+      %tr
+        %th
+        %th událost
+        %th uživatel
+        %th datum a čas
+        %th změny
+    %tbody
+      - @map.versions.reverse.each do |v|
+        - cx = v.changeset.dup
+        - cx.delete(:user_updated_at)
+        - cx.delete(:state_changed_at)
+        - cx.delete(:last_reminder_sent_at)
+        - cx.delete(:updated_at)
+        - unless cx.empty?
+          %tr
+            %td
+              = v.index
+              %br
+              [#{v.id}]
+            %td= v.event
+            %td
+              #{v.whodunnit ? User.find(v.whodunnit) : '---'}
+              / %span
+              /   [originator: #{v.originator ? User.find(v.originator) : '---'}]
+              /   %br
+              /   [whodunnit: #{v.whodunnit ? User.find(v.whodunnit) : '---'}]
+            %td= v.created_at.localtime.strftime("%d. %m. %Y %H:%M")
+            %td
+              %table.table
+                %colgroup
+                  %col(width="25%")
+                  %col(width="33%")
+                  %col
+                  %col(width="33%")
+                %tbody
+                  - cx.each do |key, value|
+                    %tr
+                      %td= key
+                      %td= (value[0] || "---").to_s.truncate(50)
+                      %td= icon('arrow-right')
+                      %td= (value[1] || "---").to_s.truncate(50)
+

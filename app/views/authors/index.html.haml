@@ -1,0 +1,54 @@
+%h1= t("mapserver.listAuthHead")
+%h2= t("mapserver.listAuthHeadLow")
+
+%div.container
+  %table.table.table-striped.compact#authors{:"data-source" => authors_url(format: "json")}
+    %colgroup
+      %col
+      %col(width="20%")
+      %col(width="20%")
+      %col(width="20%")
+      %col(width="10%")
+    %thead
+      %tr
+        %th= t('mapserver.author_attributes.full_name')
+        %th= t('mapserver.author_attributes.year_of_birth')
+        %th= t('mapserver.author_attributes.activity')
+        %th= t('mapserver.author_attributes.club')
+        %th
+    %tbody
+
+:javascript
+  $(function(){
+    $('#authors').dataTable( {
+      "processing": true,
+      "pagingType": "full_numbers",
+      "serverSide": true,
+      "lengthChange": false,
+      "ajax": $('#authors').data('source'),
+      "columns": [
+          null,
+          null,
+          null,
+          null,
+          { "orderable": false }
+        ],
+      'language': {
+        "emptyTable": "#{t('datatable.emptyTable')}",
+        "info": "#{t('datatable.info')}",
+        "infoEmpty": "#{t('datatable.infoEmpty')}",
+        "infoFiltered": "#{t('datatable.infoFiltered')}",
+        "loadingRecords": "#{t('datatable.loadingRecords')}",
+        "processing": "#{t('datatable.processing')}",
+        "search": "#{t('datatable.search')}",
+        "zeroRecords": "#{t('datatable.zeroRecords')}",
+        "paginate": {
+          "first": "#{t('datatable.paginate.first')}",
+          "last": "#{t('datatable.paginate.last')}",
+          "next": "#{t('datatable.paginate.next')}",
+          "previous": "#{t('datatable.paginate.previous')}"
+        }
+      }
+    });
+  });
+  

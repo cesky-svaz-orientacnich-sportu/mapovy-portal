@@ -1,0 +1,15 @@
+%p &nbsp;
+%div.panel.panel-primary
+  %div.panel-heading 
+    %h4.panel-title Přijmout evidovanou mapu nebo vrátit k doplnění
+  %div.panel-body
+    %p Pokud jsou všechny údaje v pořádku včetně krajové příslušnosti, lze přijmout o žádost o přidělení čísla.
+    = button_to "Přijmout", [:authorize_proposal, @map], class:'btn btn-primary', form: {id: 'authorize_proposal_form'}
+    %hr
+    %p Pokud je potřeba údaje doplnit nebo změnit, lze záznam vrátit žadateli (#{print_user @map.created_by, true}) k doplnění.
+    = form_tag([:reject_proposal, @map], id: 'reject_proposal_form') do
+      %h5 Komentář / zpráva pro žadatele
+      = text_area_tag "map[comment]", "", size: "80x8"
+      %br 
+      = submit_tag "Vrátit k doplnění", class:'btn btn-danger'
+    

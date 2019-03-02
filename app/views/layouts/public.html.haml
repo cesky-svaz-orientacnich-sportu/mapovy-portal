@@ -1,0 +1,59 @@
+!!! 5
+%html(lang="en")
+  %head
+    %meta(charset="utf-8")
+    %title= t('mapserver.title')
+    = csrf_meta_tags
+    = stylesheet_link_tag "_public", :media => "all"
+    = favicon_link_tag
+    - if @_use_map
+      = javascript_include_tag "https://maps.google.com/maps/api/js?key=#{GOOGLE_API_KEY}&language=#{I18n.locale}&libraries=geometry,drawing"
+      = javascript_include_tag "https://www.google.com/jsapi"
+      = javascript_include_tag "https://apis.google.com/js/client.js"
+    - if current_user
+      :javascript
+        function loadUserConfig() {
+          Config.user = #{current_user.to_json.html_safe};
+          Config.apiKey = "#{GOOGLE_API_KEY}";
+        };
+    - else
+      :javascript
+        function loadUserConfig() {
+          Config.apiKey = "#{GOOGLE_API_KEY}";
+        };
+    = javascript_include_tag "_public"
+    - if @_use_map
+      = javascript_include_tag "_minimap"
+      :javascript
+        google.load('visualization', '1', {});
+        window.race_map = #{OrisEvent.all.inject({0 => {title:'', date: nil}}){|h, e| h[e.id] = {title: e.title, date: e.date}; h}.to_json.html_safe};
+    = javascript_include_tag "mapserver/locale/#{I18n.locale}"
+    / cdn for modernizr, if you haven't included it already
+    %script(src="https://cdn.jsdelivr.net/webshim/1.12.4/extras/modernizr-custom.js")
+    / polyfiller file to detect and load polyfills
+    %script(src="https://cdn.jsdelivr.net/webshim/1.12.4/polyfiller.js")
+    :javascript
+      webshims.activeLang('#{I18n.locale}');
+      webshims.setOptions('waitReady', false);
+      webshims.setOptions('forms-ext', {types: 'date'});
+      webshim.setOptions("forms-ext", {
+        "date" : {
+          "openOnFocus": true,
+      		"buttonOnly": true,
+      		"classes": "hide-spinbtns"
+        },
+      	"widgets": {
+      		"popover": {
+      			"appendTo": "body"
+      		}
+      	}
+      });
+      webshims.polyfill('forms forms-ext');
+  %body
+    = render :partial => 'shared/top_menu'
+    %div.container.content(style="margin-top:41px")
+      - flash.each do |key, value|
+        - key = {'error' => 'danger', 'alert' => 'warning', 'notice' => 'primary'}[key] || key
+        %div.bs-callout{class: "bs-callout-#{key}"}= value
+      = yield
+

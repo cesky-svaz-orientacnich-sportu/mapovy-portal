@@ -1,0 +1,25 @@
+%h1 Mapy s doplněnými údaji po vydání
+
+- if current_user and current_user.role == 'cartographer' 
+  - maps = Map.where(state: Map::STATE_COMPLETED).select{|x| current_user.regions.include?(x.region)}
+  - if maps.any?
+
+    %h3 
+      Doplněné mapy
+      - if (current_user.authorized_regions.size > 1)
+        (z krajů #{current_user.regions.map{|x| Map::REGIONS[x]} * ", "})
+      - else
+        (z kraje #{Map::REGIONS[current_user.regions.first]})
+
+    = render partial: 'list', locals: {maps: maps}
+
+- maps = Map.where(state: Map::STATE_COMPLETED)
+- if maps.exists?
+
+  %h3 Všechny doplněné mapy
+
+  = render partial: 'list', locals: {maps: maps}
+
+- else
+
+  %p Žádné otevřené doplněné mapy.

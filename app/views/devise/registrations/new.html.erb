@@ -1,0 +1,23 @@
+<h2>Registrovat</h2>
+
+<p>Do registrace, prosím, uvádějte jméno a příjmení spolu s e-mailovou adresou odpovídající záznamu v systému ORIS. Bez toho nemůžeme automaticky spárovat vaši identitu s ORISem a tudíž ani rovnou přidělit potřebná práva.</p>
+
+<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+  <%= devise_error_messages! %>
+
+  <div><%= f.label :email %><br />
+  <%= f.email_field :email, :autofocus => true %></div>
+
+  <div><%= f.label :full_name %><br />
+  <%= f.text_field :full_name %></div>
+
+  <div><%= f.label :password %><br />
+  <%= f.password_field :password %></div>
+
+  <div><%= f.label :password_confirmation %><br />
+  <%= f.password_field :password_confirmation %></div>
+
+  <div><%= f.submit "Registrovat" %></div>
+<% end %>
+
+<%= render "devise/shared/links" %>

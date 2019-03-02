@@ -1,0 +1,39 @@
+ul.toolsList {
+    box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    -webkit-box-sizing: content-box;      
+
+    li:first-child {
+        border-left: 0;
+    }
+
+    li {
+      list-style-type: none;
+        float: left;
+        border-left: 1px solid #cecece;
+        height: 13px;
+        padding: 0 5px 0 5px;
+        box-sizing: content-box;
+        -moz-box-sizing: content-box;
+        -webkit-box-sizing: content-box;
+        a {
+            display: block;
+            float: left;
+            overflow: hidden;
+            position: relative;
+            height: 16px;
+            width: 19px;
+            img {
+                position: absolute;
+            }
+        }
+        a:hover img {
+            margin-top: -16px;
+        }
+    }
+
+    li.disabled a:hover img {
+        margin-top: 0;
+    }
+}
+

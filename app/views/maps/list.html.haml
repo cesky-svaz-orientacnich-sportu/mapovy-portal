@@ -1,0 +1,214 @@
+%h1 Podrobná tabulka
+
+:javascript
+  $(function() {
+    $('.column_filter').on( 'input paste propertychange change', function () {
+        filterColumn( $(this).attr('data-column') );
+    } );
+  })
+  
+%table.table.table-striped.compact#maps{:"data-source" => list_maps_url(format: "json")}
+  %thead
+    %tr
+      %th(data-column="0"  style="width:30px")= map_attribute_label :id, false
+      %th(data-column="1"  style="width:90px")= map_attribute_label :state, false
+      %th(data-column="2"  style="width:200px")= map_attribute_label :title, false
+      %th(data-column="3"  style="width:40px")= map_attribute_label :patron, false
+      %th(data-column="4"  style="width:50px")= map_attribute_label :patron_accuracy, false
+      %th(data-column="5"  style="width:50px")= map_attribute_label :year, false
+      %th(data-column="6"  style="width:50px")= map_attribute_label :year_accuracy, false
+      %th(data-column="7"  style="width:50px")= map_attribute_label :scale, false
+      %th(data-column="8"  style="width:50px")= map_attribute_label :equidistance, false
+      %th(data-column="9"  style="width:50px")= map_attribute_label :map_sport, false
+      %th(data-column="10" style="width:120px")= map_attribute_label :map_type, false
+      %th(data-column="11" style="width:60px")= map_attribute_label :map_family, false
+      %th(data-column="12" style="width:120px")= map_attribute_label :region, false
+      %th(data-column="13" style="width:120px")= map_attribute_label :locality, false
+      %th(data-column="14" style="width:60px")= map_attribute_label :area_size, false
+      %th(data-column="15" style="width:60px")= map_attribute_label :resource, false
+      %th(data-column="16" style="width:120px")= map_attribute_label :georeference, false
+      %th(data-column="17" style="width:120px")= map_attribute_label :mapping_state, false
+      %th(data-column="18" style="width:120px")= map_attribute_label :drawing_technique, false
+      %th(data-column="19" style="width:120px")= map_attribute_label :printing_technique, false
+      %th(data-column="20" style="width:120px")= map_attribute_label :issued_by, false
+      %th(data-column="21" style="width:120px")= map_attribute_label :printed_by, false
+      %th(data-column="22" style="width:300px")= map_attribute_label :administrator, false
+      %th(data-column="23" style="width:120px")= map_attribute_label :identifier_filing, false
+      %th(data-column="24" style="width:120px")= map_attribute_label :identifier_approval, false
+      %th(data-column="25" style="width:120px")= map_attribute_label :identifier_other, false
+      %th(data-column="26" style="width:90px")= map_attribute_label :archive, false
+      %th(data-column="27" style="width:120px")= map_attribute_label :note_public, false
+      %th(data-column="28" style="width:120px")= map_attribute_label :note_internal, false
+      %th(data-column="29" style="width:120px")= map_attribute_label :created_by, false
+      %th(data-column="30" style="width:120px")= map_attribute_label :approved_by, false
+      %th(data-column="31" style="width:120px")= map_attribute_label :oris_event, false
+      %th(data-column="32" style="width:120px")= map_attribute_label :main_race_title, false
+      %th(data-column="33" style="width:120px")= map_attribute_label :main_race_date, false
+      %th(data-column="34" style="width:70px") (akce)
+  %tbody
+
+%h4 Filtrování
+
+%table.table
+  %tr
+    = list_filter_text 0, :id
+    = list_filter_select 1, :state, Map::STATES.map{|x| [t("mapserver.map_enums.state.#{x}").truncate(20), x]}
+    = list_filter_text 2, :title
+  %tr
+    = list_filter_text 3, :patron
+    = list_filter_select 4, :patron_accuracy, Map::ACCURACIES.map{|x| [t("mapserver.map_enums.accuracy.#{x}").truncate(20), x]}
+    = list_filter_text 5, :year
+    = list_filter_select 6, :year_accuracy, Map::ACCURACIES.map{|x| [t("mapserver.map_enums.accuracy.#{x}").truncate(20), x]}
+  %tr    
+    = list_filter_text 7, :scale
+    = list_filter_text 8, :equidistance
+    = list_filter_select 9, :map_sport, Map::MAP_SPORTS.map{|x| [t("mapserver.map_enums.map_sport.#{x}").truncate(20), x]}
+    = list_filter_select 10, :map_type, Map::MAP_TYPES.map{|x| [t("mapserver.map_enums.map_type.#{x}").truncate(20), x]}
+  %tr
+    = list_filter_select 11, :map_family, Map::MAP_FAMILIES.map{|x| [t("mapserver.map_enums.map_family.#{x}").truncate(20), x]}
+    = list_filter_select 12, :region, Map::REGIONS.map{|k, v| ["#{k} -- #{v}", k]}
+    = list_filter_text 13, :locality
+    = list_filter_text 14, :area_size
+  %tr  
+    = list_filter_text 15, :resource
+    = list_filter_select 16, :georeference, Map::GEOREFERENCES.map{|x| [t("mapserver.map_enums.georeference.#{x}").truncate(20), x]}
+    = list_filter_text 17, :mapping_state
+    = list_filter_select 18, :drawing_technique, Map::DRAWING_TECHNIQUES.map{|x| [t("mapserver.map_enums.drawing_technique.#{x}").truncate(20), x]}
+  %tr  
+    = list_filter_select 19, :printing_technique, Map::PRINTING_TECHNIQUES.map{|x| [t("mapserver.map_enums.printing_technique.#{x}").truncate(20), x]}
+    = list_filter_text 20, :issued_by
+    = list_filter_text 21, :printed_by
+    = list_filter_text 22, :administrator
+  %tr
+    = list_filter_text 23, :identifier_filing
+    = list_filter_text 24, :identifier_approval
+    = list_filter_text 25, :identifier_other
+    / 26 archive
+  %tr
+    = list_filter_text 27, :note_public
+    = list_filter_text 28, :note_internal
+    / 29 created by
+    / 30 approved by
+  %tr
+    = list_filter_text 31, :oris_event_id
+    = list_filter_text 32, :main_race_title
+    = list_filter_text 33, :main_race_date
+
+%div.well.well-sm
+  %strong =
+  rovná se
+  %strong !
+  nerovná se
+  %strong <
+  menší než
+  %strong >
+  větší než
+  %strong ~
+  obsahuje
+  %strong *
+  neprázdné
+  %strong 0
+  prázdné
+
+:javascript
+  function filterColumn (i) {
+    var col = window.maps_table.api().column(i);
+    var val = $('#col_'+i+'_filter').val();
+    var ftype_input = $('#col_'+i+'_filter_type');
+    var ftype = "~";
+    if (ftype_input) ftype = ftype_input.val();
+    col.search(ftype + val,false,false).draw();
+    initPreviewAndInfo();
+  }
+  
+  function rebuildSearch() {
+    window.maps_table.api().columns().search( '' ).draw();    
+    for (var i = 0; i < 34; ++i) {
+      var col = window.maps_table.api().column(i);
+      var val = $('#col_'+i+'_filter').val();
+      var ftype_input = $('#col_'+i+'_filter_type');
+      var ftype = "~";
+      if (ftype_input) ftype = ftype_input.val();
+      if (val && val != '') col.search(ftype + val,false,false);
+    }
+    window.maps_table.api().draw();
+    initPreviewAndInfo();
+  }
+
+  $(function(){
+    window.maps_table = $('#maps').dataTable( {
+      //"searching": false,
+      "processing": true,
+      "pagingType": "full_numbers",
+      "serverSide": true,
+      "lengthChange": false,
+      "dom": 'lrtip',
+      'scrollX': '100%',
+      //'scrollCollapse': false,
+      "ajax": $('#maps').data('source'),
+      "columns": [
+        {'data': "id"                 ,'visible': false},                               
+        {'data': "state"              ,'visible': false},                               
+        {'data': "title"              },                                               
+        {'data': "patron"             },                                               
+        {'data': "patron_accuracy"    ,'visible': false},                               
+        {'data': "year"               },                                               
+        {'data': "year_accuracy"      ,'visible': false},                               
+        {'data': "scale"              },                                               
+        {'data': "equidistance"       ,'visible': false},                               
+        {'data': "map_sport"          },                                               
+        {'data': "map_type"           ,'visible': false},                               
+        {'data': "map_family"         ,'visible': false},                               
+        {'data': "region"             },                               
+        {'data': "locality"           },                                               
+        {'data': "area_size"          ,'visible': false},                               
+        {'data': "resource"           ,'visible': false},                               
+        {'data': "georeference"       ,'visible': false},                               
+        {'data': "mapping_state"      ,'visible': false},                               
+        {'data': "drawing_technique"  ,'visible': false},                               
+        {'data': "printing_technique" ,'visible': false},                               
+        {'data': "issued_by"          ,'visible': false},                               
+        {'data': "printed_by"         ,'visible': false},                               
+        {'data': "administrator"      ,'visible': false},                               
+        {'data': "identifier_filing"  ,'visible': false},                               
+        {'data': "identifier_approval",'visible': false},                               
+        {'data': "identifier_other"   ,'visible': false},                               
+        {'data': "archive"            ,'visible': false, "orderable": false },          
+        {'data': "note_public"        ,'visible': false},                               
+        {'data': "note_internal"      ,'visible': false},                               
+        {'data': "created_by"         ,'visible': false},                               
+        {'data': "approved_by"        ,'visible': false},                               
+        {'data': "oris_event"         ,'visible': false},                               
+        {'data': "main_race_title"    ,'visible': false},                               
+        {'data': "main_race_date"     ,'visible': false},                               
+        {'data': "buttons"            ,"searchable": false ,"orderable": false }
+        ],
+      'fnDrawCallback': initPreviewAndInfo, 
+      'language': {
+        "emptyTable": "#{t('datatable.emptyTable')}",
+        "info": "#{t('datatable.info')}",
+        "infoEmpty": "#{t('datatable.infoEmpty')}",
+        "infoFiltered": "#{t('datatable.infoFiltered')}",
+        "loadingRecords": "#{t('datatable.loadingRecords')}",
+        "processing": "#{t('datatable.processing')}",
+        "search": "#{t('datatable.search_maps')}",
+        "zeroRecords": "#{t('datatable.zeroRecords')}",
+        "paginate": {
+          "first": "#{t('datatable.paginate.first')}",
+          "last": "#{t('datatable.paginate.last')}",
+          "next": "#{t('datatable.paginate.next')}",
+          "previous": "#{t('datatable.paginate.previous')}"
+        }
+      }
+    });
+
+    var colvis = new $.fn.dataTable.ColVis( window.maps_table, {
+        buttonText: 'Vybrat sloupce'
+    } );
+    $('#maps_wrapper').before( colvis.button() );
+    
+    new $.fn.dataTable.ColReorder( window.maps_table, {
+      reorderCallback: rebuildSearch
+    } );
+    
+  });

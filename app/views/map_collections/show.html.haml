@@ -1,0 +1,60 @@
+- if has_role?(:manager)
+  %div.well(style="margin-top:20px")
+    Soubor map #{@map_collection.title}
+    = link_to icon('edit'), [:edit, @map_collection]
+    = link_to icon('times'), @map_collection, :method => :delete, :confirm => "Opravdu chcete smazat soubor map #{@map_collection}?"
+
+%div.row(style="margin-bottom:30px")
+  %div.col-sm-8
+    %h1= @map_collection.title
+    = RedCloth.new(@map_collection.description || "").to_html.html_safe
+  %div.col-sm-4(style="text-align:right")
+    - if @map_collection.logo.file?
+      = image_tag @map_collection.logo.url(:show)
+
+- yrs = @map_collection.years
+
+- if yrs.size == 1
+  %table.table.table-striped
+    %colgroup 
+      %col
+      %col(width=250)
+      %col(width=70)
+    %thead
+      %tr
+        %th
+        %th= map_attribute_label :title
+        %th Poznámka
+    %tbody
+      - @map_collection.map_collection_memberships.joins(:map).each do |map_collection_membership|
+        - map = map_collection_membership.map
+        %tr
+          %td= link_to map.title, _map_path(map)
+          %td= map_collection_membership.note
+          %td= map_collection_membership.year
+- else
+  - yrs.each do |y|
+    %h2 Rok #{y}
+    %table.table.table-striped
+      %colgroup 
+        %col(width=30)
+        %col
+        %col(width=250)
+      %thead
+        %tr
+          %th
+          %th= map_attribute_label :title
+          %th Poznámka
+      %tbody
+        - @map_collection.map_collection_memberships.where(year: y).joins(:map).each do |map_collection_membership|
+          - map = map_collection_membership.map
+          %tr
+            %td
+              - if map.has_jpg?
+                =link_to(icon('eye', tooltip: t('mapserver.preview')), map.preview_path, class: 'mapPreviewLink')              
+            %td
+              = link_to map.title, _map_path(map)
+            %td= map_collection_membership.note
+    
+%div.well
+  = link_to((icon('globe') + ' zobrazit všechny záznamy v mapě'), map_by_collection_path(@map_collection.friendly_id))

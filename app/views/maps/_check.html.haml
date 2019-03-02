@@ -1,0 +1,44 @@
+- extra_column ||= nil
+- if maps.empty?
+  %p Všechny v pořádku.
+- else
+  %table.table
+    %colgroup 
+      %col(width="65")
+      %col
+      - if extra_column
+        %col(width="100")
+      %col(width="70")
+      %col(width="70")
+      %col(width="350")
+      %col(width="40")
+      %col(width="60")
+    %thead
+      %tr
+        %th
+        %th= map_attribute_label :title
+        - if extra_column
+          %th
+            = map_attribute_label extra_column
+        %th= map_attribute_label :patron
+        %th= map_attribute_label :year
+        %th= map_attribute_label :note_internal
+        %th= map_attribute_label :id
+        %th= map_attribute_label :archive
+    %tbody
+      - maps.each do |map|
+        %tr
+          %td
+            = link_to icon('edit'), [:edit, map]
+            = link_to icon('info-circle'), [:info_table, map], class: 'infoTableLink'
+            - if map.has_jpg?
+              =link_to(icon('eye', tooltip: t('mapserver.preview')), map.preview_path, class: 'mapPreviewLink')              
+          %td= link_to map.title, _map_path(map)
+          - if extra_column
+            %td
+              = map.send(extra_column)
+          %td= map.patron
+          %td= map.year
+          %td= map.note_internal
+          %td= map.id
+          %td= map.archive_

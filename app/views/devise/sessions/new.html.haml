@@ -1,0 +1,36 @@
+%h1.login Přihlášení
+
+%p
+  - resource_class.omniauth_providers.each do |provider| 
+    = link_to login_button(provider.to_s), omniauth_authorize_path(resource_name, provider)
+
+%p Abyste si nemuseli pamatovat další jméno a heslo, doporučujeme přihlášení pomocí vašeho Google nebo Facebook účtu (mapový portál je použije pouze k ověření tvojí identity, k ničemu jinému). Pokud tento způsob nemůžete nebo nechcete využít, můžete se níže zaregistrovat klasicky pomocí jména a hesla.
+
+%div(style="min-height:25px")
+
+%h4 Přihlásit se pomocí jména a hesla
+
+= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
+  %div
+    = f.label :email 
+    %br
+    = f.email_field :email, :autofocus => true
+    
+  %div
+    = f.label :password
+    %br
+    = f.password_field :password
+
+  - if devise_mapping.rememberable?
+    %div
+      = f.check_box :remember_me
+      = f.label :remember_me
+  
+  %div= f.submit "Přihlásit"
+
+%p#login_links
+  = link_to "Zapomenuté heslo?", new_password_path(resource_name)
+  %br
+  = link_to "Zaregistrovat nový účet", new_registration_path(resource_name)
+  %br
+  = link_to "Nedostal jsi aktivační e-mail?", new_confirmation_path(resource_name)
