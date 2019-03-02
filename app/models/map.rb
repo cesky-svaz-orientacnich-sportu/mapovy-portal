@@ -361,13 +361,22 @@ class Map < ActiveRecord::Base
     #:hasJPG
   }
 
+  y0 = Date.today.year - 5
+  y0 -= y0 % 5
+
 
   MAP_YEARS = [
-    [2010, nil,    0],
-    [2005, 2009, -15],
-    [2000, 2004, -20],
-    [nil, 1999,  -25],
+    [y, nil,    0],
+    [y-5, y-1, -15],
+    [y-10, y-6, -20],
+    [nil, y-11,  -25],
   ]
+  # MAP_YEARS = [
+  #   [2010, nil,    0],
+  #   [2005, 2009, -15],
+  #   [2000, 2004, -20],
+  #   [nil, 1999,  -25],
+  # ]
 
   REGIONS_OPTIONS = REGIONS.map{|x,y| ["#{x} -- #{y}", x]}
 
@@ -392,7 +401,7 @@ class Map < ActiveRecord::Base
     MAP_SPORT_FOOT,
     MAP_SPORT_SPRINT,
     MAP_SPORT_MTBO,
-    [2010, nil,    0]
+    MAP_YEARS.first,
   ]
 
   before_update :sync_fusion
