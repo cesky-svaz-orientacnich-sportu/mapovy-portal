@@ -7,6 +7,8 @@ Mapserver::Application.routes.draw do
     get '/users/auth/:provider' => 'omniauth_callbacks#passthru'
   end
 
+  get '/files/maps/*anything', to: proc { [404, {}, ['']] }
+
   root :to => 'map#index'
 
   get '/info/after_sign_up' => "texts#show", name: "#after_sign_up"
