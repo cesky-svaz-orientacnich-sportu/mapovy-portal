@@ -7,7 +7,7 @@ Mapserver::Application.routes.draw do
     get '/users/auth/:provider' => 'omniauth_callbacks#passthru'
   end
 
-  get '/files/maps/*anything', to: proc { [404, {}, ['']] }
+  get '/files/maps/*anything', to: redirect("/404", status: 404)
 
   root :to => 'map#index'
 
