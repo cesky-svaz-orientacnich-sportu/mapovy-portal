@@ -2,11 +2,11 @@ source "http://rubygems.org"
 
 ruby "2.3.8"
 
-gem "bootstrap-sass"
+gem "bootstrap-sass", ">= 3.4.1"
 gem "coffee-rails", "~> 4.1.0"
 gem "color"
 gem "dalli"
-gem "devise"
+gem "devise", "~> 4.6.0"
 gem "exception_notification"
 gem "friendly_id", "~>5.1.0"
 gem "haml"
