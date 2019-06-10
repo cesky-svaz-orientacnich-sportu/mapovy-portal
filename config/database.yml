@@ -5,7 +5,7 @@ development:
   database: mapserver
   host: localhost
   username: root
-  password:
+  password: <%= ENV["DB_MYSQL_PASSWORD"] %>
   encoding: utf8
   pool: 5
   timeout: 5000
@@ -18,7 +18,7 @@ test:
   database: mapserver_test
   host: localhost
   username: root
-  password:
+  password: <%= ENV["DB_MYSQL_PASSWORD"] %>
   encoding: utf8
   pool: 5
   timeout: 5000
