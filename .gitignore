@@ -15,7 +15,14 @@ vendor/bundle
 /log/*.log
 /tmp
 
-/public/data
+/public/data/*
+!/public/data/jpg
+/public/data/jpg/*
+!/public/data/jpg/original
+/public/data/jpg/original/*
+!/public/data/jpg/original/cream
+!/public/data/jpg/original/watermark.png
+
 /public/system
 /spec/reports
 .DS_Store

@@ -1,0 +1,34 @@
+#!/usr/bin/env ruby
+# encoding: utf-8
+
+fn = ARGV.first
+
+raise "?file not found #{fn}" unless File.exist?(fn)
+
+ext = File.basename(fn).split(".").last.downcase
+
+puts fn
+
+ofn = "../#{File.basename(fn).split(".").first}.jpg"
+_fn = "_" + "#{File.basename(fn).split(".").first}"
+__fn = "_" + _fn
+
+puts "Converting to #{_fn}"
+
+if ext == 'pdf'
+#	`convert -density 300 #{fn} #{_fn}.png`
+#	`convert -flatten -background white -quality 100 -resample 96x96 #{_fn}.png #{_fn}.jpg`
+	puts "Calling cairo to convert to #{_fn}-1.png in between"
+	`pdftocairo -r 96 -png #{fn} #{_fn}`
+        `convert -flatten -background white -quality 100 -resample 96x96 #{_fn}-1.png #{_fn}.jpg`
+else
+	`convert -resample 96x96 #{fn} #{_fn}.jpg`
+end
+
+puts "downsampling"
+`convert #{_fn}.jpg -resize '2700x2700>' #{__fn}.jpg`
+
+puts "blending"
+`composite -quality 100 -dissolve 50 -density 96x96 watermark.png #{__fn}.jpg #{ofn}`
+
+puts "done"
