@@ -15,13 +15,7 @@ vendor/bundle
 /log/*.log
 /tmp
 
-/public/data/*
-!/public/data/jpg
-/public/data/jpg/*
-!/public/data/jpg/original
-/public/data/jpg/original/*
-!/public/data/jpg/original/cream
-!/public/data/jpg/original/watermark.png
+/public/data
 
 /public/system
 /spec/reports

@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 # encoding: utf-8
 
-fn = ARGV.first
+fn = File.join("data", "jpg", "original", ARGV.first)
 
 raise "?file not found #{fn}" unless File.exist?(fn)
 
@@ -9,9 +9,9 @@ ext = File.basename(fn).split(".").last.downcase
 
 puts fn
 
-ofn = "../#{File.basename(fn).split(".").first}.jpg"
-_fn = "_" + "#{File.basename(fn).split(".").first}"
-__fn = "_" + _fn
+ofn = "data/jpg/#{File.basename(fn).split(".").first}.jpg"
+_fn = "data/jpg/original/_" + "#{File.basename(fn).split(".").first}"
+__fn = "data/jpg/original/_" + "#{File.basename(fn).split(".").first}"
 
 puts "Converting to #{_fn}"
 

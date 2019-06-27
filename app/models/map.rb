@@ -796,7 +796,7 @@ class Map < ActiveRecord::Base
     _fn = File.expand_path("_" + "#{File.basename(fn).split(".").first}.jpg", path)
     __fn = File.join(File.dirname(_fn), "_" + File.basename(_fn))
 
-    Dir.chdir(path) do
+    Dir.chdir(File.join(Rails.root, "public")) do
       Bundler.with_clean_env do
         system("rbenv shell 2.3.8 ; ./cream #{self.id}X.#{ext}")
       end
