@@ -1,7 +1,7 @@
 = f.fields_for :map_collection_memberships do |map_collection_membership_form|
   %div.form-group
     %div.col-sm-4
-      = map_collection_membership_form.text_field :map_id, :class => "mapSelect", :style => "width:100%"
+      = map_collection_membership_form.select :map_id, Map.order(:title).map{|x| ["#{x} [#{x.id}]", x.id]}, {:include_blank => true}, {:class => "mapSelect", :style => "width:100%"}
     %div.col-sm-3
       = map_collection_membership_form.text_field :year, :style => "width:100%", :placeholder => "Rok"
     %div.col-sm-3
@@ -12,9 +12,7 @@
 
 :javascript
   function mapSelect(e) {
-    e.select2({
-      data: #{Map.order(:title).map{|x| {'id' => x.id, 'text' => "#{x} [#{x.id}]"}}.to_json.html_safe}
-    });
+    e.select2();
   }
 
   $(function() {
