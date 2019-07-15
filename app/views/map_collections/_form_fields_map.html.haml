@@ -13,12 +13,6 @@
 :javascript
   function mapSelect(e) {
     e.select2({
-      // createSearchChoice:function(term, data) {
-      //   if ($(data).filter(function() {
-      //     return this.text.localeCompare(term)===0;
-      //   }).length===0)
-      //   {return {id:term, text:term};}
-      // },
       data: #{Map.order(:title).map{|x| {'id' => x.id, 'text' => "#{x} [#{x.id}]"}}.to_json.html_safe}
     });
   }
