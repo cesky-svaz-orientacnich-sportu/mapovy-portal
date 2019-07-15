@@ -1,7 +1,7 @@
 = f.fields_for :cartographers do |cartographer_form|
   %div.form-group
     %div.col-sm-4
-      = cartographer_form.text_field :author_id, :class => "authorSelect", :style => "width:90%"
+      = cartographer_form.select :author_id, Author.all.map{|x| [x.to_s, x.id]}, {:include_blank => true}, {:class => "authorSelect", :style => "width:90%"}
       = map_attribute_label(:author_name, :edit_short)
     %div.col-sm-4
       = cartographer_form.select :role, options_for_select(Cartographer::CARTOGRAPHER_ROLES.map{|x| [t("mapserver.cartographer_roles.#{x}"), x]}, cartographer_form.object.role), {}, :style => "width:90%", :class => "roleSelect"
@@ -13,13 +13,7 @@
 :javascript
   function authorSelect(e) {
     e.select2({
-      createSearchChoice:function(term, data) {
-        if ($(data).filter(function() {
-          return this.text.localeCompare(term)===0;
-        }).length===0)
-        {return {id:term, text:term};}
-      },
-      data: #{Author.all.map{|x| {'id' => x.id, 'text' => x.to_s}}.to_json.html_safe}
+      tags: true
     });
   }
 

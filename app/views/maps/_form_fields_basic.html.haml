@@ -43,14 +43,9 @@
     $("#map_title").on('input change propertychange paste', uniquenessCheck);
     $("#map_year").on('input change propertychange paste', uniquenessCheck);
     $("#map_map_sport").on('input change propertychange paste', uniquenessCheck);
-    $('#map_patron').select2({allowClear: true,
-      createSearchChoice:function(term, data) {
-        if ($(data).filter(function() {
-          return this.text.localeCompare(term)===0;
-        }).length===0)
-        {return {id:term, text:term};}
-      },
-      data: #{Club.sorted.map{|x| {'id' => x.abbreviation, 'text' => "#{x.abbreviation} - #{x.name}"}}.to_json.html_safe}
+    $('#map_patron').select2({
+      allowClear: true,
+      tags: true
     });
   });
 
@@ -80,7 +75,7 @@
   = f.label :title, map_attribute_label(:title, :edit), :class => 'col-sm-2'
   = f.text_field :title, :class => 'col-sm-2'
   = f.label :patron, map_attribute_label(:patron, :edit), :class => 'col-sm-2'
-  = f.text_field :patron,  :class => 'col-sm-2'
+  = f.select :patron, Club.sorted.map{|x| ["#{x.abbreviation} - #{x.name}", x.abbreviation]}, {:include_blank => true}, {:class => 'col-sm-2'}
   - if current_user.has_role?(:manager)
     = f.label :patron_accuracy, map_attribute_label(:patron_accuracy, :edit), :class => 'col-sm-2'
     = f.select :patron_accuracy, Map::ACCURACIES.map{|x| [t("mapserver.map_enums.accuracy.#{x}"), x]}, {}, :class => 'col-sm-2'

@@ -39,7 +39,7 @@
       %span.col-sm-3 #{allowed_clubs.first.abbreviation} -- #{allowed_clubs.first.name}
       = f.hidden_field :patron
     - elsif allowed_clubs.any?
-      = f.text_field :patron, :class => 'col-sm-3'
+      = f.select :patron, allowed_clubs.map{|x| ["#{x.abbreviation} - #{x.name}", x.abbreviation]}, {:include_blank => true}, {:class => 'col-sm-3'}
     = f.hidden_field :patron_accuracy
 
   %div.form-group
@@ -74,45 +74,22 @@
     %div.col-sm-2
       = f.label :scale, map_attribute_label(:scale)
       1:
-      /= f.select :scale, %w{20000 15000 12500 10000 7500 5000 4000 2500}, :include_blank => true
-      = f.text_field :scale, style: 'width: 80px'
+      = f.select :scale, %w{20000 15000 12500 10000 7500 5000 4000 2500}, {:include_blank => true}, style: 'width: 80px'
     %div.col-sm-2
       = f.label :equidistance, map_attribute_label(:equidistance)
-      = f.text_field :equidistance, style: 'width: 60px'
-      /= f.select :equidistance, %w{10 5 2.5 2}, :include_blank => true
+      = f.select :equidistance, %w{10.0 5.0 2.5 2.0}, {:include_blank => true}, style: 'width: 60px'
       m
 
   :javascript
     $(function() {
-      $('#map_equidistance').select2({
-        createSearchChoice:function(term, data) {
-          if ($(data).filter(function() {
-            return this.text.localeCompare(term)===0;
-          }).length===0)
-          {return {id:term, text:term};}
-        },
-        data: #{(%w{10.0 5.0 2.5 2.0} + [@map.equidistance ? @map.equidistance.to_s : nil]).compact.uniq.map{|x| {'id' => x, 'text' => x}}.to_json.html_safe}
-      });
-      $('#map_scale').select2({
-        createSearchChoice:function(term, data) {
-          if ($(data).filter(function() {
-            return this.text.localeCompare(term)===0;
-          }).length===0)
-          {return {id:term, text:term};}
-        },
-        data: #{%w{20000 15000 12500 10000 7500 5000 4000 2500}.map{|x| {'id' => x, 'text' => x}}.to_json.html_safe}
+      $('#map_equidistance, #map_scale').select2({
+        tags: true
       });
     });
   - if allowed_clubs.size != 1
     :javascript
       $('#map_patron').select2({
-        createSearchChoice:function(term, data) {
-          if ($(data).filter(function() {
-            return this.text.localeCompare(term)===0;
-          }).length===0)
-          {return {id:term, text:term};}
-        },
-        data: #{allowed_clubs.map{|x| {'id' => x.abbreviation, 'text' => "#{x.abbreviation} - #{x.name}"}}.to_json.html_safe}
+        tags: true
       });
 
   / t.string   "preview_identifier"
