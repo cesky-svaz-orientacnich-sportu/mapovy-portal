@@ -361,22 +361,14 @@ class Map < ActiveRecord::Base
     #:hasJPG
   }
 
-  y0 = Date.today.year - 3
-  y0 = y0 - y0 % 5
+  y0 = Date.today.year
 
   MAP_YEARS = [
-    [y0, nil,    0],
-    [y0-5, y0-1, -15],
-    [y0-10, y0-6, -20],
-    [nil, y0-11,  -25],
+    [y0-2,   nil,     0], # last 3 years
+    [y0-8,   y0-3,  -15], # last 4 - 9 years
+    [y0-18,  y0-9,  -20], # last 10 - 19 years
+    [nil,    y0-19, -25], # 20 years and older
   ]
-
-  # MAP_YEARS = [
-  #   [2010, nil,    0],
-  #   [2005, 2009, -15],
-  #   [2000, 2004, -20],
-  #   [nil, 1999,  -25],
-  # ]
 
   REGIONS_OPTIONS = REGIONS.map{|x,y| ["#{x} -- #{y}", x]}
 
