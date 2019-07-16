@@ -121,7 +121,7 @@
     setupMapEditorSubmit();
     fixMapHeight($('#inline_map_canvas'));
 
-    $("#map_oris_event_id").select2({allowClear: true}).select2('val', '#{@map.oris_event_id}');
+    $("#map_oris_event_id").select2({allowClear: true}).val('#{@map.oris_event_id}');
 
   });
 

@@ -23,13 +23,12 @@
               %td= oris_event.title
               %td= oris_event.date
               %td= oris_event.oris_data['Map']
-              %td= text_field_tag "map[#{oris_event.id}]", "", style: 'width: 100%', class: "mapSelect-#{y}", id: "assign_#{oris_event.id}"
+              %td= select_tag "map[#{oris_event.id}]", options_for_select(Map.where(year: y).map{|x| [x.to_label, x.id]}), {:include_blank => true, style: 'width: 100%', class: "mapSelect-#{y}", id: "assign_#{oris_event.id}"}
               %td= icon('eye', :"data-id" => oris_event.id, :class => "fa fa-eye mapView")
     :javascript
       $(function() {
         $('.mapSelect-#{y}').select2({
-          allowClear: true,
-          data: #{Map.where(year: y).map{|x| {'id' => x.id, 'text' => x.to_label}}.to_json.html_safe}
+          allowClear: true
         });
       });
   = submit_tag "Spárovat"
