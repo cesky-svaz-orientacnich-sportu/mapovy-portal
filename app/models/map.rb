@@ -92,7 +92,7 @@ class Map < ActiveRecord::Base
 
   GEOREFERENCES = %w{s_jstk utm unknown none}
 
-  DRAWING_TECHNIQUES = %w{ocad ocad_3 ocad_4 ocad_5 ocad_6 ocad_7 ocad_8 ocad_9 ocad_10 ocad_11 oo_mapper vector_sw raster_sw pen pencil engraving other}
+  DRAWING_TECHNIQUES = %w{ocad ocad_3 ocad_4 ocad_5 ocad_6 ocad_7 ocad_8 ocad_9 ocad_10 ocad_11 ocad_12 ocad_2018 oo_mapper vector_sw raster_sw pen pencil engraving other}
 
   PRINTING_TECHNIQUES = %w{spot_1 spot_2 spot_3 spot_4 spot_5 spot_6 spot_7 spot_8 cmyk cmyk_plus_1 cmyk_plus_2 color_copy laser_printer inkjet_printer other cmyk_or_laser}
 

@@ -163,6 +163,8 @@ en:
         ocad_9    : 'OCAD 9'
         ocad_10   : 'OCAD 10'
         ocad_11   : 'OCAD 11'
+        ocad_12   : 'OCAD 12'
+        ocad_2018 : 'OCAD 2018'
       map_sport:
         foot    : 'Foot-O'
         sprint  : 'Foot-O/print'
@@ -232,6 +234,8 @@ en:
         ocad_9    : 'OCAD 9'
         ocad_10   : 'OCAD 10'
         ocad_11   : 'OCAD 11'
+        ocad_12   : 'OCAD 12'
+        ocad_2018 : 'OCAD 2018'
       map_sport:
         foot    : 'Foot-O'
         sprint  : 'Sprint foot-O'
