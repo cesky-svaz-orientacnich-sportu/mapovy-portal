@@ -26,7 +26,7 @@
         %span{:style => "background-color:#{c.lighten_by(20).html};border-color:#{c.html}"}
         %label
           - if y1 and y2
-            #{y1}—#{y2}
+            #{y1} – #{y2}
           - elsif y1
             = t("mapserver.map_layers.years.upper", :y => y1)
           - elsif y2
