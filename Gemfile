@@ -17,7 +17,7 @@ gem "jquery-ui-rails"
 gem "kaminari"
 gem "kaminari-bootstrap", "~> 3.0.1"
 gem "magic_encoding"
-gem "mysql2"
+gem "pg", "~>0.21.0"
 gem "nested_form"
 gem "nilify_blanks"
 gem "nokogiri"
@@ -51,7 +51,7 @@ end
 
 group :development do
   gem "capistrano", "~> 2.0"
-  gem "capistrano-mysqldump", "1.1.1", :require => false
+  gem "capistrano-db-tasks", "0.2.1", :require => false
   gem "lorem-ipsum"
   gem "thin"
   gem "better_errors", "~>1.0"

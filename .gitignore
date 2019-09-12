@@ -8,8 +8,9 @@
 /.bundle
 vendor/bundle
 
-# Ignore the default SQLite database.
+# Ignore the default SQLite database and SQL dumps.
 /db/*.sqlite3
+/db/*.sql
 
 # Ignore all logfiles and tempfiles.
 /log/*.log

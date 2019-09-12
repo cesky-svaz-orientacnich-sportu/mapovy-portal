@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 require 'capistrano'
 require "bundler/capistrano"
-require 'capistrano/mysqldump'
+require 'capistrano-db-tasks'
 load 'deploy/assets'
 
 default_run_options[:pty] = true
@@ -12,8 +12,6 @@ ssh_options[:verify_host_key] = :never
 set :stages, %w(production)
 set :default_stage, "production"
 require 'capistrano/ext/multistage'
-
-set :mysqldump_bin, "/usr/bin/mysqldump"
 
 set :repository,  "git@github.com:moskyt/mapovy-portal-csos.git"
 set :scm, "git"
@@ -48,7 +46,7 @@ end
 task :pull do
 end
 
-before "pull", "mysqldump", "download_system"
+before "pull", "db:pull", "download_system"
 
 namespace :cache do
   task :flush do

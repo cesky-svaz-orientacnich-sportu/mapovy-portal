@@ -160,7 +160,7 @@ ActiveRecord::Schema.define(version: 20150613152413) do
     t.integer  "oris_id",           limit: 4
     t.date     "date"
     t.string   "title",             limit: 255
-    t.text     "oris_json",         limit: 4294967295
+    t.text     "oris_json",         limit: 1073741823
     t.string   "place",             limit: 255
     t.datetime "oris_timestamp"
     t.datetime "created_at",                           null: false
