@@ -54,6 +54,7 @@
 #  state_changed_at          :date
 #  completed_by_id           :integer
 #  user_updated_at           :datetime
+#  shape_geom                :geometry
 #
 
 class Map < ActiveRecord::Base
@@ -310,6 +311,16 @@ class Map < ActiveRecord::Base
     end
   end
 
+  def convert_shape_to_geom
+    unless self.shape_json.blank?
+      shape = JSON[self.shape_json].map do |coord|
+        flipped = [coord[1], coord[0]]
+        flipped
+      end
+      self.shape_geom = RGeo::GeoJSON.decode("{\"type\":\"Polygon\",\"coordinates\":[#{shape}]}", json_parser: :json)
+    end
+  end
+
   def no_archive_prints?
     (archive_print1_class.blank? or (archive_print1_class == '0')) and
     (archive_print2_class.blank? or (archive_print2_class == '0')) and
@@ -397,6 +408,7 @@ class Map < ActiveRecord::Base
   ]
 
   before_update :sync_fusion
+  before_save :convert_shape_to_geom
   after_save :update_authors_activities
 
   def update_authors_activities
