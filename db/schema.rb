@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190912121910) do
+ActiveRecord::Schema.define(version: 20190913103011) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -157,6 +157,8 @@ ActiveRecord::Schema.define(version: 20190912121910) do
     t.integer  "completed_by_id"
     t.datetime "user_updated_at"
     t.geometry "shape_geom",                limit: {:srid=>0, :type=>"geometry"}
+    t.string   "color",                     limit: 255
+    t.string   "stroke_color",              limit: 255
   end
 
   add_index "maps", ["slug"], name: "index_maps_on_slug", unique: true, using: :btree

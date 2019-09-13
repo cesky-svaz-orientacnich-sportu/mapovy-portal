@@ -55,6 +55,8 @@
 #  completed_by_id           :integer
 #  user_updated_at           :datetime
 #  shape_geom                :geometry
+#  color                     :string(255)
+#  stroke_color              :string(255)
 #
 
 class Map < ActiveRecord::Base
@@ -361,8 +363,8 @@ class Map < ActiveRecord::Base
     :year => 'ROK',
     :scale => 'MERITKO',
     :preview_identifier => 'OBRAZ',
-    #:Color
-    #:StrokeColor
+    :color => 'Color',
+    :stroke_color => 'StrokeColor',
     :map_family => 'MAP_FAMILY',
     :map_sport => 'MAP_SPORT',
     :state => 'MAP_STATE',
@@ -408,7 +410,7 @@ class Map < ActiveRecord::Base
   ]
 
   before_update :sync_fusion
-  before_save :convert_shape_to_geom
+  before_save :convert_shape_to_geom, :set_color, :set_stroke_color
   after_save :update_authors_activities
 
   def update_authors_activities
@@ -612,7 +614,7 @@ class Map < ActiveRecord::Base
     end
   end
 
-  def color
+  def set_color
     c = '#CCCCCC'
     if map_family == MAP_FAMILY_MAP
       c = MAP_SPORTS_COLOR[map_sport] || '#CCCCCC'
@@ -626,11 +628,11 @@ class Map < ActiveRecord::Base
       c = MAP_FAMILIES_COLOR[map_family] || '#CCCCCC'
     end
     c = '#CCCCCC' if c.blank?
-    c
+    self.color = c
   end
 
-  def stroke_color
-    Color::RGB::from_html(self.color).adjust_saturation(1).adjust_brightness(1).html
+  def set_stroke_color
+    self.stroke_color = Color::RGB::from_html(self.color).adjust_saturation(1).adjust_brightness(1).html
   end
 
   def self.fusion_table
