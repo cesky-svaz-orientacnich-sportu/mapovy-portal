@@ -10,7 +10,7 @@ class AddMapEmbargoColumns < ActiveRecord::Migration
   end
 
   def down
-  	remove_column :maps, :has_embargo, :string
-  	remove_column :maps, :embargo_until, :string
+  	remove_column :maps, :has_embargo, :boolean
+  	remove_column :maps, :embargo_until, :date
   end
 end
