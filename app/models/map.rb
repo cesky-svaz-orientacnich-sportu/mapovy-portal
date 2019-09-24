@@ -57,6 +57,8 @@
 #  shape_geom                :geometry
 #  color                     :string(255)
 #  stroke_color              :string(255)
+#  has_embargo               :boolean          default(FALSE), not null
+#  embargo_until             :date
 #
 
 class Map < ActiveRecord::Base
@@ -410,7 +412,7 @@ class Map < ActiveRecord::Base
   ]
 
   before_update :sync_fusion
-  before_save :convert_shape_to_geom, :set_color, :set_stroke_color
+  before_save :convert_shape_to_geom, :set_color, :set_stroke_color, :set_embargo
   after_save :update_authors_activities
 
   def update_authors_activities
@@ -543,10 +545,6 @@ class Map < ActiveRecord::Base
     end.try(:to_date)
   end
 
-  def embargo_until
-    race_date || Date.civil(1970,1,1)
-  end
-
   def set_fusion_computed_fields(pars)
     pars['Color'] = self.color
     pars['StrokeColor'] = self.stroke_color
@@ -555,7 +553,7 @@ class Map < ActiveRecord::Base
     pars['hasKML'] = self.has_kml? ? 1 : 0
     if embargo?
       pars['hasEMBARGO'] = 1
-      pars['EMBARGO_UNTIL'] = embargo_until
+      pars['EMBARGO_UNTIL'] = race_date || Date.civil(1970,1,1)
     else
       pars['hasEMBARGO'] = 0
       pars['EMBARGO_UNTIL'] = Date.civil(1970,1,1)
@@ -633,6 +631,11 @@ class Map < ActiveRecord::Base
 
   def set_stroke_color
     self.stroke_color = Color::RGB::from_html(self.color).adjust_saturation(1).adjust_brightness(1).html
+  end
+
+  def set_embargo
+    self.has_embargo = embargo? ? 1 : 0
+    self.embargo_until = embargo? ? race_date || Date.civil(1970,1,1) : Date.civil(1970,1,1)
   end
 
   def self.fusion_table
