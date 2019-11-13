@@ -37,7 +37,12 @@ namespace :deploy do
   end
 
   task :link_data do
-    run "cd #{current_path}/public; ln -sf /home/mapserver/data ./data"
+    case fetch(:stage)
+    when :production
+      run "cd #{current_path}/public; ln -sf /home/mapserver/data ./data"
+    when :staging
+      run "cd #{current_path}/public; ln -sf /home/mapserver/data_staging ./data"
+    end
   end
 end
 
