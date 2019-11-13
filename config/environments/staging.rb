@@ -2,6 +2,8 @@
 Mapserver::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
+  config.eager_load = true
+
   # Code is not reloaded between requests
   config.cache_classes = true
 
@@ -47,7 +49,7 @@ Mapserver::Application.configure do
   # config.action_controller.asset_host = "http://assets.example.com"
 
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
-  config.assets.precompile += %w( _*.js _*.css mapserver/locale/*.js)
+  config.assets.precompile += %w( _*.js _*.css mapserver_staging/locale/*.js)
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
@@ -74,14 +76,17 @@ Mapserver::Application.configure do
     :authentication => nil,
     :address  => "127.0.0.1",
     :port  => 25,
-    :domain  => "samson.cb.cz"
+    :domain  => "samson.cb.cz",
+    :enable_starttls_auto => false
     }
 
   # table IDs
   config.maps_fusion_table_id = 'STA'
-  config.convergence_fusion_table_id = 'STA'
+  #config.convergence_fusion_table_id = 'STA'
   config.selected_fusion_table_id = 'STA'
+  config.blocking_fusion_table_id = 'STA'
+  config.embargo_fusion_table_id = 'STA'
   # asset host (for JPGs et al)
-  config.asset_root_url = "https://mapserver-staging.obkotlarka.cz"
+  config.asset_root_url = "https://mapy-test.orientacnisporty.cz"
 
 end

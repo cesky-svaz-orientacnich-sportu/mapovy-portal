@@ -81,7 +81,7 @@ Mapserver::Application.configure do
   config.selected_fusion_table_id = '10Z0IZ5j-GB5K67aK026jGeTU1Jvllv6gUxk5prI4'
   config.blocking_fusion_table_id = '1EBIzS199Q_wcYcJn0Jx6jcmFwtlf3rcaopunP-k8'
   config.embargo_fusion_table_id = '1bHJthBlZp4fenXUHanfVzu3aEB09DBYeBrCsBzxJ'
-   # asset host (for JPGs et al)
+  # asset host (for JPGs et al)
   config.asset_root_url = "https://mapy.orientacnisporty.cz"
 
 end

@@ -29,6 +29,7 @@ staging:
   host: localhost
   username: u_staging
   password: <%= ENV["DB_MYSQL_PASSWORD"] %>
+  encoding: utf8
 
 production:
   adapter: mysql2
