@@ -9,8 +9,8 @@ default_run_options[:shell] = '/bin/bash --login'
 ssh_options[:forward_agent] = true
 ssh_options[:verify_host_key] = :never
 
-set :stages, %w(production)
-set :default_stage, "production"
+set :stages, %w(staging production)
+set :default_stage, "staging"
 require 'capistrano/ext/multistage'
 
 set :mysqldump_bin, "/usr/bin/mysqldump"
