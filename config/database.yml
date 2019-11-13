@@ -27,7 +27,7 @@ staging:
   adapter: mysql2
   database: mapserver_staging
   host: localhost
-  username: mapserver
+  username: u_staging
   password: <%= ENV["DB_MYSQL_PASSWORD"] %>
 
 production:
