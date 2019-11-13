@@ -28,7 +28,7 @@ staging:
   database: mapserver_staging
   host: localhost
   username: u_staging
-  password: <%= ENV["DB_MYSQL_PASSWORD"] %>
+  password: <%= ENV["DB_STAGING_MYSQL_PASSWORD"] %>
   encoding: utf8
 
 production:
