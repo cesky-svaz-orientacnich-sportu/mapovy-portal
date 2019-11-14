@@ -30,7 +30,7 @@ staging:
   schema_search_path: public
   database: mapserver_staging
   host: localhost
-  username: mapserver
+  username: mapserver_staging
   password: <%= ENV["DB_PG_PASSWORD"] %>
   encoding: unicode
 
