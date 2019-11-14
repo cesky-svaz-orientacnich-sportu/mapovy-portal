@@ -68,3 +68,10 @@ group :production do
   #gem "libv8"
   #gem "therubyracer", :platforms => :ruby
 end
+
+group :staging do
+  gem "execjs"
+  gem "uglifier"
+  #gem "libv8"
+  #gem "therubyracer", :platforms => :ruby
+end

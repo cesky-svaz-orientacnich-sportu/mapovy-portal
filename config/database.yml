@@ -32,6 +32,7 @@ staging:
   host: localhost
   username: mapserver
   password: <%= ENV["DB_PG_PASSWORD"] %>
+  encoding: unicode
 
 production:
   adapter: postgis

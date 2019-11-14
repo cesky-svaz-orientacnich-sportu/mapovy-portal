@@ -9,8 +9,8 @@ default_run_options[:shell] = '/bin/bash --login'
 ssh_options[:forward_agent] = true
 ssh_options[:verify_host_key] = :never
 
-set :stages, %w(production)
-set :default_stage, "production"
+set :stages, %w(staging production)
+set :default_stage, "staging"
 require 'capistrano/ext/multistage'
 
 set :repository,  "git@github.com:moskyt/mapovy-portal-csos.git"
@@ -35,7 +35,12 @@ namespace :deploy do
   end
 
   task :link_data do
-    run "cd #{current_path}/public; ln -sf /home/mapserver/data ./data"
+    case fetch(:stage)
+    when :production
+      run "cd #{current_path}/public; ln -sf /home/mapserver/data ./data"
+    when :staging
+      run "cd #{current_path}/public; ln -sf /home/mapserver/data_staging ./data"
+    end
   end
 end
 

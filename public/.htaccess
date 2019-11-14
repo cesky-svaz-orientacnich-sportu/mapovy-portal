@@ -1,7 +1,7 @@
-RewriteEngine On
-RewriteRule ^index.php$ http://mapy.orientacnisporty.cz/ [L,R=301]
-RewriteRule ^listMaps.php$ http://mapy.orientacnisporty.cz/cs/maps [L,R=301]
-RewriteRule ^files/maps/(.+?)/info_table$ http://mapy.orientacnisporty.cz/cs/maps/$1/info_table [L,R=301]
-RewriteRule ^files/maps/(.+?).jpg$ http://mapy.orientacnisporty.cz/data/jpg/$1.jpg [L,R=301]
-RewriteCond %{HTTP_HOST} !^mapy\.orientacnisporty\.cz
-RewriteRule ^(.*)$ http://mapy.orientacnisporty.cz/$1 [R=permanent,L]
+<IfModule mod_rewrite.c>
+	RewriteEngine On
+	RewriteRule ^index.php$ https://%{HTTP_HOST} [L,R=301]
+	RewriteRule ^listMaps.php$ https://%{HTTP_HOST}/cs/maps [L,R=301]
+	RewriteRule ^files/maps/(.+?)/info_table$ https://%{HTTP_HOST}/cs/maps/$1/info_table [L,R=301]
+	RewriteRule ^files/maps/(.+?).jpg$ https://%{HTTP_HOST}/data/jpg/$1.jpg [L,R=301]
+</IfModule>
