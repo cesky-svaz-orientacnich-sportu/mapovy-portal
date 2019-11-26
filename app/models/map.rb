@@ -415,7 +415,7 @@ class Map < ActiveRecord::Base
   ]
 
   before_update :sync_fusion
-  before_save :convert_shape_to_geom, :set_color, :set_stroke_color, :set_embargo, :set_blocking
+  before_save :set_computed_fields
   after_save :update_authors_activities
 
   def update_authors_activities
@@ -605,6 +605,14 @@ class Map < ActiveRecord::Base
     if rid = fusion_table_rowid
       Map.fusion_table.update_row rid, pars
     end
+  end
+
+  def set_computed_fields
+    convert_shape_to_geom
+    set_color
+    set_stroke_color
+    set_embargo
+    set_blocking
   end
 
   def set_color
