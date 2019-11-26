@@ -47,6 +47,7 @@ function createWMSLayer() {
       url += '&HEIGHT=256';
       url += '&BBOX='+ bbox;
       url += '&where='+ wmsLayer.where;
+      url += '&where2='+ wmsLayer.where2;
       url += '&whereE='+ wmsLayer.whereE;
       url += '&whereB='+ wmsLayer.whereB;
       return url;
@@ -216,12 +217,14 @@ function initMapsLayer() {
     },
     layers: {
       maps: false,
+      maps2: false,
       embargoes: false,
       blocking: false
     },
     getLayers: function() {
       var layers = [];
       if (wmsLayer.layers.maps) layers.push('maps');
+      if (wmsLayer.layers.maps2) layers.push('maps2');
       if (wmsLayer.layers.embargoes) layers.push('embargoes');
       if (wmsLayer.layers.blocking) layers.push('blocking');
       return layers.join(',');
@@ -250,6 +253,7 @@ function initMapsLayer() {
         lonlat: encodeURI(e.latLng.lng()+','+e.latLng.lat()),
         layers: encodeURI(wmsLayer.getLayers()),
         where: encodeURI(wmsLayer.where),
+        where2: encodeURI(wmsLayer.where2),
         whereE: encodeURI(wmsLayer.whereE),
         whereB: encodeURI(wmsLayer.whereB)
       }).done(function(res) {
@@ -337,7 +341,7 @@ function initMapComponents() {
     // app objects init
     searchAdvanced = new App.Search.Advanced(state, ftLayer1, ftLayer2, ftLayerId, Config.apiKey, sidebar.showResults, sidebar, Config.resourceString);
 
-    toc = new App.Toc(map, ftLayer2, ftLayerId);
+    toc = new App.Toc(map, wmsLayer);
     mapHelper = new App.MapHelper(state, map, toc, searchSimple, ftLayer1, ftLayer2, Config.ftHighlightLayerId);
     measure = new App.Measure(map, ftLayer1);
 

@@ -1,9 +1,8 @@
 App.Toc = App.newClass({
 
-    constructor: function (map, ftLayer2, ftLayerId) {
+    constructor: function (map, wmsLayer) {
         this.map = map;
-        this.ftLayer2 = ftLayer2;
-        this.ftLayerId = ftLayerId;
+        this.wmsLayer = wmsLayer;
     },
 
     refresh: function () {
@@ -42,10 +41,11 @@ App.Toc = App.newClass({
           }
         });
               
-        wmsLayer.layers.maps = false;
-        wmsLayer.layers.embargoes = false;
-        wmsLayer.layers.blocking = false;
-        wmsLayer.redraw();
+        this.wmsLayer.layers.maps = false;
+        this.wmsLayer.layers.maps2 = false;
+        this.wmsLayer.layers.embargoes = false;
+        this.wmsLayer.layers.blocking = false;
+        this.wmsLayer.redraw();
         
         var attrs = [];
         
@@ -59,19 +59,20 @@ App.Toc = App.newClass({
             } else {
               where1 = (where + " AND " + Config.stateQuery);
               if (Config.user) {
-                where2 = (where + " AND MAP_STATE IN ('proposed', 'change_requested') AND CREATED_BY_ID = " + Config.user.id);
+                where2 = (where + " AND state IN ('proposed', 'change_requested') AND created_by_id = " + Config.user.id);
               }
             }
             
             console.log("TOC update with primary where query: " + where1);
-            wmsLayer.layers.maps = true;
-            wmsLayer.where = where1;
-            wmsLayer.redraw();
+            this.wmsLayer.layers.maps = true;
+            this.wmsLayer.where = where1;
+            this.wmsLayer.redraw();
 
             if (where2) {
               console.log("TOC update with secondary where query: " + where2);
-              this.ftLayer2.query.where = where2;
-              this.ftLayer2.setMap(map);              
+              this.wmsLayer.where2 = where2;
+              this.wmsLayer.layers.maps2 = true;
+              this.wmsLayer.redraw();
             }
         }
         
