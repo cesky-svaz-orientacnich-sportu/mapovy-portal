@@ -44,4 +44,56 @@ class ApiController < ApplicationController
     end
   end
 
+  def maps_in_point
+    lon = URI.decode(request.query_parameters['lonlat']).split(',').first
+    lat = URI.decode(request.query_parameters['lonlat']).split(',').last
+    layers = URI.decode(request.query_parameters['layers']).split(',')
+
+    # pořadí zjišťování je důležité, mělo by inverzně odpovídat pořadí WMS vrstvech v nastavení Mapserveru
+    if layers.include? 'blocking'
+      m = Map
+            .where("St_Intersects(shape_geom, St_MakeEnvelope(#{lon.to_f - 0.000001},#{lat.to_f - 0.000001},#{lon.to_f + 0.000001},#{lat.to_f + 0.000001}))")
+            .where(URI.decode(request.query_parameters['whereB']))
+            .order(year: :desc).first
+    end
+    if not m.present? and layers.include? 'embargoes'
+      m = Map
+            .where("St_Intersects(shape_geom, St_MakeEnvelope(#{lon.to_f - 0.000001},#{lat.to_f - 0.000001},#{lon.to_f + 0.000001},#{lat.to_f + 0.000001}))")
+            .where(URI.decode(request.query_parameters['whereE']))
+            .order(year: :desc).first
+    end
+    if not m.present? and layers.include? 'maps'
+      m = Map
+            .where("St_Intersects(shape_geom, St_MakeEnvelope(#{lon.to_f - 0.000001},#{lat.to_f - 0.000001},#{lon.to_f + 0.000001},#{lat.to_f + 0.000001}))")
+            .where(URI.decode(request.query_parameters['where']))
+            .order(year: :desc).first
+    end
+
+    respond_to do |format|
+      format.json do
+        if m.present?
+          render json: {status: 'success', data: {
+            id: m.id, 
+            title: m.title,
+            patron: m.patron,
+            year: m.year,
+            state: m.state_,
+            scale: m.scale_,
+            map_sport: m.map_sport_,
+            map_family: m.map_family_,
+            has_jpg: m.has_jpg,
+            preview_identifier: m.preview_identifier,
+            #has_blocking
+            #has_embargo
+            #blocking_from,
+            #blocking_until,
+            #embargo_until,
+          }}.to_json
+        else
+          render json: {status: 'error', message: "no map found in point = #{params[:lonlat]}"}.to_json
+        end
+      end
+    end
+  end
+
 end

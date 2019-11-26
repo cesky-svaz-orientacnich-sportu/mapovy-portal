@@ -2,8 +2,8 @@ var Config = {
   locale: 'cs', // default locale to avoid weirdish undefined locales
   hostname: 'https://mapy.orientacnisporty.cz',
   assetRoot: '<%= Mapserver::Application.config.asset_root_url %>',
+  wmsUrl: '<%= Mapserver::Application.config.wms_url %>',
   ftLayerId: '<%= Mapserver::Application.config.maps_fusion_table_id %>',
-  ftHighlightLayerId: '<%= Mapserver::Application.config.selected_fusion_table_id %>',
   ftBlockingLayerId: '<%= Mapserver::Application.config.blocking_fusion_table_id %>',
   ftEmbargoLayerId: '<%= Mapserver::Application.config.embargo_fusion_table_id %>',
   ftHighlightLayerId: '<%= Mapserver::Application.config.selected_fusion_table_id %>',
@@ -14,8 +14,8 @@ var Config = {
     lat: 49.9,
     lng: 15.5
   },
-  fullStateQuery: "MAP_STATE IN ('proposed', 'change_requested', 'archived', 'saved_without_filing', 'approved', 'completed', 'finalized', 'final_change_requested')",
-  stateQuery: "MAP_STATE IN ('archived', 'saved_without_filing', 'approved', 'completed', 'finalized', 'final_change_requested')",
+  fullStateQuery: "state IN ('proposed', 'change_requested', 'archived', 'saved_without_filing', 'approved', 'completed', 'finalized', 'final_change_requested')",
+  stateQuery: "state IN ('archived', 'saved_without_filing', 'approved', 'completed', 'finalized', 'final_change_requested')",
   proj4_SJSTK: "+proj=krovak +lat_0=49.5 +lon_0=24.83333333333333 +alpha=30.28813972222222 +k=0.9999 +x_0=0 +y_0=0 +ellps=bessel +pm=greenwich +units=m +no_defs +towgs84=570.8,85.7,462.8,4.998,1.587,5.261,3.56",
   proj4_UTM33: "+proj=utm +zone=33 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
   proj4_UTM34: "+proj=utm +zone=34 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",

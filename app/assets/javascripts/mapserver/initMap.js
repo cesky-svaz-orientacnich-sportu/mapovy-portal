@@ -1,4 +1,5 @@
 var map,
+    wmsLayer,
     ftLayer1,
     ftLayer2,
     geocoder,
@@ -13,11 +14,55 @@ var map,
 
 var state = {};
 
-function renderInfoWindow(e) {
-  if (e.row['MAP_FAMILY'].value == 'embargo') {
+function createWMSLayer() {
+  var overlay = new google.maps.ImageMapType({
+    getTileUrl: function(coord, zoom) {
+      var proj = map.getProjection();
+      var zfactor = Math.pow(2, zoom);
+      // get Long Lat coordinates
+      var top = proj.fromPointToLatLng(new google.maps.Point(coord.x * 256 / zfactor, coord.y * 256 / zfactor));
+      var bot = proj.fromPointToLatLng(new google.maps.Point((coord.x + 1) * 256 / zfactor, (coord.y + 1) * 256 / zfactor));
+
+      //corrections for the slight shift of the SLP (mapserver)
+      var deltaX = 0.0013;
+      var deltaY = 0.00058;
+
+      //create the Bounding box string
+      var bbox =   (top.lng() + deltaX) + "," +
+                   (bot.lat() + deltaY) + "," +
+                   (bot.lng() + deltaX) + "," +
+                   (top.lat() + deltaY);
+
+      //base WMS URL
+      var url = Config.wmsUrl;
+      url += '?SERVICE=WMS';
+      url += '&VERSION=1.3.0';
+      url += '&REQUEST=GetMap';
+      url += '&FORMAT=image/png';
+      url += '&TRANSPARENT=true';
+      url += '&LAYERS='+ wmsLayer.getLayers();
+      url += '&CRS=EPSG:3857';
+      url += '&STYLES=';
+      url += '&WIDTH=256';
+      url += '&HEIGHT=256';
+      url += '&BBOX='+ bbox;
+      url += '&where='+ wmsLayer.where;
+      url += '&whereE='+ wmsLayer.whereE;
+      url += '&whereB='+ wmsLayer.whereB;
+      return url;
+    },
+    tileSize: new google.maps.Size(256, 256),
+    isPng: true
+  });
+
+   return overlay;
+}
+
+function renderInfoWindow(map) {
+  if (map['map_family'] == 'embargo') {
     return '<div class="infoWindow">' +
       '<div class="header title cleaned">' +
-        '<h3><a href="/' + Config.locale + '/maps/' + e.row['ID'].value + '/fusion"><span>' + e.row['NAZEV'].value + '</span></a></h3>' +
+        '<h3><a href="/' + Config.locale + '/maps/' + map['id'] + '/fusion"><span>' + map['title'] + '</span></a></h3>' +
       '</div>' +
       '<table class="data">' +
         '<colgroup>' +
@@ -33,9 +78,9 @@ function renderInfoWindow(e) {
           '<th></th>' +
         '</tr>' +
         '<tr>' +
-          '<td>' + e.row['ROK'].value + '</td>' +
+          '<td>' + map['year'] + '</td>' +
           '<td></td>' +
-          '<td>' + e.row['PATRON'].value +'</td>' +
+          '<td>' + map['patron'] +'</td>' +
           '<td></td>' +
         '</tr>' +
         '<tr>' +
@@ -43,20 +88,20 @@ function renderInfoWindow(e) {
           '<td colspan="2"></td>' +
         '</tr>' +
         '<tr>' +
-          '<td colspan="2">' + e.row['EMBARGO_UNTIL'].value.split(" ")[0] + '</td>' +
+          '<td colspan="2">' + map['embargo_until'].split(" ")[0] + '</td>' +
           '<td colspan="2"></td>' +
         '</tr>' +
       '</table>' +
     '</div>';
   } else {
-    return '<div class="infoWindow" data-map-family="' + e.row['MAP_FAMILY'].value + '">' +
+    return '<div class="infoWindow" data-map-family="' + map['map_family'] + '">' +
       '<div class="header title cleaned">' +
-        '<h3><a href="/' + Config.locale + '/maps/' + e.row['ID'].value + '/fusion"><span>' + e.row['NAZEV'].value + '</span></a></h3>' +
+        '<h3><a href="/' + Config.locale + '/maps/' + map['id'] + '/fusion"><span>' + map['title'] + '</span></a></h3>' +
         '<ul class="toolsList">' +
-          '<li><a class="infoTableLink" href="/' + Config.locale + '/maps/' + e.row['ID'].value + '/info_table"><img src="/img/tool-08.png" alt="Ikona" /></a></li>' +
+          '<li><a class="infoTableLink" href="/' + Config.locale + '/maps/' + map['id'] + '/info_table"><img src="/img/tool-08.png" alt="Ikona" /></a></li>' +
           (
-            (e.row['hasJPG'].value == '1') ?
-            ('<li><a class="mapPreviewLink" href="' + Config.assetRoot + '/data/jpg/' + e.row['OBRAZ'].value + '.jpg"><img src="/img/tool-06.png" alt="Ikona" /></a></li>') :
+            (map['has_jpg'] == '1') ?
+            ('<li><a class="mapPreviewLink" href="' + Config.assetRoot + '/data/jpg/' + map['preview_identifier'] + '.jpg"><img src="/img/tool-06.png" alt="Ikona" /></a></li>') :
             ('<li><img style="margin-top:-6px" src="/img/tool-06-dis.png" /></li>')
           ) +
         '</ul>' +
@@ -75,22 +120,22 @@ function renderInfoWindow(e) {
           '<th>' + Config.resourceString.map_attributes.sport +  ':</th>' +
         '</tr>' +
         '<tr>' +
-          '<td>' + e.row['ROK'].value + '</td>' +
-          '<td>1:' + e.row['MERITKO'].value +'</td>' +
-          '<td>' + e.row['PATRON'].value +'</td>' +
-          '<td>' + Config.resourceString.map_enums.map_sport[e.row['MAP_SPORT'].value] +'</td>' +
+          '<td>' + map['year'] + '</td>' +
+          '<td>1:' + map['scale'] +'</td>' +
+          '<td>' + map['patron'] +'</td>' +
+          '<td>' + map['map_sport'] +'</td>' +
         '</tr>' +
         '<tr>' +
           '<th colspan="2">' + Config.resourceString.map_attributes.state + ':</th>' +
           '<th colspan="2"></td>' +
         '</tr>' +
         '<tr>' +
-          '<td colspan="2">' + Config.resourceString.map_enums.state[e.row['MAP_STATE'].value] +'</td>' +
+          '<td colspan="2">' + map['state'] +'</td>' +
           '<td colspan="2"></td>' +
         '</tr>' +
         '<tr>' +
           (
-            (e.row['hasBLOCKING'].value == 1) ?
+            (map['has_blocking'] == 1) ?
             (
               '<th colspan="2">' + Config.resourceString.map_layers.blocking.title + ':' +'</th>'
             ) :
@@ -99,7 +144,7 @@ function renderInfoWindow(e) {
             )
           ) +
           (
-            (e.row['hasEMBARGO'].value == 1) ?
+            (map['has_embargo'] == 1) ?
             (
               '<th colspan="2">' + Config.resourceString.map_layers.embargo.info_title + ':' +'</th>'
             ) :
@@ -110,18 +155,18 @@ function renderInfoWindow(e) {
         '</tr>' +
         '<tr>' +
           (
-            (e.row['hasBLOCKING'].value == 1) ?
+            (map['has_blocking'] == 1) ?
             (
-              '<td colspan="2">' + e.row['BLOCKING_FROM'].value + " -- " + e.row['BLOCKING_UNTIL'].value + '</td>'
+              '<td colspan="2">' + map['blocking_from'] + " -- " + map['blocking_until'] + '</td>'
             ) :
             (
               '<td colspan="2"></td>'
             )
           ) +
           (
-            (e.row['hasEMBARGO'].value == 1) ?
+            (map['has_embargo'] == 1) ?
             (
-              '<td colspan="2">' + e.row['EMBARGO_UNTIL'].value.split(" ")[0] + '</td>'
+              '<td colspan="2">' + map['embargo_until'].split(" ")[0] + '</td>'
             ) :
             (
               '<td colspan="2"></td>'
@@ -135,23 +180,20 @@ function renderInfoWindow(e) {
 }
 
 function showBlocking(date, sports) {
-  var where = 'hasBLOCKING = 1 AND MAP_SPORT in (' + sports.join(",") + ') AND BLOCKING_FROM <= ' + date + ' AND BLOCKING_UNTIL >= ' + date + '';
-  console.log("BLOCK ON " + date + " AND " + sports + " / QUERY " + where);
-  this.ftLayerB.query.where = where;
-  this.ftLayerB.setMap(this.map);
+  wmsLayer.layers.blocking = true;
+  wmsLayer.whereB = 'has_blocking = true AND map_sport in (' + sports.join(",") + ') AND blocking_from <= ' + date + ' AND blocking_until >= ' + date + '';
+  console.log("BLOCK ON " + date + " AND " + sports + " / QUERY " + wmsLayer.whereB);
+  wmsLayer.redraw();
 }
 
-function showEmbargo(date, year) {
-  //var where = '(hasEMBARGO = 1 AND EMBARGO_UNTIL >= ' + date + ') OR (MAP_FAMILY = "embargo")';
-  var where = 'MAP_FAMILY = \'embargo\' AND ROK = ' + year;
-  console.log("EMB QUERY " + where);
-  this.ftLayerE.query.where = where;
-  this.ftLayerE.setMap(this.map);
+function showEmbargo(date) {
+  wmsLayer.layers.embargoes = true;
+  wmsLayer.whereE = 'has_embargo = true AND embargo_until >= ' + date;
+  console.log("EMB QUERY " + wmsLayer.whereE);
+  wmsLayer.redraw();
 }
 
 function initMapsLayer() {
-
-  var ftLayerId = Config.ftLayerId;
   var filter = urlInterface.getFilter();
   var where = '';
   if (filter) {
@@ -162,88 +204,66 @@ function initMapsLayer() {
       var layers = urlInterface.getLayers();
       if (layers) {
       }  else {
-          where += 'ID < 0';
+          where += 'id < 0';
       }
   }
 
-  ftLayer1 = new google.maps.FusionTablesLayer({
-      query: {
-          select: 'geometry',
-          from: ftLayerId,
-          where: where
-      },
-      options: {
-          styleId:2,
-          templateId:2,
-          suppressInfoWindows: false
-          //clickable: false
-      }
-  });
-  ftLayer1.setMap(map);
+  wmsLayer = {
+    overlay: null,
+    redraw: function() {
+      map.overlayMapTypes.pop();
+      map.overlayMapTypes.push(wmsLayer.overlay);
+    },
+    layers: {
+      maps: false,
+      embargoes: false,
+      blocking: false
+    },
+    getLayers: function() {
+      var layers = [];
+      if (wmsLayer.layers.maps) layers.push('maps');
+      if (wmsLayer.layers.embargoes) layers.push('embargoes');
+      if (wmsLayer.layers.blocking) layers.push('blocking');
+      return layers.join(',');
+    },
+    where: where,
+    whereE: '1',
+    whereB: '1',
+    suppressInfoWindows: false
+  };
 
-  ftLayer2 = new google.maps.FusionTablesLayer({
-      query: {
-          select: 'geometry',
-          from: ftLayerId,
-          where: where
-      },
-      options: {
-          styleId:2,
-          templateId:2,
-          suppressInfoWindows: false
-          //clickable: false
-      }
-  });
-  ftLayer2.setMap(null);
+  wmsLayer.overlay = createWMSLayer();
+  wmsLayer.layers.maps = true;
+  wmsLayer.redraw();
 
-  ftLayerE = new google.maps.FusionTablesLayer({
-      query: {
-          select: 'geometry',
-          from: Config.ftEmbargoLayerId
-      },
-      options: {
-          styleId:2,
-          templateId:2,
-          suppressInfoWindows: false
-      }
-  });
-  ftLayerE.setMap(null);
-
-  ftLayerB = new google.maps.FusionTablesLayer({
-      query: {
-          select: 'geometry',
-          from: Config.ftBlockingLayerId
-      },
-      options: {
-          styleId:2,
-          templateId:2,
-          suppressInfoWindows: false
-      }
-  });
-  ftLayerB.setMap(null);
+  // TODO: ftLayer1 ~ Config.ftLayerId
+  // TODO: ftLayer2 ~ Config.ftLayerId
+  // TODO: ftLayerE ~ Config.ftEmbargoLayerId
+  // TODO: ftLayerB ~ Config.ftBlockingLayerId
 
   // info window override
-  google.maps.event.addListener(ftLayer1, 'click', function(e) {
-    if (e) {
-      e.infoWindowHtml = renderInfoWindow(e);
+  var infoWindow = new google.maps.InfoWindow({content: ''});
+  map.addListener('click', function(e) {
+    if (! wmsLayer.suppressInfoWindows) {
+      $.get('/api/maps_in_point', {
+        format: 'json',
+        lonlat: encodeURI(e.latLng.lng()+','+e.latLng.lat()),
+        layers: encodeURI(wmsLayer.getLayers()),
+        where: encodeURI(wmsLayer.where),
+        whereE: encodeURI(wmsLayer.whereE),
+        whereB: encodeURI(wmsLayer.whereB)
+      }).done(function(res) {
+        if (res.status == 'success') {
+          infoWindow.setContent(renderInfoWindow(res.data));
+          infoWindow.setPosition(new google.maps.LatLng(e.latLng.lat(), e.latLng.lng()));
+          infoWindow.open(map);
+        }
+        else {
+          infoWindow.close();
+        }
+      })
     }
   });
-  google.maps.event.addListener(ftLayer2, 'click', function(e) {
-    if (e) {
-      e.infoWindowHtml = renderInfoWindow(e);
-    }
-  });
-  google.maps.event.addListener(ftLayerE, 'click', function(e) {
-    if (e) {
-      e.infoWindowHtml = renderInfoWindow(e);
-    }
-  });
-  google.maps.event.addListener(ftLayerB, 'click', function(e) {
-    if (e) {
-      e.infoWindowHtml = renderInfoWindow(e);
-    }
-  });
-
 }
 
 function initMap() {
@@ -263,7 +283,6 @@ function initMap() {
                 return Config.assetRoot + "/data/tiles/" + zoom + "/" + coord.y + "/" + coord.x + ".png";
             }
             else {
-                // return "https://ags.cuzk.cz/ArcGIS/rest/services/zmwm/MapServer/tile/" + (zoom - 9) + "/" + coord.y + "/" + coord.x;
                 return "https://ags.cuzk.cz/ArcGIS/rest/services/zmwm/MapServer/tile/" + (zoom) + "/" + coord.y + "/" + coord.x;
             }
 
@@ -318,7 +337,7 @@ function initMapComponents() {
     // app objects init
     searchAdvanced = new App.Search.Advanced(state, ftLayer1, ftLayer2, ftLayerId, Config.apiKey, sidebar.showResults, sidebar, Config.resourceString);
 
-    toc = new App.Toc(map, ftLayer1, ftLayer2, ftLayerE, ftLayerB, ftLayerId);
+    toc = new App.Toc(map, ftLayer2, ftLayerId);
     mapHelper = new App.MapHelper(state, map, toc, searchSimple, ftLayer1, ftLayer2, Config.ftHighlightLayerId);
     measure = new App.Measure(map, ftLayer1);
 

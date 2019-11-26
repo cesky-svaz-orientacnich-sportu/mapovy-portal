@@ -31,6 +31,8 @@ Mapserver::Application.configure do
   config.assets.cache_store = :null_store  # Disables the Asset cache
   config.sass.cache = false  # Disable the SASS compiler cache
   
+  config.wms_url = 'http://localhost/csos-mapserver-wms'
+
   # table IDs 
   config.maps_fusion_table_id = "1GmFqj5L4ElYP7krl_lwuPgOcrPhtmAek5eC8lKRB"
   #config.convergence_fusion_table_id = '1QaD5B-5uaI3XFWH_JGoCDet5MoxPONAfT6qAgVu2'

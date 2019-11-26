@@ -19,6 +19,7 @@ Mapserver::Application.routes.draw do
   get '/api/oris/:id' => "api#oris_by_id"
   get '/api/oris' => "api#oris"
   get '/api/list' => "api#list"
+  get '/api/maps_in_point' => "api#maps_in_point"
 
   get '/filter_oris_events/:year' => "maps#filter_oris_events"
 
