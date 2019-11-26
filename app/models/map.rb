@@ -59,6 +59,9 @@
 #  stroke_color              :string(255)
 #  has_embargo               :boolean          default(FALSE), not null
 #  embargo_until             :date
+#  has_blocking              :boolean          default(FALSE), not null
+#  blocking_from             :integer
+#  blocking_until            :integer
 #
 
 class Map < ActiveRecord::Base
@@ -412,7 +415,7 @@ class Map < ActiveRecord::Base
   ]
 
   before_update :sync_fusion
-  before_save :convert_shape_to_geom, :set_color, :set_stroke_color, :set_embargo
+  before_save :convert_shape_to_geom, :set_color, :set_stroke_color, :set_embargo, :set_blocking
   after_save :update_authors_activities
 
   def update_authors_activities
@@ -527,14 +530,6 @@ class Map < ActiveRecord::Base
     !identifier_filing.blank? and (identifier_filing.size >= 3) and [STATE_FINALIZED, STATE_ARCHIVED].include?(state)
   end
 
-  def blocking_from
-    year
-  end
-
-  def blocking_until
-    blocking_from + 9
-  end
-
   def race_date
     if oris_event
       oris_event.date
@@ -636,6 +631,12 @@ class Map < ActiveRecord::Base
   def set_embargo
     self.has_embargo = embargo? ? 1 : 0
     self.embargo_until = embargo? ? race_date || Date.civil(1970,1,1) : Date.civil(1970,1,1)
+  end
+
+  def set_blocking
+    self.has_blocking = blocking? ? 1 : 0
+    self.blocking_from = blocking? ? year : 0
+    self.blocking_until = blocking? ? blocking_from + 9 : 0
   end
 
   def self.fusion_table
