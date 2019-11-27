@@ -72,22 +72,20 @@ App.Sidebar = App.newClass({
        sidebar.hide();
     },
 
-    showResults: function (table, secondary, page) {
+    showResults: function (data, secondary, page) {
         //TODO: sidebar -> this
 
         sidebar.hideWaiting();
 
-        if (!table) table = sidebar.lastTable;
+        if (!data) data = sidebar.lastData;
 
         var numRows = 0;
-        var numCols = 0;
-        if (table && table.rows) {
-          numRows = table.rows.length;
-          numCols = table.columns.length;   
-          console.log("Search results " + numRows + " / " + numCols + " : " + table);       
-          sidebar.lastTable = table;
+        if (data) {
+          numRows = data.length;
+          console.log("Search results " + numRows + " : " + data);       
+          sidebar.lastData = data;
         } else {
-          console.log("Search results blank? : " + table);                 
+          console.log("Search results blank? : " + data);                 
         }
 
         var cancel = '<a href="#" onClick="sidebar.hideResults(); ">' + sidebar.resourceString.sideBarCancel + '</a>';
@@ -140,27 +138,27 @@ App.Sidebar = App.newClass({
         var fusionTableData = '';
         var mapsId = [], mapsIdAll = [], urlImg, urlKML;
         for (var i = 0; i < numRows; i++) {
-          var mapId = parseInt(table.rows[i][0]);
+          var mapId = parseInt(data[i]['id']);
           mapsIdAll.push(mapId);
         }
         for (var i = numStart; i < numEnd; i++) {
-            var mapId = parseInt(table.rows[i][0]);
+            var mapId = parseInt(data[i]['id']);
             mapsId.push(mapId);
             var js = '';
             for (j = 0; j < 1; j++) {
                 fusionTableData += '<li id="mapResult_' + mapId + '" class="cleaned">' + 
-                '<div class="title cleaned" id="result' + table.rows[i][0] + '" ">' + 
+                '<div class="title cleaned" id="result' + data[i]['id'] + '" ">' + 
                   '<h3>'+
                     '<a href="/' + Config.locale + '/maps/' + mapId + '/fusion">' + 
-                      '<span>' + table.rows[i][1] + '</span>' + 
+                      '<span>' + data[i]['title'] + '</span>' + 
                     '</a>' + 
                   '</h3>' +
                   '<ul class="toolsList">';
                 
-                urlImg = Config.assetRoot + '/data/jpg/' + table.rows[i][5] + '.jpg';
+                urlImg = Config.assetRoot + '/data/jpg/' + data[i]['preview_identifier'] + '.jpg';
                 urlKML = Config.assetRoot + '/data/kml/' + mapId + '.kml';
                 
-                if (table.rows[i][5] && table.rows[i][5] != '' && table.rows[i][5] != '0') {
+                if (data[i]['preview_identifier'] && data[i]['preview_identifier'] != '' && data[i]['preview_identifier'] != '0') {
                   fusionTableData += '<li>' +
                     '<a href="' + urlImg + '" class="mapPreviewLink" title="' + sidebar.resourceString.preview + '">' + 
                       '<img class="mapa" src="/img/tool-06.png" alt="Nahled" />' + 
@@ -208,11 +206,11 @@ App.Sidebar = App.newClass({
                         '<th>' + sidebar.resourceString.map_attributes.id + ':</th>' +
                       '</tr>' +
                       '<tr>' +
-                        '<td>' + table.rows[i][3] + '</a></td>' +
-                        '<td>' + table.rows[i][4] + '</td>' +
-                        '<td>' + table.rows[i][2] + '</td>' +
-                        '<td>' + Config.resourceString.map_enums.map_sport[table.rows[i][6]] + '</td>' +
-                        '<td>' + table.rows[i][0] + '</td>' +
+                        '<td>' + data[i]['year'] + '</a></td>' +
+                        '<td>' + data[i]['scale'] + '</td>' +
+                        '<td>' + data[i]['patron'] + '</td>' +
+                        '<td>' + Config.resourceString.map_enums.map_sport[data[i]['map_sport']] + '</td>' +
+                        '<td>' + data[i]['id'] + '</td>' +
                       '</tr>' +
                     '</table>' +
                   '</li>';
@@ -226,15 +224,13 @@ App.Sidebar = App.newClass({
             var id = mapsId[i];
             (function (id) {
                 $('#mapResult_' + id).mouseenter(function () {
-                    mapHelper.highlightMapPolygon(id);
+                    mapHelper.highlightMapPolygon(id); // TODO
                 });
                 $('#mapResult_' + id).mouseleave(function () {
                     mapHelper.clearHighlight();
                 });
             }(id));
         }
-
-        //var queryLink = '?lg=<?php echo $lg ?>&page=query';
 
         var sideHeadingLinks2 = '<span>|</span>' +
           '<a href="/' + Config.locale + '/maps/table_search?list=' + mapsIdAll.join("-") + '" target="_blank">' + sidebar.resourceString.sideBarTable + '</a>' +
@@ -246,7 +242,6 @@ App.Sidebar = App.newClass({
         $("#toc").hide();
         $("#cancelSearch").show();
         
-        //showQueryInMap();
         mapHelper.showSelectInMap();
     },
 

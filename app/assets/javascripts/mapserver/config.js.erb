@@ -6,8 +6,7 @@ var Config = {
   ftLayerId: '<%= Mapserver::Application.config.maps_fusion_table_id %>',
   ftBlockingLayerId: '<%= Mapserver::Application.config.blocking_fusion_table_id %>',
   ftEmbargoLayerId: '<%= Mapserver::Application.config.embargo_fusion_table_id %>',
-  ftHighlightLayerId: '<%= Mapserver::Application.config.selected_fusion_table_id %>',
-  apiKey: '<%= GOOGLE_API_KEY %>',
+  apiKey: '<%= GOOGLE_API_KEY %>', // TODO: remove
   mapInitParams: {
   	zoom: 8,
     mapTypeId: 'SHC',

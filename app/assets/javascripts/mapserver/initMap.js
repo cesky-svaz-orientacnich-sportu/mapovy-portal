@@ -40,16 +40,20 @@ function createWMSLayer() {
       url += '&REQUEST=GetMap';
       url += '&FORMAT=image/png';
       url += '&TRANSPARENT=true';
-      url += '&LAYERS='+ wmsLayer.getLayers();
+      url += '&LAYERS='+ encodeURIComponent(wmsLayer.getLayers());
       url += '&CRS=EPSG:3857';
       url += '&STYLES=';
       url += '&WIDTH=256';
       url += '&HEIGHT=256';
       url += '&BBOX='+ bbox;
-      url += '&where='+ wmsLayer.where;
-      url += '&where2='+ wmsLayer.where2;
-      url += '&whereE='+ wmsLayer.whereE;
-      url += '&whereB='+ wmsLayer.whereB;
+      if (wmsLayer.layers.maps && wmsLayer.where)
+        url += '&where='+ encodeURIComponent(wmsLayer.where);
+      if (wmsLayer.layers.maps2 && wmsLayer.where2)
+        url += '&where2='+ encodeURIComponent(wmsLayer.where2);
+      if (wmsLayer.layers.embargoes && wmsLayer.whereE)
+        url += '&whereE='+ encodeURIComponent(wmsLayer.whereE);
+      if (wmsLayer.layers.blocking && wmsLayer.whereB)
+        url += '&whereB='+ encodeURIComponent(wmsLayer.whereB);
       return url;
     },
     tileSize: new google.maps.Size(256, 256),
@@ -212,6 +216,7 @@ function initMapsLayer() {
   wmsLayer = {
     overlay: null,
     redraw: function() {
+      //TODO: removeAt() a několik vrstev namísto jedné
       map.overlayMapTypes.pop();
       map.overlayMapTypes.push(wmsLayer.overlay);
     },
@@ -232,6 +237,7 @@ function initMapsLayer() {
     where: where,
     whereE: '1',
     whereB: '1',
+    whereH: '1',
     suppressInfoWindows: false
   };
 
@@ -334,16 +340,16 @@ function initMapComponents() {
     var mapTypeId = Config.mapInitParams.mapTypeId;
 
     sidebar = new App.Sidebar(map, 385, Config.resourceString, Config.accessGranted);
-    urlInterface = new App.UrlInterface(ftLayerId);
-    mapLink = new App.MapLink(urlInterface, Config.apiKey);
-    searchSimple = new App.Search.Simple(state, ftLayerId, Config.apiKey, sidebar.showResults, sidebar);
+    urlInterface = new App.UrlInterface(ftLayerId); // TODO
+    mapLink = new App.MapLink(urlInterface, Config.apiKey); // TODO
+    searchSimple = new App.Search.Simple(state, sidebar.showResults, sidebar);
 
     // app objects init
-    searchAdvanced = new App.Search.Advanced(state, ftLayer1, ftLayer2, ftLayerId, Config.apiKey, sidebar.showResults, sidebar, Config.resourceString);
+    searchAdvanced = new App.Search.Advanced(state, ftLayer1, ftLayer2, ftLayerId, Config.apiKey, sidebar.showResults, sidebar, Config.resourceString); // TODO
 
     toc = new App.Toc(map, wmsLayer);
-    mapHelper = new App.MapHelper(state, map, toc, searchSimple, ftLayer1, ftLayer2, Config.ftHighlightLayerId);
-    measure = new App.Measure(map, ftLayer1);
+    mapHelper = new App.MapHelper(state, map, toc, searchSimple, wmsLayer); // TODO
+    measure = new App.Measure(map, ftLayer1); // TODO
 
     mapHelper.changeMapType(mapTypeId);
 

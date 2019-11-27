@@ -1,13 +1,11 @@
 App.MapHelper = App.newClass({
 
-    constructor: function (state, map, toc, search, ftLayer1, ftLayer2, ftHighlightLayerId) {
+    constructor: function (state, map, toc, search, wmsLayer) {
         this.state = state;
         this.map = map;
         this.toc = toc;
         this.search = search;
-        this.ftLayer1 = ftLayer1;
-        this.ftLayer2 = ftLayer2;
-        this.ftHighlightLayerId = ftHighlightLayerId;
+        this.wmsLayer = wmsLayer;
     },
 
     listeners: [],
@@ -16,8 +14,9 @@ App.MapHelper = App.newClass({
 
     registerMapClickListeners: function (callBack) {
         this.listeners.push(google.maps.event.addListener(this.map, 'click', callBack));
-        this.listeners.push(google.maps.event.addListener(this.ftLayer1, 'click', callBack));
-        this.listeners.push(google.maps.event.addListener(this.ftLayer2, 'click', callBack));
+        // TODO
+        //this.listeners.push(google.maps.event.addListener(this.ftLayer1, 'click', callBack));
+        //this.listeners.push(google.maps.event.addListener(this.ftLayer2, 'click', callBack));
     },
 
     unregisterMapClickListeners: function () {
@@ -50,26 +49,28 @@ App.MapHelper = App.newClass({
       var select2 = null;
 
       if (this.state.lastSelect1) {
-        var from1   = this.state.lastSelect1.substring(this.state.lastSelect1.indexOf(' FROM'));
-        var select1 = 'SELECT geometry ' + from1;
-        var where1  = this.state.lastSelect1.substring(this.state.lastSelect1.indexOf('WHERE') + 6);
-
-        this.ftLayer1.query.where = where1;
-        this.ftLayer1.setMap(this.map);
+        var select1 = {
+          select: ['shape_json'],
+          where: this.state.lastSelect1.where
+        };
+        this.wmsLayer.where = select1.where;
+        this.wmsLayer.layers.maps = true;
       } else {
-        this.ftLayer2.setMap(null);
+        this.wmsLayer.layers.maps2 = false;
       }
 
       if (this.state.lastSelect2) {
-        var from2   = this.state.lastSelect2.substring(this.state.lastSelect2.indexOf(' FROM'));
-        var select2 = 'SELECT geometry ' + from2;
-        var where2  = this.state.lastSelect2.substring(this.state.lastSelect2.indexOf('WHERE') + 6);
-
-        this.ftLayer2.query.where = where2;
-        this.ftLayer2.setMap(this.map);
+        var select2 = {
+          select: ['shape_json'],
+          where: this.state.lastSelect2.where
+        };
+        this.wmsLayer.where2 = select2.where;
+        this.wmsLayer.layers.maps2 = true;
       } else {
-        this.ftLayer2.setMap(null);
+        this.wmsLayer.layers.maps2 = false;
       }
+
+      this.wmsLayer.redraw();
 
       $("#toc").hide();
       $("#area_toc").hide();
@@ -78,18 +79,17 @@ App.MapHelper = App.newClass({
       this.search.searchBySelect(select1, select2, this.zoomToResults, true);
     },
 
-    zoomToResults: function(table) {
-        var numRows = table.rows.length;
-        var numCols = table.columns.length;
+    zoomToResults: function(data) {
+        var numRows = data.length;
 
         var coordinates = [];
         for (i = 0; i < numRows; i++) {
-            if (table.rows[i][0] !== '') {
-              var geometry = table.rows[i][0].geometry;
-                for (var j = 0; j < geometry.coordinates[0].length; j++) {
-                  var lng = geometry.coordinates[0][j][0];
-                  var lat = geometry.coordinates[0][j][1];
-                  coordinates.push(new google.maps.LatLng(lat, lng));
+            if (data[i]['shape_json'] !== '') {
+                var points = JSON.parse(data[i]['shape_json']);
+                for (var j = 0; j < points.length; j++) {
+                    var lng = points[j][1];
+                    var lat = points[j][0];
+                    coordinates.push(new google.maps.LatLng(lat, lng));
                 }
             }
         }
@@ -108,25 +108,50 @@ App.MapHelper = App.newClass({
     highlightMapPolygon: function (id) {
         this.clearHighlight();
 
-        this.ftHighlightLayer = new google.maps.FusionTablesLayer({
-          query: {
-            select: 'geometry',
-            from: this.ftHighlightLayerId,
-            where: "'ID'= " + id
+        var layer = new google.maps.ImageMapType({
+          getTileUrl: function(coord, zoom) {
+            var proj = map.getProjection();
+            var zfactor = Math.pow(2, zoom);
+            // get Long Lat coordinates
+            var top = proj.fromPointToLatLng(new google.maps.Point(coord.x * 256 / zfactor, coord.y * 256 / zfactor));
+            var bot = proj.fromPointToLatLng(new google.maps.Point((coord.x + 1) * 256 / zfactor, (coord.y + 1) * 256 / zfactor));
+
+            //corrections for the slight shift of the SLP (mapserver)
+            var deltaX = 0.0013;
+            var deltaY = 0.00058;
+
+            //create the Bounding box string
+            var bbox =   (top.lng() + deltaX) + "," +
+                         (bot.lat() + deltaY) + "," +
+                         (bot.lng() + deltaX) + "," +
+                         (top.lat() + deltaY);
+
+            //base WMS URL
+            var url = Config.wmsUrl;
+            url += '?SERVICE=WMS';
+            url += '&VERSION=1.3.0';
+            url += '&REQUEST=GetMap';
+            url += '&FORMAT=image/png';
+            url += '&TRANSPARENT=true';
+            url += '&LAYERS=highlight';
+            url += '&CRS=EPSG:3857';
+            url += '&STYLES=';
+            url += '&WIDTH=256';
+            url += '&HEIGHT=256';
+            url += '&BBOX='+ bbox;
+            url += '&whereH='+ encodeURIComponent("id = " + id);
+            return url;
           },
-          options: {
-            suppressInfoWindows: true,
-            templateId: 2,
-            styleId: 2
-          }
+          tileSize: new google.maps.Size(256, 256),
+          isPng: true
         });
 
-        this.ftHighlightLayer.setMap(map);
+        this.ftHighlightLayer = map.overlayMapTypes.setAt(14, layer);
     },
 
     clearHighlight: function () {
-        if (this.ftHighlightLayer) {
-            this.ftHighlightLayer.setMap(null);
+        if (this.ftHighlightLayer !== null) {
+            map.overlayMapTypes.removeAt(14);
         }
     }
 

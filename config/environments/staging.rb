@@ -83,7 +83,6 @@ Mapserver::Application.configure do
   # table IDs
   config.maps_fusion_table_id = 'STA'
   #config.convergence_fusion_table_id = 'STA'
-  config.selected_fusion_table_id = 'STA'
   config.blocking_fusion_table_id = 'STA'
   config.embargo_fusion_table_id = 'STA'
   # asset host (for JPGs et al)
