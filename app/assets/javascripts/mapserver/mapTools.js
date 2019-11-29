@@ -48,44 +48,6 @@ function zoom2one(mapId) {
     });
 }
 
-function zoom2query(query) {
-    // zoom and center map on query results
-    // set the callback function
-    $.ajax({
-      url: 'https://www.googleapis.com/fusiontables/v1/query?key=' + Config.apiKey + '&sql=' + encodeURIComponent(query),
-      dataType: 'jsonp',
-      jsonp: 'jsonCallback',
-      success: zoom2queryResp
-      //error: handleFtError
-    });
-}
-
-function zoom2queryResp(json) {
-    var numRows = json.table.rows.length;
-    var numCols = json.table.cols.length;
-    var coordinates = [];
-
-    for(i = 0; i < numRows; i++) {
-      if (json.table.rows[i][0] !== '' ) {
-        var shape = json.table.rows[i][0];
-        for (var j = 0; j < shape.coordinates[0].length; j++) {
-          var lng = json.table.rows[i][0].coordinates[0][j][0];
-          var lat = json.table.rows[i][0].coordinates[0][j][1];
-          coordinates.push(new google.maps.LatLng(lat, lng));
-        }
-      }
-    }
-
-    var bounds = new google.maps.LatLngBounds();
-    for (var i = 0; i < coordinates.length; i++) {
-      bounds.extend(coordinates[i]);
-    }
-    google.maps.event.trigger(map, 'resize');
-    if (coordinates.length > 0) map.fitBounds(bounds);
-    var zoomLevel = map.getZoom();
-    map.setZoom(zoomLevel);
-}
-
 function executeAdvEnter(e) {
 	if (e.keyCode == 13) {
 		$('.ui-autocomplete').hide();
