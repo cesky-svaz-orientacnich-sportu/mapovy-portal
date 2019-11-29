@@ -28,9 +28,7 @@ App.Measure = App.newClass({
         $('#showMeasure').show();
         this.map.setOptions({ draggableCursor: 'crosshair' });
 
-        this.ftLayer.setOptions({
-            suppressInfoWindows: true
-        });
+        this.ftLayer.suppressInfoWindows = true;
 
         var this_ = this;
         this.listeners.MeasureOnMap = google.maps.event.addListener(this.map, "click", function (event) { this_.add(event.latLng); });
@@ -173,9 +171,7 @@ App.Measure = App.newClass({
     },
 
     clear: function () {
-        this.ftLayer.setOptions({
-            suppressInfoWindows: false
-        });
+        this.ftLayer.suppressInfoWindows = false;
 
         this.reset();
         this.map.setOptions({ draggableCursor: 'url(https://maps.gstatic.com/mapfiles/openhand_8_8.cur),default' });

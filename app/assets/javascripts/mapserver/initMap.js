@@ -375,7 +375,7 @@ function initMapComponents() {
 
     toc = new App.Toc(map, ftLayer1, ftLayer2, ftLayerE, ftLayerB);
     mapHelper = new App.MapHelper(state, map, toc, searchSimple, ftLayer1, ftLayer2);
-    measure = new App.Measure(map, ftLayer1); // TODO
+    measure = new App.Measure(map, ftLayer1);
 
     mapHelper.changeMapType(mapTypeId);
 
