@@ -20,6 +20,7 @@ function WMSLayer(opts) {
   this.map = opts.map;
   this.index = opts.index;
   this.overlay = this.createOverlay();
+  this.visible = false;
 };
 WMSLayer.prototype.createOverlay = function() {
   var self = this;
@@ -65,9 +66,11 @@ WMSLayer.prototype.createOverlay = function() {
 };
 WMSLayer.prototype.show = function() {
   this.map.overlayMapTypes.setAt(this.index, this.overlay);
+  this.visible = true;
 };    
 WMSLayer.prototype.hide = function() {
   this.map.overlayMapTypes.setAt(this.index, null);
+  this.visible = false;
 };
 
 function renderInfoWindow(map) {
@@ -259,17 +262,32 @@ function initMapsLayer() {
   // TODO: ftLayerB ~ Config.ftBlockingLayerId
 
   // info window override
-  /*var infoWindow = new google.maps.InfoWindow({content: ''});
+  var infoWindow = new google.maps.InfoWindow({content: ''});
   map.addListener('click', function(e) {
-    if (! wmsLayer.suppressInfoWindows) {
+    var layers = [];
+
+    if (ftLayer1.visible && !ftLayer1.suppressInfoWindows) {
+      layers.push(ftLayer1.layer);
+    }
+    if (ftLayer2.visible && !ftLayer2.suppressInfoWindows) {
+      layers.push(ftLayer2.layer);
+    }
+    if (ftLayerE.visible && !ftLayerE.suppressInfoWindows) {
+      layers.push(ftLayerE.layer);
+    }
+    if (ftLayerB.visible && !ftLayerB.suppressInfoWindows) {
+      layers.push(ftLayerB.layer);
+    }
+
+    if (layers.length) {
       $.get('/api/maps_in_point', {
         format: 'json',
         lonlat: encodeURI(e.latLng.lng()+','+e.latLng.lat()),
-        layers: encodeURI(wmsLayer.getLayers()),
-        where: encodeURI(wmsLayer.where),
-        where2: encodeURI(wmsLayer.where2),
-        whereE: encodeURI(wmsLayer.whereE),
-        whereB: encodeURI(wmsLayer.whereB)
+        layers: encodeURI(layers.join(',')),
+        where: encodeURI(ftLayer1.where),
+        where2: encodeURI(ftLayer2.where),
+        whereE: encodeURI(ftLayerE.where),
+        whereB: encodeURI(ftLayerB.where)
       }).done(function(res) {
         if (res.status == 'success') {
           infoWindow.setContent(renderInfoWindow(res.data));
@@ -281,7 +299,7 @@ function initMapsLayer() {
         }
       })
     }
-  });*/
+  });
 }
 
 function initMap() {
