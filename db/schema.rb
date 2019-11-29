@@ -157,6 +157,7 @@ ActiveRecord::Schema.define(version: 20191126122310) do
     t.integer  "completed_by_id"
     t.datetime "user_updated_at"
     t.geometry "shape_geom",                limit: {:srid=>0, :type=>"geometry"}
+    t.string   "cartographers_for_api",     limit: 255
     t.string   "color",                     limit: 255
     t.string   "stroke_color",              limit: 255
     t.boolean  "has_embargo",                                                     default: false, null: false

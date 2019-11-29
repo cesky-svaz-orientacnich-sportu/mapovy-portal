@@ -55,6 +55,7 @@
 #  completed_by_id           :integer
 #  user_updated_at           :datetime
 #  shape_geom                :geometry
+#  cartographers_for_api     :string(255)
 #  color                     :string(255)
 #  stroke_color              :string(255)
 #  has_embargo               :boolean          default(FALSE), not null
@@ -472,10 +473,6 @@ class Map < ActiveRecord::Base
     "##{id}:#{title}:#{map_family}:#{map_sport}"
   end
 
-  def cartographers_for_fusion
-    cartographers.exists? ? (cartographers.map{|c| "[#{c.role.downcase}:#{c.author_id}]"} * "") : "0"
-  end
-
   def region_
     REGIONS[region] ? "#{region} -- #{REGIONS[region]}" : region
   end
@@ -543,7 +540,7 @@ class Map < ActiveRecord::Base
   def set_fusion_computed_fields(pars)
     pars['Color'] = self.color
     pars['StrokeColor'] = self.stroke_color
-    pars['AUTHORS'] = self.cartographers_for_fusion
+    pars['AUTHORS'] = self.cartographers_for_api
     pars['hasJPG'] = self.has_jpg? ? 1 : 0
     pars['hasKML'] = self.has_kml? ? 1 : 0
     if embargo?
@@ -609,10 +606,15 @@ class Map < ActiveRecord::Base
 
   def set_computed_fields
     convert_shape_to_geom
+    set_cartographers_for_api
     set_color
     set_stroke_color
     set_embargo
     set_blocking
+  end
+
+  def set_cartographers_for_api
+    self.cartographers_for_api = cartographers.exists? ? (cartographers.map{|c| "[#{c.role.downcase}:#{c.author_id}]"} * "") : "0"
   end
 
   def set_color

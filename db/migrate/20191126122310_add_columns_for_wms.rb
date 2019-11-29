@@ -1,6 +1,7 @@
 class AddColumnsForWms < ActiveRecord::Migration
   def up
   	add_column :maps, :shape_geom, :geometry, { null: true }
+    add_column :maps, :cartographers_for_api, :string, { limit: 255, null: true }
   	add_column :maps, :color, :string, { limit: 255, null: true }
   	add_column :maps, :stroke_color, :string, { limit: 255, null: true }
   	add_column :maps, :has_embargo, :boolean, { default: false, null: false }
@@ -17,6 +18,7 @@ class AddColumnsForWms < ActiveRecord::Migration
 
   def down
   	remove_column :maps, :shape_geom, :geometry
+    remove_column :maps, :cartographers_for_api, :string
   	remove_column :maps, :color, :string
   	remove_column :maps, :stroke_color, :string
   	remove_column :maps, :has_embargo, :boolean

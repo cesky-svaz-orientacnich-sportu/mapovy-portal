@@ -1,7 +1,7 @@
 App.Search.Advanced = App.newClass({
 
-    constructor: function (state, ftLayer1, ftLayer2, ftLayerId, apiKey, resultsCallback, sidebar, resourceString) {
-        App.Search.call(this, state, ftLayerId, apiKey, resultsCallback, sidebar);
+    constructor: function (state, ftLayer1, ftLayer2, resultsCallback, sidebar, resourceString) {
+        App.Search.call(this, state, resultsCallback, sidebar);
 
         this.ftLayer1 = ftLayer1;
         this.ftLayer2 = ftLayer2;
@@ -88,7 +88,7 @@ App.Search.Advanced = App.newClass({
               gps_ok = false;
             }
             if (gps_ok) {
-              query_parts.push("ST_INTERSECTS(geometry, CIRCLE(LATLNG(" + this.center.lat() + ", " + this.center.lng() + "), " + distance + "))");
+              query_parts.push("ST_DistanceSphere(shape_geom, ST_MakePoint(" + this.center.lng() + ", " + this.center.lat() + ")) <= " + distance);
               this.clearOverlays();
               var distanceOptions = {
                   strokeColor: "#FF0000",
@@ -113,31 +113,31 @@ App.Search.Advanced = App.newClass({
         }
 
         if (name) {
-            query_parts.push("NAZEV CONTAINS IGNORING CASE '" + name + "'");
+            query_parts.push("LOWER(title) LIKE LOWER('%" + name + "%')");
         }
 
         if (scale) {
-            query_parts.push("MERITKO = " + scale);
+            query_parts.push("scale = " + scale);
         }
 
         if (club) {
-            query_parts.push("PATRON CONTAINS IGNORING CASE '" + club + "'");
+            query_parts.push("LOWER(patron) LIKE LOWER('%" + club + "%')");
         }
 
         if (author) {
-            query_parts.push("AUTHORS CONTAINS IGNORING CASE '" + author + "]'");
+            query_parts.push("LOWER(cartographers_for_api) LIKE LOWER('%" + author + "]%')");
         }
 
         if (sport) {
-            query_parts.push("MAP_SPORT = '" + sport + "'");
+            query_parts.push("map_sport = '" + sport + "'");
         }
 
         if (yearFrom != '') {
-            query_parts.push("ROK >= '" + yearFrom + "'");
+            query_parts.push("year >= '" + yearFrom + "'");
         }
 
         if (yearTo != '') {
-            query_parts.push("ROK <= '" + yearTo + "'");
+            query_parts.push("year <= '" + yearTo + "'");
         }
         
         if (errors.length > 0) {
@@ -161,23 +161,24 @@ App.Search.Advanced = App.newClass({
 
     initAutocomplete: function () {
         $.ajax({
-            url: 'https://www.googleapis.com/fusiontables/v1/query?key=' + this.apiKey + '&sql=' +
-                    encodeURIComponent('SELECT NAZEV, COUNT() FROM ' + this.ftLayerId + ' GROUP BY NAZEV'),
+            url: '/api/select',
             dataType: 'json',
+            data: {
+                select: ['title'],
+                group_by: 'title'
+            },
             jsonp: 'jsonCallback',//
-            success: function (table) {
-                var rows = table.rows.length;
-                var cols = table.columns.length;
+            success: function (res) {
                 // Create the list of results for display of autocomplete
-                results = [];
-                for (i = 0; i < rows; i++) {
-                    results.push(table.rows[i][0]);
+                list = [];
+                for (i = 0; i < res.data.length; i++) {
+                    list.push(res.data[i]['title']);
                 }
 
                 // Use the results to create the autocomplete options
                 $("#advancedSearchName").autocomplete({
                     source: function(request, response) {
-                        var filtered_results = $.ui.autocomplete.filter(results, request.term);        
+                        var filtered_results = $.ui.autocomplete.filter(list, request.term);
                         response(filtered_results.slice(0, 20));
                     },
                     minLength: 2
@@ -212,9 +213,7 @@ App.Search.Advanced = App.newClass({
         this.clearOverlays();
         $('#advancedSearchGPS').val(this.resourceString.gpsTooltip);
 
-        this.ftLayer1.setOptions({
-            suppressInfoWindows: true
-        });
+        this.ftLayer1.suppressInfoWindows = true;
 
         var this_ = this;
 
@@ -240,16 +239,15 @@ App.Search.Advanced = App.newClass({
                 google.maps.event.removeListener(mapClickListener);
                 google.maps.event.removeListener(ftLayerClickListener);
 
-                this_.ftLayer1.setOptions({
-                    suppressInfoWindows: false
-                });
+                this_.ftLayer1.suppressInfoWindows = false;
             }
         );
 
         var ftLayerClickListener = google.maps.event.addListener(
-            this.ftLayer1,
+            map,
             'click',
             function (event) {
+                if (!this_.ftLayer1.visible) return;
 
                 this_.clearOverlays();
 
@@ -268,9 +266,7 @@ App.Search.Advanced = App.newClass({
                 google.maps.event.removeListener(mapClickListener);
                 google.maps.event.removeListener(ftLayerClickListener);
 
-                this_.ftLayer1.setOptions({
-                    suppressInfoWindows: false
-                });
+                this_.ftLayer1.suppressInfoWindows = false;
             }
         );
     }

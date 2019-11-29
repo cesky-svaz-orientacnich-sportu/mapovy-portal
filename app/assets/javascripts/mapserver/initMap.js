@@ -263,7 +263,7 @@ function initMapsLayer() {
 
   // info window override
   var infoWindow = new google.maps.InfoWindow({content: ''});
-  map.addListener('click', function(e) {
+  google.maps.event.addListener(map, 'click', function(e) {
     var layers = [];
 
     if (ftLayer1.visible && !ftLayer1.suppressInfoWindows) {
@@ -371,7 +371,7 @@ function initMapComponents() {
     searchSimple = new App.Search.Simple(state, sidebar.showResults, sidebar);
 
     // app objects init
-    searchAdvanced = new App.Search.Advanced(state, ftLayer1, ftLayer2, ftLayerId, Config.apiKey, sidebar.showResults, sidebar, Config.resourceString); // TODO
+    searchAdvanced = new App.Search.Advanced(state, ftLayer1, ftLayer2, sidebar.showResults, sidebar, Config.resourceString);
 
     toc = new App.Toc(map, ftLayer1, ftLayer2, ftLayerE, ftLayerB);
     mapHelper = new App.MapHelper(state, map, toc, searchSimple, ftLayer1, ftLayer2); // TODO
