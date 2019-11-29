@@ -1,8 +1,6 @@
 App.UrlInterface = App.newClass({
 
-    constructor: function (ftLayerId) {
-        this.ftLayerId = ftLayerId;
-    },
+    constructor: function () {},
 
     lastLocationHref: '',
 
@@ -101,7 +99,7 @@ App.UrlInterface = App.newClass({
         var filter;
         var id = this.getParam('id');
         if (id) {
-            filter = "ID = " + id;
+            filter = "id = " + id;
         }
 
         return filter;
@@ -111,7 +109,7 @@ App.UrlInterface = App.newClass({
         var filter;
         var name = this.getParam('name');
         if (name) {
-            filter = "NAZEV CONTAINS IGNORING CASE '" + name + "'";
+            filter = "LOWER(title) LIKE LOWER('%" + name + "%')";
         }
 
         return filter;
@@ -121,7 +119,7 @@ App.UrlInterface = App.newClass({
         var filter;
         var author = this.getParam('author');
         if(author) {
-            filter = "AUTHORS CONTAINS ':" + parseInt(author) + "]'";
+            filter = "cartographers_for_api LIKE '%:" + parseInt(author) + "]%'";
         }
         
         return filter;
@@ -131,7 +129,7 @@ App.UrlInterface = App.newClass({
         var filter;
         var year = this.getParam('year');
         if (year) {
-            filter = "ROK = " + year;
+            filter = "year = " + year;
         }
 
         return filter;
@@ -141,7 +139,7 @@ App.UrlInterface = App.newClass({
         var filter;
         var club = this.getParam('club');
         if (club) {
-            filter = "PATRON CONTAINS '" + club + "'";
+            filter = "patron LIKE '%" + club + "%'";
         }
 
         return filter;

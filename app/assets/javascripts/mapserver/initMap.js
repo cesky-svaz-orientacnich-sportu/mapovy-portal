@@ -306,7 +306,7 @@ function initMap() {
 
     var ftLayerId = Config.ftLayerId;
 
-    urlInterface = new App.UrlInterface(ftLayerId);
+    urlInterface = new App.UrlInterface();
 
     var zoom = urlInterface.getZoom() ? urlInterface.getZoom() : Config.mapInitParams.zoom;
     var lat = urlInterface.getLat() ? urlInterface.getLat() : Config.mapInitParams.lat;
@@ -366,8 +366,8 @@ function initMapComponents() {
     var mapTypeId = Config.mapInitParams.mapTypeId;
 
     sidebar = new App.Sidebar(map, 385, Config.resourceString, Config.accessGranted);
-    urlInterface = new App.UrlInterface(ftLayerId); // TODO
-    mapLink = new App.MapLink(urlInterface, Config.apiKey); // TODO
+    urlInterface = new App.UrlInterface();
+    mapLink = new App.MapLink(urlInterface, Config.apiKey);
     searchSimple = new App.Search.Simple(state, sidebar.showResults, sidebar);
 
     // app objects init
