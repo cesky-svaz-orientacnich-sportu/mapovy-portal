@@ -224,7 +224,7 @@ App.Sidebar = App.newClass({
             var id = mapsId[i];
             (function (id) {
                 $('#mapResult_' + id).mouseenter(function () {
-                    mapHelper.highlightMapPolygon(id); // TODO
+                    mapHelper.highlightMapPolygon(id);
                 });
                 $('#mapResult_' + id).mouseleave(function () {
                     mapHelper.clearHighlight();

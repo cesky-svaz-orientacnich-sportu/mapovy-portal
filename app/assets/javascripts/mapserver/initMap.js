@@ -1,5 +1,4 @@
 var map,
-    wmsLayer,
     ftLayer1,
     ftLayer2,
     geocoder,
@@ -14,10 +13,19 @@ var map,
 
 var state = {};
 
-function createWMSLayer() {
+function WMSLayer(opts) {
+  this.layer = opts.layer;
+  this.where = opts.where ? opts.where : null;
+  this.suppressInfoWindows = opts.suppressInfoWindows;
+  this.map = opts.map;
+  this.index = opts.index;
+  this.overlay = this.createOverlay();
+};
+WMSLayer.prototype.createOverlay = function() {
+  var self = this;
   var overlay = new google.maps.ImageMapType({
     getTileUrl: function(coord, zoom) {
-      var proj = map.getProjection();
+      var proj = self.map.getProjection();
       var zfactor = Math.pow(2, zoom);
       // get Long Lat coordinates
       var top = proj.fromPointToLatLng(new google.maps.Point(coord.x * 256 / zfactor, coord.y * 256 / zfactor));
@@ -32,7 +40,6 @@ function createWMSLayer() {
                    (bot.lat() + deltaY) + "," +
                    (bot.lng() + deltaX) + "," +
                    (top.lat() + deltaY);
-
       //base WMS URL
       var url = Config.wmsUrl;
       url += '?SERVICE=WMS';
@@ -40,28 +47,28 @@ function createWMSLayer() {
       url += '&REQUEST=GetMap';
       url += '&FORMAT=image/png';
       url += '&TRANSPARENT=true';
-      url += '&LAYERS='+ encodeURIComponent(wmsLayer.getLayers());
+      url += '&LAYERS='+ encodeURIComponent(self.layer);
       url += '&CRS=EPSG:3857';
       url += '&STYLES=';
       url += '&WIDTH=256';
       url += '&HEIGHT=256';
-      url += '&BBOX='+ bbox;
-      if (wmsLayer.layers.maps && wmsLayer.where)
-        url += '&where='+ encodeURIComponent(wmsLayer.where);
-      if (wmsLayer.layers.maps2 && wmsLayer.where2)
-        url += '&where2='+ encodeURIComponent(wmsLayer.where2);
-      if (wmsLayer.layers.embargoes && wmsLayer.whereE)
-        url += '&whereE='+ encodeURIComponent(wmsLayer.whereE);
-      if (wmsLayer.layers.blocking && wmsLayer.whereB)
-        url += '&whereB='+ encodeURIComponent(wmsLayer.whereB);
+      url += '&BBOX='+ encodeURIComponent(bbox);
+      if (self.where)
+        url += '&where='+ encodeURIComponent(self.where);
       return url;
     },
     tileSize: new google.maps.Size(256, 256),
     isPng: true
   });
 
-   return overlay;
-}
+  return overlay;
+};
+WMSLayer.prototype.show = function() {
+  this.map.overlayMapTypes.setAt(this.index, this.overlay);
+};    
+WMSLayer.prototype.hide = function() {
+  this.map.overlayMapTypes.setAt(this.index, null);
+};
 
 function renderInfoWindow(map) {
   if (map['map_family'] == 'embargo') {
@@ -185,17 +192,15 @@ function renderInfoWindow(map) {
 }
 
 function showBlocking(date, sports) {
-  wmsLayer.layers.blocking = true;
-  wmsLayer.whereB = 'has_blocking = true AND map_sport in (' + sports.join(",") + ') AND blocking_from <= ' + date + ' AND blocking_until >= ' + date + '';
-  console.log("BLOCK ON " + date + " AND " + sports + " / QUERY " + wmsLayer.whereB);
-  wmsLayer.redraw();
+  this.ftLayerB.where = 'has_blocking = true AND map_sport in (' + sports.join(",") + ') AND blocking_from <= ' + date + ' AND blocking_until >= ' + date + '';
+  console.log("BLOCK ON " + date + " AND " + sports + " / QUERY " + this.ftLayerB.where);
+  this.ftLayerB.show();
 }
 
 function showEmbargo(date) {
-  wmsLayer.layers.embargoes = true;
-  wmsLayer.whereE = 'has_embargo = true AND embargo_until >= ' + date;
-  console.log("EMB QUERY " + wmsLayer.whereE);
-  wmsLayer.redraw();
+  this.ftLayerE.where = 'has_embargo = true AND embargo_until >= ' + date;
+  console.log("EMB QUERY " + this.ftLayerE.where);
+  this.ftLayerE.show();
 }
 
 function initMapsLayer() {
@@ -213,37 +218,40 @@ function initMapsLayer() {
       }
   }
 
-  wmsLayer = {
-    overlay: null,
-    redraw: function() {
-      //TODO: removeAt() a několik vrstev namísto jedné
-      map.overlayMapTypes.pop();
-      map.overlayMapTypes.push(wmsLayer.overlay);
-    },
-    layers: {
-      maps: false,
-      maps2: false,
-      embargoes: false,
-      blocking: false
-    },
-    getLayers: function() {
-      var layers = [];
-      if (wmsLayer.layers.maps) layers.push('maps');
-      if (wmsLayer.layers.maps2) layers.push('maps2');
-      if (wmsLayer.layers.embargoes) layers.push('embargoes');
-      if (wmsLayer.layers.blocking) layers.push('blocking');
-      return layers.join(',');
-    },
+  ftLayer1 = new WMSLayer({
+    layer: 'maps',
     where: where,
-    whereE: '1',
-    whereB: '1',
-    whereH: '1',
-    suppressInfoWindows: false
-  };
+    suppressInfoWindows: false,
+    map: map,
+    index: 0
+  });
+  ftLayer1.show();
 
-  wmsLayer.overlay = createWMSLayer();
-  wmsLayer.layers.maps = true;
-  wmsLayer.redraw();
+  ftLayer2 = new WMSLayer({
+    layer: 'maps',
+    where: where,
+    suppressInfoWindows: false,
+    map: map,
+    index: 1
+  });
+  ftLayer2.hide();
+
+  ftLayerE = new WMSLayer({
+    layer: 'embargoes',
+    where: 'has_embargo = true AND embargo_until >= 2018',
+    suppressInfoWindows: false,
+    map: map,
+    index: 2
+  });
+  ftLayerE.show();
+
+  ftLayerB = new WMSLayer({
+    layer: 'blocking',
+    suppressInfoWindows: false,
+    map: map,
+    index: 3
+  });
+  ftLayerB.hide();
 
   // TODO: ftLayer1 ~ Config.ftLayerId
   // TODO: ftLayer2 ~ Config.ftLayerId
@@ -251,7 +259,7 @@ function initMapsLayer() {
   // TODO: ftLayerB ~ Config.ftBlockingLayerId
 
   // info window override
-  var infoWindow = new google.maps.InfoWindow({content: ''});
+  /*var infoWindow = new google.maps.InfoWindow({content: ''});
   map.addListener('click', function(e) {
     if (! wmsLayer.suppressInfoWindows) {
       $.get('/api/maps_in_point', {
@@ -273,7 +281,7 @@ function initMapsLayer() {
         }
       })
     }
-  });
+  });*/
 }
 
 function initMap() {
@@ -347,8 +355,8 @@ function initMapComponents() {
     // app objects init
     searchAdvanced = new App.Search.Advanced(state, ftLayer1, ftLayer2, ftLayerId, Config.apiKey, sidebar.showResults, sidebar, Config.resourceString); // TODO
 
-    toc = new App.Toc(map, wmsLayer);
-    mapHelper = new App.MapHelper(state, map, toc, searchSimple, wmsLayer); // TODO
+    toc = new App.Toc(map, ftLayer1, ftLayer2, ftLayerE, ftLayerB);
+    mapHelper = new App.MapHelper(state, map, toc, searchSimple, ftLayer1, ftLayer2); // TODO
     measure = new App.Measure(map, ftLayer1); // TODO
 
     mapHelper.changeMapType(mapTypeId);

@@ -1,11 +1,12 @@
 App.MapHelper = App.newClass({
 
-    constructor: function (state, map, toc, search, wmsLayer) {
+    constructor: function (state, map, toc, search, ftLayer1, ftLayer2) {
         this.state = state;
         this.map = map;
         this.toc = toc;
         this.search = search;
-        this.wmsLayer = wmsLayer;
+        this.ftLayer1 = ftLayer1;
+        this.ftLayer2 = ftLayer2;
     },
 
     listeners: [],
@@ -53,10 +54,10 @@ App.MapHelper = App.newClass({
           select: ['shape_json'],
           where: this.state.lastSelect1.where
         };
-        this.wmsLayer.where = select1.where;
-        this.wmsLayer.layers.maps = true;
+        this.ftLayer1.where = select1.where;
+        this.ftLayer1.show();
       } else {
-        this.wmsLayer.layers.maps2 = false;
+        this.ftLayer2.hide();
       }
 
       if (this.state.lastSelect2) {
@@ -64,13 +65,11 @@ App.MapHelper = App.newClass({
           select: ['shape_json'],
           where: this.state.lastSelect2.where
         };
-        this.wmsLayer.where2 = select2.where;
-        this.wmsLayer.layers.maps2 = true;
+        this.ftLayer2.where = select2.where;
+        this.ftLayer2.show();
       } else {
-        this.wmsLayer.layers.maps2 = false;
+        this.ftLayer2.hide();
       }
-
-      this.wmsLayer.redraw();
 
       $("#toc").hide();
       $("#area_toc").hide();
@@ -108,50 +107,19 @@ App.MapHelper = App.newClass({
     highlightMapPolygon: function (id) {
         this.clearHighlight();
 
-        var layer = new google.maps.ImageMapType({
-          getTileUrl: function(coord, zoom) {
-            var proj = map.getProjection();
-            var zfactor = Math.pow(2, zoom);
-            // get Long Lat coordinates
-            var top = proj.fromPointToLatLng(new google.maps.Point(coord.x * 256 / zfactor, coord.y * 256 / zfactor));
-            var bot = proj.fromPointToLatLng(new google.maps.Point((coord.x + 1) * 256 / zfactor, (coord.y + 1) * 256 / zfactor));
-
-            //corrections for the slight shift of the SLP (mapserver)
-            var deltaX = 0.0013;
-            var deltaY = 0.00058;
-
-            //create the Bounding box string
-            var bbox =   (top.lng() + deltaX) + "," +
-                         (bot.lat() + deltaY) + "," +
-                         (bot.lng() + deltaX) + "," +
-                         (top.lat() + deltaY);
-
-            //base WMS URL
-            var url = Config.wmsUrl;
-            url += '?SERVICE=WMS';
-            url += '&VERSION=1.3.0';
-            url += '&REQUEST=GetMap';
-            url += '&FORMAT=image/png';
-            url += '&TRANSPARENT=true';
-            url += '&LAYERS=highlight';
-            url += '&CRS=EPSG:3857';
-            url += '&STYLES=';
-            url += '&WIDTH=256';
-            url += '&HEIGHT=256';
-            url += '&BBOX='+ bbox;
-            url += '&whereH='+ encodeURIComponent("id = " + id);
-            return url;
-          },
-          tileSize: new google.maps.Size(256, 256),
-          isPng: true
+        this.ftHighlightLayer = new WMSLayer({
+            layer: 'highlight',
+            where: 'id = ' + id,
+            suppressInfoWindows: true,
+            map: map,
+            index: 4
         });
-
-        this.ftHighlightLayer = map.overlayMapTypes.setAt(14, layer);
+        this.ftHighlightLayer.show();
     },
 
     clearHighlight: function () {
         if (this.ftHighlightLayer !== null) {
-            map.overlayMapTypes.removeAt(14);
+            this.ftHighlightLayer.hide();
         }
     }
 

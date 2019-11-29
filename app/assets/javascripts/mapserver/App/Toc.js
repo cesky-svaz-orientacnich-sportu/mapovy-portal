@@ -1,8 +1,11 @@
 App.Toc = App.newClass({
 
-    constructor: function (map, wmsLayer) {
+    constructor: function (map, ftLayer1, ftLayer2, ftLayerE, ftLayerB) {
         this.map = map;
-        this.wmsLayer = wmsLayer;
+        this.ftLayer1 = ftLayer1;
+        this.ftLayer2 = ftLayer2;
+        this.ftLayerE = ftLayerE;
+        this.ftLayerB = ftLayerB;
     },
 
     refresh: function () {
@@ -41,11 +44,10 @@ App.Toc = App.newClass({
           }
         });
               
-        this.wmsLayer.layers.maps = false;
-        this.wmsLayer.layers.maps2 = false;
-        this.wmsLayer.layers.embargoes = false;
-        this.wmsLayer.layers.blocking = false;
-        this.wmsLayer.redraw();
+        this.ftLayer1.hide();
+        this.ftLayer2.hide();
+        this.ftLayerE.hide();
+        this.ftLayerB.hide();
         
         var attrs = [];
         
@@ -64,15 +66,13 @@ App.Toc = App.newClass({
             }
             
             console.log("TOC update with primary where query: " + where1);
-            this.wmsLayer.layers.maps = true;
-            this.wmsLayer.where = where1;
-            this.wmsLayer.redraw();
+            this.ftLayer1.where = where1;
+            this.ftLayer1.show();
 
             if (where2) {
               console.log("TOC update with secondary where query: " + where2);
-              this.wmsLayer.where2 = where2;
-              this.wmsLayer.layers.maps2 = true;
-              this.wmsLayer.redraw();
+              this.ftLayer2.where = where2;
+              this.ftLayer2.show();
             }
         }
         
