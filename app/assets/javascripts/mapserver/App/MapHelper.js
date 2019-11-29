@@ -15,9 +15,6 @@ App.MapHelper = App.newClass({
 
     registerMapClickListeners: function (callBack) {
         this.listeners.push(google.maps.event.addListener(this.map, 'click', callBack));
-        // TODO
-        //this.listeners.push(google.maps.event.addListener(this.ftLayer1, 'click', callBack));
-        //this.listeners.push(google.maps.event.addListener(this.ftLayer2, 'click', callBack));
     },
 
     unregisterMapClickListeners: function () {

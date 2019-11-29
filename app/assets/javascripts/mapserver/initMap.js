@@ -374,7 +374,7 @@ function initMapComponents() {
     searchAdvanced = new App.Search.Advanced(state, ftLayer1, ftLayer2, sidebar.showResults, sidebar, Config.resourceString);
 
     toc = new App.Toc(map, ftLayer1, ftLayer2, ftLayerE, ftLayerB);
-    mapHelper = new App.MapHelper(state, map, toc, searchSimple, ftLayer1, ftLayer2); // TODO
+    mapHelper = new App.MapHelper(state, map, toc, searchSimple, ftLayer1, ftLayer2);
     measure = new App.Measure(map, ftLayer1); // TODO
 
     mapHelper.changeMapType(mapTypeId);
