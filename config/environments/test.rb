@@ -32,6 +32,8 @@ Mapserver::Application.configure do
   # Print deprecation notices to the stderr
   config.active_support.deprecation = :stderr
 
+  config.wms_url = 'http://localhost/csos-mapserver-wms'
+
   # asset host (for JPGs et al)
   config.asset_root_url = "https://mapy.orientacnisporty.cz"
 
