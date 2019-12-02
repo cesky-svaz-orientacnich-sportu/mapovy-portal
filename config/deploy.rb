@@ -15,7 +15,6 @@ require 'capistrano/ext/multistage'
 
 set :repository,  "git@github.com:moskyt/mapovy-portal-csos.git"
 set :scm, "git"
-set :branch, "master"
 set :scm_verbose, true
 set :deploy_via, :remote_cache
 
