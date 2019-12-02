@@ -283,7 +283,6 @@ class MapsController < ApplicationController
     @map = Map.find(params[:id])
     if admin?
       @map.remove_preview
-      @map.fusion_remove
       @map.destroy
       flash[:error] = "Mapa #{@map} odstraněna."
       redirect_to params[:redirect_to] || :back
@@ -332,7 +331,6 @@ class MapsController < ApplicationController
         @map.convert_shape_to_kml
         @map.set_flags
         @map.save
-        @map.save_shape_to_fusion
 
         @map.log("Uživatel #{current_user.to_log} doplnil údaje po vydání mapy.")
         MapStateMailer.map_completed(@map).deliver
@@ -371,7 +369,6 @@ class MapsController < ApplicationController
       @map.convert_shape_to_kml
       @map.set_flags
       @map.save
-      @map.save_shape_to_fusion
 
       redirect_to @map
     else
@@ -436,8 +433,6 @@ class MapsController < ApplicationController
 
         @map.convert_shape_to_kml
         @map.save
-        @map.save_to_fusion
-        @map.save_shape_to_fusion
         if !new_map
           unless do_not_send
             @map.log("Uživatel #{current_user.to_log} doplnil požadované informace")
@@ -483,7 +478,6 @@ class MapsController < ApplicationController
       @map.user_updated_at = Time.now
       @map.convert_shape_to_kml
       @map.save
-      @map.save_to_fusion
       if params[:file]
         @map.upload_preview(params[:file])
         @map.set_flags

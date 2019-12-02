@@ -135,7 +135,7 @@ App.Sidebar = App.newClass({
         $('#sideHeading').html(sideHeadingString);
 
         //concatenate the results into a string
-        var fusionTableData = '';
+        var dataHtml = '';
         var mapsId = [], mapsIdAll = [], urlImg, urlKML;
         for (var i = 0; i < numRows; i++) {
           var mapId = parseInt(data[i]['id']);
@@ -146,7 +146,7 @@ App.Sidebar = App.newClass({
             mapsId.push(mapId);
             var js = '';
             for (j = 0; j < 1; j++) {
-                fusionTableData += '<li id="mapResult_' + mapId + '" class="cleaned">' + 
+                dataHtml += '<li id="mapResult_' + mapId + '" class="cleaned">' + 
                 '<div class="title cleaned" id="result' + data[i]['id'] + '" ">' + 
                   '<h3>'+
                     '<a href="/' + Config.locale + '/maps/' + mapId + '/fusion">' + 
@@ -159,22 +159,22 @@ App.Sidebar = App.newClass({
                 urlKML = Config.assetRoot + '/data/kml/' + mapId + '.kml';
                 
                 if (data[i]['preview_identifier'] && data[i]['preview_identifier'] != '' && data[i]['preview_identifier'] != '0') {
-                  fusionTableData += '<li>' +
+                  dataHtml += '<li>' +
                     '<a href="' + urlImg + '" class="mapPreviewLink" title="' + sidebar.resourceString.preview + '">' + 
                       '<img class="mapa" src="/img/tool-06.png" alt="Nahled" />' + 
                     '</a>' + 
                   '</li>';
                 } else {
-                  fusionTableData += '<li><img class="mapa" src="/img/tool-06-dis.png" /></li>';
+                  dataHtml += '<li><img class="mapa" src="/img/tool-06-dis.png" /></li>';
                 }
                 
-                fusionTableData += '<li>' +
+                dataHtml += '<li>' +
                   '<a href="javascript:zoom2one(' + mapId + ')" title="' + sidebar.resourceString.zoomTo + '">' +
                     '<img src="/img/tool-07.png" alt="Zoom to" />'
                   '</a>' +
                 '</li>';
                 
-                fusionTableData += '<li>' + 
+                dataHtml += '<li>' + 
                   '<a class="infoTableLink" href="/' + Config.locale + '/maps/' + mapId + '/info_table" title="' + sidebar.resourceString.info + '">' +
                     '<img src="/img/tool-08.png" alt="Ikona" />' +
                   '</a>' +
@@ -186,17 +186,17 @@ App.Sidebar = App.newClass({
                 '</li>';
                 
                 // if (mapShapeExists(mapId)) {
-                //   fusionTableData += '<li>' +
+                //   dataHtml += '<li>' +
                 //     '<a href="' + urlKML + '" target="_blank" title="' + sidebar.resourceString.georefKML + '">' +
                 //       '<img src="/img/tool-09.png" alt="KML" />' +
                 //     '</a>' +
                 //    '</li>';
                 // } else {
-                //     fusionTableData += '<li><img src="/img/tool-09-dis.png" /></li>';
+                //     dataHtml += '<li><img src="/img/tool-09-dis.png" /></li>';
                 // }
                 
 
-                fusionTableData += '</ul></div>' +
+                dataHtml += '</ul></div>' +
                     '<table class="tableData">' +
                       '<tr>'+
                         '<th>' + sidebar.resourceString.map_attributes.year + ':</th>'+
@@ -217,7 +217,7 @@ App.Sidebar = App.newClass({
             }
         }
         //display the results on the page
-        $('#resultsList').html(paginationHtml + fusionTableData + paginationHtml);
+        $('#resultsList').html(paginationHtml + dataHtml + paginationHtml);
 
         //highlighting map polygons on mouseenter
         for (i = 0; i < mapsId.length; i++) {

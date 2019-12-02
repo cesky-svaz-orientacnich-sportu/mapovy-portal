@@ -1,7 +1,6 @@
 cs:
   mapserver:
     metaDescription: "Mapová aplikace Archivu map ČSOS"
-    metaKeywords: "Mapový archiv Českého svazu orientačních sportů, ČSOS, Google Fusion Tables, Google Maps API, Google Drawing Library, orientační sporty"
     metaLanguage: "czech"
 
     cancelSearch: "zrušit vyhledávání"
@@ -254,7 +253,7 @@ cs:
 
     map_attribute_descriptions:
       id_: 'ID mapy / stav záznamu'
-      id: 'ID mapy v archivu (SQL+FusionTable)'
+      id: 'ID mapy v archivu'
       state: 'Stav záznamu v databázi'
       title: 'Název mapy. Není-li na mapě uveden, odvodí se z jiných map prostoru nebo z místního názvu, ukončí se kulatou závorkou.'
       patron: 'Klub, který mapu vydal. Není-li znám, odvodí se podle jiných map prostoru nebo podle příslušnosti autora.'

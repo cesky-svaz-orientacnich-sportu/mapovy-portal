@@ -77,7 +77,6 @@ class Map < ActiveRecord::Base
   has_many :cartographers, dependent: :destroy
   has_many :authors, through: :cartographers
   accepts_nested_attributes_for :cartographers, :allow_destroy => true
-  # validates_uniqueness_of :fusion_id, allow_nil: true, allow_blank: true
 
   scope :sorted, ->{ order(:title, :patron, :year, :scale, :id) }
 
@@ -267,8 +266,6 @@ class Map < ActiveRecord::Base
             puts "Updated map title to #{map.title}"
           end
           map.save!
-
-          map.sync_fusion!
         end
       end
     end
@@ -362,24 +359,6 @@ class Map < ActiveRecord::Base
   end
   alias_method_chain :"cartographers_attributes=", :creation
 
-  SYNCHRONIZED_KEYS = {
-    #:geometry
-    :title => 'NAZEV',
-    :patron => 'PATRON',
-    :year => 'ROK',
-    :scale => 'MERITKO',
-    :preview_identifier => 'OBRAZ',
-    :color => 'Color',
-    :stroke_color => 'StrokeColor',
-    :map_family => 'MAP_FAMILY',
-    :map_sport => 'MAP_SPORT',
-    :state => 'MAP_STATE',
-    :created_by_id => 'CREATED_BY_ID'
-    #:AUTHORS
-    #:hasKML
-    #:hasJPG
-  }
-
   y0 = Date.today.year
 
   MAP_YEARS = [
@@ -415,7 +394,6 @@ class Map < ActiveRecord::Base
     MAP_YEARS.first,
   ]
 
-  before_update :sync_fusion
   before_save :set_computed_fields
   after_save :update_authors_activities
 
@@ -537,73 +515,6 @@ class Map < ActiveRecord::Base
     end.try(:to_date)
   end
 
-  def set_fusion_computed_fields(pars)
-    pars['Color'] = self.color
-    pars['StrokeColor'] = self.stroke_color
-    pars['AUTHORS'] = self.cartographers_for_api
-    pars['hasJPG'] = self.has_jpg? ? 1 : 0
-    pars['hasKML'] = self.has_kml? ? 1 : 0
-    if embargo?
-      pars['hasEMBARGO'] = 1
-      pars['EMBARGO_UNTIL'] = race_date || Date.civil(1970,1,1)
-    else
-      pars['hasEMBARGO'] = 0
-      pars['EMBARGO_UNTIL'] = Date.civil(1970,1,1)
-    end
-    if blocking?
-      pars['hasBLOCKING'] = 1
-      pars['BLOCKING_FROM'] = blocking_from
-      pars['BLOCKING_UNTIL'] = blocking_until
-    else
-      pars['hasBLOCKING'] = 0
-      pars['BLOCKING_FROM'] = 0
-      pars['BLOCKING_UNTIL'] = 0
-    end
-  end
-
-  def sync_fusion!
-    save_to_fusion unless fusion_table_record
-
-    pars = {}
-    SYNCHRONIZED_KEYS.keys.map(&:to_s).each do |aname|
-      if key = SYNCHRONIZED_KEYS[aname.to_sym]
-        pars[key] = self.send(aname) || 0
-      end
-    end
-    set_fusion_computed_fields(pars)
-    puts pars.inspect
-    fusion_update(pars)
-  end
-
-  def sync_fusion
-    save_to_fusion unless fusion_table_record
-
-    unless (SYNCHRONIZED_KEYS.keys.map(&:to_s) & changed_attributes.keys.map(&:to_s)).empty?
-      pars = {}
-      changed_attributes.each do |aname, val|
-        if key = SYNCHRONIZED_KEYS[aname.to_sym]
-          pars[key] = self.send(aname) || 0
-        end
-      end
-      set_fusion_computed_fields(pars)
-      fusion_update(pars)
-    end
-  end
-
-  def fusion_remove
-    m = 1
-    if rid = fusion_table_rowid
-      Map.fusion_table.delete_row rid
-    end
-  end
-
-  def fusion_update(pars)
-    m = 1
-    if rid = fusion_table_rowid
-      Map.fusion_table.update_row rid, pars
-    end
-  end
-
   def set_computed_fields
     convert_shape_to_geom
     set_cartographers_for_api
@@ -649,19 +560,6 @@ class Map < ActiveRecord::Base
     self.blocking_until = blocking? ? blocking_from + 9 : 0
   end
 
-  def self.fusion_table
-    @@fusion_table ||= CrazyFusionTable.new(Mapserver::Application.config.maps_fusion_table_id)
-  end
-
-  def fusion_table_rowid
-    Map.fusion_table.get_row_id(id)
-  end
-
-  def fusion_table_record
-    ri = fusion_table_rowid
-    ri && Map.fusion_table.get_row(ri)
-  end
-
   def cartographers_with_roles
     set = {}
     cartographers.each do |c|
@@ -671,18 +569,11 @@ class Map < ActiveRecord::Base
     set
   end
 
-  def shape_as_geojson
-    fusion_table_record ? fusion_table_record['geometry'] : nil
-  end
-
   def shape_as_coords
     unless shape_json.blank?
       return JSON[shape_json].map(&:reverse)
     end
-    return [] unless shape_as_geojson
-    ary = shape_as_geojson['geometry']['coordinates'].first rescue []
-    return [] unless Array === ary
-    ary
+    return []
   end
 
   def create_duplicate
@@ -695,7 +586,6 @@ class Map < ActiveRecord::Base
     m.save
     m.title += "#{m.id}]"
     m.save
-    m.save_to_fusion
     m
   end
 
@@ -775,31 +665,6 @@ class Map < ActiveRecord::Base
     File.exist?(File.join(Rails.root, 'public', 'data', 'kml', "#{id}.kml"))
   end
 
-  # def self.next_fusion_id
-  #   xid = Map.where('fusion_id IS NOT NULL and fusion_id < 100000').order('fusion_id DESC').limit(1).pluck(:fusion_id).first
-  #   (xid || 0) + 1
-  # end
-
-  def save_to_fusion
-    return if fusion_table_record
-
-    Map.fusion_table.insert_row({
-      'ID' => self.id,
-      'geometry' => self.shape_kml,
-      'NAZEV' => self.title,
-      'PATRON' => self.patron,
-      'ROK' => self.year,
-      'MERITKO' => self.scale,
-      'OBRAZ' => self.preview_identifier,
-      'MAP_STATE' => self.state,
-      'Color' => self.color,
-      'StrokeColor' => self.stroke_color,
-      'MAP_FAMILY' => self.map_family,
-      'MAP_SPORT' => self.map_sport,
-      'CREATED_BY_ID' => self.created_by_id,
-    })
-  end
-
   def upload_preview(html_file)
     puts "-> uploading preview"
     tmp = html_file.tempfile
@@ -872,10 +737,6 @@ class Map < ActiveRecord::Base
       self.record_log += ("\n" + Time.now.strftime("[%d. %m. %Y %H:%M] ") + s)
     end
     save
-  end
-
-  def save_shape_to_fusion
-    fusion_update({:geometry => self.shape_kml})
   end
 
   def authorized_to_destroy?(user)

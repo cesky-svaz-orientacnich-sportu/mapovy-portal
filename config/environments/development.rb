@@ -33,11 +33,6 @@ Mapserver::Application.configure do
   
   config.wms_url = 'http://localhost/csos-mapserver-wms'
 
-  # table IDs 
-  config.maps_fusion_table_id = "1GmFqj5L4ElYP7krl_lwuPgOcrPhtmAek5eC8lKRB"
-  #config.convergence_fusion_table_id = '1QaD5B-5uaI3XFWH_JGoCDet5MoxPONAfT6qAgVu2'
-  config.blocking_fusion_table_id = '1EBIzS199Q_wcYcJn0Jx6jcmFwtlf3rcaopunP-k8'
-  config.embargo_fusion_table_id = '1bHJthBlZp4fenXUHanfVzu3aEB09DBYeBrCsBzxJ'
   # asset host (for JPGs et al)
   config.asset_root_url = "http://mapy.orientacnisporty.cz"
 

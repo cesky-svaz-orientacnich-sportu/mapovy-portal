@@ -67,8 +67,6 @@ RSpec.configure do |config|
 
   config.before(:each) do
     User.any_instance.stub(:check_against_oris).and_return(nil)
-    Map.any_instance.stub(:fusion_update).and_return(nil)
-    Map.any_instance.stub(:save_to_fusion).and_return(nil)
   end
 
   

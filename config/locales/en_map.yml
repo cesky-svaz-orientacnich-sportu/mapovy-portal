@@ -1,7 +1,6 @@
 en:
   mapserver:
     metaDescription: "Map application of Czech Orienteering Federation Map Archive"
-    metaKeywords: "Czech Orienteering Federation Map Archive, ČSOS, Google Fusion Tables, Google Maps API, Google Drawing Library, Master Thesis, Orienteering sports"
     metaLanguage: "english"
 
     title: "Czech Orienteering Federation Map Portal"

@@ -36,15 +36,6 @@
 
 %h2= t("mapserver.mapBasicData")
 
-- if false
-  - if has_role?(:manager) and !@map.fusion_table_record
-    %div.bs-callout.bs-callout-danger
-      %p Neexistuje Fusion Table záznam!
-      - if (rid = @map.fusion_table_rowid).blank?
-        %p Ve FT není mapa s tímto ID. Mělo by pomoci mapu znovu uložit.
-      - else
-        %p Row ID je #{rid}. Pravděpodobně se jedná o chybu spojení s FT, zkuste se podívat za chvíli znovu.
-
 - if @map.map_family == Map::MAP_FAMILY_EMBARGO
 
   = render partial: 'maps/info_table_embargo', locals: {map: @map}

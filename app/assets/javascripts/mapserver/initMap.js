@@ -256,11 +256,6 @@ function initMapsLayer() {
   });
   ftLayerB.hide();
 
-  // TODO: ftLayer1 ~ Config.ftLayerId
-  // TODO: ftLayer2 ~ Config.ftLayerId
-  // TODO: ftLayerE ~ Config.ftEmbargoLayerId
-  // TODO: ftLayerB ~ Config.ftBlockingLayerId
-
   // info window override
   var infoWindow = new google.maps.InfoWindow({content: ''});
   google.maps.event.addListener(map, 'click', function(e) {
@@ -303,8 +298,6 @@ function initMapsLayer() {
 }
 
 function initMap() {
-
-    var ftLayerId = Config.ftLayerId;
 
     urlInterface = new App.UrlInterface();
 
@@ -362,7 +355,6 @@ function initMap() {
 
 function initMapComponents() {
 
-    var ftLayerId = Config.ftLayerId;
     var mapTypeId = Config.mapInitParams.mapTypeId;
 
     sidebar = new App.Sidebar(map, 385, Config.resourceString, Config.accessGranted);

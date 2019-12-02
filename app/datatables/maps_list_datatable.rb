@@ -21,7 +21,6 @@ private
     maps.map do |map|
       {
        "id"                  => map.id,
-       # "fusion_id"           => map.fusion_id,
        "state"               => map.state_,
        "title"               => map.title,
        "patron"              => map.patron,
