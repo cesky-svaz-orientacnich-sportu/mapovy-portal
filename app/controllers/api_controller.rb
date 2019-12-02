@@ -104,9 +104,9 @@ class ApiController < ApplicationController
 
   def select
     sql = "SELECT #{request.query_parameters['select'].join(',')} FROM maps"
-    sql += request.query_parameters.has_key?('where') ? " WHERE #{request.query_parameters['where']}" : ""
-    sql += request.query_parameters.has_key?('group_by') ? " GROUP BY #{request.query_parameters['group_by']}" : ""
-    sql += request.query_parameters.has_key?('order_by') ? " ORDER BY #{request.query_parameters['order_by']}" : ""
+    sql += (request.query_parameters.has_key?('where') and not request.query_parameters['where'].blank?) ? " WHERE #{request.query_parameters['where']}" : ""
+    sql += (request.query_parameters.has_key?('group_by') and not request.query_parameters['group_by'].blank?) ? " GROUP BY #{request.query_parameters['group_by']}" : ""
+    sql += (request.query_parameters.has_key?('order_by') and not request.query_parameters['order_by'].blank?) ? " ORDER BY #{request.query_parameters['order_by']}" : ""
     maps = Map.find_by_sql(sql)
     respond_to do |format|
       format.json do
