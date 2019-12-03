@@ -139,7 +139,7 @@ App.UrlInterface = App.newClass({
         var filter;
         var club = this.getParam('club');
         if (club) {
-            filter = "patron LIKE '%" + club + "%'";
+            filter = "LOWER(patron) LIKE LOWER('%" + club + "%')";
         }
 
         return filter;

@@ -5,7 +5,7 @@
 
 %h3 Neupravené kopie
 
-= render partial: 'check', locals: {maps: maps.where("title LIKE ?", "%copy ID%")}
+= render partial: 'check', locals: {maps: maps.where("LOWER(title) LIKE LOWER(?)", "%copy ID%")}
 
 %h3 Špatně zařazené mapy (ev. číslo versus kraj)
 

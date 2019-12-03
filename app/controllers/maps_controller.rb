@@ -69,7 +69,7 @@ class MapsController < ApplicationController
   before_filter :use_map, only: [:new, :show, :edit, :register, :re_register, :complete, :create, :update]
 
   def export_objev_sok
-    @maps = Map.where("note_public LIKE ?", "%objev%")
+    @maps = Map.where("LOWER(note_public) LIKE LOWER(?)", "%objev%")
     respond_to do |format|
       format.json do
         render json: @maps.to_json, layout: false

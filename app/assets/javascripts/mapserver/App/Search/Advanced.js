@@ -125,7 +125,7 @@ App.Search.Advanced = App.newClass({
         }
 
         if (author) {
-            query_parts.push("LOWER(cartographers_for_api) LIKE LOWER('%" + author + "]%')");
+            query_parts.push("cartographers_for_api LIKE '%" + author + "]%'");
         }
 
         if (sport) {

@@ -41,7 +41,7 @@ private
     end
     authors = authors.page(page).per(per_page)
     if params[:search].present? and params[:search][:value].present?
-      authors = authors.where("full_name like :search or note like :search", search: "%#{params[:search][:value]}%")
+      authors = authors.where("LOWER(full_name) LIKE LOWER(:search) OR LOWER(note) LIKE LOWER(:search)", search: "%#{params[:search][:value]}%")
     end
     authors
   end

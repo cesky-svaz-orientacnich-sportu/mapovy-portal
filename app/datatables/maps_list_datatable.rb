@@ -90,7 +90,7 @@ private
         when "!="
           maps = maps.where("#{columns[ci.to_i]} <> :search", search: x)
         when "~"
-          maps = maps.where("#{columns[ci.to_i]} LIKE :search", search: "%#{x}%")
+          maps = maps.where("LOWER(#{columns[ci.to_i]}) LIKE LOWER(:search)", search: "%#{x}%")
         end
       end
     end
