@@ -21,5 +21,5 @@
     initLayout();
     toc.refresh();
     sidebar.show();
-    searchSimple.searchByFilter("PATRON CONTAINS '#{@club.abbreviation}'");
+    searchSimple.searchByFilter("LOWER(patron) LIKE LOWER('%#{@club.abbreviation}%')");
   });
