@@ -29,10 +29,10 @@ en:
       previous: "Previous"
   views:
     pagination:
-      first: "&laquo; První"
-      last: "Poslední &raquo;"
-      previous: "&lsaquo; Předchozí"
-      next: "Další &rsaquo;"
+      first: "&laquo; First"
+      last: "Last &raquo;"
+      previous: "&lsaquo; Previous"
+      next: "Next &rsaquo;"
       truncate: "&hellip;"
   devise:
     mailer:
