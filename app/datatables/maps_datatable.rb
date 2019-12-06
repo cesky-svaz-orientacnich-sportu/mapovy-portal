@@ -62,7 +62,7 @@ private
   end
 
   def sort_column
-    columns = %w[title patron year scale sport locality]
+    columns = %w[title patron year scale sport locality actions id]
     columns[params[:order]['0'][:column].to_i] rescue nil
   end
 
