@@ -14,7 +14,12 @@ App.Search = App.newClass({
     },
 
     searchByLatLng: function (latLng, callback) {
-        var filter = "ST_INTERSECTS(geometry, RECTANGLE(LATLNG" + latLng + ", LATLNG" + latLng + ")) ";
+        var filter = "St_Intersects(shape_geom, St_MakeEnvelope("
+                    + (latLng.lng() - 0.000001) + ","
+                    + (latLng.lat() - 0.000001) + ","
+                    + (latLng.lng() + 0.000001) + ","
+                    + (latLng.lat() + 0.000001)
+                    + ")) ";
         this.searchByFilter(filter, callback);
     },
 
