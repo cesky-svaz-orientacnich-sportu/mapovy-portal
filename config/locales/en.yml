@@ -23,17 +23,17 @@ en:
     search_maps:    "Filter (map title / club / ID):"
     zeroRecords:    "No matching records found"
     paginate:
-      first: "First"
-      last: "Last"
-      next: "Next"
-      previous: "Previous"
+      first: "« First"
+      last: "Last »"
+      next: "Next ›"
+      previous: "‹ Previous"
   views:
     pagination:
-      first: "&laquo; First"
-      last: "Last &raquo;"
-      previous: "&lsaquo; Previous"
-      next: "Next &rsaquo;"
-      truncate: "&hellip;"
+      first: "« First"
+      last: "Last »"
+      previous: "‹ Previous"
+      next: "Next ›"
+      truncate: "…"
   devise:
     mailer:
       confirmation_instructions:
