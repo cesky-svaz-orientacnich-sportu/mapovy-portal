@@ -31,7 +31,8 @@ Mapserver::Application.configure do
   config.assets.cache_store = :null_store  # Disables the Asset cache
   config.sass.cache = false  # Disable the SASS compiler cache
   
-  config.wms_url = 'http://localhost/csos-mapserver-wms'
+  config.hostname = "http://localhost:3000"
+  config.wms_url = "http://localhost/csos-mapserver-wms"
 
   # asset host (for JPGs et al)
   config.asset_root_url = "http://mapy.orientacnisporty.cz"

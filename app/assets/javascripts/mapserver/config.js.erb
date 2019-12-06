@@ -1,6 +1,6 @@
 var Config = {
   locale: 'cs', // default locale to avoid weirdish undefined locales
-  hostname: 'https://mapy.orientacnisporty.cz',
+  hostname: '<%= Mapserver::Application.config.hostname %>',
   assetRoot: '<%= Mapserver::Application.config.asset_root_url %>',
   wmsUrl: '<%= Mapserver::Application.config.wms_url %>',
   apiKey: '<%= GOOGLE_API_KEY %>',

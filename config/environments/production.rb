@@ -78,5 +78,6 @@ Mapserver::Application.configure do
   # asset host (for JPGs et al)
   config.asset_root_url = "https://mapy.orientacnisporty.cz"
 
-  config.wms_url = 'https://mapy-wms.orientacnisporty.cz'
+  config.hostname = "https://mapy.orientacnisporty.cz"
+  config.wms_url = "https://mapy-wms.orientacnisporty.cz"
 end

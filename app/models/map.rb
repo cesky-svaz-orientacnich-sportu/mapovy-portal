@@ -203,7 +203,7 @@ class Map < ActiveRecord::Base
   validates_numericality_of :year, :scale, :equidistance, allow_nil: true, allow_blank: true
 
   def link_to_web
-    "https://mapy.orientacnisporty.cz/mapa/#{friendly_id || id}"
+    Mapserver::Application.config.hostname + "/mapa/#{friendly_id || id}"
   end
 
   def self.load_embargo(year)
