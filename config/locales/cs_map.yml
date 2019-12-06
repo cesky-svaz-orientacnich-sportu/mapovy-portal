@@ -587,7 +587,7 @@ cs:
     buttonMeasure: 'Měření ploch a úseků v mapě'
     buttonHelp: 'Nápověda'
 
-    basemapSHC: 'ZM10'
+    basemapSHC: 'ZM'
     basemapSatellite: 'Satelitní'
     basemapRoadmap: 'Google'
 
