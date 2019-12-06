@@ -45,7 +45,7 @@
 
 %h3 Mapy s vykřičníkem v interní poznámce
 
-= render partial: 'check', locals: {maps: maps.where('note_internal LIKE "%!%"')}
+= render partial: 'check', locals: {maps: maps.where("note_internal LIKE '%!%'")}
 
 %h3 Archivované mapy bez výtisků
 
