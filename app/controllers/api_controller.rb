@@ -89,11 +89,11 @@ class ApiController < ApplicationController
             map_family: m.map_family_,
             has_jpg: m.has_jpg,
             preview_identifier: m.preview_identifier,
-            #has_blocking
-            #has_embargo
-            #blocking_from,
-            #blocking_until,
-            #embargo_until,
+            has_blocking: m.has_blocking,
+            has_embargo: m.has_embargo,
+            blocking_from: m.blocking_from,
+            blocking_until: m.blocking_until,
+            embargo_until: m.embargo_until
           }}.to_json
         else
           render json: {status: 'error', message: "no map found in point = #{params[:lonlat]}"}.to_json
