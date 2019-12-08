@@ -5,7 +5,7 @@
 
 %h3 Neupravené kopie
 
-= render partial: 'check', locals: {maps: maps.where("title LIKE ?", "%copy ID%")}
+= render partial: 'check', locals: {maps: maps.where("LOWER(title) LIKE LOWER(?)", "%copy ID%")}
 
 %h3 Špatně zařazené mapy (ev. číslo versus kraj)
 
@@ -45,7 +45,7 @@
 
 %h3 Mapy s vykřičníkem v interní poznámce
 
-= render partial: 'check', locals: {maps: maps.where('note_internal LIKE "%!%"')}
+= render partial: 'check', locals: {maps: maps.where("note_internal LIKE '%!%'")}
 
 %h3 Archivované mapy bez výtisků
 
@@ -53,7 +53,9 @@
 
 %h3 Duplicitní evidenční číslo
 
-%p Pouze nové formáty ev. čísel (nnXnnnX)
+%p Nepovedlo se ověřit.
 
-- ifx = maps0.where("identifier_filing IS NOT NULL AND identifier_filing <> ? AND identifier_filing <> ?", "-", "?").select("id, count(id) as quantity").distinct(:id).group(:identifier_filing).having("quantity > 1").map{|x| Map.find(x).identifier_filing}.select{|x| x.match(/\d\d[A-Z]\d\d\d[A-Z]/)}
-= render partial: 'check', locals: {maps: maps0.where(identifier_filing: ifx).order("identifier_filing ASC, year DESC"), extra_column: :identifier_filing}
+/%p Pouze nové formáty ev. čísel (nnXnnnX)
+
+/- ifx = maps0.where("identifier_filing IS NOT NULL AND identifier_filing <> ? AND identifier_filing <> ?", "-", "?").select("id, count(id) as quantity").distinct(:id).group(:identifier_filing).having("quantity > 1").map{|x| Map.find(x).identifier_filing}.select{|x| x.match(/\d\d[A-Z]\d\d\d[A-Z]/)}
+/= render partial: 'check', locals: {maps: maps0.where(identifier_filing: ifx).order("identifier_filing ASC, year DESC"), extra_column: :identifier_filing}

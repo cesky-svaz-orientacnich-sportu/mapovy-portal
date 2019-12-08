@@ -48,7 +48,7 @@ private
     end
     maps = maps.page(page).per(per_page)
     if params[:search].present? and params[:search][:value].present?
-      maps = maps.where("maps.title LIKE :search OR maps.patron LIKE :search OR maps.id = :xsearch", search: "%#{params[:search][:value]}%", xsearch: params[:search][:value])
+      maps = maps.where("LOWER(maps.title) LIKE LOWER(:search) OR LOWER(maps.patron) LIKE LOWER(:search) OR maps.id = :xsearch", search: "%#{params[:search][:value]}%", xsearch: (Integer(params[:search][:value]) rescue nil))
     end
     maps
   end
@@ -62,7 +62,7 @@ private
   end
 
   def sort_column
-    columns = %w[title patron year scale sport locality]
+    columns = %w[title patron year scale sport locality actions id]
     columns[params[:order]['0'][:column].to_i] rescue nil
   end
 

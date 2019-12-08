@@ -18,11 +18,11 @@
 
 class OrisEvent < ActiveRecord::Base
   
-  scope :in_year, lambda{|y| where("YEAR(date) = ?", y).order(:date)}
+  scope :in_year, lambda{|y| where("date_part('year', date) = ?", y).order(:date)}
   scope :sorted, ->{ order(:date) }
   
   def self.years
-    OrisEvent.group('YEAR(date)').map{|m| m.date.year}.sort
+    OrisEvent.group("date_part('year', date)").map{|m| m.date.year}.sort
   end
 
   def to_s

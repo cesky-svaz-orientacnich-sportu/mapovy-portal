@@ -54,6 +54,15 @@
 #  state_changed_at          :date
 #  completed_by_id           :integer
 #  user_updated_at           :datetime
+#  shape_geom                :geometry
+#  cartographers_for_api     :string(255)
+#  color                     :string(255)
+#  stroke_color              :string(255)
+#  has_embargo               :boolean          default(FALSE), not null
+#  embargo_until             :date
+#  has_blocking              :boolean          default(FALSE), not null
+#  blocking_from             :integer
+#  blocking_until            :integer
 #
 
 class Map < ActiveRecord::Base
@@ -68,7 +77,6 @@ class Map < ActiveRecord::Base
   has_many :cartographers, dependent: :destroy
   has_many :authors, through: :cartographers
   accepts_nested_attributes_for :cartographers, :allow_destroy => true
-  # validates_uniqueness_of :fusion_id, allow_nil: true, allow_blank: true
 
   scope :sorted, ->{ order(:title, :patron, :year, :scale, :id) }
 
@@ -195,7 +203,7 @@ class Map < ActiveRecord::Base
   validates_numericality_of :year, :scale, :equidistance, allow_nil: true, allow_blank: true
 
   def link_to_web
-    "https://mapy.orientacnisporty.cz/mapa/#{friendly_id || id}"
+    Mapserver::Application.config.hostname + "/mapa/#{friendly_id || id}"
   end
 
   def self.load_embargo(year)
@@ -258,8 +266,6 @@ class Map < ActiveRecord::Base
             puts "Updated map title to #{map.title}"
           end
           map.save!
-
-          map.sync_fusion!
         end
       end
     end
@@ -310,6 +316,16 @@ class Map < ActiveRecord::Base
     end
   end
 
+  def convert_shape_to_geom
+    unless self.shape_json.blank?
+      shape = JSON[self.shape_json].map do |coord|
+        flipped = [coord[1], coord[0]]
+        flipped
+      end
+      self.shape_geom = RGeo::GeoJSON.decode("{\"type\":\"Polygon\",\"coordinates\":[#{shape}]}", json_parser: :json)
+    end
+  end
+
   def no_archive_prints?
     (archive_print1_class.blank? or (archive_print1_class == '0')) and
     (archive_print2_class.blank? or (archive_print2_class == '0')) and
@@ -342,24 +358,6 @@ class Map < ActiveRecord::Base
     attrs
   end
   alias_method_chain :"cartographers_attributes=", :creation
-
-  SYNCHRONIZED_KEYS = {
-    #:geometry
-    :title => 'NAZEV',
-    :patron => 'PATRON',
-    :year => 'ROK',
-    :scale => 'MERITKO',
-    :preview_identifier => 'OBRAZ',
-    #:Color
-    #:StrokeColor
-    :map_family => 'MAP_FAMILY',
-    :map_sport => 'MAP_SPORT',
-    :state => 'MAP_STATE',
-    :created_by_id => 'CREATED_BY_ID'
-    #:AUTHORS
-    #:hasKML
-    #:hasJPG
-  }
 
   y0 = Date.today.year
 
@@ -396,7 +394,7 @@ class Map < ActiveRecord::Base
     MAP_YEARS.first,
   ]
 
-  before_update :sync_fusion
+  before_save :set_computed_fields
   after_save :update_authors_activities
 
   def update_authors_activities
@@ -453,10 +451,6 @@ class Map < ActiveRecord::Base
     "##{id}:#{title}:#{map_family}:#{map_sport}"
   end
 
-  def cartographers_for_fusion
-    cartographers.exists? ? (cartographers.map{|c| "[#{c.role.downcase}:#{c.author_id}]"} * "") : "0"
-  end
-
   def region_
     REGIONS[region] ? "#{region} -- #{REGIONS[region]}" : region
   end
@@ -511,14 +505,6 @@ class Map < ActiveRecord::Base
     !identifier_filing.blank? and (identifier_filing.size >= 3) and [STATE_FINALIZED, STATE_ARCHIVED].include?(state)
   end
 
-  def blocking_from
-    year
-  end
-
-  def blocking_until
-    blocking_from + 9
-  end
-
   def race_date
     if oris_event
       oris_event.date
@@ -529,78 +515,20 @@ class Map < ActiveRecord::Base
     end.try(:to_date)
   end
 
-  def embargo_until
-    race_date || Date.civil(1970,1,1)
+  def set_computed_fields
+    convert_shape_to_geom
+    set_cartographers_for_api
+    set_color
+    set_stroke_color
+    set_embargo
+    set_blocking
   end
 
-  def set_fusion_computed_fields(pars)
-    pars['Color'] = self.color
-    pars['StrokeColor'] = self.stroke_color
-    pars['AUTHORS'] = self.cartographers_for_fusion
-    pars['hasJPG'] = self.has_jpg? ? 1 : 0
-    pars['hasKML'] = self.has_kml? ? 1 : 0
-    if embargo?
-      pars['hasEMBARGO'] = 1
-      pars['EMBARGO_UNTIL'] = embargo_until
-    else
-      pars['hasEMBARGO'] = 0
-      pars['EMBARGO_UNTIL'] = Date.civil(1970,1,1)
-    end
-    if blocking?
-      pars['hasBLOCKING'] = 1
-      pars['BLOCKING_FROM'] = blocking_from
-      pars['BLOCKING_UNTIL'] = blocking_until
-    else
-      pars['hasBLOCKING'] = 0
-      pars['BLOCKING_FROM'] = 0
-      pars['BLOCKING_UNTIL'] = 0
-    end
+  def set_cartographers_for_api
+    self.cartographers_for_api = cartographers.exists? ? (cartographers.map{|c| "[#{c.role.downcase}:#{c.author_id}]"} * "") : "0"
   end
 
-  def sync_fusion!
-    save_to_fusion unless fusion_table_record
-
-    pars = {}
-    SYNCHRONIZED_KEYS.keys.map(&:to_s).each do |aname|
-      if key = SYNCHRONIZED_KEYS[aname.to_sym]
-        pars[key] = self.send(aname) || 0
-      end
-    end
-    set_fusion_computed_fields(pars)
-    puts pars.inspect
-    fusion_update(pars)
-  end
-
-  def sync_fusion
-    save_to_fusion unless fusion_table_record
-
-    unless (SYNCHRONIZED_KEYS.keys.map(&:to_s) & changed_attributes.keys.map(&:to_s)).empty?
-      pars = {}
-      changed_attributes.each do |aname, val|
-        if key = SYNCHRONIZED_KEYS[aname.to_sym]
-          pars[key] = self.send(aname) || 0
-        end
-      end
-      set_fusion_computed_fields(pars)
-      fusion_update(pars)
-    end
-  end
-
-  def fusion_remove
-    m = 1
-    if rid = fusion_table_rowid
-      Map.fusion_table.delete_row rid
-    end
-  end
-
-  def fusion_update(pars)
-    m = 1
-    if rid = fusion_table_rowid
-      Map.fusion_table.update_row rid, pars
-    end
-  end
-
-  def color
+  def set_color
     c = '#CCCCCC'
     if map_family == MAP_FAMILY_MAP
       c = MAP_SPORTS_COLOR[map_sport] || '#CCCCCC'
@@ -614,24 +542,22 @@ class Map < ActiveRecord::Base
       c = MAP_FAMILIES_COLOR[map_family] || '#CCCCCC'
     end
     c = '#CCCCCC' if c.blank?
-    c
+    self.color = c
   end
 
-  def stroke_color
-    Color::RGB::from_html(self.color).adjust_saturation(1).adjust_brightness(1).html
+  def set_stroke_color
+    self.stroke_color = Color::RGB::from_html(self.color).adjust_saturation(1).adjust_brightness(1).html
   end
 
-  def self.fusion_table
-    @@fusion_table ||= CrazyFusionTable.new(Mapserver::Application.config.maps_fusion_table_id)
+  def set_embargo
+    self.has_embargo = embargo? ? 1 : 0
+    self.embargo_until = embargo? ? race_date || Date.civil(1970,1,1) : Date.civil(1970,1,1)
   end
 
-  def fusion_table_rowid
-    Map.fusion_table.get_row_id(id)
-  end
-
-  def fusion_table_record
-    ri = fusion_table_rowid
-    ri && Map.fusion_table.get_row(ri)
+  def set_blocking
+    self.has_blocking = blocking? ? 1 : 0
+    self.blocking_from = blocking? ? year : 0
+    self.blocking_until = blocking? ? blocking_from + 9 : 0
   end
 
   def cartographers_with_roles
@@ -643,18 +569,11 @@ class Map < ActiveRecord::Base
     set
   end
 
-  def shape_as_geojson
-    fusion_table_record ? fusion_table_record['geometry'] : nil
-  end
-
   def shape_as_coords
     unless shape_json.blank?
       return JSON[shape_json].map(&:reverse)
     end
-    return [] unless shape_as_geojson
-    ary = shape_as_geojson['geometry']['coordinates'].first rescue []
-    return [] unless Array === ary
-    ary
+    return []
   end
 
   def create_duplicate
@@ -667,7 +586,6 @@ class Map < ActiveRecord::Base
     m.save
     m.title += "#{m.id}]"
     m.save
-    m.save_to_fusion
     m
   end
 
@@ -747,31 +665,6 @@ class Map < ActiveRecord::Base
     File.exist?(File.join(Rails.root, 'public', 'data', 'kml', "#{id}.kml"))
   end
 
-  # def self.next_fusion_id
-  #   xid = Map.where('fusion_id IS NOT NULL and fusion_id < 100000').order('fusion_id DESC').limit(1).pluck(:fusion_id).first
-  #   (xid || 0) + 1
-  # end
-
-  def save_to_fusion
-    return if fusion_table_record
-
-    Map.fusion_table.insert_row({
-      'ID' => self.id,
-      'geometry' => self.shape_kml,
-      'NAZEV' => self.title,
-      'PATRON' => self.patron,
-      'ROK' => self.year,
-      'MERITKO' => self.scale,
-      'OBRAZ' => self.preview_identifier,
-      'MAP_STATE' => self.state,
-      'Color' => self.color,
-      'StrokeColor' => self.stroke_color,
-      'MAP_FAMILY' => self.map_family,
-      'MAP_SPORT' => self.map_sport,
-      'CREATED_BY_ID' => self.created_by_id,
-    })
-  end
-
   def upload_preview(html_file)
     puts "-> uploading preview"
     tmp = html_file.tempfile
@@ -844,10 +737,6 @@ class Map < ActiveRecord::Base
       self.record_log += ("\n" + Time.now.strftime("[%d. %m. %Y %H:%M] ") + s)
     end
     save
-  end
-
-  def save_shape_to_fusion
-    fusion_update({:geometry => self.shape_kml})
   end
 
   def authorized_to_destroy?(user)

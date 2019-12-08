@@ -1,22 +1,25 @@
 App.Search = App.newClass({
 
-    constructor: function (state, ftLayerId, apiKey, resultsCallback, sidebar) {
+    constructor: function (state, resultsCallback, sidebar) {
         this.state = state;
-        this.ftLayerId = ftLayerId;
-        this.apiKey = apiKey;
         this.resultsCallback = resultsCallback;
         this.sidebar = sidebar;
     },
 
     searchByName: function (name, callback) {
         var name = name.replace(/'/g, "\\\'");
-        var filter = "NAZEV CONTAINS IGNORING CASE '" + name + "' ";
+        var filter = "LOWER(title) LIKE LOWER('%" + name + "%') ";
 
         this.searchByFilter(filter, callback);
     },
 
     searchByLatLng: function (latLng, callback) {
-        var filter = "ST_INTERSECTS(geometry, RECTANGLE(LATLNG" + latLng + ", LATLNG" + latLng + ")) ";
+        var filter = "St_Intersects(shape_geom, St_MakeEnvelope("
+                    + (latLng.lng() - 0.000001) + ","
+                    + (latLng.lat() - 0.000001) + ","
+                    + (latLng.lng() + 0.000001) + ","
+                    + (latLng.lat() + 0.000001)
+                    + ")) ";
         this.searchByFilter(filter, callback);
     },
 
@@ -28,16 +31,24 @@ App.Search = App.newClass({
         filter1 = filter + " AND " + Config.fullStateQuery;
       } else {
         if (Config.user) {
-          filter2 = filter + " AND CREATED_BY_ID = " + Config.user.id;
+          filter2 = filter + " AND created_by_id = " + Config.user.id;
         }
         filter1 = filter + " AND " + Config.stateQuery;
       }
-      var select1 = 'SELECT ID, NAZEV, PATRON, ROK, MERITKO, OBRAZ, MAP_SPORT, MAP_FAMILY, hasJPG, hasKML, hasBLOCKING, hasEMBARGO, BLOCKING_FROM, BLOCKING_UNTIL, EMBARGO_UNTIL FROM ' + this.ftLayerId + ' WHERE ' + filter1 + ' ORDER BY ROK DESC';
+      var select1 = {
+        select: ['id', 'title', 'patron', 'year', 'scale', 'preview_identifier', 'map_sport', 'map_family', 'has_jpg', 'has_kml', 'has_blocking', 'has_embargo', 'blocking_from', 'blocking_until', 'embargo_until'],
+        where: filter1,
+        order_by: 'year DESC'
+      };
       var select2 = null;
       if (filter2) {
-        select2 = 'SELECT ID, NAZEV, PATRON, ROK, MERITKO, OBRAZ, MAP_SPORT, MAP_FAMILY, hasJPG, hasKML, hasBLOCKING, hasEMBARGO, BLOCKING_FROM, BLOCKING_UNTIL, EMBARGO_UNTIL FROM ' + this.ftLayerId + ' WHERE ' + filter2 + ' ORDER BY ROK DESC';
+        select2 = {
+          select: ['id', 'title', 'patron', 'year', 'scale', 'preview_identifier', 'map_sport', 'map_family', 'has_jpg', 'has_kml', 'has_blocking', 'has_embargo', 'blocking_from', 'blocking_until', 'embargo_until'],
+          where: filter2,
+          order_by: 'year DESC'
+        };
       }
-      console.log("Search by filter: " + select1 + " || " + select2);
+      console.log("Search by filter: " + filter1 + " || " + filter2);
       this.searchBySelect(select1, select2, callback);          
     },
 
@@ -52,37 +63,31 @@ App.Search = App.newClass({
         if (!notShowWaiting) {
             this.sidebar.showWaiting();
         }
-        
-        var url1 = null;
-        var url2 = null;
-
-        url1 = 'https://www.googleapis.com/fusiontables/v1/query?key=' + this.apiKey + '&sql=' + encodeURIComponent(select1);
-        if (select2) {
-          url2 = 'https://www.googleapis.com/fusiontables/v1/query?key=' + this.apiKey + '&sql=' + encodeURIComponent(select2);          
-        }
 
         $.ajax({
-            url: url1,
+            url: '/api/select',
             dataType: 'json',
-            success: function(data) {
-              if (url2) {
+            data: select1,
+            success: function(res1) {
+              if (select2) {
                 $.ajax({
-                  url: url2,
+                  url: '/api/select',
                   dataType: 'json',
-                  success: function(data) {
-                    callback(data, true);
+                  data: select2,
+                  success: function(res2) {
+                    callback(res2.data, true);
                   },
                     error: function(xhr, status, error) { 
-                    alert('search error? S = ' + status + " E = " + error + " -- the request was " + select2); 
+                    alert('search error? S = ' + status + " E = " + error + " -- the request was `...WHERE " + select2.where + "...`"); 
                     App.sidebar.hideWaiting();
                   }
                 });                
               } else {
-                callback(data, false);
+                callback(res1.data, false);
               }
             },
             error: function(xhr, status, error) { 
-              alert('search error? S = ' + status + " E = " + error + " -- the request was " + select1); 
+              alert('search error? S = ' + status + " E = " + error + " -- the request was `...WHERE " + select1.where + "...`"); 
               App.sidebar.hideWaiting();
             }
         });

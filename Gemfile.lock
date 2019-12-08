@@ -31,6 +31,9 @@ GEM
       activemodel (= 4.2.11)
       activesupport (= 4.2.11)
       arel (~> 6.0)
+    activerecord-postgis-adapter (3.1.5)
+      activerecord (~> 4.2)
+      rgeo-activerecord (>= 4.0.4)
     activesupport (4.2.11)
       i18n (~> 0.7)
       minitest (~> 5.1)
@@ -60,8 +63,7 @@ GEM
       net-sftp (>= 2.0.0)
       net-ssh (>= 2.0.14)
       net-ssh-gateway (>= 1.1.0)
-    capistrano-mysqldump (1.1.1)
-      capistrano (>= 1.0.0)
+    capistrano-db-tasks (0.2.1)
     ci_reporter (2.0.0)
       builder (>= 2.1.2)
     ci_reporter_rspec (1.0.0)
@@ -186,7 +188,6 @@ GEM
     multi_json (1.13.1)
     multi_xml (0.6.0)
     multipart-post (2.0.0)
-    mysql2 (0.5.2)
     nenv (0.3.0)
     nested_form (0.3.2)
     net-scp (1.2.1)
@@ -232,6 +233,7 @@ GEM
       mime-types
       mimemagic (~> 0.3.0)
       terrapin (~> 0.6.0)
+    pg (0.21.0)
     pry (0.12.2)
       coderay (~> 1.1.0)
       method_source (~> 0.9.0)
@@ -274,6 +276,12 @@ GEM
     responders (2.4.1)
       actionpack (>= 4.2.0, < 6.0)
       railties (>= 4.2.0, < 6.0)
+    rgeo (0.6.0)
+    rgeo-activerecord (4.0.5)
+      activerecord (~> 4.2)
+      rgeo (~> 0.3)
+    rgeo-geojson (0.4.3)
+      rgeo (~> 0.5)
     rspec (3.8.0)
       rspec-core (~> 3.8.0)
       rspec-expectations (~> 3.8.0)
@@ -353,12 +361,13 @@ PLATFORMS
 
 DEPENDENCIES
   RedCloth
+  activerecord-postgis-adapter (= 3.1.5)
   annotate
   better_errors (~> 1.0)
   binding_of_caller
   bootstrap-sass (>= 3.4.1)
   capistrano (~> 2.0)
-  capistrano-mysqldump (= 1.1.1)
+  capistrano-db-tasks (= 0.2.1)
   ci_reporter_rspec
   coffee-rails (~> 4.1.0)
   color
@@ -380,7 +389,6 @@ DEPENDENCIES
   launchy
   lorem-ipsum
   magic_encoding
-  mysql2
   nested_form
   nilify_blanks
   nokogiri
@@ -389,8 +397,11 @@ DEPENDENCIES
   omniauth-google-oauth2 (~> 0.6.0)
   paper_trail (~> 3.0)
   paperclip
+  pg (~> 0.21.0)
   quiet_assets
   rails (~> 4.2.0)
+  rgeo
+  rgeo-geojson
   rspec-rails
   sass-rails
   select2-rails (~> 4.0)

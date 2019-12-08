@@ -1,12 +1,11 @@
 App.Toc = App.newClass({
 
-    constructor: function (map, ftLayer1, ftLayer2, ftLayerE, ftLayerB, ftLayerId) {
+    constructor: function (map, ftLayer1, ftLayer2, ftLayerE, ftLayerB) {
         this.map = map;
         this.ftLayer1 = ftLayer1;
         this.ftLayer2 = ftLayer2;
         this.ftLayerE = ftLayerE;
         this.ftLayerB = ftLayerB;
-        this.ftLayerId = ftLayerId;
     },
 
     refresh: function () {
@@ -45,34 +44,35 @@ App.Toc = App.newClass({
           }
         });
               
-        this.ftLayer1.setMap(null);
-        this.ftLayer2.setMap(null);
-        this.ftLayerE.setMap(null);
-        this.ftLayerB.setMap(null);
+        this.ftLayer1.hide();
+        this.ftLayer2.hide();
+        this.ftLayerE.hide();
+        this.ftLayerB.hide();
         
         var attrs = [];
         
         var where1 = "";
         var where2 = null;
         if ((visibleFamilies.length > 0) && (visibleSports.length > 0) && (minYear <= maxYear)) {
-            where = 'MAP_FAMILY IN (' + visibleFamilies.join(',') + ') AND MAP_SPORT IN (' + visibleSports.join(',') + ') AND ROK >= ' + minYear + ' AND ROK <= ' + maxYear + ' ' + attrs.join(" ");
+            where = 'map_family IN (' + visibleFamilies.join(',') + ') AND map_sport IN (' + visibleSports.join(',') + ') AND year >= ' + minYear + ' AND year <= ' + maxYear + ' ' + attrs.join(" ");
 
             if (Config.user && (Config.user.role == 'admin' || Config.user.role == 'manager' || Config.user.role == 'cartographer')) {
               where1 = where;
             } else {
               where1 = (where + " AND " + Config.stateQuery);
               if (Config.user) {
-                where2 = (where + " AND MAP_STATE IN ('proposed', 'change_requested') AND CREATED_BY_ID = " + Config.user.id);
+                where2 = (where + " AND state IN ('proposed', 'change_requested') AND created_by_id = " + Config.user.id);
               }
             }
             
             console.log("TOC update with primary where query: " + where1);
-            this.ftLayer1.query.where = where1;
-            this.ftLayer1.setMap(map);
+            this.ftLayer1.where = where1;
+            this.ftLayer1.show();
+
             if (where2) {
               console.log("TOC update with secondary where query: " + where2);
-              this.ftLayer2.query.where = where2;
-              this.ftLayer2.setMap(map);              
+              this.ftLayer2.where = where2;
+              this.ftLayer2.show();
             }
         }
         
@@ -92,7 +92,7 @@ App.Toc = App.newClass({
         today = "'" + yyyy + "-" + mm + "-" + dd + " 00:00'";
         
         if ($('#area__embargo').prop('checked')) {
-          showEmbargo(today, yyyy);
+          showEmbargo(today);
         }
 
         var area_date = $('#area__blocking_year').val();
@@ -109,11 +109,9 @@ App.Toc = App.newClass({
         }
         if (sports.length > 0) {
           showBlocking(area_date, sports);
-          //showBlocking(today, sports);
         }
         if ($('#area__blocking_other').prop('checked')) {
           showBlocking(area_date, ["'trail'", "'extreme'", "'indoor'", "'other'"]);
-          //showBlocking(today, ["'trail'", "'extreme'", "'indoor'", "'other'"]);
         }
     },
 

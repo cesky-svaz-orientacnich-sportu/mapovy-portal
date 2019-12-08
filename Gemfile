@@ -2,6 +2,7 @@ source "http://rubygems.org"
 
 ruby "2.3.8"
 
+gem 'activerecord-postgis-adapter', "3.1.5"
 gem "bootstrap-sass", ">= 3.4.1"
 gem "coffee-rails", "~> 4.1.0"
 gem "color"
@@ -17,7 +18,7 @@ gem "jquery-ui-rails"
 gem "kaminari"
 gem "kaminari-bootstrap", "~> 3.0.1"
 gem "magic_encoding"
-gem "mysql2"
+gem "pg", "~>0.21.0"
 gem "nested_form"
 gem "nilify_blanks"
 gem "nokogiri"
@@ -30,6 +31,8 @@ gem "paper_trail", "~> 3.0"
 gem "quiet_assets"
 gem "rails", "~>4.2.0"
 gem "RedCloth"
+gem "rgeo"
+gem "rgeo-geojson"
 gem "sass-rails"
 gem "select2-rails", "~> 4.0"
 gem "to_xls"
@@ -51,7 +54,7 @@ end
 
 group :development do
   gem "capistrano", "~> 2.0"
-  gem "capistrano-mysqldump", "1.1.1", :require => false
+  gem "capistrano-db-tasks", "0.2.1", :require => false
   gem "lorem-ipsum"
   gem "thin"
   gem "better_errors", "~>1.0"

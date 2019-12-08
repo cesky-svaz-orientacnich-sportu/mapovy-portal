@@ -1,7 +1,7 @@
 ﻿App.Search.Simple = App.newClass({
 
-    constructor: function (state, ftLayerId, apiKey, resultsCallback, sidebar) {
-        App.Search.call(this, state, ftLayerId, apiKey, resultsCallback, sidebar);
+    constructor: function (state, resultsCallback, sidebar) {
+        App.Search.call(this, state, resultsCallback, sidebar);
         this.init();
     },
 
@@ -23,34 +23,35 @@
         if (Config.user && (Config.user.role == 'admin' || Config.user.role == 'manager' || Config.user.role == 'cartographer')) {
         } else {
           if (Config.user) {
-//            where = "WHERE " + Config.stateQuery + " OR CREATED_BY_ID = " + Config.user.id;
-            where = "WHERE " + Config.stateQuery;
+//            where = Config.stateQuery + " OR CREATED_BY_ID = " + Config.user.id;
+            where = Config.stateQuery;
           } else {
-            where = "WHERE " + Config.stateQuery;
+            where = Config.stateQuery;
           }
         }
         console.log("Autocomplete init with query = " + where);
-        url = 'https://www.googleapis.com/fusiontables/v1/query?key=' + this.apiKey + '&sql=' + encodeURIComponent('SELECT NAZEV, COUNT() FROM ' + this.ftLayerId + ' ' + where + ' GROUP BY NAZEV');
         $.ajax({
-            url: url,
+            url: '/api/select',
             dataType: 'json',
-            //jsonp: 'jsonCallback',
-            error: function(jqxhr, status, error) {
-              window.alert("Could not load autocomplete list : S = " + status + " E = " + error + " while request was sent to " + url);
+            data: {
+                select: ['title'],
+                where: where,
+                group_by: 'title'
             },
-            success: function (table) {
-                var rows = table.rows.length;
-                var cols = table.columns.length;
+            error: function(jqxhr, status, error) {
+              window.alert("Could not load autocomplete list : S = " + status + " E = " + error + " while request was sent to `/api/select`");
+            },
+            success: function (res) {
                 // Create the list of results for display of autocomplete
-                results = [];
-                for (i = 0; i < rows; i++) {
-                    results.push(table.rows[i][0]);
+                list = [];
+                for (i = 0; i < res.data.length; i++) {
+                    list.push(res.data[i]['title']);
                 }
 
                 // Use the results to create the autocomplete options
                 $("#simpleSearchName").autocomplete({
                     source: function(request, response) {
-                      var filtered_results = $.ui.autocomplete.filter(results, request.term);        
+                      var filtered_results = $.ui.autocomplete.filter(list, request.term);
                       response(filtered_results.slice(0, 20));
                     },
                     minLength: 2

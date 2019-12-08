@@ -40,7 +40,7 @@ private
     end
     clubs = clubs.page(page).per(per_page)
     if params[:search].present? and params[:search][:value].present?
-      clubs = clubs.where("name like :search OR abbreviation like :search OR region like :search OR district like :search", search: "%#{params[:search][:value]}%")
+      clubs = clubs.where("LOWER(name) LIKE LOWER(:search) OR LOWER(abbreviation) LIKE LOWER(:search) OR LOWER(region) LIKE LOWER(:search) OR LOWER(district) LIKE LOWER(:search)", search: "%#{params[:search][:value]}%")
     end
     clubs
   end

@@ -7,7 +7,7 @@
   %h2= t('mapserver.downExport')
 
   %ul
-    %li= link_to "KML", "https://www.google.com/fusiontables/exporttable?query=select+geometry+from+#{ Mapserver::Application.config.maps_fusion_table_id}+where+ID+in+(#{@list * ","})&o=kmllink&g=geometry"
+    /%li= link_to "KML", :list => @list.to_json, :format => :kml
     %li= link_to "CSV", :list => @list.to_json, :format => :csv
     %li= link_to "XLS", :list => @list.to_json, :format => :xls
 

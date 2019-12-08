@@ -1,13 +1,12 @@
 App.MapHelper = App.newClass({
 
-    constructor: function (state, map, toc, search, ftLayer1, ftLayer2, ftHighlightLayerId) {
+    constructor: function (state, map, toc, search, ftLayer1, ftLayer2) {
         this.state = state;
         this.map = map;
         this.toc = toc;
         this.search = search;
         this.ftLayer1 = ftLayer1;
         this.ftLayer2 = ftLayer2;
-        this.ftHighlightLayerId = ftHighlightLayerId;
     },
 
     listeners: [],
@@ -16,8 +15,6 @@ App.MapHelper = App.newClass({
 
     registerMapClickListeners: function (callBack) {
         this.listeners.push(google.maps.event.addListener(this.map, 'click', callBack));
-        this.listeners.push(google.maps.event.addListener(this.ftLayer1, 'click', callBack));
-        this.listeners.push(google.maps.event.addListener(this.ftLayer2, 'click', callBack));
     },
 
     unregisterMapClickListeners: function () {
@@ -50,25 +47,25 @@ App.MapHelper = App.newClass({
       var select2 = null;
 
       if (this.state.lastSelect1) {
-        var from1   = this.state.lastSelect1.substring(this.state.lastSelect1.indexOf(' FROM'));
-        var select1 = 'SELECT geometry ' + from1;
-        var where1  = this.state.lastSelect1.substring(this.state.lastSelect1.indexOf('WHERE') + 6);
-
-        this.ftLayer1.query.where = where1;
-        this.ftLayer1.setMap(this.map);
+        var select1 = {
+          select: ['shape_json'],
+          where: this.state.lastSelect1.where
+        };
+        this.ftLayer1.where = select1.where;
+        this.ftLayer1.show();
       } else {
-        this.ftLayer2.setMap(null);
+        this.ftLayer2.hide();
       }
 
       if (this.state.lastSelect2) {
-        var from2   = this.state.lastSelect2.substring(this.state.lastSelect2.indexOf(' FROM'));
-        var select2 = 'SELECT geometry ' + from2;
-        var where2  = this.state.lastSelect2.substring(this.state.lastSelect2.indexOf('WHERE') + 6);
-
-        this.ftLayer2.query.where = where2;
-        this.ftLayer2.setMap(this.map);
+        var select2 = {
+          select: ['shape_json'],
+          where: this.state.lastSelect2.where
+        };
+        this.ftLayer2.where = select2.where;
+        this.ftLayer2.show();
       } else {
-        this.ftLayer2.setMap(null);
+        this.ftLayer2.hide();
       }
 
       $("#toc").hide();
@@ -78,18 +75,17 @@ App.MapHelper = App.newClass({
       this.search.searchBySelect(select1, select2, this.zoomToResults, true);
     },
 
-    zoomToResults: function(table) {
-        var numRows = table.rows.length;
-        var numCols = table.columns.length;
+    zoomToResults: function(data) {
+        var numRows = data.length;
 
         var coordinates = [];
         for (i = 0; i < numRows; i++) {
-            if (table.rows[i][0] !== '') {
-              var geometry = table.rows[i][0].geometry;
-                for (var j = 0; j < geometry.coordinates[0].length; j++) {
-                  var lng = geometry.coordinates[0][j][0];
-                  var lat = geometry.coordinates[0][j][1];
-                  coordinates.push(new google.maps.LatLng(lat, lng));
+            if (data[i]['shape_json'] !== '') {
+                var points = JSON.parse(data[i]['shape_json']);
+                for (var j = 0; j < points.length; j++) {
+                    var lng = points[j][1];
+                    var lat = points[j][0];
+                    coordinates.push(new google.maps.LatLng(lat, lng));
                 }
             }
         }
@@ -108,25 +104,19 @@ App.MapHelper = App.newClass({
     highlightMapPolygon: function (id) {
         this.clearHighlight();
 
-        this.ftHighlightLayer = new google.maps.FusionTablesLayer({
-          query: {
-            select: 'geometry',
-            from: this.ftHighlightLayerId,
-            where: "'ID'= " + id
-          },
-          options: {
+        this.ftHighlightLayer = new WMSLayer({
+            layer: 'highlight',
+            where: 'id = ' + id,
             suppressInfoWindows: true,
-            templateId: 2,
-            styleId: 2
-          }
+            map: map,
+            index: 4
         });
-
-        this.ftHighlightLayer.setMap(map);
+        this.ftHighlightLayer.show();
     },
 
     clearHighlight: function () {
-        if (this.ftHighlightLayer) {
-            this.ftHighlightLayer.setMap(null);
+        if (this.ftHighlightLayer !== null) {
+            this.ftHighlightLayer.hide();
         }
     }
 

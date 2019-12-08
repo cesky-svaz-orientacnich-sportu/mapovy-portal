@@ -6,14 +6,11 @@ namespace :data do
     maps = Map.where('id >= ?', x1)
     old_ids = maps.pluck(:id)
     new_ids = old_ids.map{|x| x - x1 + x2}
-    row_ids = maps.map(&:fusion_table_rowid)
     n = old_ids.size
     n == new_ids.size or raise "size mismatch!"
-    n == row_ids.size or raise "size mismatch!"
     
-    ft = Map.fusion_table
     (0...n).each do |i|
-      puts "(#{i}) ID : #{old_ids[i]} -> #{new_ids[i]} [#{row_ids[i]}]"
+      puts "(#{i}) ID : #{old_ids[i]} -> #{new_ids[i]}"
       Map.where(id: new_ids[i]).exists? and raise "WROING!"
       sleep 1
       map = Map.find(old_ids[i])
@@ -24,25 +21,6 @@ namespace :data do
           record.update_attribute(:map_id, new_ids[i])
         end
       end
-      
-      begin
-        ft.update row_ids[i], {'ID' => new_ids[i]}
-      rescue GData::Client::UnknownError => e
-        sleep m
-        m += 1
-        puts "#{map}! -- #{e}"
-        retry
-      rescue StandardError => e
-        if e.to_s.include?('403')
-          sleep m
-          m += 1
-          puts "#{map}! -- #{e}"
-          retry
-        else
-          raise
-        end
-      end
-      
     end
     
   end
@@ -864,12 +842,10 @@ namespace :data do
       end
       
       m.save!
-      m.save_to_fusion
       if geometry
         m.reclaim_shape
         m.save!
       end
-      puts "FT RID #{m.fusion_table_rowid}"
     end
     
   end

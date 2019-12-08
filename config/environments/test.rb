@@ -32,12 +32,9 @@ Mapserver::Application.configure do
   # Print deprecation notices to the stderr
   config.active_support.deprecation = :stderr
 
-  # table IDs
-  config.maps_fusion_table_id = '1fQnFWBaosCEdW-6-CJdaxgO6QjobswIz6Wxk-55N'
-  #config.convergence_fusion_table_id = '1QaD5B-5uaI3XFWH_JGoCDet5MoxPONAfT6qAgVu2'
-  config.selected_fusion_table_id = '10Z0IZ5j-GB5K67aK026jGeTU1Jvllv6gUxk5prI4'
-  config.blocking_fusion_table_id = '1EBIzS199Q_wcYcJn0Jx6jcmFwtlf3rcaopunP-k8'
-  config.embargo_fusion_table_id = '1bHJthBlZp4fenXUHanfVzu3aEB09DBYeBrCsBzxJ'
+  config.hostname = "http://localhost:3000"
+  config.wms_url = "http://localhost/csos-mapserver-wms"
+
   # asset host (for JPGs et al)
   config.asset_root_url = "https://mapy.orientacnisporty.cz"
 

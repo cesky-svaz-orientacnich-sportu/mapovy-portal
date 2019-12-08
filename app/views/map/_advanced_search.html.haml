@@ -32,7 +32,7 @@
           %dd
             %select#advancedSearchClub
               %option(selected="selected")
-              - Club.all.each do |club|
+              - Club.order('abbreviation ASC').all.each do |club|
                 %option{:value => club.abbreviation}= club
           %dt
             %label(for="item03")= t("mapserver.advancedSearchAuthor")

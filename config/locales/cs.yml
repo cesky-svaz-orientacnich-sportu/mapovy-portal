@@ -84,17 +84,17 @@ cs:
     search_maps:    "Filtr (Název nebo Klub nebo ID):"
     zeroRecords:    "Žádné záznamy nenalezeny"
     paginate:
-      first: "&laquo; První"
-      last: "Poslední &raquo;"
-      previous: "&lsaquo; Předchozí"
-      next: "Další &rsaquo;"
+      first: "« První"
+      last: "Poslední »"
+      previous: "‹ Předchozí"
+      next: "Další ›"
   views:
     pagination:
-      first: "&laquo; První"
-      last: "Poslední &raquo;"
-      previous: "&lsaquo; Předchozí"
-      next: "Další &rsaquo;"
-      truncate: "&hellip;"
+      first: "« První"
+      last: "Poslední »"
+      previous: "‹ Předchozí"
+      next: "Další ›"
+      truncate: "…"
   devise:
     mailer:
       confirmation_instructions:

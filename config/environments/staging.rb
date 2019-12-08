@@ -80,13 +80,9 @@ Mapserver::Application.configure do
     :enable_starttls_auto => false
     }
 
-  # table IDs
-  config.maps_fusion_table_id = 'STA'
-  #config.convergence_fusion_table_id = 'STA'
-  config.selected_fusion_table_id = 'STA'
-  config.blocking_fusion_table_id = 'STA'
-  config.embargo_fusion_table_id = 'STA'
   # asset host (for JPGs et al)
   config.asset_root_url = "https://mapy-test.orientacnisporty.cz"
 
+  config.hostname = "https://mapy-test.orientacnisporty.cz"
+  config.wms_url = "https://mapy-wms.orientacnisporty.cz"
 end
