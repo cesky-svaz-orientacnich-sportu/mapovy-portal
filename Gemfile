@@ -43,6 +43,11 @@ gem "rspec-rails", :group => [:test, :development]
 gem "factory_girl_rails", :group => [:test, :development]
 gem "ci_reporter_rspec"
 
+gem "execjs", :group => [:production, :staging]
+gem "uglifier", :group => [:production, :staging]
+#gem "libv8", :group => [:production, :staging]
+#gem "therubyracer", :group => [:production, :staging], :platforms => :ruby
+
 group :test do
   # gem "capybara"
   # gem 'capybara-webkit'
@@ -60,18 +65,4 @@ group :development do
   gem "better_errors", "~>1.0"
   gem "binding_of_caller"
   gem "annotate"
-end
-
-group :production do
-  gem "execjs"
-  gem "uglifier"
-  #gem "libv8"
-  #gem "therubyracer", :platforms => :ruby
-end
-
-group :staging do
-  gem "execjs"
-  gem "uglifier"
-  #gem "libv8"
-  #gem "therubyracer", :platforms => :ruby
 end
