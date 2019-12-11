@@ -25,7 +25,7 @@ function ContextMenu(map, options){
 	this.map_=map;
 	this.mapDiv_=map.getDiv();
 	this.menuItems_=options.menuItems || [];
-	this.pixelOffset=options.pixelOffset || new google.maps.Point(10, -5);
+	this.pixelOffset=options.pixelOffset || new google.maps.Point(0, 0);
 }
 
 ContextMenu.prototype=new google.maps.OverlayView();

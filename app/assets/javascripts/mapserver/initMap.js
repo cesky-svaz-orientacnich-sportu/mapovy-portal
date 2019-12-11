@@ -32,11 +32,15 @@ WMSLayer.prototype.createOverlay = function() {
       var top = proj.fromPointToLatLng(new google.maps.Point(coord.x * 256 / zfactor, coord.y * 256 / zfactor));
       var bot = proj.fromPointToLatLng(new google.maps.Point((coord.x + 1) * 256 / zfactor, (coord.y + 1) * 256 / zfactor));
 
+      //corrections for the slight shift of the SLP (mapserver)
+      var deltaX = 0;
+      var deltaY = 0;
+
       //create the Bounding box string
-      var bbox = top.lng() + "," +
-                 bot.lat() + "," +
-                 bot.lng() + "," +
-                 top.lat();
+      var bbox =   (top.lng() + deltaX) + "," +
+                   (bot.lat() + deltaY) + "," +
+                   (bot.lng() + deltaX) + "," +
+                   (top.lat() + deltaY);
       //base WMS URL
       var url = Config.wmsUrl;
       url += '?SERVICE=WMS';
@@ -326,7 +330,8 @@ function initMap() {
         overviewMapControl: false,
         scaleControl: true,
         mapTypeControl: false,
-        scrollwheel: true
+        scrollwheel: true,
+        draggableCursor: 'default'
     };
 
     geocoder = new google.maps.Geocoder();
