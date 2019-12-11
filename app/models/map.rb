@@ -596,6 +596,7 @@ class Map < ActiveRecord::Base
         aa = a.map{|x| [x[1], x[0]]}
         self.shape_json = aa.to_json
         convert_shape_to_kml
+        convert_shape_to_geom
         save
       end
     end
