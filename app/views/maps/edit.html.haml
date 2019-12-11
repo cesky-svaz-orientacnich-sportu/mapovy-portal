@@ -380,7 +380,10 @@
     setupMapEditorSubmit();
     fixMapHeight($('#inline_map_canvas'));
 
-    $("#map_oris_event_id").select2({allowClear: true});
+    $("#map_oris_event_id").select2({
+      allowClear: true,
+      theme: 'default col-sm-4'
+    });
   });
 
 - if @map.has_jpg?
