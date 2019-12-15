@@ -11,7 +11,7 @@ class MapController < ApplicationController
     date = Date.today.strftime("%Y-%m-%d")
     lat, lng = params[:lat], params[:lng]
     require 'open-uri'
-    url = "https://geomag.nrcan.gc.ca/calc/mdcal-r-eng.php?latitude=#{lat}&longitude=#{lng}&latitude_north=1&longitude_east=1&date=#{date}"
+    url = "https://geomag.nrcan.gc.ca/calc/mdcal-r-en.php?latitude=#{lat}&longitude=#{lng}&latitude_north=1&longitude_east=1&date=#{date}"
     doc = Nokogiri::HTML(open(url))
     paragraphs = doc.root.css("main p")
     paragraphs.size >= 2 or begin
