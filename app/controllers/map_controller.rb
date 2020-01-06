@@ -19,8 +19,8 @@ class MapController < ApplicationController
       return
     end
 
-    mag = paragraphs[0].text.split(":").last.strip
-    chg = paragraphs[1].text.split(":").last.strip
+    mag = paragraphs[1].text.split(":").last.strip
+    chg = paragraphs[2].text.split(":").last.strip
 
     m_deg = mag.split[0].to_i
     m_min = mag.split[1].to_f
