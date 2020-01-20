@@ -84,5 +84,5 @@ Mapserver::Application.configure do
   config.asset_root_url = "https://mapy-test.orientacnisporty.cz"
 
   config.hostname = "https://mapy-test.orientacnisporty.cz"
-  config.wms_url = "https://mapy-wms.orientacnisporty.cz"
+  config.wms_url = "https://mapy-test-wms.orientacnisporty.cz"
 end
