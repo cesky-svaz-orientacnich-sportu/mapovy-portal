@@ -249,12 +249,15 @@ class Map < ActiveRecord::Base
             ojson = JSON[odata] rescue nil
             if ojson and ojson['Status'] == 'OK'
               ojson = ojson['Data']
-              #puts ojson.inspect
               if ojson['Name']
                 map.title = ojson['Name'] + "(" + ojson['Date'] + ")"
               end
               if ojson['Org1']
                 map.patron = ojson['Org1']['Abbr']
+              end
+              # disciplína je nutná pro `save!` mapy, když k embargu ještě není založená, a vytváříme novou
+              if ojson['Sport'] and ojson['Sport']['NameCZ'] == 'OB'
+                map.map_sport = 'foot'
               end
             end
           end
