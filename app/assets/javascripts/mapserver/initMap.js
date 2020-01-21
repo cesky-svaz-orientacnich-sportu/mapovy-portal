@@ -136,7 +136,7 @@ function renderInfoWindow(map) {
         '</tr>' +
         '<tr>' +
           '<td>' + map['year'] + '</td>' +
-          '<td>1:' + map['scale'] +'</td>' +
+          '<td>' + (map['scale'] == '1:' ? '' : map['scale']) +'</td>' +
           '<td>' + map['patron'] +'</td>' +
           '<td>' + map['map_sport'] +'</td>' +
         '</tr>' +
