@@ -8,8 +8,19 @@ App.Toc = App.newClass({
         this.ftLayerB = ftLayerB;
     },
 
-    refresh: function () {
+    showEmbargoes: function (date) {
+        this.ftLayerE.where = 'has_embargo = true AND embargo_until >= ' + date;
+        console.log("EMB QUERY " + this.ftLayerE.where);
+        this.ftLayerE.show();
+    },
 
+    showBlocking: function (date, sports) {
+        this.ftLayerB.where = 'has_blocking = true AND map_sport in (' + sports.join(",") + ') AND blocking_from <= ' + date + ' AND blocking_until >= ' + date + '';
+        console.log("BLOCK ON " + date + " AND " + sports + " / QUERY " + this.ftLayerB.where);
+        this.ftLayerB.show();
+    },
+
+    refresh: function () {
         $("#toc .options .item").removeClass("active");
         
         var visibleFamilies = [];
@@ -91,8 +102,8 @@ App.Toc = App.newClass({
 
         today = "'" + yyyy + "-" + mm + "-" + dd + " 00:00'";
         
-        if ($('#area__embargo').prop('checked')) {
-          showEmbargo(today);
+        if ($('#area__embargoes').prop('checked')) {
+          this.showEmbargoes(today);
         }
 
         var area_date = $('#area__blocking_year').val();

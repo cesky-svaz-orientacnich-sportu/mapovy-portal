@@ -39,7 +39,7 @@
     = link_to "", "javascript:void(0)", :id => "TOC_area_expand_button",   :class => 'link toc_expand', :title => t("mapserver.panelMax")
   %div.options(style="display:none")
     %div.item(style="height:44px")
-      %input{:type => 'checkbox', :checked => false, :onclick => "toc.refresh()", :id => "area__embargo"}
+      %input{:type => 'checkbox', :checked => false, :onclick => "toc.refresh()", :id => "area__embargoes"}
       / %span{:style => "background-color:#{Color::RGB::from_html('#ffdd00').lighten_by(20).html};border-color:#ffdd00"}
       %label Embarga (OB)
     %div.separator

@@ -194,18 +194,6 @@ function renderInfoWindow(map) {
   }
 }
 
-function showBlocking(date, sports) {
-  this.ftLayerB.where = 'has_blocking = true AND map_sport in (' + sports.join(",") + ') AND blocking_from <= ' + date + ' AND blocking_until >= ' + date + '';
-  console.log("BLOCK ON " + date + " AND " + sports + " / QUERY " + this.ftLayerB.where);
-  this.ftLayerB.show();
-}
-
-function showEmbargo(date) {
-  this.ftLayerE.where = 'has_embargo = true AND embargo_until >= ' + date;
-  console.log("EMB QUERY " + this.ftLayerE.where);
-  this.ftLayerE.show();
-}
-
 function initMapsLayer() {
   var filter = urlInterface.getFilter();
   var where = '';
