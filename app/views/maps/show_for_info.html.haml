@@ -1,5 +1,9 @@
 %h1
-  #{t('mapserver.mapTitle')} #{@map}
+  - case @map.map_family
+  - when Map::MAP_FAMILY_MAP
+    = "#{t("mapserver.mapTitle.map")} #{@map}"
+  - when Map::MAP_FAMILY_EMBARGO
+    = "#{t("mapserver.mapTitle.embargo")} #{@map}"
 
 %h2= t("mapserver.mapBasicData")
 

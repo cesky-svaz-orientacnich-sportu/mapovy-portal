@@ -609,7 +609,9 @@ cs:
     panelMin: 'Zmenši'
     panelMax: 'Zvětši'
 
-    mapTitle: "Mapa"
+    mapTitle:
+      map: "Mapa"
+      embargo: "Embargo"
     mapBasicData: "Základní údaje o mapě"
     mapAuthors: "Autoři"
     mapPreview: "Náhled mapy"

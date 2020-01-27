@@ -1,5 +1,9 @@
 %h1
-  Mapa #{@map}
+  - case @map.map_family
+  - when Map::MAP_FAMILY_MAP
+    = "#{t("mapserver.mapTitle.map")} #{@map}"
+  - when Map::MAP_FAMILY_EMBARGO
+    = "#{t("mapserver.mapTitle.embargo")} #{@map}"
   = map_buttons(@map, maps_path)
   - if current_user and current_user.has_role?(:organizer)
     %span.pull-right
