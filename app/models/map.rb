@@ -60,6 +60,8 @@
 #  stroke_color              :string(255)
 #  has_embargo               :boolean          default(FALSE), not null
 #  embargo_until             :date
+#  has_competition_area      :boolean          default(FALSE), not null
+#  competition_area_until    :date
 #  has_blocking              :boolean          default(FALSE), not null
 #  blocking_from             :integer
 #  blocking_until            :integer
@@ -499,7 +501,11 @@ class Map < ActiveRecord::Base
   end
 
   def embargo?
-    (map_family == MAP_FAMILY_EMBARGO) or (
+    map_family == MAP_FAMILY_EMBARGO
+  end
+
+  def competition_area?
+    (map_family != MAP_FAMILY_EMBARGO) and (
     !identifier_filing.blank? and (identifier_filing.size >= 3) and [STATE_APPROVED, STATE_COMPLETED, STATE_FINALIZED, STATE_FINAL_CHANGE_REQUESTED, STATE_ARCHIVED].include?(state) and (oris_event || main_race_date)
     )
   end
@@ -524,6 +530,7 @@ class Map < ActiveRecord::Base
     set_color
     set_stroke_color
     set_embargo
+    set_competition_area
     set_blocking
   end
 
@@ -555,6 +562,11 @@ class Map < ActiveRecord::Base
   def set_embargo
     self.has_embargo = embargo? ? 1 : 0
     self.embargo_until = embargo? ? race_date || Date.civil(1970,1,1) : Date.civil(1970,1,1)
+  end
+
+  def set_competition_area
+    self.has_competition_area = competition_area? ? 1 : 0
+    self.competition_area_until = competition_area? ? race_date || Date.civil(1970,1,1) : Date.civil(1970,1,1)
   end
 
   def set_blocking

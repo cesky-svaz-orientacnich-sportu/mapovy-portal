@@ -56,6 +56,12 @@ class ApiController < ApplicationController
             .where(URI.decode(request.query_parameters['whereB']))
             .order(year: :desc).first
     end
+    if not m.present? and layers.include? 'competitionareas'
+      m = Map
+            .where("St_Intersects(shape_geom, St_MakeEnvelope(#{lon.to_f - 0.000001},#{lat.to_f - 0.000001},#{lon.to_f + 0.000001},#{lat.to_f + 0.000001}))")
+            .where(URI.decode(request.query_parameters['whereCA']))
+            .order(year: :desc).first
+    end
     if not m.present? and layers.include? 'embargoes'
       m = Map
             .where("St_Intersects(shape_geom, St_MakeEnvelope(#{lon.to_f - 0.000001},#{lat.to_f - 0.000001},#{lon.to_f + 0.000001},#{lat.to_f + 0.000001}))")

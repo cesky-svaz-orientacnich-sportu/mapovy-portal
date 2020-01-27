@@ -227,20 +227,31 @@ function initMapsLayer() {
   });
   ftLayer2.hide();
 
+  var today = new Date();
+
   ftLayerE = new WMSLayer({
     layer: 'embargoes',
-    where: 'has_embargo = true AND embargo_until >= 2018',
+    where: 'has_embargo = true AND embargo_until >= '+today.getFullYear(),
     suppressInfoWindows: false,
     map: map,
     index: 2
   });
   ftLayerE.show();
 
+  ftLayerCA = new WMSLayer({
+    layer: 'competitionareas',
+    where: 'has_competition_area = true AND competition_area_until >= '+today.getFullYear(),
+    suppressInfoWindows: false,
+    map: map,
+    index: 3
+  });
+  ftLayerCA.show();
+
   ftLayerB = new WMSLayer({
     layer: 'blocking',
     suppressInfoWindows: false,
     map: map,
-    index: 3
+    index: 4
   });
   ftLayerB.hide();
 
@@ -258,6 +269,9 @@ function initMapsLayer() {
     if (ftLayerE.visible && !ftLayerE.suppressInfoWindows) {
       layers.push(ftLayerE.layer);
     }
+    if (ftLayerCA.visible && !ftLayerCA.suppressInfoWindows) {
+      layers.push(ftLayerCA.layer);
+    }
     if (ftLayerB.visible && !ftLayerB.suppressInfoWindows) {
       layers.push(ftLayerB.layer);
     }
@@ -270,6 +284,7 @@ function initMapsLayer() {
         where: encodeURI(ftLayer1.where),
         where2: encodeURI(ftLayer2.where),
         whereE: encodeURI(ftLayerE.where),
+        whereCA: encodeURI(ftLayerCA.where),
         whereB: encodeURI(ftLayerB.where)
       }).done(function(res) {
         if (res.status == 'success') {
@@ -354,7 +369,7 @@ function initMapComponents() {
     // app objects init
     searchAdvanced = new App.Search.Advanced(state, ftLayer1, ftLayer2, sidebar.showResults, sidebar, Config.resourceString);
 
-    toc = new App.Toc(map, ftLayer1, ftLayer2, ftLayerE, ftLayerB);
+    toc = new App.Toc(map, ftLayer1, ftLayer2, ftLayerE, ftLayerCA, ftLayerB);
     mapHelper = new App.MapHelper(state, map, toc, searchSimple, ftLayer1, ftLayer2);
     measure = new App.Measure(map, ftLayer1);
 

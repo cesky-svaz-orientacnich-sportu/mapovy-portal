@@ -38,24 +38,28 @@
     = link_to "", "javascript:void(0)", :id => "TOC_area_collapse_button", :class => 'link toc_collapse', :title => t("mapserver.panelMin"), :style => "display:none"
     = link_to "", "javascript:void(0)", :id => "TOC_area_expand_button",   :class => 'link toc_expand', :title => t("mapserver.panelMax")
   %div.options(style="display:none")
-    %div.item(style="height:44px")
+    %div.item{:class => 'item'}
       %input{:type => 'checkbox', :checked => false, :onclick => "toc.refresh()", :id => "area__embargoes"}
-      / %span{:style => "background-color:#{Color::RGB::from_html('#ffdd00').lighten_by(20).html};border-color:#ffdd00"}
-      %label Embarga (OB)
+      %span{:style => "background-color:#{Color::RGB::from_html('#ff0000').lighten_by(40).html};border-color:#ff0000"}
+      %label Embarga
+    %div.item{:class => 'item'}
+      %input{:type => 'checkbox', :checked => false, :onclick => "toc.refresh()", :id => "area__competition_areas"}
+      %span{:style => "background-color:#{Color::RGB::from_html('#ff3300').lighten_by(20).html};border-color:#ff3300"}
+      %label Prostory závodů
     %div.separator
-    %div.item
+    %div.item{:class => 'item has-no-color-indicator'}
       %input{:type => 'checkbox', :checked => false, :onclick => "toc.refresh()", :id => "area__blocking_foot"}
       / %span{:style => "background-color:#{Color::RGB::from_html('#ff00ff').lighten_by(20).html};border-color:#ff00ff"}
       %label #{t('mapserver.map_layers.blocking.title')} (#{t('mapserver.map_enums.map_sport.foot')})
-    %div.item
+    %div.item{:class => 'item has-no-color-indicator'}
       %input{:type => 'checkbox', :checked => false, :onclick => "toc.refresh()", :id => "area__blocking_bike"}
       / %span{:style => "background-color:#{Color::RGB::from_html('#ff00ff').lighten_by(20).html};border-color:#0000ff"}
       %label #{t('mapserver.map_layers.blocking.title')} (#{t('mapserver.map_enums.map_sport.mtbo')})
-    %div.item
+    %div.item{:class => 'item has-no-color-indicator'}
       %input{:type => 'checkbox', :checked => false, :onclick => "toc.refresh()", :id => "area__blocking_ski"}
       / %span{:style => "background-color:#{Color::RGB::from_html('#ff00ff').lighten_by(20).html};border-color:#ff0000"}
       %label #{t('mapserver.map_layers.blocking.title')} (#{t('mapserver.map_enums.map_sport.ski')})
-    %div.item
+    %div.item{:class => 'item has-no-color-indicator'}
       %input{:type => 'checkbox', :checked => false, :onclick => "toc.refresh()", :id => "area__blocking_other"}
       / %span{:style => "background-color:#{Color::RGB::from_html('#ff00ff').lighten_by(20).html};border-color:#00ff00"}
       %label #{t('mapserver.map_layers.blocking.title')} (#{t('mapserver.other_sports')})

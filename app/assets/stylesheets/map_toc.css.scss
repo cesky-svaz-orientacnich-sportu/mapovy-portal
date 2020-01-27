@@ -126,8 +126,10 @@
 #areatoc {
   right: 165px;  
   .options {
-    label {
-      padding-left:28px;
+    .item.has-no-color-indicator {
+      label {
+        padding-left:28px;
+      }
     }
   }
 }

@@ -1,10 +1,11 @@
 App.Toc = App.newClass({
 
-    constructor: function (map, ftLayer1, ftLayer2, ftLayerE, ftLayerB) {
+    constructor: function (map, ftLayer1, ftLayer2, ftLayerE, ftLayerCA, ftLayerB) {
         this.map = map;
         this.ftLayer1 = ftLayer1;
         this.ftLayer2 = ftLayer2;
         this.ftLayerE = ftLayerE;
+        this.ftLayerCA = ftLayerCA;
         this.ftLayerB = ftLayerB;
     },
 
@@ -12,6 +13,12 @@ App.Toc = App.newClass({
         this.ftLayerE.where = 'has_embargo = true AND embargo_until >= ' + date;
         console.log("EMB QUERY " + this.ftLayerE.where);
         this.ftLayerE.show();
+    },
+
+    showCompetitionAreas: function (date) {
+        this.ftLayerCA.where = 'has_competition_area = true AND competition_area_until >= ' + date;
+        console.log("CA QUERY " + this.ftLayerCA.where);
+        this.ftLayerCA.show();
     },
 
     showBlocking: function (date, sports) {
@@ -58,6 +65,7 @@ App.Toc = App.newClass({
         this.ftLayer1.hide();
         this.ftLayer2.hide();
         this.ftLayerE.hide();
+        this.ftLayerCA.hide();
         this.ftLayerB.hide();
         
         var attrs = [];
@@ -104,6 +112,10 @@ App.Toc = App.newClass({
         
         if ($('#area__embargoes').prop('checked')) {
           this.showEmbargoes(today);
+        }
+
+        if ($('#area__competition_areas').prop('checked')) {
+          this.showCompetitionAreas(today);
         }
 
         var area_date = $('#area__blocking_year').val();
