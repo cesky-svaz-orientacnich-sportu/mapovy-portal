@@ -38,6 +38,7 @@
 #  map_family                :string(255)
 #  map_sport                 :string(255)
 #  oris_event_id             :integer
+#  non_oris_event_url        :string(255)
 #  shape_json                :text
 #  shape_kml                 :text
 #  georeference              :string(255)
@@ -532,6 +533,7 @@ class Map < ActiveRecord::Base
     set_embargo
     set_competition_area
     set_blocking
+    unset_oris_url
   end
 
   def set_cartographers_for_api
@@ -573,6 +575,12 @@ class Map < ActiveRecord::Base
     self.has_blocking = blocking? ? 1 : 0
     self.blocking_from = blocking? ? year : 0
     self.blocking_until = blocking? ? blocking_from + 9 : 0
+  end
+
+  def unset_oris_url
+    if oris_event and oris_event_id != 0
+      self.non_oris_event_url = nil
+    end
   end
 
   def cartographers_with_roles

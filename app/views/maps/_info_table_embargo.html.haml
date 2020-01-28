@@ -17,13 +17,17 @@
       %tr
         %th= map_attribute_label :main_race_title
         %td(colspan=3)
-          = link_to map.oris_event.title.html_safe + " " + icon('globe', tooltip: "ORIS"), map.oris_event.oris_url, target: '_blank'
+          = link_to map.oris_event.title.html_safe + " " + icon('globe', tooltip: "ORIS"), map.oris_event.oris_url
         %th= map_attribute_label :main_race_date
         %td= map.oris_event.date
     - elsif !map.main_race_title.blank?
       %tr
         %th= map_attribute_label :main_race_title
-        %td(colspan=3) #{map.main_race_title}
+        %td(colspan=3)
+          - if !map.non_oris_event_url.blank?
+            = link_to map.main_race_title.html_safe + " " + icon('globe'), map.non_oris_event_url.html_safe
+          - else
+            = map.main_race_title
         %th= map_attribute_label :main_race_date
         %td= map.main_race_date ? map.main_race_date.strftime("%d. %m. %Y") : '---'
     - elsif map.oris_event == 0

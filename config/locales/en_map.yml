@@ -44,6 +44,7 @@ en:
       created_by: "Entry created by"
       main_race_title: "Main race (title)"
       main_race_date: "Main race (date)"
+      non_oris_event_url: "Main race (URL)"
       identifier_filing: 'Filing number'
       identifier_approval: 'Approval number'
       identifier_other: 'Other identifier'
@@ -121,6 +122,7 @@ en:
         final_change_requested: 'completion requested'
       map_family:
         map: 'Map'
+        embargo: 'Embargo'
         training_area: 'Training area'
       accuracy:
         imprint: 'printed'

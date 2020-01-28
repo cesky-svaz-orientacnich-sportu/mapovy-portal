@@ -28,7 +28,7 @@
       = javascript_include_tag "_minimap"
       :javascript
         google.load('visualization', '1', {});
-        window.race_map = #{OrisEvent.all.inject({0 => {title:'', date: nil}}){|h, e| h[e.id] = {title: e.title, date: e.date}; h}.to_json.html_safe};
+        window.race_map = #{OrisEvent.all.inject({0 => {title:'', date: nil, url: ''}}){|h, e| h[e.id] = {title: e.title, date: e.date, url: e.oris_url}; h}.to_json.html_safe};
     = javascript_include_tag "mapserver/locale/#{I18n.locale}"
     / cdn for modernizr, if you haven't included it already
     %script(src="https://cdn.jsdelivr.net/webshim/1.12.4/extras/modernizr-custom.js")

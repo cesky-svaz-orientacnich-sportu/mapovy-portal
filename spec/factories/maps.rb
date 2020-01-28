@@ -37,6 +37,7 @@
 #  map_family                :string(255)
 #  map_sport                 :string(255)
 #  oris_event_id             :integer
+#  non_oris_event_url        :string(255)
 #  shape_json                :text
 #  shape_kml                 :text
 #  georeference              :string(255)

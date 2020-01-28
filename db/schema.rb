@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200127100043) do
+ActiveRecord::Schema.define(version: 20200127124300) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -167,6 +167,7 @@ ActiveRecord::Schema.define(version: 20200127100043) do
     t.integer  "blocking_until"
     t.boolean  "has_competition_area",                                            default: false, null: false
     t.date     "competition_area_until"
+    t.string   "non_oris_event_url",        limit: 255
   end
 
   add_index "maps", ["slug"], name: "index_maps_on_slug", unique: true, using: :btree

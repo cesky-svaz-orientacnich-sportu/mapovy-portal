@@ -42,13 +42,16 @@ $(function() {
     if (rid && rid != '') {
       $('#map_main_race_title').prop('readonly', true);
       $('#map_main_race_date').prop('readonly', true);
+      $('#map_non_oris_event_url').prop('readonly', true);
       if (r = window.race_map[rid]) {
         $('#map_main_race_title').val(r.title);
         $('#map_main_race_date').val(r.date);
+        $('#map_non_oris_event_url').val(r.url);
       }
     } else {
       $('#map_main_race_title').prop('readonly', false);
       $('#map_main_race_date').prop('readonly', false);
+      $('#map_non_oris_event_url').prop('readonly', false);
     }
   });
 });

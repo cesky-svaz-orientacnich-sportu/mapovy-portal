@@ -184,11 +184,15 @@
 
 %div.form-group
   = f.label :oris_event_id, map_attribute_label(:main_race, :edit), :class => 'col-sm-2'
-  = f.select :oris_event_id, "<option value=\"0\"#{f.object.oris_event_id == 0 ? 'selected' : ''}>(žádný závod)</option>".html_safe + options_from_collection_for_select(f.object.year ? OrisEvent.in_year(f.object.year) : OrisEvent.sorted, :id, :to_label, f.object.oris_event_id), {:include_blank => true}, :class => 'col-sm-4'
-  = f.label :main_race_title, map_attribute_label(:main_race_title, :edit), :class => 'col-sm-1'
-  = f.text_field :main_race_title, :class => 'col-sm-2'
-  = f.label :main_race_date, map_attribute_label(:main_race_date, :edit), :class => 'col-sm-1'
+  = f.select :oris_event_id, "<option value=\"0\"#{f.object.oris_event_id == 0 ? 'selected' : ''}>(žádný závod)</option>".html_safe + options_from_collection_for_select(f.object.year ? OrisEvent.in_year(f.object.year) : OrisEvent.sorted, :id, :to_label, f.object.oris_event_id), {:include_blank => true}, :class => 'col-sm-6'
+  = f.label :main_race_date, map_attribute_label(:main_race_date, :edit), :class => 'col-sm-2'
   = f.text_field :main_race_date, :class => 'col-sm-2', :type => 'date'
+
+%div.form-group
+  = f.label :main_race_title, map_attribute_label(:main_race_title, :edit), :class => 'col-sm-2'
+  = f.text_field :main_race_title, :class => 'col-sm-4'
+  = f.label :non_oris_event_url, map_attribute_label(:non_oris_event_url, :edit), :class => 'col-sm-2'
+  = f.url_field :non_oris_event_url, :class => 'col-sm-4'
 
 - if current_user.has_role?(:manager)
   %div.form-group

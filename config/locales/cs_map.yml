@@ -62,6 +62,7 @@ cs:
         final_change_requested: 'vráceno k doplnění'
       map_family:
         map: 'Mapa'
+        embargo: 'Embargo'
         training_area: 'Areál pevných kontrol'
       accuracy:
         imprint: 'z tiráže'
@@ -222,6 +223,7 @@ cs:
       main_race: 'Závod ORIS'
       main_race_title: 'Závod'
       main_race_date: 'Datum závodu'
+      non_oris_event_url: 'Odkaz na závod'
       identifier_filing: 'Evidenční číslo'
       identifier_approval: 'Schvalovací číslo'
       identifier_other: 'Jiný identifikátor'
@@ -268,6 +270,7 @@ cs:
       main_race: 'První závod na mapě, je-li v kalendáři ORIS'
       main_race_title: 'Název prvního závodu'
       main_race_date: 'Datum prvního závodu (rrrr-mm-dd)'
+      non_oris_event_url: 'Odkaz na první závod'
       identifier_filing: 'Evidenční číslo, přiděluje ČSOS. Do 1990 rok-kraj-číslo-druh mapy, do 2014 rok-oblast-číslo-druh mapy, od 2015 rok-kraj-číslo-disciplína'
       identifier_approval: 'Číslo vydávané VZÚ (MNO) v letech 1972 - 1992'
       identifier_other: 'Číslo z evidence vydavatele, autora apod.'
@@ -497,6 +500,9 @@ cs:
         Příklad převzatý z ORISu: Mistrovství oblasti ve sprintu
       main_race_date: |
         Datum premiérového závodu. Vyplněním pole Závod ORIS se pole Datum závodu naplní automaticky datem z ORISu. Jinak lze zadat jen výběrem z kalendáře, u vícedenních akcí první den, místo neurčitého data první den v roce, příp. v měsíci.
+      non_oris_event_url: |
+        Odkaz na premiérový závod, není-li závod v ORISu. Od závodů roku 2013 jsou údaje po vyplnění pole Závod ORIS přebírány automaticky z ORISu. U starších map a u závodů nezařazených v ORISu můžete vyplnit URL stránky, na kterou bude položka "Závod" na detailu mapy odkazovat.
+        Prvotně vytvořeno pro potřeby odkazu na soubor embarg MS 2021.
       archive_print_class: |
         Tři samostatná pole, každé pro jeden výtisk mapy v archivu. Povolené hodnoty:
         a = bezvadný, dostačující jako originál, dotisk kontrol apod. se toleruje jen výjimečně, když s dotiskem byl vytištěny celý náklad mapy (např. areál pevných kontrol),

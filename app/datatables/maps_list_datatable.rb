@@ -54,6 +54,7 @@ private
        "oris_event"          => map.oris_event ? map.oris_event.to_s : '',
        "main_race_title"     => map.main_race_title,
        "main_race_date"      => map.main_race_date,
+       "non_oris_event_url"  => map.non_oris_event_url,
        "buttons"             => map_buttons(map),
      }
     end
@@ -118,7 +119,7 @@ private
   end
   
   def columns
-    %w[id state title patron patron_accuracy year year_accuracy scale equidistance map_sport map_type map_family region locality area_size resource georeference mapping_state drawing_technique printing_technique issued_by printed_by administrator identifier_filing identifier_approval identifier_other archive_ note_public note_internal created_by_id approved_by_id oris_event_id main_race_title main_race_date]
+    %w[id state title patron patron_accuracy year year_accuracy scale equidistance map_sport map_type map_family region locality area_size resource georeference mapping_state drawing_technique printing_technique issued_by printed_by administrator identifier_filing identifier_approval identifier_other archive_ note_public note_internal created_by_id approved_by_id oris_event_id main_race_title main_race_date non_oris_event_url]
   end
   
 end

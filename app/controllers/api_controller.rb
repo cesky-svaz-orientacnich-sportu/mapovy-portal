@@ -92,7 +92,7 @@ class ApiController < ApplicationController
             state: m.state_,
             scale: m.scale_,
             map_sport: m.map_sport_,
-            map_family: m.map_family_,
+            map_family: m.map_family,
             has_jpg: m.has_jpg,
             preview_identifier: m.preview_identifier,
             has_blocking: m.has_blocking,

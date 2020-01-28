@@ -26,6 +26,7 @@
 #  resource                  :string(255)
 #  main_race_title           :string(255)
 #  main_race_date            :date
+#  non_oris_event_url        :string(255)
 #  administrator             :text
 #  identifier_approval       :string(255)
 #  identifier_filing         :string(255)
@@ -159,6 +160,7 @@ class MapsController < ApplicationController
       :oris_event         ,
       :main_race_title    ,
       :main_race_date     ,
+      :non_oris_event_url ,
       :link_to_web        ,
     ]
 

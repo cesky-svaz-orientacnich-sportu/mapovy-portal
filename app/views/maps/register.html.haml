@@ -67,6 +67,11 @@
     = f.text_field :main_race_date, :class => 'col-sm-2', :type => 'date'
 
   %div.form-group
+    %span.col-sm-4
+    = f.label :non_oris_event_url, map_attribute_label(:non_oris_event_url), :class => 'col-sm-2'
+    = f.text_field :non_oris_event_url, :class => 'col-sm-6'
+
+  %div.form-group
     = f.label :map_sport, map_attribute_label(:map_sport), :class => 'col-sm-2'
     = f.select :map_sport, Map::MAP_SPORTS.map{|x| [t("mapserver.map_enums.map_sport.#{x}"), x]}, {:include_blank => true}, :class => 'col-sm-2'
     = f.label :map_type, map_attribute_label(:map_type), :class => 'col-sm-2'
