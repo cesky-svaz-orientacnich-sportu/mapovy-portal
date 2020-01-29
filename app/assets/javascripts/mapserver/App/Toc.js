@@ -28,7 +28,14 @@ App.Toc = App.newClass({
     },
 
     refresh: function () {
-        $("#toc .options .item").removeClass("active");
+        var $items = $("#toc .options .item, #areatoc .options .item");
+        
+        $items.removeClass("active");
+        $items.find('input').each(function(i) {
+          if ($(this).prop('checked')) {
+            $(this).parent().addClass('active');
+          }
+        });          
         
         var visibleFamilies = [];
         var visibleSports = [];
@@ -37,7 +44,6 @@ App.Toc = App.newClass({
         
         $("#toc .options input").each(function(i) {
           if ($(this).prop('checked')) {
-            $(this).parent().addClass('active');
             col = $(this).attr('data-filter-column');
             if (col == 'MAP_FAMILY') {
               visibleFamilies.push("'" + $(this).attr('data-filter-value') + "'");
