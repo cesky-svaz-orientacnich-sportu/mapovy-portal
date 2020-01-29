@@ -141,15 +141,18 @@
   }
 }
 
-#toc.minimized .header, #areatoc.minimized .header {
+#toc.minimized .header,
+#areatoc.minimized .header {
     background: #3d3d3d;
     border-bottom: 0;
+    
     strong {
         font-weight: normal;
         color: #fff;
     }
 }
 
-
-
-
+#area__blocking_year {
+  width: 100%;
+  margin-top: 9px;
+}
