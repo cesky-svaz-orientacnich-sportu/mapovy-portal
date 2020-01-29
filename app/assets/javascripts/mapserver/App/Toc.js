@@ -137,10 +137,10 @@ App.Toc = App.newClass({
           sports.push("'ski'")
         }
         if (sports.length > 0) {
-          showBlocking(area_date, sports);
+          this.showBlocking(area_date, sports);
         }
         if ($('#area__blocking_other').prop('checked')) {
-          showBlocking(area_date, ["'trail'", "'extreme'", "'indoor'", "'other'"]);
+          this.showBlocking(area_date, ["'trail'", "'extreme'", "'indoor'", "'other'"]);
         }
     },
 
