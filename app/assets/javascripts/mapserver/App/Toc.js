@@ -33,7 +33,7 @@ App.Toc = App.newClass({
         $items.removeClass("active");
         $items.find('input').each(function(i) {
           if ($(this).prop('checked')) {
-            $(this).parent().addClass('active');
+            $(this).closest('.item').addClass('active');
           }
         });          
         

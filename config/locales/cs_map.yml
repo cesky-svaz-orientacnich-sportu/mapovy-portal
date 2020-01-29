@@ -578,6 +578,7 @@ cs:
         upper: 'od %{y}'
       blocking:
         title: 'Blokace'
+        year: 'v roce'
       embargo:
         info_title: 'Embargo do'
 

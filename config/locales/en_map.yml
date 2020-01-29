@@ -271,6 +271,7 @@ en:
         upper: 'from %{y}'
       blocking:
         title: 'Blocked'
+        year: 'in year'
       embargo:
         info_title: 'Embargo until'
 
