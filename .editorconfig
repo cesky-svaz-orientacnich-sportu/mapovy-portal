@@ -1,0 +1,22 @@
+# https://editorconfig.org
+
+root = true
+
+[*]
+
+# File encoding
+charset = utf-8
+
+# 1 tab (4 space) indentation
+indent_style = tab
+indent_size = 4
+
+# Trailing whitespace (UNIX style with no trailing whitespace)
+end_of_line = lf
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+# Ruby specific
+[*.rb, *.haml]
+indent_style = space
+indent_size = 2
