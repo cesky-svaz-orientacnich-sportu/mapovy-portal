@@ -121,7 +121,7 @@ class MapsController < ApplicationController
   end
 
   def download_all
-    @maps = Map.order(:title)
+    @maps = Map.order(:title).limit(2)
 
     fn = Date.today.strftime("mapy-vsechny--%Y-%m-%d")
 
@@ -180,6 +180,7 @@ class MapsController < ApplicationController
         send_data csv, filename: "#{fn}.csv"
       end
       format.xls do
+      	document_columns = document_columns.map { |c| c == :oris_event ? {:oris_event => :to_s} : c }
         file = @maps.to_xls(columns: document_columns, headers: document_headers)
         send_data file, filename: "#{fn}.xls"
       end
