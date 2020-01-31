@@ -4,7 +4,7 @@ Mapserver::Application.routes.draw do
   devise_for :users, :controllers => { :omniauth_callbacks => "omniauth_callbacks", :registrations => "registrations", :sessions => "sessions" }
 
   devise_scope :user do
-    get '/users/auth/:provider' => 'omniauth_callbacks#passthru'
+    post '/users/auth/:provider' => 'omniauth_callbacks#passthru'
   end
 
   get '/files/maps/*anything', to: redirect("/404", status: 404)

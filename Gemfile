@@ -23,6 +23,7 @@ gem "nested_form"
 gem "nilify_blanks"
 gem "nokogiri"
 gem "omniauth"
+gem 'omniauth-rails_csrf_protection', '~> 0.1'
 gem "omniauth-facebook"
 gem "omniauth-google-oauth2", "~>0.6.0"
 gem "paperclip"
