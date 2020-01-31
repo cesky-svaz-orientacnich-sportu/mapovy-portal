@@ -17,10 +17,10 @@
 #
 
 class OrisEvent < ActiveRecord::Base
-  
+
   scope :in_year, lambda{|y| where("date_part('year', date) = ?", y).order(:date)}
   scope :sorted, ->{ order(:date) }
-  
+
   def self.years
     OrisEvent.group("date_part('year', date)").map{|m| m.date.year}.sort
   end
@@ -28,38 +28,23 @@ class OrisEvent < ActiveRecord::Base
   def to_s
     to_label
   end
-  
+
   def to_label
     s = "[#{date}] #{title} / #{organizers * "+"}"
     unless place.blank?
       if place.size < 20
-        s << ", #{place}" 
+        s << ", #{place}"
       else
-        s << ", #{place[0...20]}..." 
+        s << ", #{place[0...20]}..."
       end
     end
     s << " ##{oris_id}"
     s
   end
-  
+
   def self.obpostupy_lookup
     require 'open-uri'
     require 'nokogiri'
-
-    # url = "http://www.obpostupy.cz/gadget-jar/kod_archiv.php"
-    # doc = Nokogiri::XML(open(url).read)
-    # if doc and doc.root
-    #   puts "Loaded obpostupy map."
-    #   doc.root.css("zavod").each do |row|
-    #     oris_id = row.css("id_oris").first.text.to_i
-    #     map_url = row.css("odkaz").first.text.strip
-    #     puts "-> oris ID = #{oris_id}"
-    #     puts " --> #{map_url}"
-    #     if e = OrisEvent.where(oris_id: oris_id).first
-    #       e.update_attribute(:obpostupy_map_url, map_url)
-    #     end
-    #   end
-    # end
 
     url = "http://www.obpostupy.cz/index.php"
     doc = Nokogiri::HTML(open(url).read)
@@ -77,7 +62,7 @@ class OrisEvent < ActiveRecord::Base
               puts " --> #{url}"
               if e = OrisEvent.where(oris_id: oris_id).first
                 e.update_attribute(:obpostupy_url, url)
-                
+
                 s = open(url).read
                 if m = s.encode('ASCII-8BIT',invalid: :replace, undef: :replace).match(/imageUrl = '\/gadget\/kartat\/(\d+)\.jpg'/)
                   map_url = "http://www.obpostupy.cz/gadget/kartat/#{m[1]}.jpg"
@@ -123,17 +108,17 @@ class OrisEvent < ActiveRecord::Base
   def oris_info_url
     "https://oris.orientacnisporty.cz/API/?format=json&method=getEvent&id=#{oris_id}"
   end
-  
+
   def oris_url
     "https://oris.orientacnisporty.cz/Zavod?id=#{oris_id}"
   end
-  
-  
+
+
   def oris_data
     return {} if oris_json.blank?
     @oris_data ||= JSON[oris_json]['Data']
   end
-  
+
   def organizers
     orgs = ['Org1', 'Org2'].map do |okey|
       oris_data[okey] && !oris_data[okey].empty? && oris_data[okey]['Abbr']
@@ -150,7 +135,7 @@ class OrisEvent < ActiveRecord::Base
     end
     sleep 1
   end
-  
+
   def fetch
     return unless oris_id
     puts " -- fetching"
@@ -160,7 +145,7 @@ class OrisEvent < ActiveRecord::Base
     update_attribute :oris_timestamp, Time.now
     puts " -- OK"
   end
-  
+
   def set_oris_properties
     unless oris_data['Name'].blank?
       update_attribute :title, oris_data['Name']
