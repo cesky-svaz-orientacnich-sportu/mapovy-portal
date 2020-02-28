@@ -33,15 +33,15 @@
             = t("mapserver.map_layers.years.upper", :y => y1)
           - elsif y2
             = t("mapserver.map_layers.years.lower", :y => y2)
-%div#areatoc.minimized
+%div#areatoc
   %div.header
     %strong= t("mapserver.areas")
-    = link_to "", "javascript:void(0)", :id => "TOC_area_collapse_button", :class => 'link toc_collapse', :title => t("mapserver.panelMin"), :style => "display:none"
-    = link_to "", "javascript:void(0)", :id => "TOC_area_expand_button",   :class => 'link toc_expand', :title => t("mapserver.panelMax")
-  %div.options(style="display:none")
+    = link_to "", "javascript:void(0)", :id => "TOC_area_collapse_button", :class => 'link toc_collapse', :title => t("mapserver.panelMin")
+    = link_to "", "javascript:void(0)", :id => "TOC_area_expand_button",   :class => 'link toc_expand', :title => t("mapserver.panelMax"), :style => "display:none"
+  %div.options
     %div.item{:class => 'item'}
       %label
-        %input{:type => 'checkbox', :checked => false, :onclick => "toc.refresh()", :id => "area__embargoes"}
+        %input{:type => 'checkbox', :checked => true, :onclick => "toc.refresh()", :id => "area__embargoes"}
         %span{:style => "background-color:#{Color::RGB::from_html('#ff0000').lighten_by(40).html};border-color:#ff0000"}
         Embarga
     %div.item{:class => 'item'}
