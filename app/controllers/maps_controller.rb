@@ -121,7 +121,7 @@ class MapsController < ApplicationController
   end
 
   def download_all
-    @maps = Map.order(:title).limit(2)
+    @maps = Map.order(:title)
 
     fn = Date.today.strftime("mapy-vsechny--%Y-%m-%d")
 
