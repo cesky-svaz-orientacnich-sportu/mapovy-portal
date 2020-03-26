@@ -11,7 +11,7 @@
 #  updated_at :datetime         not null
 #
 
-class Text < ActiveRecord::Base
+class Text < ApplicationRecord
 
   def to_s
     name.to_s

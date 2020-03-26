@@ -27,7 +27,7 @@
 #  full_name              :string(255)
 #
 
-class User < ActiveRecord::Base
+class User < ApplicationRecord
 
   nilify_blanks
 
@@ -35,19 +35,19 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
 
   has_many :authorizations
-  
+
   has_many :created_maps, :class_name => 'Map', :foreign_key => :created_by_id
-  
+
   before_save :check_against_oris_possibly
   after_create :notify_create
-  
+
   ROLES = %w{contributor organizer cartographer manager admin}
-  
+
   def name_for_sort
     ary = name.split
     ([ary.last] + ary[0...-1] || []) * " "
   end
-  
+
   def to_s
     if role == 'cartographer' and regions.any?
       "#{name} [koordinátor pro #{regions.map{|r| Map::REGIONS[r]} * " a "}]"
@@ -59,21 +59,21 @@ class User < ActiveRecord::Base
       "#{name} [#{oris_registrations}]"
     end
   end
-  
+
   def to_log
     "#{name} (ID##{id} / #{role_to_s})"
   end
-  
+
   def role_to_s
     (!role.blank?) ? I18n.t("roles.#{role}") : '---'
   end
-  
+
   def check_against_oris_possibly
     if email_changed? or new_record?
       check_against_oris
     end
   end
-  
+
   def has_role?(*roles)
     return true if self.role == 'admin'
     roles.map(&:to_s).include?(self.role.to_s)
@@ -82,11 +82,11 @@ class User < ActiveRecord::Base
   def name
     full_name || authorizations.map(&:name).reject(&:blank?).first || email || '---'
   end
-  
+
   def admin?
     has_role?(:admin)
   end
-  
+
   def check_against_oris
     base = "https://oris.orientacnisporty.cz/API"
     firstname, lastname = *name.split
@@ -126,7 +126,7 @@ class User < ActiveRecord::Base
     end
     log
   end
-  
+
   def regions
     (authorized_regions || "").strip.split
   end
@@ -134,7 +134,7 @@ class User < ActiveRecord::Base
   def clubs
     (authorized_clubs || "").strip.split
   end
-  
+
   def to_json
     {
       id: id,
@@ -142,7 +142,7 @@ class User < ActiveRecord::Base
       role: role,
     }.to_json
   end
-  
+
   def notify_create
     UserMailer.new_user(self).deliver
   end

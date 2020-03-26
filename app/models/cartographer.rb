@@ -11,7 +11,7 @@
 #  updated_at :datetime         not null
 #
 
-class Cartographer < ActiveRecord::Base
+class Cartographer < ApplicationRecord
 
   belongs_to :map
   belongs_to :author

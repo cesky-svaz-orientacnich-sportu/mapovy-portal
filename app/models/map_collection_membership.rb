@@ -12,7 +12,7 @@
 #  updated_at        :datetime         not null
 #
 
-class MapCollectionMembership < ActiveRecord::Base
+class MapCollectionMembership < ApplicationRecord
   belongs_to :map_collection
   belongs_to :map
 end

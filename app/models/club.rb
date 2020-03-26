@@ -16,15 +16,15 @@
 #  slug           :string(255)
 #
 
-class Club < ActiveRecord::Base
+class Club < ApplicationRecord
 
   paginates_per 20
-  
+
   has_many :maps, :primary_key => :abbreviation, :foreign_key => :patron
-  
+
   scope :sorted, ->{ order(:abbreviation) }
   validates_uniqueness_of :abbreviation
-  
+
   extend FriendlyId
   friendly_id :abbreviation, use: [:slugged, :finders]
 
@@ -33,23 +33,23 @@ class Club < ActiveRecord::Base
     s += " - #{name}" unless name.blank?
     s
   end
-  
+
   def oris_link
     "https://oris.orientacnisporty.cz/Klub?id=#{abbreviation}"
   end
-    
+
   def self.by_abbreviation(x)
     where(:abbreviation => x).first
   end
-    
+
   def self.oris_url
     "https://oris.orientacnisporty.cz/API/?format=json&method=getCSOSClubList"
   end
-  
+
   def oris_url
     "https://oris.orientacnisporty.cz/API/?format=json&method=getClub&id=#{abbreviation}"
   end
-  
+
   def self.build
     require 'open-uri'
     puts "Opening #{oris_url}"
@@ -67,7 +67,7 @@ class Club < ActiveRecord::Base
           c.get
         end
       end
-    end    
+    end
   end
 
   def get
@@ -81,12 +81,12 @@ class Club < ActiveRecord::Base
     end
     sleep 1
   end
-  
+
   def oris_data
     return {} if oris_data_json.blank?
     @oris_data ||= JSON[oris_data_json]['Data']
   end
-    
-  
+
+
 
 end

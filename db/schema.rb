@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -58,9 +57,8 @@ ActiveRecord::Schema.define(version: 20200127124300) do
     t.datetime "updated_at",                 null: false
     t.text     "oris_data_json"
     t.string   "slug",           limit: 255
+    t.index ["slug"], name: "index_clubs_on_slug", unique: true, using: :btree
   end
-
-  add_index "clubs", ["slug"], name: "index_clubs_on_slug", unique: true, using: :btree
 
   create_table "issue_reports", force: :cascade do |t|
     t.integer  "map_id"
@@ -91,9 +89,8 @@ ActiveRecord::Schema.define(version: 20200127124300) do
     t.string   "logo_content_type", limit: 255
     t.integer  "logo_file_size"
     t.datetime "logo_updated_at"
+    t.index ["slug"], name: "index_map_collections_on_slug", unique: true, using: :btree
   end
-
-  add_index "map_collections", ["slug"], name: "index_map_collections_on_slug", unique: true, using: :btree
 
   create_table "map_layers", force: :cascade do |t|
     t.integer  "layer_index"
@@ -168,9 +165,8 @@ ActiveRecord::Schema.define(version: 20200127124300) do
     t.boolean  "has_competition_area",                                            default: false, null: false
     t.date     "competition_area_until"
     t.string   "non_oris_event_url",        limit: 255
+    t.index ["slug"], name: "index_maps_on_slug", unique: true, using: :btree
   end
-
-  add_index "maps", ["slug"], name: "index_maps_on_slug", unique: true, using: :btree
 
   create_table "oris_events", force: :cascade do |t|
     t.integer  "oris_id"
@@ -215,11 +211,10 @@ ActiveRecord::Schema.define(version: 20200127124300) do
     t.string   "authorized_clubs",       limit: 255
     t.string   "authorized_regions",     limit: 255
     t.string   "full_name",              limit: 255
+    t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
+    t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
-
-  add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
-  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   create_table "versions", force: :cascade do |t|
     t.string   "item_type",      limit: 255, null: false
@@ -229,8 +224,7 @@ ActiveRecord::Schema.define(version: 20200127124300) do
     t.text     "object"
     t.datetime "created_at"
     t.text     "object_changes"
+    t.index ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id", using: :btree
   end
-
-  add_index "versions", ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id", using: :btree
 
 end

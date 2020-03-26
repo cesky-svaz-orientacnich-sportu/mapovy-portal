@@ -68,7 +68,7 @@
 #  blocking_until            :integer
 #
 
-class Map < ActiveRecord::Base
+class Map < ApplicationRecord
 
   has_paper_trail ignore: [:user_updated_at, :state_changed_at, :last_reminder_sent_at]
   nilify_blanks

@@ -1,8 +1,9 @@
-# -*- encoding : utf-8 -*-
-require File.expand_path('../boot', __FILE__)
+require_relative 'boot'
 
 require 'rails/all'
 
+# Require the gems listed in Gemfile, including any gems
+# you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
 module Mapserver
@@ -56,7 +57,6 @@ module Mapserver
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
 
-    config.action_controller.permit_all_parameters = true   
-    
+    config.action_controller.permit_all_parameters = true
   end
 end

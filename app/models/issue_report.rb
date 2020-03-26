@@ -12,7 +12,7 @@
 #  resolved   :boolean          default(FALSE), not null
 #
 
-class IssueReport < ActiveRecord::Base
+class IssueReport < ApplicationRecord
   belongs_to :map
   belongs_to :user
   scope :unresolved, ->{ where(resolved: false) }

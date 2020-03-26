@@ -15,7 +15,7 @@
 #  logo_updated_at   :datetime
 #
 
-class MapCollection < ActiveRecord::Base
+class MapCollection < ApplicationRecord
 
   has_attached_file :logo, :styles => { :show => "200x200>", :thumb => "100x100#", :micro => "64x64#" }
   validates_attachment_content_type :logo, :content_type => /\Aimage\/.*\Z/
