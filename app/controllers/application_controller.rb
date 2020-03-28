@@ -2,16 +2,16 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  before_filter :set_locale
-  
+  before_action :set_locale
+
   layout "public"
- 
+
   protected
-  
+
   def use_map
     @_use_map = true
   end
-  
+
   def set_locale
     if params[:locale] and params[:locale] != 'undefined' and !current_user
       I18n.locale = params[:locale]
@@ -19,11 +19,11 @@ class ApplicationController < ActionController::Base
       I18n.locale = I18n.default_locale
     end
   end
-  
+
   def default_url_options(options={})
     options.merge({ locale: I18n.locale })
   end
-  
+
   def require_any_user
     if current_user
       true
@@ -33,15 +33,15 @@ class ApplicationController < ActionController::Base
       redirect_to new_user_session_path
     end
   end
-  
+
   def admin?
     current_user && current_user.admin?
   end
-  
+
   def has_role?(*roles)
     current_user && (admin? || current_user.has_role?(*roles))
   end
-  
+
   def require_admin
     if admin?
       true
@@ -68,7 +68,7 @@ class ApplicationController < ActionController::Base
       end
     end
   end
-  
+
   def require_cartographer
     if has_role?(:manager, :cartographer)
       true
@@ -81,7 +81,7 @@ class ApplicationController < ActionController::Base
       end
     end
   end
-  
+
   def require_organizer
     if has_role?(:manager, :cartographer, :organizer)
       true
@@ -94,7 +94,7 @@ class ApplicationController < ActionController::Base
       end
     end
   end
-  
+
   def require_contributor
     if has_role?(:manager, :cartographer, :organizer, :contributor)
       true
@@ -107,12 +107,12 @@ class ApplicationController < ActionController::Base
       end
     end
   end
-  
+
   helper_method :admin?, :has_role?
 
 
   def after_sign_in_path_for(resource)
     root_path
   end
-    
+
 end

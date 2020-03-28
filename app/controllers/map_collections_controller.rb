@@ -16,9 +16,8 @@
 #
 
 class MapCollectionsController < ApplicationController
-  
-  before_filter :require_manager, only: [:edit, :create, :update, :new, :destroy]
-  # before_filter :require_any_user
+
+  before_action :require_manager, only: [:edit, :create, :update, :new, :destroy]
 
   def index
     @map_collections = MapCollection.order(:title)
@@ -53,7 +52,7 @@ class MapCollectionsController < ApplicationController
         redirect_to :action => :index
       end
     end
-  end    
-  
+  end
+
 
 end

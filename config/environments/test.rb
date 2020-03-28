@@ -15,7 +15,7 @@ Mapserver::Application.configure do
   # Configure public file server for tests with Cache-Control for performance.
   config.public_file_server.enabled = true
   config.public_file_server.headers = {
-    'Cache-Control' => 'public, max-age=3600'
+    "Cache-Control' => 'public, max-age=#{1.hour.seconds.to_i}"
   }
 
   # Show full error reports and disable caching.
@@ -29,6 +29,11 @@ Mapserver::Application.configure do
   config.action_controller.allow_forgery_protection = false
   config.action_mailer.perform_caching = false
 
+  # local mailcatcher
+  config.action_mailer.default_url_options = { :host => "localhost:3333" }
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = { :address => "localhost", :port => 1025 }
+
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr
 
@@ -40,9 +45,4 @@ Mapserver::Application.configure do
 
   # asset host (for JPGs et al)
   config.asset_root_url = "https://mapy.orientacnisporty.cz"
-
-  # local mailcatcher
-  config.action_mailer.default_url_options = { :host => "localhost:3333" }
-  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = { :address => "localhost", :port => 1025 }
 end

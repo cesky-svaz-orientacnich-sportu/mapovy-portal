@@ -363,7 +363,8 @@ class Map < ApplicationRecord
     puts cartographers.inspect
     attrs
   end
-  alias_method_chain :"cartographers_attributes=", :creation
+  alias_method :"cartographers_attributes_without_creation=", :"cartographers_attributes="
+  alias_method :"cartographers_attributes=", :"cartographers_attributes_with_creation="
 
   y0 = Date.today.year
 
