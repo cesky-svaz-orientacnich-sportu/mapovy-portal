@@ -1,1 +1,0 @@
-Rails.application.config.action_controller.raise_on_unfiltered_parameters = true
