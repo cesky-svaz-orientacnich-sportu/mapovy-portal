@@ -20,7 +20,7 @@ class MapCollection < ApplicationRecord
   has_attached_file :logo, :styles => { :show => "200x200>", :thumb => "100x100#", :micro => "64x64#" }
   validates_attachment_content_type :logo, :content_type => /\Aimage\/.*\Z/
 
-  has_many :map_collection_memberships, { dependent: :destroy }, -> { order('map_collection_memberships.year') }
+  has_many :map_collection_memberships, -> { order('map_collection_memberships.year') }, { dependent: :destroy }
   has_many :maps, through: :map_collection_memberships
   accepts_nested_attributes_for :map_collection_memberships, :allow_destroy => true
 

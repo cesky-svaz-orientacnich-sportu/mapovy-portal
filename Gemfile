@@ -1,11 +1,11 @@
 source "http://rubygems.org"
 
-ruby "2.3.8"
+ruby "2.6.5"
 
-gem 'activerecord-postgis-adapter', "~> 5.0"
+gem 'activerecord-postgis-adapter'
 gem 'bootsnap'
 gem "bootstrap-sass"
-gem "coffee-rails", "4.2.2"
+gem "coffee-rails"
 gem "color"
 gem "dalli"
 gem "devise"
@@ -28,7 +28,7 @@ gem "omniauth-facebook"
 gem "omniauth-google-oauth2"
 gem "paperclip"
 gem "paper_trail"
-gem "rails", "~> 5.2.4.2"
+gem "rails"
 gem "rails-controller-testing"
 gem "RedCloth"
 gem "rgeo"
@@ -38,6 +38,7 @@ gem "select2-rails"
 gem "to_xls"
 gem "turnout"
 gem "uuidtools"
+gem "webpacker"
 
 gem "rspec-rails", :group => [:test, :development]
 gem "factory_girl_rails", :group => [:test, :development]
