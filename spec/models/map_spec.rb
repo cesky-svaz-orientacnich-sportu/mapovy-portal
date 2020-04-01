@@ -59,27 +59,27 @@
 require 'rails_helper'
 
 RSpec.describe Map, type: :model do
-  
+
   it "assigns a good first number" do
-    map1 = FactoryGirl.create(:map, region: 'A')
+    map1 = FactoryBot.create(:map, region: 'A')
     assert_equal '15A001O', map1.identifier_filing
   end
-  
+
   it "assigns properly into a hole and after region change" do
-    map1 = FactoryGirl.create(:map, region: 'A')
-    map2 = FactoryGirl.create(:map, region: 'A', map_sport: Map::MAP_SPORT_MTBO)
-    map3 = FactoryGirl.create(:map, region: 'A')
+    map1 = FactoryBot.create(:map, region: 'A')
+    map2 = FactoryBot.create(:map, region: 'A', map_sport: Map::MAP_SPORT_MTBO)
+    map3 = FactoryBot.create(:map, region: 'A')
     assert_equal '15A001O', map1.identifier_filing
     assert_equal '15A002M', map2.identifier_filing
     assert_equal '15A003O', map3.identifier_filing
-    
+
     map2.region = 'H'
     map2.identifier_filing = map2.proposed_identifier_filing
     map2.save
     assert_equal '15H001M', map2.identifier_filing
 
-    map4 = FactoryGirl.create(:map, region: 'A')
+    map4 = FactoryBot.create(:map, region: 'A')
     assert_equal '15A002O', map4.identifier_filing
   end
-  
+
 end

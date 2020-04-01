@@ -56,24 +56,24 @@
 #  user_updated_at           :datetime
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :map do
     sequence(:title) {|n| "Mapa ##{n}"}
-    region 'X'
-    year 2015
-    scale 10000
-    equidistance 5
-    map_type 'isom'
-    oris_event_id 0
-    patron 'AAA'
-    patron_accuracy 'imprint'
-    year_accuracy 'imprint'
-    state Map::STATE_PROPOSED
-    map_sport Map::MAP_SPORT_FOOT
-    map_family Map::MAP_FAMILY_MAP
-    locality {"prostor mapy #{title} v kraji #{region} vydane klubem #{patron}"}    
+    region { 'X' }
+    year { 2015 }
+    scale { 10000 }
+    equidistance { 5 }
+    map_type { 'isom' }
+    oris_event_id { 0 }
+    patron { 'AAA' }
+    patron_accuracy { 'imprint' }
+    year_accuracy { 'imprint' }
+    state { Map::STATE_PROPOSED }
+    map_sport { Map::MAP_SPORT_FOOT }
+    map_family { Map::MAP_FAMILY_MAP }
+    locality {"prostor mapy #{title} v kraji #{region} vydane klubem #{patron}"}
     after(:create) do |map|
-      map.update_attribute :identifier_filing, map.proposed_identifier_filing 
+      map.update_attribute :identifier_filing, map.proposed_identifier_filing
     end
   end
 end

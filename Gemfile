@@ -41,7 +41,7 @@ gem "uuidtools"
 gem "webpacker"
 
 gem "rspec-rails", :group => [:test, :development]
-gem "factory_girl_rails", :group => [:test, :development]
+gem "factory_bot_rails", :group => [:test, :development]
 gem "ci_reporter_rspec"
 
 gem "execjs", :group => [:production, :staging]
