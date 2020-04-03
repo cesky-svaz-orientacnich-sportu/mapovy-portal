@@ -1,6 +1,6 @@
 namespace :deploy do
   desc "Restart Application"
-  task :restart
+  task :restart do
     on roles :app do
       within fetch(:current_path) do
         execute :touch, 'tmp/restart.txt'
