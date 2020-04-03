@@ -31,7 +31,6 @@ staging:
   database: mapserver_staging
   host: localhost
   username: mapserver_staging
-  password: <%= ENV["DB_STAGING_PG_PASSWORD"] %>
   encoding: unicode
 
 production:
@@ -40,5 +39,4 @@ production:
   database: mapserver
   host: localhost
   username: mapserver
-  password: <%= ENV["DB_PG_PASSWORD"] %>
   encoding: unicode

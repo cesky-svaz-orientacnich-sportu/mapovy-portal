@@ -48,17 +48,21 @@ gem "execjs", :group => [:production, :staging]
 gem "uglifier", :group => [:production, :staging]
 
 group :test do
-  gem "guard-rspec"
   gem "database_cleaner"
+  gem "guard-rspec"
   gem "launchy"
 end
 
 group :development do
-  gem "capistrano", "~> 2.0"
-  gem "capistrano-db-tasks", "0.2.1", :require => false
-  gem "lorem-ipsum"
-  gem "thin"
+  gem "annotate"
   gem "better_errors"
   gem "binding_of_caller"
-  gem "annotate"
+  gem "capistrano", require: false
+  gem "capistrano-bundler", require: false
+  gem "capistrano-db-tasks", :require => false
+  gem "capistrano-rails", require: false
+  gem "capistrano-rvm", require: false
+  gem "capistrano-yarn", require: false
+  gem "lorem-ipsum"
+  gem "thin"
 end

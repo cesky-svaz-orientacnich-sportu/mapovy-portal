@@ -1,6 +1,9 @@
-# -*- encoding : utf-8 -*-
 set :stage, :production
-set :deploy_to, '/home/mapserver/mapserver'
-server 'goldfish.amagical.net', :app, :web, :db, :primary => true
+
+server "5.180.201.132",
+	user: "mapserver",
+	roles: %w{app db web}
+
 set :branch, "master"
-set :rails_env, 'production'
+set :deploy_to, "/var/www/mapserver"
+set :rails_env, "production"
