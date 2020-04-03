@@ -24,4 +24,4 @@ namespace :deploy do
 end
 
 after "deploy:updating", "bundle:install", "deploy:migrate", "deploy:cleanup"
-after "deploy:update", "deploy:link_data"
+after "deploy:updated", "deploy:link_data"
