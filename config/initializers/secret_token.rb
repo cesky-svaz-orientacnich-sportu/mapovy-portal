@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 # Be sure to restart your server when you modify this file.
 
 # Your secret key for verifying the integrity of signed cookies.
@@ -8,4 +7,3 @@
 
 Mapserver::Application.config.secret_token = ENV["RAILS_SECRET_TOKEN"]
 Mapserver::Application.config.secret_key_base = ENV["RAILS_SECRET_KEY_BASE"]
-
