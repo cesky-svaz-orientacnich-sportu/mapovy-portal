@@ -25,3 +25,4 @@ end
 
 after "deploy:updating", "bundler:install", "deploy:migrate", "deploy:cleanup"
 after "deploy:symlink:release", "deploy:link_data"
+after 'deploy:published', 'deploy:restart'
