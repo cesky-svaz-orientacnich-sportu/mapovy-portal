@@ -2,7 +2,7 @@ namespace :deploy do
   desc "Restart Application"
   task :restart do
     on roles :app do
-      within fetch(:current_path) do
+      within current_path do
         execute :touch, 'tmp/restart.txt'
       end
     end
@@ -11,7 +11,7 @@ namespace :deploy do
   desc "Point `public/data` to `data` in home directory"
   task :link_data do
   	on roles :all do
-      within fetch(:current_path) do
+      within current_path do
         case fetch(:stage)
         when :production
           execute :ln, '-sf', '/home/mapserver/data', 'public/data'
@@ -24,4 +24,4 @@ namespace :deploy do
 end
 
 after "deploy:updating", "bundler:install", "deploy:migrate", "deploy:cleanup"
-after "deploy:updated", "deploy:link_data"
+after "deploy:symlink:release", "deploy:link_data"
