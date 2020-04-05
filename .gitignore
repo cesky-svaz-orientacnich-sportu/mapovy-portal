@@ -28,3 +28,6 @@ vendor/bundle
 /yarn-error.log
 yarn-debug.log*
 .yarn-integrity
+
+# Don't share the decrypt key to our credentials
+/config/master.key
