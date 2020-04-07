@@ -22,12 +22,12 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
 private
 
   def oauthorize(kind)
-    @user = find_for_ouath(kind, env["omniauth.auth"], current_user)
+    @user = find_for_ouath(kind, request.env["omniauth.auth"], current_user)
     if @user
       @user.update_attribute :confirmed_at, Time.now
       @user.update_attribute :confirmation_sent_at, Time.now
       flash[:notice] = I18n.t "devise.omniauth_callbacks.success", :kind => kind
-      session["devise.#{kind.downcase}_data"] = env["omniauth.auth"]
+      session["devise.#{kind.downcase}_data"] = request.env["omniauth.auth"]
       sign_in_and_redirect @user, :event => :authentication
     end
   end
