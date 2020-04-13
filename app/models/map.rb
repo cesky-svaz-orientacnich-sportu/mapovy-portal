@@ -73,10 +73,10 @@ class Map < ApplicationRecord
   has_paper_trail ignore: [:user_updated_at, :state_changed_at, :last_reminder_sent_at]
   nilify_blanks
 
-  belongs_to :created_by, :class_name => 'User'
-  belongs_to :completed_by, :class_name => 'User'
-  belongs_to :approved_by, :class_name => 'User'
-  belongs_to :oris_event
+  belongs_to :created_by, :class_name => 'User', optional: true
+  belongs_to :completed_by, :class_name => 'User', optional: true
+  belongs_to :approved_by, :class_name => 'User', optional: true
+  belongs_to :oris_event, optional: true
   has_many :cartographers, dependent: :destroy
   has_many :authors, through: :cartographers
   accepts_nested_attributes_for :cartographers, :allow_destroy => true

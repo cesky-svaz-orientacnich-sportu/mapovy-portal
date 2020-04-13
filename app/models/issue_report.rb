@@ -14,7 +14,7 @@
 
 class IssueReport < ApplicationRecord
   belongs_to :map
-  belongs_to :user
+  belongs_to :user, optional: true
   scope :unresolved, ->{ where(resolved: false) }
   scope :resolved, ->{ where(resolved: true) }
 end
