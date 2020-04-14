@@ -299,7 +299,7 @@ class MapsController < ApplicationController
       if params.has_key?(:redirect_to)
         redirect_to params[:redirect_to]
       else
-        redirect_back fallback_location: { action: 'show', id: params[:id] }
+        redirect_back fallback_location: { action: 'index' }
       end
     else
       flash[:error] = "Uživatel #{current_user} nemá oprávnění smazat mapu #{@map}!"
