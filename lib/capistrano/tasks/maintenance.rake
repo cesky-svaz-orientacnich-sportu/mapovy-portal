@@ -4,7 +4,7 @@ namespace :maintenance do
   	on roles :all do
       within current_path do
         with rails_env: fetch(:rails_env) do
-          execute :bundel, 'exec', 'rake', 'maintenance:start', "reason=\"#{ENV['reason']}\""
+          execute :bundle, 'exec', 'rake', 'maintenance:start', "reason=\"#{ENV['reason']}\""
         end
       end
     end
@@ -15,7 +15,7 @@ namespace :maintenance do
     on roles :all do
       within current_path do
         with rails_env: fetch(:rails_env) do
-          execute :bundel, 'exec', 'rake', 'maintenance:end'
+          execute :bundle, 'exec', 'rake', 'maintenance:end'
         end
       end
     end
