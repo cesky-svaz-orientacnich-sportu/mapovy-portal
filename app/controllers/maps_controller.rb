@@ -272,13 +272,21 @@ class MapsController < ApplicationController
   def remove
     @map = Map.find(params[:id])
     if @map.authorized_to_destroy?(current_user)
-      @map.update_attribute :identifier_filing, nil if @map.state == Map::STATE_PROPOSED
-      @map.update_attribute :state, Map::STATE_REMOVED
+      #@map.update_attribute :identifier_filing, nil if @map.state == Map::STATE_PROPOSED
+      #@map.update_attribute :state, Map::STATE_REMOVED
       flash[:error] = "Mapa #{@map} označena jako zrušená."
-      redirect_to params[:redirect_to] || :back
+      if params.has_key?(:redirect_to)
+        redirect_to params[:redirect_to]
+      else
+        redirect_back fallback_location: { action: 'show', id: params[:id] }
+      end
     else
       flash[:error] = "Uživatel #{current_user} nemá oprávnění smazat mapu #{@map}!"
-      redirect_to params[:redirect_to] || :back
+      if params.has_key?(:redirect_to)
+        redirect_to params[:redirect_to]
+      else
+        redirect_back fallback_location: { action: 'show', id: params[:id] }
+      end
     end
   end
 
@@ -288,10 +296,18 @@ class MapsController < ApplicationController
       @map.remove_preview
       @map.destroy
       flash[:error] = "Mapa #{@map} odstraněna."
-      redirect_to params[:redirect_to] || :back
+      if params.has_key?(:redirect_to)
+        redirect_to params[:redirect_to]
+      else
+        redirect_back fallback_location: { action: 'show', id: params[:id] }
+      end
     else
       flash[:error] = "Uživatel #{current_user} nemá oprávnění smazat mapu #{@map}!"
-      redirect_to params[:redirect_to] || :back
+      if params.has_key?(:redirect_to)
+        redirect_to params[:redirect_to]
+      else
+        redirect_back fallback_location: { action: 'show', id: params[:id] }
+      end
     end
   end
 
