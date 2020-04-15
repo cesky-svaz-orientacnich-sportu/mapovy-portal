@@ -1,5 +1,5 @@
 # config valid for current version and patch releases of Capistrano
-lock "~> 3.12.1"
+lock "~> 3.13.0"
 
 set :application, "mapserver"
 set :repo_url, "git@github.com:cesky-svaz-orientacnich-sportu/mapovy-portal.git"
