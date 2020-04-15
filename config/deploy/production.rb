@@ -2,7 +2,7 @@ set :stage, :production
 
 server "5.180.201.132",
 	user: "mapserver",
-	roles: %w{app db web}
+	roles: %w{app db web cron}
 
 set :branch, "rails-upgrade"
 set :deploy_to, "/var/www/mapserver"

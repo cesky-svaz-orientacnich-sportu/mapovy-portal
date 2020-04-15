@@ -39,6 +39,7 @@ gem "to_xls"
 gem "turnout"
 gem "uuidtools"
 gem "webpacker"
+gem 'whenever', require: false
 
 gem "rspec-rails", :group => [:test, :development]
 gem "factory_bot_rails", :group => [:test, :development]

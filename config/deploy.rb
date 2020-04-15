@@ -38,3 +38,6 @@ set :db_local_clean, true
 
 # Remove the dump file from the server after downloading.
 set :db_remote_clean, true
+
+# Whenever crontab integration
+set :whenever_roles, ->{ :cron }
