@@ -125,6 +125,7 @@ Mapserver::Application.configure do
   config.action_mailer.smtp_settings = {
     :address => "mta.amagical.net",
     :port => 587,
+    :authentication => "plain",
     :user_name => ENV["SMTP_USER"],
     :password => ENV["SMTP_PASSWORD"]
   }
