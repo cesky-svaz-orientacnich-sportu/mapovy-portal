@@ -516,7 +516,7 @@ class MapsController < ApplicationController
     if fn = @map.preview_original_filename and has_role?(:manager)
       send_file fn, disposition: :inline
     else
-      render nothing: true, status: 404
+      head 404, "content_type" => "text/plain"
     end
   end
 
