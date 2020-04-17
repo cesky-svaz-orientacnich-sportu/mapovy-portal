@@ -1,87 +1,44 @@
-# -*- encoding : utf-8 -*-
-require 'capistrano'
-require "bundler/capistrano"
-require 'capistrano-db-tasks'
-load 'deploy/assets'
+# config valid for current version and patch releases of Capistrano
+lock "~> 3.13.0"
 
-default_run_options[:pty] = true
-default_run_options[:shell] = '/bin/bash --login'
-ssh_options[:forward_agent] = true
-ssh_options[:verify_host_key] = :never
-
-set :stages, %w(staging production)
-set :default_stage, "staging"
-require 'capistrano/ext/multistage'
-
-set :repository,  "git@github.com:moskyt/mapovy-portal-csos.git"
-set :scm, "git"
-set :scm_verbose, true
-set :deploy_via, :remote_cache
-
-set :user, "mapserver"
 set :application, "mapserver"
+set :repo_url, "git@github.com:cesky-svaz-orientacnich-sportu/mapovy-portal.git"
+
+# Default value for default_env is {}
+# set :default_env, { path: "/opt/ruby/bin:$PATH" }
+
+# Default value for local_user is ENV['USER']
+# set :local_user, -> { `git config user.name`.chomp }
+
+# Default value for keep_releases is 5
 set :keep_releases, 2
-set :use_sudo, false
 
-namespace :deploy do
-  desc "Restart Application"
-  task :restart, :roles => :app do
-    run "touch #{current_path}/tmp/restart.txt"
-  end
+# Defaults to nil (no asset cleanup is performed)
+# If you use Rails 4+ and you'd like to clean up old assets after each deploy,
+# set this to the number of versions to keep
+set :keep_assets, 2
 
-  task :kwikfix do
-    run "cd #{current_path}; git reset --hard; git pull origin master"
-  end
+set :ssh_options, verify_host_key: :never
+set :ssh_options, forward_agent: true
+set :scm_verbose, true
 
-  task :link_data do
-    case fetch(:stage)
-    when :production
-      run "cd #{current_path}/public; ln -sf /home/mapserver/data ./data"
-    when :staging
-      run "cd #{current_path}/public; ln -sf /home/mapserver/data_staging ./data"
-    end
-  end
-end
+# Rails
 
-task :download_system do
-  download "#{shared_path}/system", "./public/", :recursive => true, :via => :scp
-end
+# You'll probably want to symlink Rails shared files and directories.
+append :linked_files, 'config/master.key'
+append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', '.bundle', 'public/system', 'public/uploads'
 
-task :pull do
-end
+# While migrations looks like a concern of the database layer, Rails migrations are strictly related to the framework.
+set :migration_role, :app
 
-before "pull", "db:pull", "download_system"
+# DB tasks
 
-namespace :cache do
-  task :flush do
-    #run "cd #{current_path}; bundle exec rake cache:flush RAILS_ENV=production; bundle exec rake cache:preload RAILS_ENV=production"
-  end
-end
+# Remove the local dump file after loading.
+set :db_local_clean, true
 
-after "deploy:update_code", "bundle:install", "deploy:migrate", "deploy:cleanup"
-after "deploy:update", "deploy:link_data"
+# Remove the dump file from the server after downloading.
+set :db_remote_clean, true
 
-after "deploy:kwikfix", "deploy:restart"
-after "deploy:restart", "cache:flush"
-
-namespace :rails do
-  desc "Open the rails console on one of the remote servers"
-  task :console, :roles => :app do
-    hostname = find_servers_for_task(current_task).first
-    exec "ssh -l #{user} #{hostname} -t 'source ~/.profile && #{current_path}/script/rails c #{rails_env}'"
-  end
-  task :log, :roles => :app do
-    hostname = find_servers_for_task(current_task).first
-    exec "ssh -l #{user} #{hostname} -t 'tail -n 500 #{current_path}/log/#{rails_env}.log'"
-  end
-end
-
-namespace :maintenance do
-  desc "Shut down the app for maintenance"
-  task :shutdown do
-    run "cd #{current_path}; bundle exec rake maintenance:start RAILS_ENV=#{rails_env} reason=\"#{ENV['reason']}\""
-  end
-  task :resume do
-    run "cd #{current_path}; bundle exec rake maintenance:end RAILS_ENV=#{rails_env}"
-  end
-end
+# Whenever crontab integration
+set :whenever_roles, ->{ :cron }
+set :whenever_path, ->{ current_path }

@@ -12,15 +12,15 @@
 #
 
 class TextsController < ApplicationController
-  
-  before_filter :require_any_user, only: :current_user_page
-  
+
+  before_action :require_any_user, only: :current_user_page
+
   def current_user_page
     @check_against_oris = current_user.check_against_oris
     current_user.save
     #...
   end
-  
+
   def current_user_edit
   end
 
@@ -28,9 +28,9 @@ class TextsController < ApplicationController
     current_user.update_attribute(:full_name, params[:full_name])
     redirect_to :current_user_page
   end
-  
+
   def show
     @text = Text.where(:name => params[:name]).first
   end
-  
+
 end

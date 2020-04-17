@@ -26,7 +26,7 @@
 #  full_name              :string(255)
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :user do
     sequence(:email) {|n| "user#{n}@mapserver.xxx"}
     sequence(:password) {|n| "secret#{n}"}
@@ -35,19 +35,19 @@ FactoryGirl.define do
     after(:create) do |u|
       u.stub(:check_against_oris) { true }
     end
-    
+
     factory :contributor do
-      role 'contributor'
+      role { 'contributor' }
       sequence(:full_name) {|n| "Contributor #{n}"}
       sequence(:email) {|n| "contributor#{n}@mapserver.xxx"}
     end
     factory :organizer do
-      role 'organizer'
+      role { 'organizer' }
       sequence(:full_name) {|n| "Organizer for #{authorized_clubs} #{n}"}
       sequence(:email) {|n| "organizer#{n}@mapserver.xxx"}
     end
     factory :cartographer do
-      role 'cartographer'
+      role { 'cartographer' }
       sequence(:full_name) {|n| "Cartographer for #{authorized_regions} #{n}"}
       sequence(:email) {|n| "cartographer#{n}@mapserver.xxx"}
     end

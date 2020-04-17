@@ -16,28 +16,28 @@ require 'rails_helper'
 
 
 RSpec.describe "Authors", type: :request do
-  
+
   before :example do
-    
-    @a1 = FactoryGirl.create(:author)
-    @a2 = FactoryGirl.create(:author)
-    @a3 = FactoryGirl.create(:author)
-    
-    @m1 = FactoryGirl.create(:map)
-    @m2 = FactoryGirl.create(:map)
-    @m3 = FactoryGirl.create(:map)
-    
+
+    @a1 = FactoryBot.create(:author)
+    @a2 = FactoryBot.create(:author)
+    @a3 = FactoryBot.create(:author)
+
+    @m1 = FactoryBot.create(:map)
+    @m2 = FactoryBot.create(:map)
+    @m3 = FactoryBot.create(:map)
+
     @m1.authors = [@a1]
     @m2.authors = [@a2,@a3]
     @m3.authors = [@a1,@a3]
     [@a1, @a2, @a3].each(&:save)
-    
-    @admin = FactoryGirl.create(:user, role: 'admin')
+
+    @admin = FactoryBot.create(:user, role: 'admin')
     login @admin
   end
-  
+
   it "can be listed" do
-    get authors_path    
+    get authors_path
     expect(response).to have_http_status(200)
     expect(response).to render_template(:index)
   end
@@ -47,5 +47,5 @@ RSpec.describe "Authors", type: :request do
     expect(response).to have_http_status(200)
     expect(response).to render_template(:index)
   end
-    
+
 end

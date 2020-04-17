@@ -1,9 +1,9 @@
 # -*- encoding : utf-8 -*-
 class Backend::UsersController < ApplicationController
-  
-  before_filter :authenticate_user!
-  before_filter :require_admin
-  
+
+  before_action :authenticate_user!
+  before_action :require_admin
+
   def index
     @users = User.order(:name)
   end
@@ -23,7 +23,7 @@ class Backend::UsersController < ApplicationController
     @user.update_attributes(params[:user])
     redirect_to :action => :index
   end
-  
+
   def become
     #return unless current_user.admin?
     sign_in(:user, User.find(params[:id]))
@@ -38,6 +38,6 @@ class Backend::UsersController < ApplicationController
         redirect_to :action => :index
       end
     end
-  end    
-  
+  end
+
 end

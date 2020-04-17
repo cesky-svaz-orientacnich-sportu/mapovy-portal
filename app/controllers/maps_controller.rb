@@ -61,13 +61,13 @@ class MapsController < ApplicationController
 
   require 'fileutils'
 
-  before_filter :require_admin, only: [:destroy]
-  before_filter :require_manager, only: [:racematch]
-  before_filter :require_contributor, only: [:edit, :new, :create, :remove]
-  before_filter :require_organizer, only: [:register]
-  before_filter :require_cartographer, only: [:authorize_proposal, :reject_proposal, :authorize_completion, :reject_completion]
+  before_action :require_admin, only: [:destroy]
+  before_action :require_manager, only: [:racematch]
+  before_action :require_contributor, only: [:edit, :new, :create, :remove]
+  before_action :require_organizer, only: [:register]
+  before_action :require_cartographer, only: [:authorize_proposal, :reject_proposal, :authorize_completion, :reject_completion]
 
-  before_filter :use_map, only: [:new, :show, :edit, :register, :re_register, :complete, :create, :update]
+  before_action :use_map, only: [:new, :show, :edit, :register, :re_register, :complete, :create, :update]
 
   def export_objev_sok
     @maps = Map.where("LOWER(note_public) LIKE LOWER(?)", "%objev%")
@@ -90,9 +90,9 @@ class MapsController < ApplicationController
     maps = Map.where(year: year, title: title).not_removed
     maps = maps.where('id <> :id', id: id) if id
     if maps.any?
-      render :text => ("<p>Název + rok je shodný u těchto map:</p><ul>" + maps.map{|m| view_context.link_to("#{m.title} [#{m.year}, #{m.patron}]", m)}.join + "</ul>").html_safe
+      render :plain => ("<p>Název + rok je shodný u těchto map:</p><ul>" + maps.map{|m| view_context.link_to("#{m.title} [#{m.year}, #{m.patron}]", m)}.join + "</ul>").html_safe
     else
-      render text: 'OK'
+      render plain: 'OK'
     end
   end
 
@@ -275,10 +275,18 @@ class MapsController < ApplicationController
       @map.update_attribute :identifier_filing, nil if @map.state == Map::STATE_PROPOSED
       @map.update_attribute :state, Map::STATE_REMOVED
       flash[:error] = "Mapa #{@map} označena jako zrušená."
-      redirect_to params[:redirect_to] || :back
+      if params.has_key?(:redirect_to)
+        redirect_to params[:redirect_to]
+      else
+        redirect_back fallback_location: { action: 'show', id: params[:id] }
+      end
     else
       flash[:error] = "Uživatel #{current_user} nemá oprávnění smazat mapu #{@map}!"
-      redirect_to params[:redirect_to] || :back
+      if params.has_key?(:redirect_to)
+        redirect_to params[:redirect_to]
+      else
+        redirect_back fallback_location: { action: 'show', id: params[:id] }
+      end
     end
   end
 
@@ -288,10 +296,18 @@ class MapsController < ApplicationController
       @map.remove_preview
       @map.destroy
       flash[:error] = "Mapa #{@map} odstraněna."
-      redirect_to params[:redirect_to] || :back
+      if params.has_key?(:redirect_to)
+        redirect_to params[:redirect_to]
+      else
+        redirect_back fallback_location: { action: 'index' }
+      end
     else
       flash[:error] = "Uživatel #{current_user} nemá oprávnění smazat mapu #{@map}!"
-      redirect_to params[:redirect_to] || :back
+      if params.has_key?(:redirect_to)
+        redirect_to params[:redirect_to]
+      else
+        redirect_back fallback_location: { action: 'show', id: params[:id] }
+      end
     end
   end
 
@@ -310,14 +326,14 @@ class MapsController < ApplicationController
         redirect_to action: :register, id: @map.id
       end
     else
-      render text: "Not authorized.", status: 403
+      render plain: "Not authorized.", status: 403
     end
   end
 
   def complete
     @map = Map.find(params[:id])
     unless current_user && (has_role?(:manager) or @map.created_by == current_user)
-      render text: "Not authorized.", status: 403
+      render plain: "Not authorized.", status: 403
     end
     @map.state = Map::STATE_COMPLETED
     @map.state_changed_at = Date.today
@@ -348,7 +364,7 @@ class MapsController < ApplicationController
   def update
     @map = Map.find(params[:id])
     unless current_user && (has_role?(:manager) or @map.created_by == current_user)
-      render text: "Not authorized.", status: 403
+      render plain: "Not authorized.", status: 403
       return
     end
 
@@ -500,7 +516,7 @@ class MapsController < ApplicationController
     if fn = @map.preview_original_filename and has_role?(:manager)
       send_file fn, disposition: :inline
     else
-      render nothing: true, status: 404
+      head 404, "content_type" => "text/plain"
     end
   end
 
@@ -521,7 +537,7 @@ class MapsController < ApplicationController
     else
       OrisEvent.sorted
     end
-    render text: ("<option value=\"\"></option><option value=\"0\">(žádný závod)</option>".html_safe + view_context.options_from_collection_for_select(list, :id, :to_label))
+    render plain: ("<option value=\"\"></option><option value=\"0\">(žádný závod)</option>".html_safe + view_context.options_from_collection_for_select(list, :id, :to_label))
   end
 
   def authorize_proposal
@@ -588,7 +604,7 @@ class MapsController < ApplicationController
           map2oris[map_id] = oris_event_id
         end
       end
-      render text: "<p>Changed maps: " + map2oris.inspect + "</p>", layout: true
+      render plain: "<p>Changed maps: " + map2oris.inspect + "</p>", layout: true
     end
   end
 

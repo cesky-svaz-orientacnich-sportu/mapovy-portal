@@ -16,8 +16,6 @@ __fn = "data/jpg/original/_" + "#{File.basename(fn).split(".").first}"
 puts "Converting to #{_fn}"
 
 if ext == 'pdf'
-#	`convert -density 300 #{fn} #{_fn}.png`
-#	`convert -flatten -background white -quality 100 -resample 96x96 #{_fn}.png #{_fn}.jpg`
 	puts "Calling cairo to convert to #{_fn}-1.png in between"
 	`pdftocairo -r 96 -png #{fn} #{_fn}`
         `convert -flatten -background white -quality 100 -resample 96x96 #{_fn}-1.png #{_fn}.jpg`

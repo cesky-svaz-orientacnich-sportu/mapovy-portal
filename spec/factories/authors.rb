@@ -12,7 +12,7 @@
 #  updated_at    :datetime         not null
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :author do
     sequence(:full_name) {|n| "Author #{n}"}
     year_of_birth{ 1950 + rand(40) }

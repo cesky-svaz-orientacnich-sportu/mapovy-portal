@@ -1,15 +1,26 @@
-# -*- encoding : utf-8 -*-
-require File.expand_path('../boot', __FILE__)
+require_relative 'boot'
 
 require 'rails/all'
 
+# Require the gems listed in Gemfile, including any gems
+# you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
 module Mapserver
   class Application < Rails::Application
+    # Initialize configuration defaults for originally generated Rails version.
+    config.load_defaults "6.0"
+
     # Settings in config/environments/* take precedence over those specified here.
-    # Application configuration should go into files in config/initializers
-    # -- all .rb files in that directory are automatically loaded.
+    # Application configuration can go into files in config/initializers
+    # -- all .rb files in that directory are automatically loaded after loading
+    # the framework and any gems in your application.
+
+    # Autoload paths are added to $LOAD_PATH by default. However, Zeitwerk uses
+    # absolute file names internally, and your application should not issue require
+    # calls for autoloadable files, so those directories are actually not needed
+    # there. You can opt-out with this flag:
+    config.add_autoload_paths_to_load_path = false
 
     # Custom directories with classes and modules you want to be autoloadable.
     config.autoload_paths += %W(#{config.root}/lib #{config.root}/app/datatables)
@@ -56,7 +67,6 @@ module Mapserver
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
 
-    config.action_controller.permit_all_parameters = true   
-    
+    config.action_controller.permit_all_parameters = true
   end
 end

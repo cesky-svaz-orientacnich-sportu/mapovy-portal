@@ -1,8 +1,8 @@
 # -*- encoding : utf-8 -*-
 class Backend::TextsController < Backend::BackendController
-  
-  skip_before_filter :require_admin, only: [:locale]
-  
+
+  skip_before_action :require_admin, only: [:locale]
+
   def locale
     @texts = {}
     Text.order(:name).each do |t|
@@ -39,6 +39,6 @@ class Backend::TextsController < Backend::BackendController
         redirect_to :action => :index
       end
     end
-  end    
-  
+  end
+
 end

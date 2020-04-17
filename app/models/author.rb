@@ -13,7 +13,7 @@
 #  updated_at    :datetime         not null
 #
 
-class Author < ActiveRecord::Base
+class Author < ApplicationRecord
 
   has_many :cartographers, dependent: :destroy
   has_many :maps, ->{ group('maps.id') }, through: :cartographers
@@ -26,7 +26,7 @@ class Author < ActiveRecord::Base
   def to_label
     "#{full_name} (#{(club || '').truncate(15)} | #{activity})"
   end
-  
+
   def update_activity
     y = maps.where('year > 0').group(:year).pluck(:year)
     if y.any?
@@ -37,12 +37,12 @@ class Author < ActiveRecord::Base
         "#{y1} - #{y2}"
       end
       update_attribute :activity, act
-    end    
+    end
     cx = maps.where('patron IS NOT NULL').group(:patron).pluck(:patron)
     if cx.any?
       act = cx.uniq.sort * ", "
       update_attribute :club, act
-    end    
+    end
   end
 
 end

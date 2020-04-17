@@ -6,7 +6,7 @@ development:
   database: mapserver
   host: localhost
   username: postgres
-  password: <%= ENV["DB_PG_PASSWORD"] %>
+  password: <%= ENV["DB_PASSWORD"] %>
   encoding: unicode
   pool: 5
   timeout: 5000
@@ -20,7 +20,7 @@ test:
   database: mapserver_test
   host: localhost
   username: postgres
-  password: <%= ENV["DB_PG_PASSWORD"] %>
+  password: <%= ENV["DB_PASSWORD"] %>
   encoding: unicode
   pool: 5
   timeout: 5000
@@ -31,7 +31,7 @@ staging:
   database: mapserver_staging
   host: localhost
   username: mapserver_staging
-  password: <%= ENV["DB_STAGING_PG_PASSWORD"] %>
+  password: <%= ENV["DB_PASSWORD"] %>
   encoding: unicode
 
 production:
@@ -40,5 +40,5 @@ production:
   database: mapserver
   host: localhost
   username: mapserver
-  password: <%= ENV["DB_PG_PASSWORD"] %>
+  password: <%= ENV["DB_PASSWORD"] %>
   encoding: unicode

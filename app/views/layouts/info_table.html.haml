@@ -7,7 +7,6 @@
     %title= t('mapserver.title')
     = csrf_meta_tags
     = stylesheet_link_tag "_info_table", :media => "all"
-    = favicon_link_tag
     = javascript_include_tag "https://maps.google.com/maps/api/js?key=#{GOOGLE_API_KEY}&language=#{I18n.locale}&libraries=drawing,geometry"
     = javascript_include_tag "https://www.google.com/jsapi"
     = javascript_include_tag "https://apis.google.com/js/client.js"

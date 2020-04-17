@@ -1,6 +1,9 @@
-# -*- encoding : utf-8 -*-
 set :stage, :staging
-set :deploy_to, '/home/mapserver/mapserver_staging'
-server 'goldfish.amagical.net', :app, :web, :db, :primary => true
-set :branch, "master"
-set :rails_env, 'staging'
+
+server "5.180.201.132",
+	user: "mapserver_staging",
+	roles: %w{app db web}
+
+set :branch, "dev"
+set :deploy_to, "/var/www/mapserver_staging"
+set :rails_env, "staging"

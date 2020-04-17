@@ -15,11 +15,11 @@
 #  updated_at :datetime         not null
 #
 
-class Authorization < ActiveRecord::Base
-  
+class Authorization < ApplicationRecord
+
   #attr_accessible :link, :name, :provider, :secret, :token, :uid, :user_id
 
   belongs_to :user, :touch => true
   validates :provider, :uid, :presence => true
-  
+
 end

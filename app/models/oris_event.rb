@@ -16,7 +16,7 @@
 #  obpostupy_map_url :string(255)
 #
 
-class OrisEvent < ActiveRecord::Base
+class OrisEvent < ApplicationRecord
 
   scope :in_year, lambda{|y| where("date_part('year', date) = ?", y).order(:date)}
   scope :sorted, ->{ order(:date) }

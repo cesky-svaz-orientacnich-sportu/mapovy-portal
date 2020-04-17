@@ -14,20 +14,20 @@
 #
 
 class AuthorsController < ApplicationController
-  
-  before_filter :require_manager, only: [:edit, :update, :destroy]
-  
+
+  before_action :require_manager, only: [:edit, :update, :destroy]
+
   def index
     respond_to do |format|
       format.html
       format.json { render json: AuthorsDatatable.new(view_context) }
     end
   end
-  
+
   def show
     @author = Author.find(params[:id])
   end
-  
+
   def edit
     @author = Author.find(params[:id])
   end
@@ -46,19 +46,19 @@ class AuthorsController < ApplicationController
         redirect_to :action => :index
       end
     end
-  end    
-  
+  end
+
   def merge
     @author = Author.find(params[:id])
     @other_author = Author.find(params[:target_author_id])
-    
+
     @author.cartographers.each do |c|
       if c.author_id == @author.id
         c.update_attribute :author_id, @other_author.id
       end
     end
     @other_author.update_activity
-    
+
     @author.reload
     @author.destroy
     respond_to do |format|
@@ -67,5 +67,5 @@ class AuthorsController < ApplicationController
       end
     end
   end
-  
+
 end
