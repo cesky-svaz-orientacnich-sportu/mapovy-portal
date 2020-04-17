@@ -123,12 +123,11 @@ Mapserver::Application.configure do
 
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    :authentication => nil,
-    :address  => "127.0.0.1",
-    :port  => 25,
-    :domain  => "samson.cb.cz",
-    :enable_starttls_auto => false
-    }
+    :address => "mta.amagical.net",
+    :port => 587,
+    :user_name => ENV["SMTP_USER"],
+    :password => ENV["SMTP_PASSWORD"]
+  }
 
   # asset host (for JPGs et al)
   config.asset_root_url = "https://mapy.orientacnisporty.cz"
