@@ -1,11 +1,11 @@
 # -*- encoding : utf-8 -*-
 class ApiController < ApplicationController
-  
+
   def list
-    maps = Map.where(state: %w{archived completed approved finalized}).map do |m| 
+    maps = Map.where(state: %w{archived completed approved finalized}).map do |m|
       {
-          id: m.id, 
-          title: m.title, 
+          id: m.id,
+          title: m.title,
           url: url_for(m),
           club: m.club && m.club.abbreviation,
           scale: m.scale_,
@@ -85,7 +85,7 @@ class ApiController < ApplicationController
       format.json do
         if m.present?
           render json: {status: 'success', data: {
-            id: m.id, 
+            id: m.id,
             title: m.title,
             patron: m.patron,
             year: m.year,
