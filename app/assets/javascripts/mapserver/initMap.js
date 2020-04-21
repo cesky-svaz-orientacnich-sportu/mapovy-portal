@@ -67,7 +67,7 @@ WMSLayer.prototype.createOverlay = function() {
 WMSLayer.prototype.show = function() {
   this.map.overlayMapTypes.setAt(this.index, this.overlay);
   this.visible = true;
-};    
+};
 WMSLayer.prototype.hide = function() {
   this.map.overlayMapTypes.setAt(this.index, null);
   this.visible = false;
