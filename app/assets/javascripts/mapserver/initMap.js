@@ -67,7 +67,7 @@ WMSLayer.prototype.createOverlay = function() {
 WMSLayer.prototype.show = function() {
   this.map.overlayMapTypes.setAt(this.index, this.overlay);
   this.visible = true;
-};    
+};
 WMSLayer.prototype.hide = function() {
   this.map.overlayMapTypes.setAt(this.index, null);
   this.visible = false;
@@ -231,7 +231,7 @@ function initMapsLayer() {
 
   ftLayerE = new WMSLayer({
     layer: 'embargoes',
-    where: 'has_embargo = true AND embargo_until >= '+today.getFullYear(),
+    where: 'has_embargo = true AND embargo_until >= \''+today.getFullYear()+'-01-01 00:00\'',
     suppressInfoWindows: false,
     map: map,
     index: 2
@@ -240,7 +240,7 @@ function initMapsLayer() {
 
   ftLayerCA = new WMSLayer({
     layer: 'competitionareas',
-    where: 'has_competition_area = true AND competition_area_until >= '+today.getFullYear(),
+    where: 'has_competition_area = true AND competition_area_until >= \''+today.getFullYear()+'-01-01 00:00\'',
     suppressInfoWindows: false,
     map: map,
     index: 3

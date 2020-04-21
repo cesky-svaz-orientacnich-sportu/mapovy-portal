@@ -22,7 +22,7 @@ class OrisEvent < ApplicationRecord
   scope :sorted, ->{ order(:date) }
 
   def self.years
-    OrisEvent.group("date_part('year', date)").map{|m| m.date.year}.sort
+    OrisEvent.distinct.pluck("date_part('year', date)").sort
   end
 
   def to_s

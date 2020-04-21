@@ -17,7 +17,6 @@ function changeInlineMapType(mapTypeId) {
 function setOrisEvent(year) {
   $.get("/filter_oris_events/" + year).success(function(data){
     $("#map_oris_event_id").html(data);
-    $("#map_oris_event_id").select2({allowClear: true});
     $("#map_oris_event_id").prop('disabled', false);
   });
 }
