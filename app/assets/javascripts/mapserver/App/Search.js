@@ -7,7 +7,7 @@ App.Search = App.newClass({
     },
 
     searchByName: function (name, callback) {
-        var name = name.replace(/'/g, "\\\'");
+        var name = name.replace(/'/g, "''");
         var filter = "LOWER(title) LIKE LOWER('%" + name + "%') ";
 
         this.searchByFilter(filter, callback);
