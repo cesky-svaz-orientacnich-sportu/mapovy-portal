@@ -187,7 +187,6 @@ class MapsController < ApplicationController
     end
   end
 
-
   def download_search
     @list = params[:list].split("-").map(&:to_i).uniq if params[:list]
     @maps = @list ? Map.where(:id => @list).order(:title) : []
