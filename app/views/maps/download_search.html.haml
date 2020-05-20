@@ -1,4 +1,4 @@
-%h1= t('mapserver.downloadSearchHead') 
+%h1= t('mapserver.downloadSearchHead')
 
 - if @list and @list.size > 0
 
@@ -7,9 +7,9 @@
   %h2= t('mapserver.downExport')
 
   %ul
-    /%li= link_to "KML", :list => @list.to_json, :format => :kml
-    %li= link_to "CSV", :list => @list.to_json, :format => :csv
-    %li= link_to "XLS", :list => @list.to_json, :format => :xls
+    /%li= link_to "KML", :list => @list.join("-"), :format => :kml
+    %li= link_to "CSV", :list => @list.join("-"), :format => :csv
+    %li= link_to "XLS", :list => @list.join("-"), :format => :xls
 
   %p= t("mapserver.downNote")
 - else

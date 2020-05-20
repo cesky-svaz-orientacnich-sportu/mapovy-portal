@@ -7,7 +7,7 @@ App.Search = App.newClass({
     },
 
     searchByName: function (name, callback) {
-        var name = name.replace(/'/g, "\\\'");
+        var name = name.replace(/'/g, "''");
         var filter = "LOWER(title) LIKE LOWER('%" + name + "%') ";
 
         this.searchByFilter(filter, callback);
@@ -49,7 +49,7 @@ App.Search = App.newClass({
         };
       }
       console.log("Search by filter: " + filter1 + " || " + filter2);
-      this.searchBySelect(select1, select2, callback);          
+      this.searchBySelect(select1, select2, callback);
     },
 
     searchBySelect: function (select1, select2, callback, notShowWaiting) {
@@ -77,17 +77,17 @@ App.Search = App.newClass({
                   success: function(res2) {
                     callback(res2.data, true);
                   },
-                    error: function(xhr, status, error) { 
-                    alert('search error? S = ' + status + " E = " + error + " -- the request was `...WHERE " + select2.where + "...`"); 
+                    error: function(xhr, status, error) {
+                    alert('search error? S = ' + status + " E = " + error + " -- the request was `...WHERE " + select2.where + "...`");
                     App.sidebar.hideWaiting();
                   }
-                });                
+                });
               } else {
                 callback(res1.data, false);
               }
             },
-            error: function(xhr, status, error) { 
-              alert('search error? S = ' + status + " E = " + error + " -- the request was `...WHERE " + select1.where + "...`"); 
+            error: function(xhr, status, error) {
+              alert('search error? S = ' + status + " E = " + error + " -- the request was `...WHERE " + select1.where + "...`");
               App.sidebar.hideWaiting();
             }
         });

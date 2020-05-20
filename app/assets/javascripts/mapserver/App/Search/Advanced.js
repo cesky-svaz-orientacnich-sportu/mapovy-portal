@@ -65,7 +65,7 @@ App.Search.Advanced = App.newClass({
             var gps_ok = true;
             if (position.length != 2) {
               errors.push("souřadnice mají špatný formát -- správný je \"z.š., z.d.\"");
-              gps_ok = false;              
+              gps_ok = false;
             }
             if (distance > 30000) {
               errors.push("maximální poloměr je 30 km");
@@ -107,7 +107,7 @@ App.Search.Advanced = App.newClass({
                   position: this.center,
                   title: ""
               });
-              this.markerOverlay.setMap(map);              
+              this.markerOverlay.setMap(map);
               console.log("Drawing marker");
             }
         }
@@ -139,18 +139,18 @@ App.Search.Advanced = App.newClass({
         if (yearTo != '') {
             query_parts.push("year <= '" + yearTo + "'");
         }
-        
+
         if (errors.length > 0) {
           alert(this.resourceString.advancedSearchInvalid + errors.join(", "));
         } else {
           if (query_parts.length > 0) {
             this.hide();
-        
+
             var filter = query_parts.join(' AND ');
-            this.searchByFilter(filter);          
+            this.searchByFilter(filter);
           } else {
             alert(this.resourceString.advancedSearchEmpty);
-          }          
+          }
         }
     },
 
@@ -160,11 +160,22 @@ App.Search.Advanced = App.newClass({
     },
 
     initAutocomplete: function () {
+    	where = '';
+        // visibility
+        if (! Config.user || ! (Config.user.role == 'admin' || Config.user.role == 'manager' || Config.user.role == 'cartographer')) {
+          if (Config.user) {
+            //where = Config.stateQuery + " OR created_by_id = " + Config.user.id;
+            where = Config.stateQuery;
+          } else {
+            where = Config.stateQuery;
+          }
+        }
         $.ajax({
             url: '/api/select',
             dataType: 'json',
             data: {
                 select: ['title'],
+            	where: where,
                 group_by: 'title'
             },
             jsonp: 'jsonCallback',//
@@ -186,15 +197,6 @@ App.Search.Advanced = App.newClass({
 
             }
         });
-
-        // // anonymous function for setting maximum items as a result of autocomplete
-        // $.ui.autocomplete.prototype._renderMenu = function (ul, items) {
-        //     var self = this;
-        //     $.each(items, function (index, item) {
-        //         if (index < 20) // here we define how many results to show
-        //         { self._renderItem(ul, item); }
-        //     });
-        // }
     },
 
     clearOverlays: function () {
