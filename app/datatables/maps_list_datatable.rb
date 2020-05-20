@@ -83,15 +83,15 @@ private
         when "*"
           maps = maps.where("#{columns[ci.to_i]} IS NOT NULL AND #{columns[ci.to_i]} <> ''")
         when "="
-          unless Map.columns_hash[columns[ci.to_i]].type == :integer and x.empty?
+          unless Map.columns_hash[columns[ci.to_i]].type == :integer and x.blank?
             maps = maps.where("#{columns[ci.to_i]} = :search", search: x)
           end
         when ">"
-          unless Map.columns_hash[columns[ci.to_i]].type == :integer and x.empty?
+          unless Map.columns_hash[columns[ci.to_i]].type == :integer and x.blank?
             maps = maps.where("#{columns[ci.to_i]} > :search", search: x)
           end
         when "<"
-          unless Map.columns_hash[columns[ci.to_i]].type == :integer and x.empty?
+          unless Map.columns_hash[columns[ci.to_i]].type == :integer and x.blank?
             maps = maps.where("#{columns[ci.to_i]} < :search", search: x)
           end
         when "!="
