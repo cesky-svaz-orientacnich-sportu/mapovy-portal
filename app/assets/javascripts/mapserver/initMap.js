@@ -231,7 +231,7 @@ function initMapsLayer() {
 
   ftLayerE = new WMSLayer({
     layer: 'embargoes',
-    where: 'has_embargo = true AND embargo_until >= \''+today.getFullYear()+'-01-01 00:00\'',
+    where: where,
     suppressInfoWindows: false,
     map: map,
     index: 2
@@ -240,7 +240,7 @@ function initMapsLayer() {
 
   ftLayerCA = new WMSLayer({
     layer: 'competitionareas',
-    where: 'has_competition_area = true AND competition_area_until >= \''+today.getFullYear()+'-01-01 00:00\'',
+    where: where,
     suppressInfoWindows: false,
     map: map,
     index: 3
