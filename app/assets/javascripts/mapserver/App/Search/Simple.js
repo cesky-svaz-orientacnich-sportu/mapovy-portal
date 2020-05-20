@@ -1,4 +1,4 @@
-﻿App.Search.Simple = App.newClass({
+App.Search.Simple = App.newClass({
 
     constructor: function (state, resultsCallback, sidebar) {
         App.Search.call(this, state, resultsCallback, sidebar);
@@ -20,10 +20,9 @@
     initAutocomplete: function () {
         where = '';
         // visibility
-        if (Config.user && (Config.user.role == 'admin' || Config.user.role == 'manager' || Config.user.role == 'cartographer')) {
-        } else {
+        if (! Config.user || ! (Config.user.role == 'admin' || Config.user.role == 'manager' || Config.user.role == 'cartographer')) {
           if (Config.user) {
-//            where = Config.stateQuery + " OR CREATED_BY_ID = " + Config.user.id;
+            //where = Config.stateQuery + " OR created_by_id = " + Config.user.id;
             where = Config.stateQuery;
           } else {
             where = Config.stateQuery;
@@ -59,15 +58,6 @@
 
             }
         });
-
-        // // anonymous function for setting maximum items as a result of autocomplete
-        // $.ui.autocomplete.prototype._renderMenu = function (ul, items) {
-        //     var self = this;
-        //     $.each(items, function (index, item) {
-        //         if (index < 20) // here we define how many results to show
-        //         { self._renderItem(ul, item); }
-        //     });
-        // }
     },
 
     initKeyPressed: function () {
