@@ -34,12 +34,7 @@ private
   end
 
   def fetch_authors
-    authors = if sort_column
-      Author.order("#{sort_column} #{sort_direction}")
-    else
-      Author.where(1)
-    end
-    authors = authors.page(page).per(per_page)
+    authors = Author.order("#{sort_column} #{sort_direction}").page(page).per(per_page)
     if params[:search].present? and params[:search][:value].present?
       authors = authors.where("LOWER(full_name) LIKE LOWER(:search) OR LOWER(note) LIKE LOWER(:search)", search: "%#{params[:search][:value]}%")
     end
@@ -56,7 +51,7 @@ private
 
   def sort_column
     columns = %w[full_name year_of_birth]
-    columns[params[:order]['0'][:column].to_i]  rescue nil
+    columns[params[:order]['0'][:column].to_i] || "id"
   end
 
   def sort_direction
