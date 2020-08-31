@@ -170,10 +170,6 @@
             %td= v.event
             %td
               #{v.whodunnit ? User.find(v.whodunnit) : '---'}
-              / %span
-              /   [originator: #{v.originator ? User.find(v.originator) : '---'}]
-              /   %br
-              /   [whodunnit: #{v.whodunnit ? User.find(v.whodunnit) : '---'}]
             %td= v.created_at.localtime.strftime("%d. %m. %Y %H:%M")
             %td
               %table.table

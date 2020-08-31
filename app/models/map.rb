@@ -70,7 +70,7 @@
 
 class Map < ApplicationRecord
 
-  has_paper_trail ignore: [:user_updated_at, :state_changed_at, :last_reminder_sent_at]
+  has_paper_trail ignore: [:user_updated_at, :state_changed_at, :last_reminder_sent_at, :shape_geom]
   nilify_blanks
 
   belongs_to :created_by, :class_name => 'User', optional: true

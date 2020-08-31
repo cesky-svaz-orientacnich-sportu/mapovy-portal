@@ -69,6 +69,8 @@ class MapsController < ApplicationController
 
   before_action :use_map, only: [:new, :show, :edit, :register, :re_register, :complete, :create, :update]
 
+  before_action :set_paper_trail_whodunnit
+
   def export_objev_sok
     @maps = Map.where("LOWER(note_public) LIKE LOWER(?)", "%objev%")
     respond_to do |format|
