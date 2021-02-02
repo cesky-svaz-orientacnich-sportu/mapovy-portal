@@ -449,7 +449,7 @@ DEPENDENCIES
   magic_encoding
   nested_form
   nilify_blanks
-  nokogiri
+  nokogiri (~> 1.11)
   omniauth
   omniauth-facebook
   omniauth-google-oauth2
