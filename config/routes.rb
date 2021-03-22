@@ -118,4 +118,3 @@ Mapserver::Application.routes.draw do
   get "/data/tiles/:a/:b/:c.png", to: proc { [404, {}, ['']] }
 
 end
-
