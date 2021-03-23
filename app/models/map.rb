@@ -176,6 +176,7 @@ class Map < ApplicationRecord
   validates_presence_of :equidistance, if: :is__proposal?
   validate :any_event
   validate :date_makes_sense
+  validate :valid_geom
   validates_presence_of :region, if: :is__proposal?
 
   validates_presence_of :patron, if: :is__completion?
@@ -311,6 +312,20 @@ class Map < ApplicationRecord
     if is__proposal? or is__completion?
       unless oris_event or oris_event_id == 0 or (!main_race_title.blank? and !main_race_date.blank?)
         errors.add(:oris_event_id, I18n.t('errors.messages.blank'))
+      end
+    end
+  end
+
+  def valid_geom
+    unless shape_json.blank?
+      shape = JSON[shape_json].map do |coord|
+        flipped = [coord[1], coord[0]]
+        flipped
+      end
+      begin
+        RGeo::GeoJSON.decode("{\"type\":\"Polygon\",\"coordinates\":[#{shape}]}", json_parser: :json)
+      rescue RGeo::Error::InvalidGeometry
+        errors.add('Obrys mapy', 'netvoří jednu spojitou plochu')
       end
     end
   end
