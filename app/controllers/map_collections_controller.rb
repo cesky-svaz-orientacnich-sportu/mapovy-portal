@@ -42,7 +42,7 @@ class MapCollectionsController < ApplicationController
 
   def update
     @map_collection = MapCollection.find(params[:id])
-    @map_collection.update_attributes(params[:map_collection])
+    @map_collection.update(params[:map_collection])
     redirect_to :action => :index
   end
 

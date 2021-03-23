@@ -29,7 +29,7 @@ class Backend::TextsController < Backend::BackendController
 
   def update
     @text = Text.find(params[:id])
-    @text.update_attributes(params[:text])
+    @text.update(params[:text])
     redirect_to :action => :index
   end
 

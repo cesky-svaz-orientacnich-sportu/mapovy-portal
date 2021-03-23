@@ -56,18 +56,19 @@
     = f.select :oris_event_id, "<option value=\"0\"#{f.object.oris_event_id == 0 ? 'selected' : ''}>(žádný závod)</option>".html_safe + options_from_collection_for_select(f.object.year ? OrisEvent.in_year(f.object.year) : OrisEvent.sorted, :id, :to_label, f.object.oris_event_id), {:include_blank => true}, :class => 'col-sm-6'
 
   %div.form-group
-    - if f.object.identifier_filing.blank?
-      %span.col-sm-4
-    - else
-      = f.label :identifier_filing, map_attribute_label(:identifier_filing), :class => 'col-sm-2'
-      %span.col-sm-2= f.object.identifier_filing
+    = f.label :blocking_until, map_attribute_label(:blocking_until), :class => 'col-sm-2'
+    = f.select :blocking_until, ((Date.today.year..Date.today.year+9).to_a + [0]).sort.reverse, {}, :class => 'col-sm-2'
     = f.label :main_race_title, map_attribute_label(:main_race_title), :class => 'col-sm-2'
     = f.text_field :main_race_title, :class => 'col-sm-2'
     = f.label :main_race_date, map_attribute_label(:main_race_date), :class => 'col-sm-2'
     = f.text_field :main_race_date, :class => 'col-sm-2', :type => 'date'
 
   %div.form-group
-    %span.col-sm-4
+    - if f.object.identifier_filing.blank?
+      %span.col-sm-4
+    - else
+      = f.label :identifier_filing, map_attribute_label(:identifier_filing), :class => 'col-sm-2'
+      %span.col-sm-2= f.object.identifier_filing
     = f.label :non_oris_event_url, map_attribute_label(:non_oris_event_url), :class => 'col-sm-2'
     = f.text_field :non_oris_event_url, :class => 'col-sm-6'
 
