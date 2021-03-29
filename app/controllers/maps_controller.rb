@@ -609,4 +609,10 @@ class MapsController < ApplicationController
     end
   end
 
+  def update_oris_data
+    @map = Map.find(params[:id])
+    OrisEvent.find(@map.oris_event_id).fetch
+    redirect_to @map
+  end
+
 end

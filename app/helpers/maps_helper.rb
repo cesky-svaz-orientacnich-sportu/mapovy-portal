@@ -58,7 +58,7 @@
 #
 
 module MapsHelper
-  
+
   def map_attribute_label(key, with_help = true)
     if with_help == :edit
       (
@@ -80,7 +80,7 @@ module MapsHelper
       I18n.translate("mapserver.map_attributes.#{key}")
     end
   end
-  
+
   def author_attribute_label(key, with_help = true)
     if with_help == :edit
       (
@@ -102,7 +102,7 @@ module MapsHelper
       I18n.translate("mapserver.author_attributes.#{key}")
     end
   end
-  
+
   def print_identifier_filing(s)
     if s and m = s.match(/(\d\d)([A-Z])(\d\d\d)([A-Z])/)
       [1,2,3,4].map{|x| content_tag(:span, m[x].to_s, class: 'identifier_filing_component')}.join.html_safe
@@ -110,11 +110,11 @@ module MapsHelper
       s
     end
   end
-  
+
   def copy_link(map)
     link_to(icon('copy', tooltip: t('mapserver.copy')), [:copy, map], method: :post, data: {confirm: t("mapserver.copy-confirmation")})
   end
-  
+
   def map_buttons(map, destroy_redirect_path = nil)
     s = "".html_safe
     if current_user
@@ -160,5 +160,15 @@ module MapsHelper
       select_tag(nil, options_for_select([["", nil]] + opts), id: "col_#{index}_filter", class: 'column_filter', data: {column: index})
     end
   end
-  
+
+  def update_oris_event_link(map)
+    s = "".html_safe
+    if current_user
+      if map.created_by == current_user or has_role?(:manager)
+        s+= link_to icon('repeat', tooltip: "Aktualizovat data z ORISu"), [:update_oris_data, @map], class: "pull-right"
+      end
+    end
+    s.html_safe
+  end
+
 end
