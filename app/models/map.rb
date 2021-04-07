@@ -169,7 +169,6 @@ class Map < ApplicationRecord
   validates_presence_of :map_sport
   validates_presence_of :state
   validates_presence_of :year
-  validates_presence_of :blocking_until
 
   validates_presence_of :patron, if: :is__proposal?
   validates_presence_of :scale, if: :is__proposal?
