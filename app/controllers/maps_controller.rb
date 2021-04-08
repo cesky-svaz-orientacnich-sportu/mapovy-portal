@@ -548,6 +548,7 @@ class MapsController < ApplicationController
     @map.state_changed_at = Date.today
     @map.approved_by_id = current_user.id
     @map.user_updated_at = Time.now
+    @map.blocking_until = params[:map][:blocking_until]
     @map.save
     MapStateMailer.map_approved(@map).deliver
     redirect_to @map
