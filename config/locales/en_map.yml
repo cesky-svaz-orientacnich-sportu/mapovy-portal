@@ -305,6 +305,7 @@ en:
       blocking:
         title: 'Blocked'
         year: 'in year'
+        without_claim: 'without claim'
       embargo:
         info_title: 'Embargo until'
 

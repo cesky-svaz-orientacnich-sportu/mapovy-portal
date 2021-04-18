@@ -3,10 +3,12 @@
   %div.panel-heading
     %h4.panel-title Přijmout evidovanou mapu nebo vrátit k doplnění
   %div.panel-body
-    %p Pokud jsou všechny údaje v pořádku včetně krajové příslušnosti, lze přijmout o žádost o přidělení čísla.
+    %p Pokud jsou všechny údaje v pořádku včetně krajové příslušnosti a blokace, lze přijmout žádost o přidělení čísla.
     = form_tag([:authorize_proposal, @map], id: 'authorize_proposal_form') do
       = label_tag "map[blocking_until]", map_attribute_label(:blocking_until, false)
-      = select_tag "map[blocking_until]", options_for_select(((Date.today.year..Date.today.year+9).to_a + [0]).sort.reverse.map { |v| [v, v] }, @map.blocking_until)
+      = select_tag "map[blocking_until]", options_for_select(((Date.today.year..Date.today.year+9).to_a + [0]).sort.reverse.map { |v| [v, v] }, @map.blocking_until), {"aria-describedby" => "authorize_proposal_form_map_blocking_until"}
+      %p{:id => "authorize_proposal_form_map_blocking_until"}
+        Pokud nevzniká nárok na blokaci, zvol hodnotu 0.
       %br
       = submit_tag "Přijmout", class:'btn btn-primary'
     %hr

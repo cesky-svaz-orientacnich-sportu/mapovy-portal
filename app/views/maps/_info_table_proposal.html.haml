@@ -19,12 +19,17 @@
 					= icon('question-circle', tooltip: t("mapserver.map_enum_descriptions.map_type.#{map.map_type}") )
 		%tr
 			%th= map_attribute_label :year
-			%td
-				= map.year
+			%td= map.year
 			%th= map_attribute_label :created_by
 			%td(colspan=3) #{map.created_by ? print_user(map.created_by, has_role?(:organizer, :cartographer, :manager)) : "archiv ČSOS"}
 			%th= map_attribute_label :patron
 			%td= map.club ? link_to(map.club, map.club) : map.patron
+		%tr
+			- if map.state == Map::STATE_PROPOSED or map.state == Map::STATE_CHANGE_REQUESTED
+				%th= map_attribute_label :blocking_until
+				%td(colspan=9)
+					= map.blocking_until
+					(navržené trvání blokace -- je platné až po schválení krajským kartografem / koordinátorem #{icon 'info-circle', tooltip: map.authorized_cartographers.map(&:name) * ", "})
 		%tr
 			- if map.state == Map::STATE_PROPOSED or map.state == Map::STATE_CHANGE_REQUESTED
 				%th= map_attribute_label :identifier_filing
@@ -32,9 +37,10 @@
 					= print_identifier_filing map.identifier_filing
 					(navržené evidenční číslo -- je platné až po schválení krajským kartografem / koordinátorem #{icon 'info-circle', tooltip: map.authorized_cartographers.map(&:name) * ", "})
 			- else
+				%th= map_attribute_label :blocking_until
+				%td= map.blocking_until
 				%th= map_attribute_label :identifier_filing
-				%td(colspan=5)
-					= print_identifier_filing map.identifier_filing
+				%td(colspan=3)= print_identifier_filing map.identifier_filing
 				%th= map_attribute_label :approved_by
 				%td(colspan=3) #{print_user map.approved_by, has_role?(:organizer, :cartographer, :manager)}
 		%tr

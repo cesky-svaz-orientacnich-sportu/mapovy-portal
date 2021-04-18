@@ -86,27 +86,31 @@
 
 %div.form-group
   = f.label :year, map_attribute_label(:year, :edit), :class => 'col-sm-2'
-  = f.text_field :year, :class => 'col-sm-2'
+  = f.text_field :year, :class => 'col-sm-1'
   - if current_user.has_role?(:manager)
     = f.label :year_accuracy, map_attribute_label(:year_accuracy, :edit), :class => 'col-sm-2'
     = f.select :year_accuracy, Map::ACCURACIES.map{|x| [t("mapserver.map_enums.accuracy.#{x}"), x]}, {}, :class => 'col-sm-2'
   - else
     = f.hidden_field :year_accuracy
     %div.col-sm-4
+  = f.label :blocking_until, map_attribute_label(:blocking_until, :edit), :class => 'col-sm-2'
+  = f.select :blocking_until, options_for_select(((Date.today.year..Date.today.year+9).to_a + [0]).sort.reverse.map { |v| [v, v] }, @map.blocking_until), {:include_blank => false}, :class => 'col-sm-1'
+
+%div.form-group
   = f.label :scale, map_attribute_label(:scale, :edit), :class => 'col-sm-2'
   %div.col-sm-2
     1:
     = f.text_field :scale, size: 6
-
-%div.form-group
   = f.label :equidistance, map_attribute_label(:equidistance, :edit), :class => 'col-sm-2'
   %div.col-sm-2
     = f.text_field :equidistance, size: 6
     m
+
+%div.form-group
   = f.label :map_sport, map_attribute_label(:map_sport, :edit), :class => 'col-sm-2'
-  = f.select :map_sport, Map::MAP_SPORTS.map{|x| [t("mapserver.map_enums.map_sport.#{x}"), x]}, {:include_blank => true}, :class => 'col-sm-2'
+  = f.select :map_sport, Map::MAP_SPORTS.map{|x| [t("mapserver.map_enums.map_sport.#{x}"), x]}, {:include_blank => true}, :class => 'col-sm-1'
   = f.label :map_type, map_attribute_label(:map_type, :edit), :class => 'col-sm-2'
-  = f.select :map_type, Map::MAP_TYPES.map{|x| [t("mapserver.map_enums.map_type.#{x}"), x]}, {:include_blank => true}, :class => 'col-sm-2'
+  = f.select :map_type, Map::MAP_TYPES.map{|x| [t("mapserver.map_enums.map_type.#{x}"), x]}, {:include_blank => true}, :class => 'col-sm-3'
 
 %div.form-group
   = f.label :region, map_attribute_label(:region, :edit), :class => 'col-sm-2'
