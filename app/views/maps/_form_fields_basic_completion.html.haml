@@ -14,18 +14,22 @@
   %span.col-sm-2= f.object.title
   = f.label :patron, map_attribute_label(:patron), :class => 'col-sm-1'
   %span.col-sm-1= f.object.patron
-  = f.label :year, map_attribute_label(:year), :class => 'col-sm-1'
+  = f.label :year, map_attribute_label(:year), :class => 'col-sm-2'
   %span.col-sm-1= f.object.year
-  = f.label :blocking_until, map_attribute_label(:blocking_until), :class => 'col-sm-2'
-  %span.col-sm-1= f.object.blocking_until
-
-%div.form-group
   = f.label :identifier_filing, map_attribute_label(:identifier_filing), :class => 'col-sm-2'
   %span.col-sm-1= print_identifier_filing f.object.identifier_filing
+
+%div.form-group
+  = f.label :blocking_until, map_attribute_label(:blocking_until), :class => 'col-sm-2'
+  %span.col-sm-1= f.object.blocking_until
+  = f.label :blocking_reason, map_attribute_label(:blocking_reason), :class => 'col-sm-2'
+  %span.col-sm-7= f.object.blocking_reason
+
+%div.form-group
   = f.label :map_sport, map_attribute_label(:map_sport), :class => 'col-sm-2'
   %span.col-sm-1= f.object.map_sport_
   = f.label :map_type, map_attribute_label(:map_type), :class => 'col-sm-2'
-  %span.col-sm-2= f.object.map_type_
+  %span.col-sm-7= f.object.map_type_
 
 %div.form-group
   = f.label :scale, map_attribute_label(:scale), :class => 'col-sm-2'
@@ -47,8 +51,8 @@
 
 %div.form-group
   = f.label :region, map_attribute_label(:region), :class => 'col-sm-2'
-  %span.col-sm-1= Map::REGIONS[f.object.region]
-  = f.label :locality, map_attribute_label(:locality), :class => 'col-sm-2'
+  %span.col-sm-2= Map::REGIONS[f.object.region]
+  = f.label :locality, map_attribute_label(:locality), :class => 'col-sm-1'
   = f.text_field :locality, :class => 'col-sm-7'
 
 %div.form-group

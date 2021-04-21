@@ -25,12 +25,15 @@
 						= icon("question-circle", tooltip: t("mapserver.map_enums.accuracy.#{map.year_accuracy}"))
 				- else
 					= "---"
-			%th= map_attribute_label :blocking_until
-			%td #{map.blocking_until}
+			%th= map_attribute_label :issued_by
+			%td(colspan=3) #{map.issued_by}
 			%th= map_attribute_label :identifier_filing
 			%td #{print_identifier_filing map.identifier_filing}
-			%th= map_attribute_label :issued_by
-			%td #{map.issued_by}
+		%tr
+			%th= map_attribute_label :blocking_until
+			%td #{map.blocking_until}
+			%th= map_attribute_label :blocking_reason
+			%td(colspan=5) #{map.blocking_reason}
 		%tr
 			%th= map_attribute_label :administrator
 			%td(colspan=5)

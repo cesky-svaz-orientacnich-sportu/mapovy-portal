@@ -97,6 +97,10 @@
   = f.select :blocking_until, options_for_select(((Date.today.year..Date.today.year+9).to_a + [0]).sort.reverse.map { |v| [v, v] }, @map.blocking_until), {:include_blank => false}, :class => 'col-sm-1'
 
 %div.form-group
+  = f.label :blocking_reason, map_attribute_label(:blocking_reason, :edit), :class => 'col-sm-2'
+  = f.text_field :blocking_reason, :class => 'col-sm-10'
+
+%div.form-group
   = f.label :scale, map_attribute_label(:scale, :edit), :class => 'col-sm-2'
   %div.col-sm-2
     1:

@@ -10,9 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_31_083822) do
+ActiveRecord::Schema.define(version: 2021_04_21_085949) do
 
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pgrouting"
   enable_extension "plpgsql"
   enable_extension "postgis"
 
@@ -165,6 +166,7 @@ ActiveRecord::Schema.define(version: 2020_03_31_083822) do
     t.boolean "has_competition_area", default: false, null: false
     t.date "competition_area_until"
     t.string "non_oris_event_url", limit: 255
+    t.text "blocking_reason"
     t.index ["slug"], name: "index_maps_on_slug", unique: true
   end
 
@@ -221,9 +223,9 @@ ActiveRecord::Schema.define(version: 2020_03_31_083822) do
     t.integer "item_id", null: false
     t.string "event", limit: 255, null: false
     t.string "whodunnit", limit: 255
+    t.text "object"
     t.datetime "created_at"
     t.text "object_changes"
-    t.text "object"
     t.index ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id"
   end
 

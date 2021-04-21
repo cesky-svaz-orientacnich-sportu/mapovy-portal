@@ -66,6 +66,7 @@
 #  has_blocking              :boolean          default(FALSE), not null
 #  blocking_from             :integer
 #  blocking_until            :integer
+#  blocking_reason           :text
 
 class Map < ApplicationRecord
 

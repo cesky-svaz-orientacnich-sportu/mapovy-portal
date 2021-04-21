@@ -549,6 +549,7 @@ class MapsController < ApplicationController
     @map.approved_by_id = current_user.id
     @map.user_updated_at = Time.now
     @map.blocking_until = params[:map][:blocking_until]
+    @map.blocking_reason = params[:map][:blocking_reason]
     @map.save
     MapStateMailer.map_approved(@map).deliver
     redirect_to @map
@@ -578,6 +579,7 @@ class MapsController < ApplicationController
     @map.approved_by_id = current_user.id
     @map.user_updated_at = Time.now
     @map.blocking_until = params[:map][:blocking_until]
+    @map.blocking_reason = params[:map][:blocking_reason]
     @map.save
     redirect_to @map
   end

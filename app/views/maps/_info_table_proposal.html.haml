@@ -27,28 +27,31 @@
 		%tr
 			- if map.state == Map::STATE_PROPOSED or map.state == Map::STATE_CHANGE_REQUESTED
 				%th= map_attribute_label :blocking_until
-				%td(colspan=9)
+				%td(colspan=7)
 					= map.blocking_until
 					(navržené trvání blokace -- je platné až po schválení krajským kartografem / koordinátorem #{icon 'info-circle', tooltip: map.authorized_cartographers.map(&:name) * ", "})
-		%tr
-			- if map.state == Map::STATE_PROPOSED or map.state == Map::STATE_CHANGE_REQUESTED
-				%th= map_attribute_label :identifier_filing
-				%td(colspan=9)
-					= print_identifier_filing map.identifier_filing
-					(navržené evidenční číslo -- je platné až po schválení krajským kartografem / koordinátorem #{icon 'info-circle', tooltip: map.authorized_cartographers.map(&:name) * ", "})
 			- else
 				%th= map_attribute_label :blocking_until
 				%td= map.blocking_until
+				%th= map_attribute_label :blocking_reason
+				%td(colspan=5)= map.blocking_reason
+		%tr
+			- if map.state == Map::STATE_PROPOSED or map.state == Map::STATE_CHANGE_REQUESTED
 				%th= map_attribute_label :identifier_filing
-				%td(colspan=3)= print_identifier_filing map.identifier_filing
+				%td(colspan=7)
+					= print_identifier_filing map.identifier_filing
+					(navržené evidenční číslo -- je platné až po schválení krajským kartografem / koordinátorem #{icon 'info-circle', tooltip: map.authorized_cartographers.map(&:name) * ", "})
+			- else
+				%th= map_attribute_label :identifier_filing
+				%td(colspan=5)= print_identifier_filing map.identifier_filing
 				%th= map_attribute_label :approved_by
-				%td(colspan=3) #{print_user map.approved_by, has_role?(:organizer, :cartographer, :manager)}
+				%td #{print_user map.approved_by, has_role?(:organizer, :cartographer, :manager)}
 		%tr
 			%th= map_attribute_label :locality
 			%td(colspan=5)
 				= map.locality
 			%th= map_attribute_label :region
-			%td(colspan=3) #{map.region} &ndash; #{Map::REGIONS[map.region]}
+			%td #{map.region} &ndash; #{Map::REGIONS[map.region]}
 		- if map.oris_event
 			%tr
 				%th
