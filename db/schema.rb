@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_21_085949) do
+ActiveRecord::Schema.define(version: 2021_04_21_144630) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgrouting"
@@ -167,6 +167,7 @@ ActiveRecord::Schema.define(version: 2021_04_21_085949) do
     t.date "competition_area_until"
     t.string "non_oris_event_url", limit: 255
     t.text "blocking_reason"
+    t.boolean "is_educational", default: false, null: false
     t.index ["slug"], name: "index_maps_on_slug", unique: true
   end
 

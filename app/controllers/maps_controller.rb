@@ -72,7 +72,7 @@ class MapsController < ApplicationController
   before_action :set_paper_trail_whodunnit
 
   def export_objev_sok
-    @maps = Map.where("LOWER(note_public) LIKE LOWER(?)", "%objev%")
+    @maps = Map.where("is_educational IS TRUE")
     respond_to do |format|
       format.json do
         render json: @maps.to_json, layout: false

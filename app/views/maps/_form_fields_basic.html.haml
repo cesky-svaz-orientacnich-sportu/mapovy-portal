@@ -101,6 +101,14 @@
   = f.text_field :blocking_reason, :class => 'col-sm-10'
 
 %div.form-group
+  = f.label :map_sport, map_attribute_label(:map_sport, :edit), :class => 'col-sm-2'
+  = f.select :map_sport, Map::MAP_SPORTS.map{|x| [t("mapserver.map_enums.map_sport.#{x}"), x]}, {:include_blank => true}, :class => 'col-sm-1'
+  = f.label :map_type, map_attribute_label(:map_type, :edit), :class => 'col-sm-2'
+  = f.select :map_type, Map::MAP_TYPES.map{|x| [t("mapserver.map_enums.map_type.#{x}"), x]}, {:include_blank => true}, :class => 'col-sm-3'
+  = f.label :is_educational, map_attribute_label(:is_educational), class: "col-sm-3"
+  = f.check_box :is_educational
+
+%div.form-group
   = f.label :scale, map_attribute_label(:scale, :edit), :class => 'col-sm-2'
   %div.col-sm-2
     1:
@@ -111,18 +119,11 @@
     m
 
 %div.form-group
-  = f.label :map_sport, map_attribute_label(:map_sport, :edit), :class => 'col-sm-2'
-  = f.select :map_sport, Map::MAP_SPORTS.map{|x| [t("mapserver.map_enums.map_sport.#{x}"), x]}, {:include_blank => true}, :class => 'col-sm-1'
-  = f.label :map_type, map_attribute_label(:map_type, :edit), :class => 'col-sm-2'
-  = f.select :map_type, Map::MAP_TYPES.map{|x| [t("mapserver.map_enums.map_type.#{x}"), x]}, {:include_blank => true}, :class => 'col-sm-3'
-
-%div.form-group
   = f.label :region, map_attribute_label(:region, :edit), :class => 'col-sm-2'
   = f.select :region, Map::REGIONS_OPTIONS, {:include_blank => true}, :class => 'col-sm-2'
   = f.label :locality, map_attribute_label(:locality, :edit), :class => 'col-sm-2'
   = f.text_field :locality, :class => 'col-sm-6'
 
-/ - if current_user.has_role?(:manager)
 %div.form-group
   = f.label :identifier_filing, map_attribute_label(:identifier_filing, :edit), :class => 'col-sm-2'
   - if (current_user.has_role?(:admin) or !f.object.approved_by) and f.object.identifier_filing and f.object.identifier_filing.size > 1
@@ -211,8 +212,3 @@
     %div.col-sm-1
     = f.label :archive_extra_print_count, map_attribute_label(:archive_extra_print_count, :edit), :class => 'col-sm-2'
     = f.select :archive_extra_print_count, ["0", "1", "2", "3"], {:include_blank => true}, :class => 'col-sm-1'
-
-/ t.string   "preview_identifier"
-/ t.integer  "layer_index"
-/ = f.label :area_size, map_attribute_label(:area_size), :class => 'col-sm-2'
-/ = f.text_field :area_size, :class => 'col-sm-2'

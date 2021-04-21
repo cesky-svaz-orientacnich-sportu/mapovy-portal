@@ -94,6 +94,7 @@ en:
       author_name: "Name"
       author_role: "Role"
       archive: 'Archive'
+      is_educational: 'Educational map'
 
     map_attribute_descriptions:
       id: 'ID'
@@ -127,6 +128,7 @@ en:
       printing_technique: 'Print technique'
       author_name: "Name"
       author_role: "Role"
+      is_educational: "Educational map for zacitorientak.cz"
 
     author_attributes:
       full_name: 'Name'

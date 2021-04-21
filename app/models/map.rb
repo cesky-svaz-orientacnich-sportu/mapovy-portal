@@ -67,6 +67,7 @@
 #  blocking_from             :integer
 #  blocking_until            :integer
 #  blocking_reason           :text
+#  is_educational            :boolean          default(FALSE), not null
 
 class Map < ApplicationRecord
 

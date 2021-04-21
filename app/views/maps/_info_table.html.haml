@@ -36,7 +36,7 @@
 			%td(colspan=5) #{map.blocking_reason}
 		%tr
 			%th= map_attribute_label :administrator
-			%td(colspan=5)
+			%td(colspan=3)
 				= map.administrator
 				- unless map.administrator_email.blank?
 					= mail_to map.administrator_email, icon('envelope', tooltip: map.administrator_email )
@@ -48,6 +48,8 @@
 					= map.patron
 				- if Map::ACCURACIES.include?(map.patron_accuracy)
 					= icon("question-circle", tooltip: t("mapserver.map_enums.accuracy.#{map.patron_accuracy}"))
+			%th= map_attribute_label :is_educational
+			%td= map.is_educational ? "ano" : "ne"
 		%tr
 			%th= map_attribute_label :printed_by
 			%td(colspan=5)= map.printed_by

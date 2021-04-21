@@ -29,10 +29,8 @@
   = f.label :map_sport, map_attribute_label(:map_sport), :class => 'col-sm-2'
   %span.col-sm-1= f.object.map_sport_
   = f.label :map_type, map_attribute_label(:map_type), :class => 'col-sm-2'
-  %span.col-sm-7= f.object.map_type_
-
-%div.form-group
-  = f.label :scale, map_attribute_label(:scale), :class => 'col-sm-2'
+  %span.col-sm-2= f.object.map_type_
+  = f.label :scale, map_attribute_label(:scale), :class => 'col-sm-1'
   %span.col-sm-1 1:#{f.object.scale}
   = f.label :equidistance, map_attribute_label(:equidistance), :class => 'col-sm-2'
   %span.col-sm-1 #{f.object.equidistance} m
@@ -53,15 +51,13 @@
   = f.label :region, map_attribute_label(:region), :class => 'col-sm-2'
   %span.col-sm-2= Map::REGIONS[f.object.region]
   = f.label :locality, map_attribute_label(:locality), :class => 'col-sm-1'
-  = f.text_field :locality, :class => 'col-sm-7'
+  = f.text_field :locality, :class => 'col-sm-4'
+  = f.label :is_educational, map_attribute_label(:is_educational), :class => 'col-sm-2'
+  = f.check_box :is_educational
 
 %div.form-group
   = f.label :note_public, map_attribute_label(:note_public), :class => 'col-sm-2'
   = f.text_field :note_public, :class => 'col-sm-10'
-/
-/ %div.form-group
-/   = f.label :note_internal, map_attribute_label(:note_internal), :class => 'col-sm-2'
-/   = f.text_field :note_internal, :class => 'col-sm-10'
 
 %div.form-group
   = f.label :resource, map_attribute_label(:resource), :class => 'col-sm-2'
@@ -90,4 +86,3 @@
   = f.text_field :administrator, :class => 'col-sm-6'
   = f.label :administrator_email, map_attribute_label(:administrator_email), :class => 'col-sm-2'
   = f.text_field :administrator_email, :class => 'col-sm-2'
-

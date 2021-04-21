@@ -285,6 +285,7 @@ cs:
       created_at: 'Vytvořeno'
       updated_at: 'Změněno'
       link_to_web: "Odkaz na mapový portál"
+      is_educational: "Výuková mapa"
 
     map_attribute_descriptions:
       id_: 'ID mapy / stav záznamu'
@@ -334,6 +335,7 @@ cs:
       mapping_state: "Rok a měsíc dokončení mapových prací (rrrr-mm)"
       created_at: 'Datum a čas vytvoření záznamu'
       updated_at: 'Datum a čas poslední změny záznamu'
+      is_educational: 'Označení výukových map pro portál zacitorientak.cz'
 
     map_attribute_hints:
       state: |
