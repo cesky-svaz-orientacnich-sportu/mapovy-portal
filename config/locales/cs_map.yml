@@ -161,6 +161,9 @@ cs:
         utm    : 'UTM'
         unknown: 'nezjištěno'
         none   : 'bez georeference'
+      is_educational:
+        positive: 'ano'
+        negative: 'ne'
 
     map_enum_descriptions:
       map_family:
@@ -335,7 +338,7 @@ cs:
       mapping_state: "Rok a měsíc dokončení mapových prací (rrrr-mm)"
       created_at: 'Datum a čas vytvoření záznamu'
       updated_at: 'Datum a čas poslední změny záznamu'
-      is_educational: 'Označení výukových map pro portál zacitorientak.cz'
+      is_educational: 'Mapa byla vydána v rámci projektu výukových map'
 
     map_attribute_hints:
       state: |

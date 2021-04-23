@@ -490,6 +490,10 @@ class Map < ApplicationRecord
     I18n.t("mapserver.map_enums.state.#{state}")
   end
 
+  def is_educational_
+  	is_educational ? I18n.translate("mapserver.map_enums.is_educational.positive") : I18n.translate("mapserver.map_enums.is_educational.negative")
+  end
+
   def drawing_technique_
     drawing_technique.blank? ? "---" : I18n.t("mapserver.map_enums.drawing_technique.#{drawing_technique}")
   end

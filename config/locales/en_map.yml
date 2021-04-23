@@ -128,7 +128,7 @@ en:
       printing_technique: 'Print technique'
       author_name: "Name"
       author_role: "Role"
-      is_educational: "Educational map for zacitorientak.cz"
+      is_educational: "Map was issued within the educational maps project"
 
     author_attributes:
       full_name: 'Name'
@@ -227,6 +227,9 @@ en:
         utm    : 'UTM'
         unknown: 'unknown'
         none   : 'not referenced'
+      is_educational:
+        positive: 'yes'
+        negative: 'no'
 
     map_enum_descriptions:
       map_family:
