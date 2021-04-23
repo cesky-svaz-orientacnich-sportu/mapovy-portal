@@ -6,21 +6,23 @@
     %p Pokud jsou všechny údaje v pořádku včetně krajové příslušnosti a blokace, lze přijmout žádost o přidělení čísla.
     .row
       .col-md-6
-        = form_tag([:authorize_proposal, @map], id: 'authorize_proposal_form') do
+        = form_tag([:authorize_proposal, @map], id: 'authorize_proposal_form', class: 'form-updated') do
           .form-group
             = label_tag "map[blocking_until]", map_attribute_label(:blocking_until, false)
-            = select_tag "map[blocking_until]", options_for_select(((Date.today.year..Date.today.year+9).to_a + [0]).sort.reverse.map { |v| [v, v] }, @map.blocking_until), {"aria-describedby" => "authorize_proposal_form_map_blocking_until", "class" => "form-control"}
-            %p{:id => "authorize_proposal_form_map_blocking_until"}
+            %p{:id => "authorize_proposal_form_map_blocking_until", :class => "help-block"}
               Pokud nevzniká nárok na blokaci, zvol hodnotu 0.
+            = select_tag "map[blocking_until]", options_for_select(((Date.today.year..Date.today.year+9).to_a + [0]).sort.reverse.map { |v| [v, v] }, @map.blocking_until), {"aria-describedby" => "authorize_proposal_form_map_blocking_until", "class" => "form-control"}
           .form-group
             = label_tag "map[blocking_reason]", map_attribute_label(:blocking_reason, false)
-            = text_area_tag "map[blocking_reason]", @map.blocking_reason, size: "80x8", class: "form-control"
+            %p{:id => "authorize_proposal_form_map_blocking_reason", :class => "help-block"}
+              Uveď důvod zkrácení základní délky blokace resp. důvod ztráty nároku na blokaci.
+            = text_area_tag "map[blocking_reason]", @map.blocking_reason, {:size => "80x8", :class => "form-control", "aria-describedby" => "authorize_proposal_form_map_blocking_reason"}
           = submit_tag "Přijmout", class:'btn btn-primary'
     %hr
     %p Pokud je potřeba údaje doplnit nebo změnit, lze záznam vrátit žadateli (#{print_user @map.created_by, true}) k doplnění.
     .row
       .col-md-6
-        = form_tag([:reject_proposal, @map], id: 'reject_proposal_form') do
+        = form_tag([:reject_proposal, @map], id: 'reject_proposal_form', class: 'form-updated') do
           .form-group
             = label_tag "map[comment]", "Komentář / zpráva pro žadatele"
             = text_area_tag "map[comment]", "", size: "80x8", class: "form-control"
