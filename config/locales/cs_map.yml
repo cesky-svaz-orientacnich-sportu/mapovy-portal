@@ -242,7 +242,7 @@ cs:
       patron: 'Klub'
       year: 'Rok'
       blocking_until: 'Blokace do'
-      blocking_reason: 'Zdůvodnění blokace'
+      blocking_reason: 'Blokace – zdůvodnění'
       region: 'Kraj'
       patron_accuracy: 'Klub - míra jistoty'
       year_accuracy: 'Rok - míra jistoty'
