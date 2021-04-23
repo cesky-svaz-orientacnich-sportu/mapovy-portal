@@ -42,12 +42,12 @@
 					= print_identifier_filing map.identifier_filing
 					(navržené evidenční číslo -- je platné až po schválení krajským kartografem / koordinátorem #{icon 'info-circle', tooltip: map.authorized_cartographers.map(&:name) * ", "})
 				%th= map_attribute_label :is_educational
-				%td= map.is_educational ? "ano" : "ne"
+				%td= map.is_educational_
 			- else
 				%th= map_attribute_label :identifier_filing
 				%td(colspan=3)= print_identifier_filing map.identifier_filing
 				%th= map_attribute_label :is_educational
-				%td= map.is_educational ? "ano" : "ne"
+				%td= map.is_educational_
 				%th= map_attribute_label :approved_by
 				%td #{print_user map.approved_by, has_role?(:organizer, :cartographer, :manager)}
 		%tr

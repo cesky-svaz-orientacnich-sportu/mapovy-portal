@@ -49,7 +49,7 @@
 				- if Map::ACCURACIES.include?(map.patron_accuracy)
 					= icon("question-circle", tooltip: t("mapserver.map_enums.accuracy.#{map.patron_accuracy}"))
 			%th= map_attribute_label :is_educational
-			%td= map.is_educational ? "ano" : "ne"
+			%td= map.is_educational_
 		%tr
 			%th= map_attribute_label :printed_by
 			%td(colspan=5)= map.printed_by

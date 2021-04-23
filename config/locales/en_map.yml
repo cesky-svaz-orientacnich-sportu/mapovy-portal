@@ -227,6 +227,9 @@ en:
         utm    : 'UTM'
         unknown: 'unknown'
         none   : 'not referenced'
+      is_educational:
+        positive: 'yes'
+        negative: 'no'
 
     map_enum_descriptions:
       map_family:

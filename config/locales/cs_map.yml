@@ -161,6 +161,9 @@ cs:
         utm    : 'UTM'
         unknown: 'nezjištěno'
         none   : 'bez georeference'
+      is_educational:
+        positive: 'ano'
+        negative: 'ne'
 
     map_enum_descriptions:
       map_family:
