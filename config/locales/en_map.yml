@@ -128,7 +128,7 @@ en:
       printing_technique: 'Print technique'
       author_name: "Name"
       author_role: "Role"
-      is_educational: "Educational map for zacitorientak.cz"
+      is_educational: "Map was issued within the educational maps project"
 
     author_attributes:
       full_name: 'Name'
