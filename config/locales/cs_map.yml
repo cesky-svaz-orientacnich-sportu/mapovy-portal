@@ -150,7 +150,7 @@ cs:
         none      : 'Náčrtek, malůvka, fotokopie'
         military  : 'Zeleňavka'
         isom      : 'ISOM (klasický OB)'
-        issom     : 'ISSOM (OB sprint)'
+        issprom   : 'ISSprOM (OB sprint)'
         ismtbom   : 'ISMTBOM (cyklistický OB)'
         isskiom   : 'ISSkiOM (lyžařský OB)'
         topo      : 'Topografická mapa'
@@ -221,7 +221,7 @@ cs:
         none      : 'bez normy'
         military  : 'VZÚ'
         isom      : 'ISOM'
-        issom     : 'ISSOM'
+        issprom   : 'ISSprOM'
         ismtbom   : 'ISMTBOM'
         isskiom   : 'ISSkiOM'
         topo      : 'Topografická'
@@ -387,7 +387,7 @@ cs:
       map_type: |
         Druh mapy podle použité normy nebo stylu. Přípustné hodnoty:
         ISOM (klasický pěší OB),
-        ISSOM (OB sprint),
+        ISSprOM (OB sprint),
         ISMTBOM (cyklistický OB),
         ISSkiOM (lyžařský OB),
         Topografická mapa (základní, turistická apod.),

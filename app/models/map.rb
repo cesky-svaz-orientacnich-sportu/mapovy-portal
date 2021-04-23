@@ -98,7 +98,7 @@ class Map < ApplicationRecord
     ]
   end
 
-  MAP_TYPES = %w{isom issom ismtbom isskiom topo iof_4color none military combined}
+  MAP_TYPES = %w{isom issprom ismtbom isskiom topo iof_4color none military combined}
 
   ACCURACIES = %w{imprint estimate lookup authored}
 
