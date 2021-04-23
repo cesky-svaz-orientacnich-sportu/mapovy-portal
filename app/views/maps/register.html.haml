@@ -45,29 +45,35 @@
   %div.form-group
     = f.label :region, map_attribute_label(:region), :class => 'col-sm-2'
     = f.select :region, Map::REGIONS_OPTIONS, {:include_blank => true}, :class => 'col-sm-2'
-    = f.label :locality, map_attribute_label(:locality), :class => 'col-sm-2'
-    = f.text_field :locality, :class => 'col-sm-6'
+    - if f.object.identifier_filing.blank?
+      = f.label :locality, map_attribute_label(:locality), :class => 'col-sm-2'
+      = f.text_field :locality, :class => 'col-sm-6'
+    - else
+      = f.label :locality, map_attribute_label(:locality), :class => 'col-sm-1'
+      = f.text_field :locality, :class => 'col-sm-3'
+      = f.label :identifier_filing, map_attribute_label(:identifier_filing), :class => 'col-sm-3'
+      %span.col-sm-1= f.object.identifier_filing
 
   %div.form-group
     = f.label :year, map_attribute_label(:year), :class => 'col-sm-2'
     = f.select :year, [Date.today.year, Date.today.year+1], {}, :class => 'col-sm-2'
     = f.hidden_field :year_accuracy
+    = f.label :blocking_until, map_attribute_label(:blocking_until), :class => 'col-sm-2'
+    = f.select :blocking_until, ((Date.today.year..Date.today.year+9).to_a + [0]).sort.reverse, {}, :class => 'col-sm-2'
+    = f.label :is_educational, map_attribute_label(:is_educational), :class => 'col-sm-3'
+    = f.check_box :is_educational
+
+  %div.form-group
     = f.label :oris_event_id, map_attribute_label(:main_race), :class => 'col-sm-2'
     = f.select :oris_event_id, "<option value=\"0\"#{f.object.oris_event_id == 0 ? 'selected' : ''}>(žádný závod)</option>".html_safe + options_from_collection_for_select(f.object.year ? OrisEvent.in_year(f.object.year) : OrisEvent.sorted, :id, :to_label, f.object.oris_event_id), {:include_blank => true}, :class => 'col-sm-6'
 
   %div.form-group
-    - if f.object.identifier_filing.blank?
-      %span.col-sm-4
-    - else
-      = f.label :identifier_filing, map_attribute_label(:identifier_filing), :class => 'col-sm-2'
-      %span.col-sm-2= f.object.identifier_filing
-    = f.label :main_race_title, map_attribute_label(:main_race_title), :class => 'col-sm-2'
-    = f.text_field :main_race_title, :class => 'col-sm-2'
     = f.label :main_race_date, map_attribute_label(:main_race_date), :class => 'col-sm-2'
     = f.text_field :main_race_date, :class => 'col-sm-2', :type => 'date'
+    = f.label :main_race_title, map_attribute_label(:main_race_title), :class => 'col-sm-1'
+    = f.text_field :main_race_title, :class => 'col-sm-3'
 
   %div.form-group
-    %span.col-sm-4
     = f.label :non_oris_event_url, map_attribute_label(:non_oris_event_url), :class => 'col-sm-2'
     = f.text_field :non_oris_event_url, :class => 'col-sm-6'
 
@@ -96,17 +102,6 @@
       $('#map_patron').select2({
         tags: true
       });
-
-  / t.string   "preview_identifier"
-  / t.integer  "layer_index"
-
-  / %h2= t("mapserver.mapBasicData")
-  /
-  / = render :partial => 'form_fields_basic', :locals => {:f => f}
-  /
-  / %h2 Autoři
-  /
-  / = render :partial => 'form_fields_authors', :locals => {:f => f}
 
   %h2 Obrys mapy
 

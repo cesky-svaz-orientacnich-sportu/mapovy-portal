@@ -7,8 +7,8 @@
       %td #{map.id} / #{map.map_family_}
     %tr
       %th= map_attribute_label :year
-      %td 
-        = map.year          
+      %td
+        = map.year
       %th= map_attribute_label :created_by
       %td #{map.created_by ? print_user(map.created_by, has_role?(:organizer, :cartographer, :manager)) : "archiv ČSOS"}
       %th= map_attribute_label :patron
@@ -18,6 +18,7 @@
         %th= map_attribute_label :main_race_title
         %td(colspan=3)
           = link_to map.oris_event.title.html_safe + " " + icon('globe', tooltip: "ORIS"), map.oris_event.oris_url
+          = update_oris_event_link(@map)
         %th= map_attribute_label :main_race_date
         %td= map.oris_event.date
     - elsif !map.main_race_title.blank?

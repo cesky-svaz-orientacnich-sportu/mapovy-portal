@@ -65,6 +65,8 @@ en:
       patron: 'Club'
       scale: 'Scale'
       year: 'Year'
+      blocking_until: 'Blocking until'
+      blocking_reason: 'Blocking reason'
       map_type: 'Type'
       sport: 'Sport'
       map_sport: 'Sport'
@@ -92,6 +94,7 @@ en:
       author_name: "Name"
       author_role: "Role"
       archive: 'Archive'
+      is_educational: 'Educational map'
 
     map_attribute_descriptions:
       id: 'ID'
@@ -100,6 +103,8 @@ en:
       patron: 'Club'
       scale: 'Scale'
       year: 'Year'
+      blocking_until: 'Blocking ends with the last day of the year'
+      blocking_reason: 'Reason for shorter blocking period'
       map_type: 'Type'
       sport: 'Sport'
       map_sport: 'Sport'
@@ -123,6 +128,7 @@ en:
       printing_technique: 'Print technique'
       author_name: "Name"
       author_role: "Role"
+      is_educational: "Educational map for zacitorientak.cz"
 
     author_attributes:
       full_name: 'Name'
@@ -210,7 +216,7 @@ en:
         none      : 'Náčrtek, malůvka, fotokopie'
         military  : 'Topografická mapa, "zeleňavka"'
         isom      : 'ISOM (foot-O)'
-        issom     : 'ISSOM (sprint foot-O)'
+        issprom   : 'ISSprOM (sprint foot-O)'
         ismtbom   : 'ISMTBOM (MTBO)'
         isskiom   : 'ISSkiOM (Ski-O)'
         topo      : 'Topographic map'
@@ -281,7 +287,7 @@ en:
         none      : 'no norm'
         military  : 'Military Cartography'
         isom      : 'ISOM'
-        issom     : 'ISSOM'
+        issprom   : 'ISSprOM'
         ismtbom   : 'ISMTBOM'
         isskiom   : 'ISSkiOM'
         topo      : 'Topografická'
@@ -303,6 +309,7 @@ en:
       blocking:
         title: 'Blocked'
         year: 'in year'
+        without_claim: 'without claim'
       embargo:
         info_title: 'Embargo until'
 

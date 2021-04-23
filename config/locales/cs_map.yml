@@ -150,7 +150,7 @@ cs:
         none      : 'Náčrtek, malůvka, fotokopie'
         military  : 'Zeleňavka'
         isom      : 'ISOM (klasický OB)'
-        issom     : 'ISSOM (OB sprint)'
+        issprom   : 'ISSprOM (OB sprint)'
         ismtbom   : 'ISMTBOM (cyklistický OB)'
         isskiom   : 'ISSkiOM (lyžařský OB)'
         topo      : 'Topografická mapa'
@@ -221,7 +221,7 @@ cs:
         none      : 'bez normy'
         military  : 'VZÚ'
         isom      : 'ISOM'
-        issom     : 'ISSOM'
+        issprom   : 'ISSprOM'
         ismtbom   : 'ISMTBOM'
         isskiom   : 'ISSkiOM'
         topo      : 'Topografická'
@@ -241,6 +241,8 @@ cs:
       scale: 'Měřítko'
       patron: 'Klub'
       year: 'Rok'
+      blocking_until: 'Blokace do'
+      blocking_reason: 'Blokace – zdůvodnění'
       region: 'Kraj'
       patron_accuracy: 'Klub - míra jistoty'
       year_accuracy: 'Rok - míra jistoty'
@@ -283,6 +285,7 @@ cs:
       created_at: 'Vytvořeno'
       updated_at: 'Změněno'
       link_to_web: "Odkaz na mapový portál"
+      is_educational: "Výuková mapa"
 
     map_attribute_descriptions:
       id_: 'ID mapy / stav záznamu'
@@ -292,6 +295,8 @@ cs:
       patron: 'Klub, který mapu vydal. Není-li znám, odvodí se podle jiných map prostoru nebo podle příslušnosti autora.'
       scale: 'Měřítko, v němž je mapa vytištěna'
       year: 'Rok vydání mapy'
+      blocking_until: 'Blokace končí s posledním dnem roku'
+      blocking_reason: 'Důvod zkrácení základní délky blokace resp. ztráty nároku na blokaci'
       region: 'Kraj podle převažující příslušnosti prostoru'
       patron_accuracy: 'Způsob určení klubu (vydavatele)'
       year_accuracy: 'Způsob určení roku vydání'
@@ -330,6 +335,7 @@ cs:
       mapping_state: "Rok a měsíc dokončení mapových prací (rrrr-mm)"
       created_at: 'Datum a čas vytvoření záznamu'
       updated_at: 'Datum a čas poslední změny záznamu'
+      is_educational: 'Označení výukových map pro portál zacitorientak.cz'
 
     map_attribute_hints:
       state: |
@@ -381,7 +387,7 @@ cs:
       map_type: |
         Druh mapy podle použité normy nebo stylu. Přípustné hodnoty:
         ISOM (klasický pěší OB),
-        ISSOM (OB sprint),
+        ISSprOM (OB sprint),
         ISMTBOM (cyklistický OB),
         ISSkiOM (lyžařský OB),
         Topografická mapa (základní, turistická apod.),
@@ -610,6 +616,7 @@ cs:
       blocking:
         title: 'Blokace'
         year: 'v roce'
+        without_claim: 'bez nároku'
       embargo:
         info_title: 'Embargo do'
 

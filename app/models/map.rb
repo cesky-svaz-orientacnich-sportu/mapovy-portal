@@ -66,7 +66,8 @@
 #  has_blocking              :boolean          default(FALSE), not null
 #  blocking_from             :integer
 #  blocking_until            :integer
-#
+#  blocking_reason           :text
+#  is_educational            :boolean          default(FALSE), not null
 
 class Map < ApplicationRecord
 
@@ -97,7 +98,7 @@ class Map < ApplicationRecord
     ]
   end
 
-  MAP_TYPES = %w{isom issom ismtbom isskiom topo iof_4color none military combined}
+  MAP_TYPES = %w{isom issprom ismtbom isskiom topo iof_4color none military combined}
 
   ACCURACIES = %w{imprint estimate lookup authored}
 
@@ -164,7 +165,7 @@ class Map < ApplicationRecord
 
   scope :visible, ->{ where(state: [STATE_APPROVED, STATE_COMPLETED, STATE_FINALIZED, STATE_FINAL_CHANGE_REQUESTED, STATE_SAVED_WITHOUT_FILING, STATE_ARCHIVED]) }
   scope :not_removed, ->{ where('state <> ?', STATE_REMOVED) }
-  #validates_uniqueness_of :title, scope: :year
+
   validates_presence_of :title
   validates_presence_of :map_family
   validates_presence_of :map_sport
@@ -204,7 +205,7 @@ class Map < ApplicationRecord
   validates_inclusion_of :map_type, in: MAP_TYPES, allow_nil: true, allow_blank: true
   validates_inclusion_of :map_sport, in: MAP_SPORTS, allow_nil: true, allow_blank: true
   validates_inclusion_of :region, in: REGIONS.keys, allow_nil: true, allow_blank: true
-  validates_numericality_of :year, :scale, :equidistance, allow_nil: true, allow_blank: true
+  validates_numericality_of :year, :blocking_until, :scale, :equidistance, allow_nil: true, allow_blank: true
 
   def link_to_web
     Mapserver::Application.config.hostname + "/mapa/#{friendly_id || id}"
@@ -590,7 +591,6 @@ class Map < ApplicationRecord
   def set_blocking
     self.has_blocking = blocking? ? 1 : 0
     self.blocking_from = blocking? ? year : 0
-    self.blocking_until = blocking? ? blocking_from + 9 : 0
   end
 
   def unset_oris_url
@@ -746,7 +746,7 @@ class Map < ApplicationRecord
       end
     end
 
-    self.update_attributes(:preview_identifier => "#{self.id}X")
+    self.update(:preview_identifier => "#{self.id}X")
   end
 
   def authorized_cartographers(extra_region = nil)

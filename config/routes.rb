@@ -87,6 +87,7 @@ Mapserver::Application.routes.draw do
         post :reject_proposal
         post :authorize_completion
         post :reject_completion
+        get :update_oris_data
       end
     end
 

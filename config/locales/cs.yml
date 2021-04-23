@@ -65,6 +65,7 @@ cs:
         patron: 'Klub'
         scale: 'Měřítko'
         year: 'Rok'
+        blocking_until: 'Blokace do'
         map_type: 'Norma'
         map_type_: 'Norma'
         oris_event_id: "Závod ORIS"

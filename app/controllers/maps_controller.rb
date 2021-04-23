@@ -72,7 +72,7 @@ class MapsController < ApplicationController
   before_action :set_paper_trail_whodunnit
 
   def export_objev_sok
-    @maps = Map.where("LOWER(note_public) LIKE LOWER(?)", "%objev%")
+    @maps = Map.where("is_educational IS TRUE")
     respond_to do |format|
       format.json do
         render json: @maps.to_json, layout: false
@@ -548,6 +548,8 @@ class MapsController < ApplicationController
     @map.state_changed_at = Date.today
     @map.approved_by_id = current_user.id
     @map.user_updated_at = Time.now
+    @map.blocking_until = params[:map][:blocking_until]
+    @map.blocking_reason = params[:map][:blocking_reason]
     @map.save
     MapStateMailer.map_approved(@map).deliver
     redirect_to @map
@@ -576,8 +578,9 @@ class MapsController < ApplicationController
     @map.state_changed_at = Date.today
     @map.approved_by_id = current_user.id
     @map.user_updated_at = Time.now
+    @map.blocking_until = params[:map][:blocking_until]
+    @map.blocking_reason = params[:map][:blocking_reason]
     @map.save
-    # MapStateMailer.map_finalized(@map).deliver
     redirect_to @map
   end
 
@@ -607,6 +610,12 @@ class MapsController < ApplicationController
       end
       render plain: "<p>Changed maps: " + map2oris.inspect + "</p>", layout: true
     end
+  end
+
+  def update_oris_data
+    @map = Map.find(params[:id])
+    OrisEvent.find(@map.oris_event_id).fetch
+    redirect_to @map
   end
 
 end

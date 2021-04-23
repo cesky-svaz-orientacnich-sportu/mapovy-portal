@@ -34,7 +34,7 @@ class AuthorsController < ApplicationController
 
   def update
     @author = Author.find(params[:id])
-    @author.update_attributes(params[:author])
+    @author.update(params[:author])
     redirect_to :action => :index
   end
 

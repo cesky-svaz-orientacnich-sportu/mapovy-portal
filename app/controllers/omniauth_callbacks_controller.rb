@@ -69,7 +69,7 @@ private
       auth = user.authorizations.build(:provider => provider)
       user.authorizations << auth
     end
-    auth.update_attributes auth_attr
+    auth.update auth_attr
 
     if user and user.full_name.blank?
       user.update_attribute :full_name, user.authorizations.map(&:name).reject(&:blank?).first

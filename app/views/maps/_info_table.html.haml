@@ -1,133 +1,142 @@
 - hide_authors ||= false
 %table.table.table-bordered.table-condensed.infoTable
-  %tbody
-    %tr
-      %th= map_attribute_label :scale
-      %td 1:#{map.scale}
-      %th= map_attribute_label :equidistance
-      %td #{map.equidistance}m
-      %th= map_attribute_label :map_sport
-      %td
-        - unless map.map_sport.blank?
-          = map.map_sport_
-          = icon('question-circle', tooltip: t("mapserver.map_enum_descriptions.map_sport.#{map.map_sport}") )
-      %th= map_attribute_label :map_type
-      %td
-        - unless map.map_type.blank?
-          = t("mapserver.map_enums.map_type.#{map.map_type}") 
-          = icon('question-circle', tooltip: t("mapserver.map_enum_descriptions.map_type.#{map.map_type}") )
-    %tr
-      %th= map_attribute_label :year
-      %td 
-        - if map.year and map.year.to_i > 0
-          = map.year
-          - if Map::ACCURACIES.include?(map.year_accuracy)
-            = icon("question-circle", tooltip: t("mapserver.map_enums.accuracy.#{map.year_accuracy}"))        
-        - else 
-          = "---"
-      %th= map_attribute_label :issued_by
-      %td(colspan=3) #{map.issued_by}
-      %th= map_attribute_label :identifier_filing
-      %td #{print_identifier_filing map.identifier_filing}
-    %tr
-      %th= map_attribute_label :administrator
-      %td(colspan=5) 
-        = map.administrator
-        - unless map.administrator_email.blank?
-          = mail_to map.administrator_email, icon('envelope', tooltip: map.administrator_email )
-      %th= map_attribute_label :patron
-      %td
-        - if map.club
-          = link_to map.club, map.club
-        - else
-          = map.patron
-        - if Map::ACCURACIES.include?(map.patron_accuracy)
-          = icon("question-circle", tooltip: t("mapserver.map_enums.accuracy.#{map.patron_accuracy}"))
-    %tr
-      %th= map_attribute_label :printed_by
-      %td(colspan=5)= map.printed_by
-      %th= map_attribute_label :resource
-      %td #{map.resource}
-    %tr
-      %th= map_attribute_label :locality
-      %td(colspan=3)= map.locality
-      - unless map.region.blank?
-        %th= map_attribute_label :region
-        %td #{Map::REGIONS[map.region]}
-      - else  
-        %td(colspan=2)
-      %th= map_attribute_label :area_size
-      %td 
-        - if map.area_size and map.area_size > 0
-          #{map.area_size.round(3)} km2
-    %tr
-      %th= map_attribute_label :printing_technique
-      %td(colspan=5)
-        - unless map.printing_technique.blank?
-          - if Map::PRINTING_TECHNIQUES.include?(map.printing_technique)
-            = t("mapserver.map_enums.printing_technique.#{map.printing_technique}") 
-            = icon('question-circle', tooltip: t("mapserver.map_enum_descriptions.printing_technique.#{map.printing_technique}") )
-          - else
-            = "[? #{map.printing_technique}]"
-      %th= map_attribute_label :drawing_technique
-      %td(colspan=1)
-        - unless map.drawing_technique.blank?
-          = t("mapserver.map_enums.drawing_technique.#{map.drawing_technique}") 
-          = icon('question-circle', tooltip: t("mapserver.map_enum_descriptions.drawing_technique.#{map.drawing_technique}") )
-    - unless map.note_public.blank?
-      %tr
-        %th= map_attribute_label :note_public
-        %td(colspan=7) #{map.note_public}
-    - if has_role?(:manager)  
-      - unless map.note_internal.blank?
-        %tr
-          %th= map_attribute_label :note_internal
-          %td(colspan=7) #{map.note_internal}
-    - if map.oris_event
-      %tr
-        %th= map_attribute_label :main_race_title
-        %td(colspan=5)
-          = link_to map.oris_event.title.html_safe + " " + icon('globe', tooltip: "ORIS"), map.oris_event.oris_url, target: '_blank'
-        %th= map_attribute_label :main_race_date
-        %td= map.oris_event.date
-    - elsif !map.main_race_title.blank?
-      %tr
-        %th= map_attribute_label :main_race_title
-        %td(colspan=5)
-          - if !map.non_oris_event_url.blank?
-            = link_to map.main_race_title.html_safe + " " + icon('globe'), map.non_oris_event_url.html_safe
-          - else
-            = map.main_race_title
-        %th= map_attribute_label :main_race_date
-        %td= map.main_race_date ? map.main_race_date.strftime("%d. %m. %Y") : '---'
-    - elsif map.oris_event == 0
-      %tr
-        %th= map_attribute_label :main_race_title
-        %td(colspan=7) (mapa není určena pro konkrétní závod)
-    %tr
-      %th= map_attribute_label :created_by
-      %td(colspan=3) #{map.created_by ? print_user(map.created_by, has_role?(:organizer, :cartographer, :manager)) : "archiv ČSOS"}
-      - if map.state == Map::STATE_ARCHIVED || map.state == Map::STATE_SAVED_WITHOUT_FILING
-        %th= map_attribute_label :archive
-        - if map.no_archive_prints?
-          %td.danger(colspan=1)
-            %strong= t('mapserver.map_no_archive_prints')
-        - else
-          %td(colspan=1)= map.archive_
-      - else
-        %td(colspan=2)
-      %th= map_attribute_label :id_
-      %td(colspan=1) #{map.id} / #{t("mapserver.map_enums.state.#{map.state}")}
+	%tbody
+		%tr
+			%th= map_attribute_label :scale
+			%td 1:#{map.scale}
+			%th= map_attribute_label :equidistance
+			%td #{map.equidistance}m
+			%th= map_attribute_label :map_sport
+			%td
+				- unless map.map_sport.blank?
+					= map.map_sport_
+					= icon('question-circle', tooltip: t("mapserver.map_enum_descriptions.map_sport.#{map.map_sport}") )
+			%th= map_attribute_label :map_type
+			%td
+				- unless map.map_type.blank?
+					= t("mapserver.map_enums.map_type.#{map.map_type}")
+					= icon('question-circle', tooltip: t("mapserver.map_enum_descriptions.map_type.#{map.map_type}") )
+		%tr
+			%th= map_attribute_label :year
+			%td
+				- if map.year and map.year.to_i > 0
+					= map.year
+					- if Map::ACCURACIES.include?(map.year_accuracy)
+						= icon("question-circle", tooltip: t("mapserver.map_enums.accuracy.#{map.year_accuracy}"))
+				- else
+					= "---"
+			%th= map_attribute_label :issued_by
+			%td(colspan=3) #{map.issued_by}
+			%th= map_attribute_label :identifier_filing
+			%td #{print_identifier_filing map.identifier_filing}
+		%tr
+			%th= map_attribute_label :blocking_until
+			%td #{map.blocking_until}
+			%th= map_attribute_label :blocking_reason
+			%td(colspan=5) #{map.blocking_reason}
+		%tr
+			%th= map_attribute_label :administrator
+			%td(colspan=3)
+				= map.administrator
+				- unless map.administrator_email.blank?
+					= mail_to map.administrator_email, icon('envelope', tooltip: map.administrator_email )
+			%th= map_attribute_label :patron
+			%td
+				- if map.club
+					= link_to map.club, map.club
+				- else
+					= map.patron
+				- if Map::ACCURACIES.include?(map.patron_accuracy)
+					= icon("question-circle", tooltip: t("mapserver.map_enums.accuracy.#{map.patron_accuracy}"))
+			%th= map_attribute_label :is_educational
+			%td= map.is_educational ? "ano" : "ne"
+		%tr
+			%th= map_attribute_label :printed_by
+			%td(colspan=5)= map.printed_by
+			%th= map_attribute_label :resource
+			%td #{map.resource}
+		%tr
+			%th= map_attribute_label :locality
+			%td(colspan=3)= map.locality
+			- unless map.region.blank?
+				%th= map_attribute_label :region
+				%td #{Map::REGIONS[map.region]}
+			- else
+				%td(colspan=2)
+			%th= map_attribute_label :area_size
+			%td
+				- if map.area_size and map.area_size > 0
+					#{map.area_size.round(3)} km2
+		%tr
+			%th= map_attribute_label :printing_technique
+			%td(colspan=5)
+				- unless map.printing_technique.blank?
+					- if Map::PRINTING_TECHNIQUES.include?(map.printing_technique)
+						= t("mapserver.map_enums.printing_technique.#{map.printing_technique}")
+						= icon('question-circle', tooltip: t("mapserver.map_enum_descriptions.printing_technique.#{map.printing_technique}") )
+					- else
+						= "[? #{map.printing_technique}]"
+			%th= map_attribute_label :drawing_technique
+			%td(colspan=1)
+				- unless map.drawing_technique.blank?
+					= t("mapserver.map_enums.drawing_technique.#{map.drawing_technique}")
+					= icon('question-circle', tooltip: t("mapserver.map_enum_descriptions.drawing_technique.#{map.drawing_technique}") )
+		- unless map.note_public.blank?
+			%tr
+				%th= map_attribute_label :note_public
+				%td(colspan=7) #{map.note_public}
+		- if has_role?(:manager)
+			- unless map.note_internal.blank?
+				%tr
+					%th= map_attribute_label :note_internal
+					%td(colspan=7) #{map.note_internal}
+		- if map.oris_event
+			%tr
+				%th
+					= map_attribute_label :main_race_title
+				%td(colspan=5)
+					= link_to map.oris_event.title.html_safe + " " + icon('globe', tooltip: "ORIS"), map.oris_event.oris_url, target: '_blank'
+					= update_oris_event_link(@map)
+				%th= map_attribute_label :main_race_date
+				%td= map.oris_event.date
+		- elsif !map.main_race_title.blank?
+			%tr
+				%th= map_attribute_label :main_race_title
+				%td(colspan=5)
+					- if !map.non_oris_event_url.blank?
+						= link_to map.main_race_title.html_safe + " " + icon('globe'), map.non_oris_event_url.html_safe
+					- else
+						= map.main_race_title
+				%th= map_attribute_label :main_race_date
+				%td= map.main_race_date ? map.main_race_date.strftime("%d. %m. %Y") : '---'
+		- elsif map.oris_event == 0
+			%tr
+				%th= map_attribute_label :main_race_title
+				%td(colspan=7) (mapa není určena pro konkrétní závod)
+		%tr
+			%th= map_attribute_label :created_by
+			%td(colspan=3) #{map.created_by ? print_user(map.created_by, has_role?(:organizer, :cartographer, :manager)) : "archiv ČSOS"}
+			- if map.state == Map::STATE_ARCHIVED || map.state == Map::STATE_SAVED_WITHOUT_FILING
+				%th= map_attribute_label :archive
+				- if map.no_archive_prints?
+					%td.danger(colspan=1)
+						%strong= t('mapserver.map_no_archive_prints')
+				- else
+					%td(colspan=1)= map.archive_
+			- else
+				%td(colspan=2)
+			%th= map_attribute_label :id_
+			%td(colspan=1) #{map.id} / #{t("mapserver.map_enums.state.#{map.state}")}
 
 - if !hide_authors and map.cartographers.any?
-  %h2= t("mapserver.map_attributes.authors")
-  %table.table
-    %thead
-      %tr
-        %th= map_attribute_label :author_name
-        %th= map_attribute_label :author_role
-    %tbody
-      - map.cartographers_with_roles.each do |c, roles|
-        %tr
-          %td= c ? link(c) : '---'
-          %td= roles.map{|role| t("mapserver.cartographer_roles.#{role.upcase}")} * ", "
+	%h2= t("mapserver.map_attributes.authors")
+	%table.table
+		%thead
+			%tr
+				%th= map_attribute_label :author_name
+				%th= map_attribute_label :author_role
+		%tbody
+			- map.cartographers_with_roles.each do |c, roles|
+				%tr
+					%td= c ? link(c) : '---'
+					%td= roles.map{|role| t("mapserver.cartographer_roles.#{role.upcase}")} * ", "
