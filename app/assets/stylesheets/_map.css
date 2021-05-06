@@ -14,7 +14,7 @@
  *= require jquery-ui
  *= require 'common'
  *= require 'map'
- *= require 'map_toc'
+ *= require 'map_controls'
  *= require 'map_switch'
  *= require 'map_search'
  *= require 'tools_list'

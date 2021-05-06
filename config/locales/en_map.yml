@@ -355,6 +355,7 @@ en:
     controls: "Map selection controls"
     layers: "O-maps"
     areas: "Areas"
+    backgroundSwitch: 'Background map'
 
     embargoes: 'Embargoes'
     competitionAreas: 'Competition areas'

@@ -3,7 +3,7 @@ jQuery ->
   $('#advanced_search_gps_button').on 'click', ->
     searchAdvanced.userGpsCoords()
 
-  $('#baseMapSwitch a').on 'click', ->
+  $('#baseMapSwitch a, .map-controls-background-switch a').on 'click', ->
     mapHelper.changeMapType($(this).data('map-type'))
 
   $('.map-controls-collapse').on 'click', ->

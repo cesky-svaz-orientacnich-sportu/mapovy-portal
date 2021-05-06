@@ -76,7 +76,6 @@ function initLayout() {
         $(".linkShow").show();
         $("#top").css("height", "auto");
         $("#top").slideDown("medium", function () {
-            //resize();
             $("#searchResult").css("top", 100);
             $(".linkShowResults").css("top", 100);
             $("#map_canvas").css("top", 100);

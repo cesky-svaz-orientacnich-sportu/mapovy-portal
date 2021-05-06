@@ -30,8 +30,8 @@ App.MapHelper = App.newClass({
 
     changeMapType: function (mapTypeId) {
       console.dir(mapTypeId);
-        $("#baseMapSwitch a").removeClass("active");
-        $("#baseMapSwitch a[data-map-type=" + mapTypeId + "]").addClass("active");
+        $("#baseMapSwitch, .map-controls-background-switch").find("a").removeClass("active");
+        $("#baseMapSwitch, .map-controls-background-switch").find("a[data-map-type=" + mapTypeId + "]").addClass("active");
         if (mapTypeId == 'SHC') {
             this.map.setMapTypeId('SHC');
             $('#cuzkCopyright').show();

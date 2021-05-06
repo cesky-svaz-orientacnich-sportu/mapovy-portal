@@ -669,6 +669,7 @@ cs:
     controls: 'Možnosti zobrazení map'
     layers: 'O-mapy'
     areas: 'Prostory'
+    backgroundSwitch: 'Podklad'
 
     embargoes: 'Embarga'
     competitionAreas: 'Prostory závodů'
