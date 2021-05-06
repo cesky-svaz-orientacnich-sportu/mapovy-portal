@@ -334,7 +334,9 @@ function initMap() {
         scaleControl: true,
         mapTypeControl: false,
         scrollwheel: true,
-        draggableCursor: 'default'
+        draggableCursor: 'default',
+        fullscreenControl: false,
+        streetViewControl: false
     };
 
     geocoder = new google.maps.Geocoder();

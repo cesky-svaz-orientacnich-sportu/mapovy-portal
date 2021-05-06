@@ -58,7 +58,9 @@ function setupMap(mapElement, useScrollWheel) {
       overviewMapControl: false,
       scaleControl: true,
       mapTypeControl: false,
-      scrollwheel: useScrollWheel
+      scrollwheel: useScrollWheel,
+      fullscreenControl: false,
+      streetViewControl: false
   };
 
   var map = new google.maps.Map(mapElement, myOptions);
