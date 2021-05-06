@@ -361,7 +361,7 @@ function initMapComponents() {
 
     var mapTypeId = Config.mapInitParams.mapTypeId;
 
-    sidebar = new App.Sidebar(map, 385, Config.resourceString, Config.accessGranted);
+    sidebar = new App.Sidebar(map, Config.resourceString, Config.accessGranted);
     urlInterface = new App.UrlInterface();
     mapLink = new App.MapLink(urlInterface, Config.apiKey);
     searchSimple = new App.Search.Simple(state, sidebar.showResults, sidebar);

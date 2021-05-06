@@ -68,8 +68,7 @@ App.MapHelper = App.newClass({
         this.ftLayer2.hide();
       }
 
-      $("#toc").hide();
-      $("#area_toc").hide();
+      $(".map-controls").hide();
       $("#cancelSearch").show();
 
       this.search.searchBySelect(select1, select2, this.zoomToResults, true);

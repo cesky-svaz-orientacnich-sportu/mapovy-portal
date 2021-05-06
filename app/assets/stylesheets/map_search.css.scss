@@ -18,15 +18,15 @@
 }
 
 #advanced_search_gps_button {
-  position: absolute; 
-  margin-top: 5px; 
+  position: absolute;
+  margin-top: 5px;
   margin-left: 5px;
 }
 
 #advaSearch {
     padding: 17px 0 0 0;
     width: 100%;
-    
+
     fieldset {
         margin: 0 auto 0 auto;
         max-width: 1225px;
@@ -103,7 +103,7 @@
     .dblCol {
         padding: 9px 0 10px 23px;
         width: 567px;
-        
+
         dl {
           width: 265px;
           padding-top: 0;
@@ -185,20 +185,21 @@
     }
 }
 
-
-
 #searchResult {
+	max-width: 100%;
     width: 385px;
     background: #fff;
     border-right: 1px solid #b5b6b6;
     position: absolute;
-    top: 103px;
-    bottom: 0px;
+    top: 0;
+    bottom: 0;
     left: -385px;
-    z-index: 1;
+    z-index: 10;
+
     .content {
       width: 100%;
     }
+
     .header {
         border-bottom: 1px solid #cbcccc;
         padding: 0 0 6px 23px;
@@ -267,7 +268,7 @@
         line-height: 13px;
         padding: 2px 0 4px 0;
     }
-    
+
     .contentText h3 {
         float: none;
         font-size: 12px;
@@ -275,12 +276,12 @@
         line-height: 13px;
         padding: 2px 0 4px 0;
     }
-    
+
     .contentText p {
         float: none;
         padding: 0;
     }
-    
+
     h3 {
       float: left;
       font-size: 16px;
@@ -313,12 +314,8 @@
 
 }
 
-
-
-
 #formSearch {
-    float: left;
-    margin: 16px 0 0 0;
+	margin-top: 16px;
 
     .inputtext {
         background: #fff url('/img/bg-ico-search.png') no-repeat;

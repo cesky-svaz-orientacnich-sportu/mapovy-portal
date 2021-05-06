@@ -1,23 +1,17 @@
 jQuery ->
-  
+
   $('#advanced_search_gps_button').on 'click', ->
     searchAdvanced.userGpsCoords()
-  
+
   $('#baseMapSwitch a').on 'click', ->
     mapHelper.changeMapType($(this).data('map-type'))
 
-  $('#TOC_collapse_button').on 'click', ->
+  $('.map-controls-collapse').on 'click', ->
     toc.collapse()
 
-  $('#TOC_expand_button').on 'click', ->
+  $('.map-controls-expand').on 'click', ->
     toc.expand()
 
-  $('#TOC_area_collapse_button').on 'click', ->
-    toc.area_collapse()
-
-  $('#TOC_area_expand_button').on 'click', ->
-    toc.area_expand()
-    
   $('.hide_search_results_button').on 'click', ->
     sidebar.hideResults()
 
@@ -36,7 +30,7 @@ jQuery ->
     sidebar.show()
     toc.refresh(true)
     searchAdvanced.clearOverlays();
-    
+
   $('#tools_link_close_button').on 'click', ->
     mapLink.hide()
 

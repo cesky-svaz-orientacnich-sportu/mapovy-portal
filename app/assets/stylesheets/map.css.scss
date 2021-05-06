@@ -1,7 +1,9 @@
-// set the main navbar properly 
+// set the main navbar properly
 
 .navbar-nav > li > a {padding-top:10px !important; padding-bottom:10px !important;}
-.navbar {min-height:40px !important}
+.navbar {
+	margin-bottom: 0;
+}
 
 // main map components
 
@@ -43,22 +45,20 @@
 }
 
 #showUrlLink {
-  top:165px; 
+  top:165px;
   right:180px;
 }
 
 #showMeasure {
-  top:265px; 
+  top:265px;
   right:180px;
 }
 
 #map_canvas {
-    position: absolute;
-    left: 0px;
-    top: 102px;
-    right: 0px;
-    bottom: 0px;
     overflow: hidden;
+    width: 100%;
+    height: 100%;
+    min-height: 90vh;
 }
 
 // context menu
@@ -97,13 +97,13 @@
       a {
         color: #d93c00;
         text-decoration: none;
-      }      
+      }
       a:hover {
         color: #d93c00;
         text-decoration: none;
-      }      
+      }
     }
-  }  
+  }
   .toolsList {
       float: right;
       margin-top: 5px;
@@ -123,24 +123,18 @@
     background: #f1f1f1;
     border-bottom: 1px solid #646464;
     min-height: 70px;
-    left: 0;
-    position: absolute;
-    top: 40;
     width: 100%;
     z-index: 9;
-    .folder {
-        height: 70px;
-        .text {
-          font-size:20px;
-          padding-top:20px;
-        }
+
+    .folder .text {
+        font-size:20px;
+        padding-top:20px;
     }
 
     .toolsList {
         float: right;
         margin: 22px 18px 0 0;
     }
-
 
     .linkHide {
         background: url('/img/bg-link-hide.png');
@@ -151,6 +145,25 @@
         right: 18px;
         width: 29px;
     }
+}
+
+#toolbar {
+	display: flex;
+	flex-wrap: wrap;
+
+	.folder {
+		display: flex;
+		flex-wrap: wrap;
+	}
+}
+
+#titlebar {
+    position: absolute;
+	left: 0;
+
+	.folder {
+		height: 70px;
+	}
 }
 
 // branding
@@ -265,6 +278,11 @@
 
 // common styles for map
 
+.map-wrapper {
+	position: relative;
+	max-width: 100%;
+}
+
 ul.ui-autocomplete {
   font-size: 12px;
   line-height: 1.5;
@@ -287,7 +305,7 @@ ul.ui-autocomplete {
     height: 31px;
     left: 0;
     position: absolute;
-    top: 121px;
+    top: 18px;
     width: 23px;
     z-index: 1;
 }

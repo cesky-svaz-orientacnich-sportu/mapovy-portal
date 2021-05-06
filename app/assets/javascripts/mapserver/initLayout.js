@@ -60,12 +60,11 @@ function initLayout() {
         $("#top").slideUp("medium", function () {
             $(".linkShow").show();
             $("#top").css("height", 0);
-            //resize();
             $("#searchResult").css("top", 0);
             $(".linkShowResults").css("top", 0);
             $("#map_canvas").css("top", 0);
             $("#baseMapSwitch").css("top", 25);
-            $("#toc").css("top", 25);
+            $(".map-controls").css("top", 25);
             $("#cancelSearch").css("top", 25);
             google.maps.event.trigger(map, "resize");
             return false;
@@ -82,7 +81,7 @@ function initLayout() {
             $(".linkShowResults").css("top", 100);
             $("#map_canvas").css("top", 100);
             $("#baseMapSwitch").css("top", 120);
-            $("#toc").css("top", 120);
+            $(".map-controls").css("top", 120);
             $("#cancelSearch").css("top", 120);
             google.maps.event.trigger(map, "resize"); //TODO
             return false;
@@ -126,11 +125,11 @@ function initLayout() {
 
     $(".popup .content .inside").jScrollPane({ showArrows: true });
 
-    // reset Advanced Search Form values    
+    // reset Advanced Search Form values
     $("#advancedSearchResetForm").click(function() {
         $('#advancedSearchName, #advancedSearchYearFrom, #advancedSearchYearTo, #TYP, #advancedSearchScale, #advancedSearchClub, #advancedSearchAuthor, #advancedSearchGPS, #advancedSearchPlace, #advancedSearchDistance').val('').placeholder();
     });
-    
+
     $(document).on('mouseenter', 'ul.toolsList', initPreviewAndInfo);
 
 }

@@ -29,7 +29,7 @@
   %body
     = render :partial => 'shared/top_menu'
     = render :partial => 'toolbar'
-    %div(style="margin-top:41px")
+    %div.map-wrapper
       = yield
     - unless flash.empty?
       %div#flash_container

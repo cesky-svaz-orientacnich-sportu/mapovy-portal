@@ -352,8 +352,12 @@ en:
     mapAuthors: "Authors"
     mapPreview: "Map preview"
 
-    layers: "O - maps"
-    layerSel: "Selected"
+    controls: "Map selection controls"
+    layers: "O-maps"
+    areas: "Areas"
+
+    embargoes: 'Embargoes'
+    competitionAreas: 'Competition areas'
 
     other_sports: 'other'
 
