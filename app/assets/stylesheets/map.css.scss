@@ -310,6 +310,23 @@ ul.ui-autocomplete {
     z-index: 1;
 }
 
+.map-show-help {
+	position: absolute;
+	top: 12px;
+	left: 12px;
+	z-index: 1;
+	display: block;
+	padding: 8px;
+	border: 1px solid #b5b6b6;
+	border-radius: 0;
+	background-color: #f1f1f1;
+
+	img {
+		width: 22px;
+		height: 22px;
+	}
+}
+
 .cleaned:after {
     content: ".";
     clear: both;

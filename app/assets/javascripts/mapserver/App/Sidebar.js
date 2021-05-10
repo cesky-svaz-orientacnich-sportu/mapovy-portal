@@ -12,17 +12,17 @@ App.Sidebar = App.newClass({
 
     init: function () {
         $(".hide_search_results_button").click(this.hide);
-        $(".linkShowResults").click(this.show);
+        $(".map-show-help, .linkShowResults").click(this.show);
     },
 
     show: function () {
         $("#searchResult").animate({ left: "0" }, { duration: 'slow', easing: 'easeOutBack' }, 500);
-        $(".linkShowResults").hide();
+        $(".map-show-help, .linkShowResults").hide();
     },
 
     hide: function () {
         $("#searchResult").animate({ left: '-' + this.width }, { duration: 'slow', easing: 'easeOutBack' }, 500);
-        $(".linkShowResults").show();
+        $(".map-show-help, .linkShowResults").show();
     },
 
     reset: function () {

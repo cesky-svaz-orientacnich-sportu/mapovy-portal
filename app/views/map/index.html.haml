@@ -1,7 +1,7 @@
 %a.linkShow{:href => "#", :title => t("mapserver.panelMax")}
   %span.oos= t("mapserver.panelMax")
-%a.linkShowResults{:href => "#", :title => t("mapserver.showSideBar")}
-  %span.oos= t("mapserver.showSideBar")
+%button.map-show-help{:tpye => "button", :title => t("mapserver.showSideBar")}
+  = image_tag "/assets/icons/help.svg", alt: t("mapserver.showSideBar")
 = render :partial => 'search_results'
 %div#map_canvas
 = render :partial => 'toc'

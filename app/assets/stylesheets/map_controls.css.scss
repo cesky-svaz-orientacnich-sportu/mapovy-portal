@@ -42,23 +42,17 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	padding: 12px 16px;
-	border-bottom: 1px solid #d5d5d5;
+	padding: 12px 16px 10px;
+	line-height: 1;
 	font-size: 16px;
 	color: #000;
 
-	.map-controls.is-minimized & {
-		border-bottom: 0;
-		background: #3d3d3d;
-
-		strong {
-			font-weight: normal;
-			color: #fff;
-		}
+	.map-controls:not(.is-minimized) & {
+		border-bottom: 1px solid #d5d5d5;
 	}
 
 	strong {
-		margin-right: 32px;
+		margin-right: 16px;
 	}
 }
 

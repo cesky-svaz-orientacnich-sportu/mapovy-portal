@@ -33,102 +33,102 @@
 
 function initLayout() {
 
-    $(".toolsList .disabled img").css("opacity", 0.3);
-    $(".toolsList .disabled a").css("cursor", "default");
-    $(".toolsList .disabled a").click(function () {
-        return false;
-    });
+	$(".toolsList .disabled img").css("opacity", 0.3);
+	$(".toolsList .disabled a").css("cursor", "default");
+	$(".toolsList .disabled a").click(function () {
+		return false;
+	});
 
-    si = $("#formSearch input[type=text]")
+	si = $("#formSearch input[type=text]")
 
-    $(si).focus(function () {
-        if ($(si).attr("value") == $(si).attr("title")) {
-            $(si).attr("value", "");
-        }
-        $(si).parent().addClass("focus");
-    });
+	$(si).focus(function () {
+		if ($(si).attr("value") == $(si).attr("title")) {
+			$(si).attr("value", "");
+		}
+		$(si).parent().addClass("focus");
+	});
 
-    $(si).blur(function () {
-        if ($(si).attr("value") == "") {
-            $(si).attr("value", $(si).attr("title"));
-        }
-        $(si).parent().removeClass("focus");
-    });
-
-
-    $("#top .linkHide").click(function () {
-        $("#top").slideUp("medium", function () {
-            $(".linkShow").show();
-            $("#top").css("height", 0);
-            $("#searchResult").css("top", 0);
-            $(".linkShowResults").css("top", 0);
-            $("#map_canvas").css("top", 0);
-            $("#baseMapSwitch").css("top", 25);
-            $(".map-controls").css("top", 25);
-            $("#cancelSearch").css("top", 25);
-            google.maps.event.trigger(map, "resize");
-            return false;
-        });
-    });
+	$(si).blur(function () {
+		if ($(si).attr("value") == "") {
+			$(si).attr("value", $(si).attr("title"));
+		}
+		$(si).parent().removeClass("focus");
+	});
 
 
-    $(".linkShow").click(function () {
-        $(".linkShow").show();
-        $("#top").css("height", "auto");
-        $("#top").slideDown("medium", function () {
-            $("#searchResult").css("top", 100);
-            $(".linkShowResults").css("top", 100);
-            $("#map_canvas").css("top", 100);
-            $("#baseMapSwitch").css("top", 120);
-            $(".map-controls").css("top", 120);
-            $("#cancelSearch").css("top", 120);
-            google.maps.event.trigger(map, "resize"); //TODO
-            return false;
-        });
-    });
+	$("#top .linkHide").click(function () {
+		$("#top").slideUp("medium", function () {
+			$(".linkShow").show();
+			$("#top").css("height", 0);
+			$("#searchResult").css("top", 0);
+			$(".map-show-help, .linkShowResults").css("top", 0);
+			$("#map_canvas").css("top", 0);
+			$("#baseMapSwitch").css("top", 25);
+			$(".map-controls").css("top", 25);
+			$("#cancelSearch").css("top", 25);
+			google.maps.event.trigger(map, "resize");
+			return false;
+		});
+	});
 
 
-    $(".menuAdvanced, .menuApplication").bind("click", function () {
-        $("#menuTop a").removeClass("active");
-        $(this).addClass("active");
-    });
-
-    $(".linkAdvSearchHide, .menuAppllication").click(function () {
-        $("#advaSearch").slideUp("medium", function () {
-            //resize();
-        });
-
-        Advanced.clearOverlays();
-
-        $(".linkAdvSearch").show();
-        $("#formSearch .submitWrapper").removeClass("disabled");
-        $('.inputtext :input').removeAttr('disabled');
-        $('.searchSubmit').attr('onclick', 'searchSimple.search();');
-
-        return false;
-
-    });
+	$(".linkShow").click(function () {
+		$(".linkShow").show();
+		$("#top").css("height", "auto");
+		$("#top").slideDown("medium", function () {
+			$("#searchResult").css("top", 100);
+			$(".map-show-help, .linkShowResults").css("top", 100);
+			$("#map_canvas").css("top", 100);
+			$("#baseMapSwitch").css("top", 120);
+			$(".map-controls").css("top", 120);
+			$("#cancelSearch").css("top", 120);
+			google.maps.event.trigger(map, "resize"); //TODO
+			return false;
+		});
+	});
 
 
-    $(".popup .header a.close").click(function () {
+	$(".menuAdvanced, .menuApplication").bind("click", function () {
+		$("#menuTop a").removeClass("active");
+		$(this).addClass("active");
+	});
 
-        $(this).parent().parent().parent().hide();
+	$(".linkAdvSearchHide, .menuAppllication").click(function () {
+		$("#advaSearch").slideUp("medium", function () {
+			//resize();
+		});
 
-    });
+		Advanced.clearOverlays();
 
-    $(".draggable").draggable({ handle: ".header" });
+		$(".linkAdvSearch").show();
+		$("#formSearch .submitWrapper").removeClass("disabled");
+		$('.inputtext :input').removeAttr('disabled');
+		$('.searchSubmit').attr('onclick', 'searchSimple.search();');
 
-    $("div.submitWrapper:not(.disabled) a.searchSubmit").click(function () {
-        $(this).next().click();
-    });
+		return false;
 
-    $(".popup .content .inside").jScrollPane({ showArrows: true });
+	});
 
-    // reset Advanced Search Form values
-    $("#advancedSearchResetForm").click(function() {
-        $('#advancedSearchName, #advancedSearchYearFrom, #advancedSearchYearTo, #TYP, #advancedSearchScale, #advancedSearchClub, #advancedSearchAuthor, #advancedSearchGPS, #advancedSearchPlace, #advancedSearchDistance').val('').placeholder();
-    });
 
-    $(document).on('mouseenter', 'ul.toolsList', initPreviewAndInfo);
+	$(".popup .header a.close").click(function () {
+
+		$(this).parent().parent().parent().hide();
+
+	});
+
+	$(".draggable").draggable({ handle: ".header" });
+
+	$("div.submitWrapper:not(.disabled) a.searchSubmit").click(function () {
+		$(this).next().click();
+	});
+
+	$(".popup .content .inside").jScrollPane({ showArrows: true });
+
+	// reset Advanced Search Form values
+	$("#advancedSearchResetForm").click(function() {
+		$('#advancedSearchName, #advancedSearchYearFrom, #advancedSearchYearTo, #TYP, #advancedSearchScale, #advancedSearchClub, #advancedSearchAuthor, #advancedSearchGPS, #advancedSearchPlace, #advancedSearchDistance').val('').placeholder();
+	});
+
+	$(document).on('mouseenter', 'ul.toolsList', initPreviewAndInfo);
 
 }
