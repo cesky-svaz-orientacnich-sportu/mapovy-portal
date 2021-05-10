@@ -56,38 +56,6 @@ function initLayout() {
 	});
 
 
-	$("#top .linkHide").click(function () {
-		$("#top").slideUp("medium", function () {
-			$(".linkShow").show();
-			$("#top").css("height", 0);
-			$("#searchResult").css("top", 0);
-			$(".map-show-help, .linkShowResults").css("top", 0);
-			$("#map_canvas").css("top", 0);
-			$("#baseMapSwitch").css("top", 25);
-			$(".map-controls").css("top", 25);
-			$(".map-cancel-search").css("top", 25);
-			google.maps.event.trigger(map, "resize");
-			return false;
-		});
-	});
-
-
-	$(".linkShow").click(function () {
-		$(".linkShow").show();
-		$("#top").css("height", "auto");
-		$("#top").slideDown("medium", function () {
-			$("#searchResult").css("top", 100);
-			$(".map-show-help, .linkShowResults").css("top", 100);
-			$("#map_canvas").css("top", 100);
-			$("#baseMapSwitch").css("top", 120);
-			$(".map-controls").css("top", 120);
-			$(".map-cancel-search").css("top", 120);
-			google.maps.event.trigger(map, "resize"); //TODO
-			return false;
-		});
-	});
-
-
 	$(".menuAdvanced, .menuApplication").bind("click", function () {
 		$("#menuTop a").removeClass("active");
 		$(this).addClass("active");

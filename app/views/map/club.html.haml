@@ -3,8 +3,6 @@
     = link_to image_tag("/img/mapovy-portal-csos-#{I18n.locale}.png", :id => 'logo', :alt => t("mapserver.mainLogoTitle"), :title => t("mapserver.mainLogoTitle")), :root
     %div.text
       #{t('mapserver.listClubContentMap')} #{@club}
-%a.linkShow{:href => "#", :title => t("mapserver.panelMax")}
-  %span.oos= t("mapserver.panelMax")
 %a.linkShowResults{:href => "#", :title => t("mapserver.showSideBar")}
   %span.oos= t("mapserver.showSideBar")
 = render :partial => 'search_results'
