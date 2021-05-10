@@ -148,6 +148,13 @@ App.Search.Advanced = App.newClass({
 
 	init: function () {
 		$(".toolbar-advanced-search-expand, .menuAdvanced").click(this.show);
+		var clearOverlays = this.clearOverlays;
+		var hide = this.hide;
+		$(".toolbar-advanced-search-collapse").click(function () {
+			clearOverlays();
+			hide();
+			return false;
+		});
 		this.initAutocomplete();
 	},
 
@@ -203,7 +210,6 @@ App.Search.Advanced = App.newClass({
 	},
 
 	userGpsCoords: function () {
-		//$('#infoGPS').show();
 		this.clearOverlays();
 		$('#advancedSearchGPS').val(this.resourceString.gpsTooltip);
 

@@ -28,21 +28,6 @@ function initLayout() {
 		$(this).addClass("active");
 	});
 
-	$(".linkAdvSearchHide, .menuAppllication").click(function () {
-		$(".toolbar-advanced-search").slideUp("medium", function () {});
-
-		Advanced.clearOverlays();
-
-		$(".toolbar-advanced-search-expand").show();
-		$(".toolbar-search-submit").removeClass("disabled");
-		$('.toolbar-search-input').removeAttr('disabled');
-		$('.toolbar-search-submit').attr('onclick', 'searchSimple.search();');
-
-		return false;
-
-	});
-
-
 	$(".popup .header a.close").click(function () {
 
 		$(this).parent().parent().parent().hide();
