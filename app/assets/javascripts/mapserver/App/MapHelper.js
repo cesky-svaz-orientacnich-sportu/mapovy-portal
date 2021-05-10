@@ -34,11 +34,11 @@ App.MapHelper = App.newClass({
         $("#baseMapSwitch, .map-controls-background-switch").find("a[data-map-type=" + mapTypeId + "]").addClass("active");
         if (mapTypeId == 'SHC') {
             this.map.setMapTypeId('SHC');
-            $('#cuzkCopyright').show();
+            $('.map-cuzk-copyright').show();
         }
         else {
             this.map.setMapTypeId(google.maps.MapTypeId[mapTypeId]);
-            $('#cuzkCopyright').hide();
+            $('.map-cuzk-copyright').hide();
         }
     },
 
