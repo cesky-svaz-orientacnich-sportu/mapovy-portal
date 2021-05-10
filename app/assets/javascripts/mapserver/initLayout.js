@@ -1,36 +1,3 @@
-//function isElement(element) {
-
-//    var result;
-
-//    if ($(element).length > 0) { result = true; } else { result = false }
-
-//    return result;
-
-//}
-
-//function resize() {
-//  //window.alert('neco');
-//	$(".dblCol").width(parseInt($("#advaSearch fieldset").width()) - parseInt($("#advaSearch .right").width()) - 50);
-
-//	$("#searchResult").css("top",parseInt($("#top").css("height")));
-
-//	$("#searchResult").css("height",$(window).height()- parseInt($("#top").css("height")));
-
-//	$("ul.tabs").animate({top:(parseInt($("#top").css("height"))+20)},{duration: 'slow'},500);
-
-//	$(".filter").animate({top:(parseInt($("#top").css("height"))+20)},{duration: 'slow'},500);
-
-//	$("#searchResult").jScrollPane({showArrows: true});
-
-//	//google.maps.event.trigger(map, 'resize');
-
-//}
-
-
-//$(window).resize(function() {
-//	resize();
-//});
-
 function initLayout() {
 
 	$(".toolsList .disabled img").css("opacity", 0.3);
