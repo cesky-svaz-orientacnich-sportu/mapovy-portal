@@ -1,12 +1,12 @@
 function initLayout() {
 
-	$(".toolsList .disabled img").css("opacity", 0.3);
-	$(".toolsList .disabled a").css("cursor", "default");
-	$(".toolsList .disabled a").click(function () {
+	$(".tools-list .disabled img").css("opacity", 0.3);
+	$(".tools-list .disabled a").css("cursor", "default");
+	$(".tools-list .disabled a").click(function () {
 		return false;
 	});
 
-	si = $("#formSearch input[type=text]")
+	si = $(".toolbar-search input[type=text]")
 
 	$(si).focus(function () {
 		if ($(si).attr("value") == $(si).attr("title")) {
@@ -29,16 +29,14 @@ function initLayout() {
 	});
 
 	$(".linkAdvSearchHide, .menuAppllication").click(function () {
-		$("#advaSearch").slideUp("medium", function () {
-			//resize();
-		});
+		$(".toolbar-advanced-search").slideUp("medium", function () {});
 
 		Advanced.clearOverlays();
 
-		$(".linkAdvSearch").show();
-		$("#formSearch .submitWrapper").removeClass("disabled");
-		$('.inputtext :input').removeAttr('disabled');
-		$('.searchSubmit').attr('onclick', 'searchSimple.search();');
+		$(".toolbar-advanced-search-expand").show();
+		$(".toolbar-search-submit").removeClass("disabled");
+		$('.toolbar-search-input').removeAttr('disabled');
+		$('.toolbar-search-submit').attr('onclick', 'searchSimple.search();');
 
 		return false;
 
@@ -53,7 +51,7 @@ function initLayout() {
 
 	$(".draggable").draggable({ handle: ".header" });
 
-	$("div.submitWrapper:not(.disabled) a.searchSubmit").click(function () {
+	$(".toolbar-search-submit:not(.disabled)").click(function () {
 		$(this).next().click();
 	});
 
@@ -64,6 +62,6 @@ function initLayout() {
 		$('#advancedSearchName, #advancedSearchYearFrom, #advancedSearchYearTo, #TYP, #advancedSearchScale, #advancedSearchClub, #advancedSearchAuthor, #advancedSearchGPS, #advancedSearchPlace, #advancedSearchDistance').val('').placeholder();
 	});
 
-	$(document).on('mouseenter', 'ul.toolsList', initPreviewAndInfo);
+	$(document).on('mouseenter', 'ul.tools-list', initPreviewAndInfo);
 
 }

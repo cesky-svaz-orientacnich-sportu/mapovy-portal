@@ -145,7 +145,7 @@ App.Sidebar = App.newClass({
                       '<span>' + data[i]['title'] + '</span>' +
                     '</a>' +
                   '</h3>' +
-                  '<ul class="toolsList">';
+                  '<ul class="tools-list">';
 
                 urlImg = Config.assetRoot + '/data/jpg/' + data[i]['preview_identifier'] + '.jpg';
                 urlKML = Config.assetRoot + '/data/kml/' + mapId + '.kml';

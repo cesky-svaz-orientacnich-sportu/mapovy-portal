@@ -8,7 +8,7 @@ App.Search.Simple = App.newClass({
     Extends: App.Search,
 
     search: function () {
-        var name = $("#simpleSearchName").val();
+        var name = $(".toolbar-search-input").val();
         this.searchByName(name);
     },
 
@@ -48,7 +48,7 @@ App.Search.Simple = App.newClass({
                 }
 
                 // Use the results to create the autocomplete options
-                $("#simpleSearchName").autocomplete({
+                $(".toolbar-search-input").autocomplete({
                     source: function(request, response) {
                       var filtered_results = $.ui.autocomplete.filter(list, request.term);
                       response(filtered_results.slice(0, 20));
@@ -62,7 +62,7 @@ App.Search.Simple = App.newClass({
 
     initKeyPressed: function () {
       var this_ = this;
-      $('#simpleSearchName').keypress(function (e) {
+      $('.toolbar-search-input').keypress(function (e) {
           if (e.keyCode == '13') {
               $('.ui-autocomplete').hide();
               this_.search();

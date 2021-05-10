@@ -112,7 +112,7 @@ function renderInfoWindow(map) {
     return '<div class="infoWindow" data-map-family="' + map['map_family'] + '">' +
       '<div class="header title cleaned">' +
         '<h3><a href="/' + Config.locale + '/maps/' + map['id'] + '/fusion"><span>' + map['title'] + '</span></a></h3>' +
-        '<ul class="toolsList">' +
+        '<ul class="tools-list">' +
           '<li><a class="infoTableLink" href="/' + Config.locale + '/maps/' + map['id'] + '/info_table"><img src="/img/tool-08.png" alt="Ikona" /></a></li>' +
           (
             (map['has_jpg'] == '1') ?

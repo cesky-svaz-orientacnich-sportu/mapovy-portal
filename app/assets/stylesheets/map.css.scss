@@ -87,10 +87,12 @@
       }
     }
   }
-  .toolsList {
+
+  .tools-list {
       float: right;
       margin-top: 5px;
   }
+
   .data {
     th {
       vertical-align:middle;
@@ -102,32 +104,41 @@
 
 //
 
-#toolbar, #titlebar {
+.toolbar,
+#titlebar {
     background: #f1f1f1;
     border-bottom: 1px solid #646464;
     min-height: 70px;
     width: 100%;
     z-index: 9;
-
-    .folder .text {
-        font-size:20px;
-        padding-top:20px;
-    }
-
-    .toolsList {
-        float: right;
-        margin: 22px 18px 0 0;
-    }
 }
 
-#toolbar {
+.toolbar {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	padding: 12px;
+
+	@media (min-width: 50em) {
+		padding: 12px 24px;
+	}
+}
+
+.toolbar-bar {
 	display: flex;
 	flex-wrap: wrap;
+	justify-content: space-between;
+	align-items: center;
+	gap: 24px 16px;
 
-	.folder {
-		display: flex;
-		flex-wrap: wrap;
+	.text {
+		font-size: 20px;
+		padding-top: 20px;
 	}
+
+	.tools-list {
+        margin: 0;
+    }
 }
 
 #titlebar {
@@ -136,7 +147,17 @@
 
 	.folder {
 		height: 70px;
+
+		.text {
+	        font-size: 20px;
+	        padding-top: 20px;
+	    }
 	}
+
+	.tools-list {
+        float: right;
+        margin: 22px 18px 0 0;
+    }
 }
 
 // sidebar
@@ -267,7 +288,8 @@ input[type=submit]:hover, select:hover {
     border-color: #de3b04 !important;
 }
 
-.inputtext:hover, input[type=text]:hover {
+.toolbar-search-input:hover,
+input[type=text]:hover {
     border-color: #de3b04 !important;
 }
 
