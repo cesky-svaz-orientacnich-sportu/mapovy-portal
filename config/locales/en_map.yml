@@ -352,7 +352,7 @@ en:
     mapAuthors: "Authors"
     mapPreview: "Map preview"
 
-    controls: "Map display controls"
+    controls: "Map browsing controls"
     layers: "O-maps"
     areas: "Areas"
     backgroundSwitch: 'Background map'
