@@ -15,12 +15,12 @@
       %div
         %input(id="urlInp" type="text" value="" style="border:2px inset; width:215px")
         = link_to t("mapserver.urlLinkUpdate"), "javascript:void(0)", id: 'tools_link_update_button'
-%div#showMeasure.popupShadow(style="display:none")
-  %div.popup.simple.dialog
-    %div.header
+.map-show-measure.popupShadow(style="display:none")
+  .popup.simple.dialog
+    .header
       %span= t("mapserver.measureHeading")
       = link_to image_tag("/img/ico-close.png", :alt => t("mapserver.urlLinkClose")), "javascript:void(0)", id: 'tools_measure_clear_button', class: 'close'
-    %div.content
+    .content
       #{t("mapserver.measureLength")}:
       %span#span-length 0
       km

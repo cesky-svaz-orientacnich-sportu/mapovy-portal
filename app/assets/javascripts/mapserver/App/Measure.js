@@ -25,7 +25,7 @@ App.Measure = App.newClass({
     },
 
     init: function () {
-        $('#showMeasure').show();
+        $('.map-show-measure').show();
         this.map.setOptions({ draggableCursor: 'crosshair' });
 
         this.ftLayer.suppressInfoWindows = true;
@@ -181,7 +181,7 @@ App.Measure = App.newClass({
         google.maps.event.removeListener(this.listeners.Marker2);
         google.maps.event.removeListener(this.listeners.Marker3);
         google.maps.event.removeListener(this.listeners.Marker4);
-        $('#showMeasure').hide();
+        $('.map-show-measure').hide();
     }
 
 });
