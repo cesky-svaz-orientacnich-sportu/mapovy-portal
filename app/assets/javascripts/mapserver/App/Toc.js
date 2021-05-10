@@ -146,18 +146,12 @@ App.Toc = App.newClass({
 
     collapse: function () {
         $(".map-controls-body").slideUp("medium");
-        $(".map-controls").addClass("is-minimized");
-
-        $(".map-controls-expand").show();
-        $(".map-controls-collapse").hide();
+        $(".map-controls-header").attr('aria-expanded', 'false');
     },
 
     expand: function () {
         $(".map-controls-body").slideDown("medium");
-        $(".map-controls").removeClass("is-minimized");
-
-        $(".map-controls-expand").hide();
-        $(".map-controls-collapse").show();
+        $(".map-controls-header").attr('aria-expanded', 'true');
     },
 
 });

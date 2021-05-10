@@ -654,9 +654,6 @@ cs:
     advancedSearchEmpty: 'Nebyla zadána žádná kritéria.'
     advancedSearchInvalid: 'Chyba v zadaných hodnotách kritérií: '
 
-    panelMin: 'Zmenši'
-    panelMax: 'Zvětši'
-
     mapTitle:
       map: "Mapa"
       embargo: "Embargo"

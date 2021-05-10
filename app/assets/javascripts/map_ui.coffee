@@ -6,11 +6,8 @@ jQuery ->
   $('#baseMapSwitch a, .map-controls-background-switch a').on 'click', ->
     mapHelper.changeMapType($(this).data('map-type'))
 
-  $('.map-controls-collapse').on 'click', ->
-    toc.collapse()
-
-  $('.map-controls-expand').on 'click', ->
-    toc.expand()
+  $('.map-controls-header').on 'click', ->
+    if $(this).attr('aria-expanded') == 'true' then toc.collapse() else toc.expand()
 
   $('.map-cancel-search, .hide_search_results_button').on 'click', ->
     sidebar.hideResults()

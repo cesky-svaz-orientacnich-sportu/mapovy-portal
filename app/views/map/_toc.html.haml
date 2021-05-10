@@ -1,8 +1,6 @@
 %div.map-controls
-  .map-controls-header
-    %strong= t("mapserver.controls")
-    = link_to "", "javascript:void(0)", :class => 'map-controls-collapse', :title => t("mapserver.panelMin")
-    = link_to "", "javascript:void(0)", :class => 'map-controls-expand',   :title => t("mapserver.panelMax"), :style => "display:none"
+  %button.map-controls-header{:type => "button", "aria-expanded" => "true"}
+    = t("mapserver.controls")
   .map-controls-body
     .map-controls-column
       %strong.map-controls-column-header= t("mapserver.layers")
