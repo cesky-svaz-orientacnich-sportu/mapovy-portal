@@ -69,7 +69,7 @@ App.MapHelper = App.newClass({
       }
 
       $(".map-controls").hide();
-      $("#cancelSearch").show();
+      $(".map-cancel-search").show();
 
       this.search.searchBySelect(select1, select2, this.zoomToResults, true);
     },

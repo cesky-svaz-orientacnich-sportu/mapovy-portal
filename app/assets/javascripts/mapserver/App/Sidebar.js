@@ -11,7 +11,6 @@ App.Sidebar = App.newClass({
     },
 
     init: function () {
-        $(".hide_search_results_button").click(this.hide);
         $(".map-show-help, .linkShowResults").click(this.show);
     },
 
@@ -58,7 +57,7 @@ App.Sidebar = App.newClass({
     hideResults: function() {
        sidebar.reset();
        $('#titlebar').remove();
-       $('#cancelSearch').hide();
+       $('.map-cancel-search').hide();
        $('.map-controls').show();
        toc.refresh();
        searchAdvanced.clearOverlays();
@@ -233,7 +232,7 @@ App.Sidebar = App.newClass({
 
         $('#searchResult').jScrollPane({ showArrows: true });
         $(".map-controls").hide();
-        $("#cancelSearch").show();
+        $(".map-cancel-search").show();
 
         mapHelper.showSelectInMap();
     },

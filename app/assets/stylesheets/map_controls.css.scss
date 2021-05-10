@@ -1,22 +1,20 @@
-#cancelSearch {
+.map-cancel-search {
 	position: absolute;
-	top: 18px;
-	right: 9px;
-	z-index:8;
-	width: 148px;
-	height: 29px;
-	padding: 5px;
+	top: 12px;
+	right: 12px;
+	z-index: 8;
+	padding: 12px 32px 10px;
 	border: 1px solid #b5b6b6;
-	text-align: center;
+	line-height: 1;
+	font-size: 16px;
 	font-weight: bold;
+	text-align: center;
 	background-color: #da2626;
+	color: #fff;
 
-	a {
-		color: #fff;
-
-		&:hover {
-			color: yellow;
-		}
+	&:focus,
+	&:hover {
+		color: yellow;
 	}
 }
 

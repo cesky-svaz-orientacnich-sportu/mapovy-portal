@@ -70,8 +70,8 @@
         %li= link_to t("mapserver.basemapSatellite"), "javascript:void(0);", data: {map_type: "SATELLITE"}
         %li= link_to t("mapserver.basemapRoadmap"),   "javascript:void(0);", data: {map_type: "ROADMAP"  }
 
-%div#cancelSearch(style="display:none")
-  = link_to t('mapserver.cancelSearch'), "javascript:void(0)", class: "hide_search_results_button"
+%button.map-cancel-search{:type => "button", :style => "display:none"}
+  = t('mapserver.cancelSearch')
 
 :javascript
   $(function() {

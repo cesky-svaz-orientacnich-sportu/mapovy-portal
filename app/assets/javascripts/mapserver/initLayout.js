@@ -65,7 +65,7 @@ function initLayout() {
 			$("#map_canvas").css("top", 0);
 			$("#baseMapSwitch").css("top", 25);
 			$(".map-controls").css("top", 25);
-			$("#cancelSearch").css("top", 25);
+			$(".map-cancel-search").css("top", 25);
 			google.maps.event.trigger(map, "resize");
 			return false;
 		});
@@ -81,7 +81,7 @@ function initLayout() {
 			$("#map_canvas").css("top", 100);
 			$("#baseMapSwitch").css("top", 120);
 			$(".map-controls").css("top", 120);
-			$("#cancelSearch").css("top", 120);
+			$(".map-cancel-search").css("top", 120);
 			google.maps.event.trigger(map, "resize"); //TODO
 			return false;
 		});

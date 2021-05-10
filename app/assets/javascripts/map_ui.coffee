@@ -12,7 +12,7 @@ jQuery ->
   $('.map-controls-expand').on 'click', ->
     toc.expand()
 
-  $('.hide_search_results_button').on 'click', ->
+  $('.map-cancel-search, .hide_search_results_button').on 'click', ->
     sidebar.hideResults()
 
   $('#map_tool_print_button').on 'click', ->
