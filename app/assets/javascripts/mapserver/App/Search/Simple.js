@@ -15,6 +15,10 @@ App.Search.Simple = App.newClass({
     init: function () {
         this.initAutocomplete();
         this.initKeyPressed();
+        $('.toolbar-search-submit').on('click', function(e) {
+        	e.preventDefault();
+        	searchSimple.search();
+        });
     },
 
     initAutocomplete: function () {

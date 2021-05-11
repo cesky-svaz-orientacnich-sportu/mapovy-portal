@@ -14,20 +14,16 @@ App.Search.Advanced = App.newClass({
 
 	show: function () {
 		$(".toolbar-advanced-search").slideDown("fast", function () {});
-
 		$(".toolbar-advanced-search-expand").hide();
-		$(".toolbar-search-submit").addClass("disabled");
-		$('.toolbar-search-input').attr('disabled', true);
-		$('.toolbar-search-submit').removeAttr('onclick');
+		$(".toolbar-search-submit").attr('disabled', '');
+		$('.toolbar-search-input').attr('disabled', '');
 	},
 
 	hide: function () {
 		$(".toolbar-advanced-search").slideUp("medium", function () {});
-
 		$(".toolbar-advanced-search-expand").show();
-		$(".toolbar-search-submit").removeClass("disabled");
+		$(".toolbar-search-submit").removeAttr("disabled");
 		$('.toolbar-search-input').removeAttr('disabled');
-		$('.toolbar-search-submit').attr('onclick', 'searchSimple.search()');
 	},
 
 	search: function () {

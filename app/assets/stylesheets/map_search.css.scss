@@ -322,7 +322,7 @@
 	background: #d93c00;
 	color: #fff;
 
-	&.disabled {
+	&[disabled] {
 		background: #d1d1d1;
 	}
 }

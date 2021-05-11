@@ -36,10 +36,6 @@ function initLayout() {
 
 	$(".draggable").draggable({ handle: ".header" });
 
-	$(".toolbar-search-submit:not(.disabled)").click(function () {
-		$(this).next().click();
-	});
-
 	$(".popup .content .inside").jScrollPane({ showArrows: true });
 
 	// reset Advanced Search Form values

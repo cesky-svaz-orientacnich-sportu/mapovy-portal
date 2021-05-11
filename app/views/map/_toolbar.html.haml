@@ -7,8 +7,7 @@
       %form.toolbar-search(role="search")
         %label.sr-only{:for => "toolbar-map-search"}= t("mapserver.searchBoxForm")
         %input#toolbar-map-search.toolbar-search-input{:type => "text", :name => "search", :placeholder => t("mapserver.searchBoxForm")}
-        %button.toolbar-search-submit.input{:type => "button", :onclick => "searchSimple.search()"}= t("mapserver.search")
-        %input{:type => "submit", :value => t("mapserver.search"), :class => "oos"}
+        %button.toolbar-search-submit{:type => "submit"}= t("mapserver.search")
         %button{:type => "button", :class => "toolbar-advanced-search-expand"}
           = t("mapserver.advancedSearch")
       %ul.tools-list
