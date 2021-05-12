@@ -1,7 +1,7 @@
 %div.map-controls
-  %button.map-controls-header{:type => "button", "aria-expanded" => "true"}
+  %button.map-controls-header{:type => "button", "aria-expanded" => "false"}
     = t("mapserver.controls")
-  .map-controls-body
+  .map-controls-body{:style => "display:none"}
     .map-controls-column
       %strong.map-controls-column-header= t("mapserver.layers")
       %input{:type => 'checkbox', :checked => 'checked', :"data-filter-column" => "MAP_FAMILY", :"data-filter-value" => Map::MAP_FAMILY_MAP, :style => 'display:none'}
