@@ -1,47 +1,48 @@
 - archive ||= false
-%table.table.table-striped
-  %colgroup 
-    %col
-    %col(width=58)
-    %col(width=50)
-    %col(width=75)
-    %col(width=85)
-    %col(width=170)
-    %col(width=210)
-    %col(width=110)
-    %col(width=45)
-    - if archive
-      %col(width=65)
-  %thead
-    %tr
-      %th= map_attribute_label :title
-      %th= map_attribute_label :patron
-      %th= map_attribute_label :year
-      %th= map_attribute_label :scale
-      %th= map_attribute_label :map_sport
-      %th= map_attribute_label :region
-      %th= map_attribute_label :locality
-      %th= map_attribute_label :main_race_date
-      %th= map_attribute_label :id
+.data-table.table-responsive
+  %table.table.table-striped
+    %colgroup
+      %col
+      %col(width=58)
+      %col(width=50)
+      %col(width=75)
+      %col(width=85)
+      %col(width=170)
+      %col(width=210)
+      %col(width=110)
+      %col(width=45)
       - if archive
-        %th= map_attribute_label :archive
-  %tbody
-    - maps.each do |map|
-      %tr.map_list_row
-        %td
-          = link_to map.title, _map_path(map)
-          %span.buttons(style="display:none")= map_buttons(map)
-        %td= map.patron
-        %td= map.year
-        %td 1:#{map.scale}
-        %td= map.map_sport_
-        %td= map.region_
-        %td= map.locality
-        %td= map.race_date.try{|x| x.strftime("%d. %m. %Y")}
-        %td= map.id
+        %col(width=65)
+    %thead
+      %tr
+        %th= map_attribute_label :title
+        %th= map_attribute_label :patron
+        %th= map_attribute_label :year
+        %th= map_attribute_label :scale
+        %th= map_attribute_label :map_sport
+        %th= map_attribute_label :region
+        %th= map_attribute_label :locality
+        %th= map_attribute_label :main_race_date
+        %th= map_attribute_label :id
         - if archive
-          %td= map.archive_
-        
+          %th= map_attribute_label :archive
+    %tbody
+      - maps.each do |map|
+        %tr.map_list_row
+          %td
+            = link_to map.title, _map_path(map)
+            %span.buttons(style="display:none")= map_buttons(map)
+          %td= map.patron
+          %td= map.year
+          %td 1:#{map.scale}
+          %td= map.map_sport_
+          %td= map.region_
+          %td= map.locality
+          %td= map.race_date.try{|x| x.strftime("%d. %m. %Y")}
+          %td= map.id
+          - if archive
+            %td= map.archive_
+
 :javascript
   $('tr.map_list_row').on('mouseover', function() {
     $(this).find('.buttons').show();

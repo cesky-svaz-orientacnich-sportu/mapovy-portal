@@ -10,17 +10,41 @@
   }
 }
 
+.convergence-map {
+	@media (min-width: 45em) {
+		display: flex;
+	}
+
+	#map_canvas {
+		min-height: 0;
+		max-height: 60vh;
+		height: 300px;
+
+		@media (min-width: 45em) {
+			max-height: none;
+			min-height: 90vh;
+			height: 100%;
+		}
+	}
+}
+
+.convergence-map-canvas {
+	position: relative;
+	flex-grow: 1;
+}
+
 #convergence_info {
-  position:absolute;
-  left:0px;
-  top:112px;
-  width:300px;
-  bottom:0px;
-  padding:20px;
-  border-right: 2px solid #555;
+  padding: 20px;
+
+  @media (min-width: 45em) {
+  	width: 300px;
+  	border-left: 2px solid #555;
+  }
+
   h5 {
     border-bottom: 1px solid red;
   }
+
   p {
     margin: 0px;
     padding:0px;
@@ -131,14 +155,13 @@
 	align-items: center;
 	gap: 24px 16px;
 
-	.text {
-		font-size: 20px;
-		padding-top: 20px;
-	}
-
 	.tools-list {
         margin: 0;
     }
+}
+
+.toolbar-title {
+	font-size: 20px;
 }
 
 #titlebar {

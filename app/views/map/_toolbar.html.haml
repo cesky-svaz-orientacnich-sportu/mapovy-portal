@@ -2,7 +2,7 @@
   .toolbar-bar
     = link_to image_tag("/img/mapovy-portal-csos-#{I18n.locale}.png", :class => 'toolbar-logo', :alt => t("mapserver.mainLogoTitle"), :title => t("mapserver.mainLogoTitle")), :root
     - if @map_title
-      %div.text= @map_title
+      .toolbar-title= @map_title
     - else
       %form.toolbar-search(role="search")
         %label.sr-only{:for => "toolbar-map-search"}= t("mapserver.searchBoxForm")

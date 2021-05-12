@@ -1,7 +1,7 @@
 %h1= t("mapserver.listAuthHead")
 %h2= t("mapserver.listAuthHeadLow")
 
-%div.container
+.table-responsive
   %table.table.table-striped.compact#authors{:"data-source" => authors_url(format: "json")}
     %colgroup
       %col
@@ -51,4 +51,3 @@
       }
     });
   });
-  

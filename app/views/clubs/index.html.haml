@@ -1,7 +1,7 @@
 %h1= t("mapserver.listClubHead")
 %h2= t("mapserver.listClubHeadLow")
 
-%div.container
+.table-responsive
   %table.table.table-striped.compact#clubs{:"data-source" => clubs_url(format: "json")}
     %colgroup
       %col(width="20%")

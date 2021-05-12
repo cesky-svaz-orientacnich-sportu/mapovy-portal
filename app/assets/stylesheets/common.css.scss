@@ -268,3 +268,37 @@ input.field-my-error {
   	color: inherit;
   }
 }
+
+.data-table {
+	margin-top: 8px;
+
+	table {
+		margin-top: 0;
+	}
+}
+
+.dataTables_filter {
+	padding-left: 8px;
+}
+
+.rich-text {
+	max-width: 100%;
+
+	h1,
+	h2,
+	p,
+	li {
+		max-width: 400px;
+		margin-right: auto;
+		margin-left: auto;
+	}
+
+	iframe {
+		max-width: 100%;
+		max-height: 225px;
+	}
+}
+
+div.ColVis.ColVis {
+	float: left;
+}

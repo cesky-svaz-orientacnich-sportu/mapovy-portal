@@ -1,29 +1,30 @@
-%table.table.table-striped.compact#maps{:"data-source" => source}
-  %colgroup
-    %col
-    %col(width="80")
-    %col(width="80")
-    %col(width="80")
-    %col(width="80")
-    %col(width="100")
-    %col(width="70")
-  %thead
-    %tr
-      %th= t('mapserver.map_attributes.title')
-      %th= t('mapserver.map_attributes.patron')
-      %th= t('mapserver.map_attributes.year')
-      %th= t('mapserver.map_attributes.scale')
-      %th= t('mapserver.map_attributes.sport')
-      %th= t('mapserver.map_attributes.locality')
-      %th
-      %th= t('mapserver.map_attributes.id')
-      %th= t('mapserver.map_attributes.archive')
-  %tbody
+.table-responsive
+  %table.table.table-striped.compact#maps{:"data-source" => source}
+    %colgroup
+      %col
+      %col(width="80")
+      %col(width="80")
+      %col(width="80")
+      %col(width="80")
+      %col(width="100")
+      %col(width="70")
+    %thead
+      %tr
+        %th= t('mapserver.map_attributes.title')
+        %th= t('mapserver.map_attributes.patron')
+        %th= t('mapserver.map_attributes.year')
+        %th= t('mapserver.map_attributes.scale')
+        %th= t('mapserver.map_attributes.sport')
+        %th= t('mapserver.map_attributes.locality')
+        %th
+        %th= t('mapserver.map_attributes.id')
+        %th= t('mapserver.map_attributes.archive')
+    %tbody
 
-- if has_role?(:manager, :organizer, :contributor, :cartographer)  
+- if has_role?(:manager, :organizer, :contributor, :cartographer)
   %div.well.well-sm
     = link_to "Srovnat všechny zobrazené záznamy", "javascript:void(0)", id: "compare_maps"
-  
+
 :javascript
   $(function(){
     $("#compare_maps").on('click', function() {
@@ -37,10 +38,10 @@
       }
       if (array.length > 0) {
         console.log(array);
-        window.location = ("#{compare_maps_path}?" + $.param({ids: array}));  
+        window.location = ("#{compare_maps_path}?" + $.param({ids: array}));
       } else {
         alert("V tabulce nejsou žádné mapy!");
-      }      
+      }
     });
     $('#maps').dataTable( {
       "processing": true,
@@ -59,7 +60,7 @@
           null,
           { "orderable": false }
         ],
-      'fnDrawCallback': initPreviewAndInfo, 
+      'fnDrawCallback': initPreviewAndInfo,
       'language': {
         "emptyTable": "#{t('datatable.emptyTable')}",
         "info": "#{t('datatable.info')}",
@@ -78,7 +79,7 @@
       }
     });
 
- 
+
     $('#maps').on( 'page.dt', function () {
       var table = $('#maps').DataTable();
       var info = table.page.info();
