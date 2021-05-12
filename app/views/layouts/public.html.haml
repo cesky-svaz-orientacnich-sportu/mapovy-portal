@@ -52,7 +52,7 @@
       webshims.polyfill('forms forms-ext');
   %body
     = render :partial => 'shared/top_menu'
-    %div.container.content(style="margin-top:41px")
+    %div.container.content
       - flash.each do |key, value|
         - key = {'error' => 'danger', 'alert' => 'warning', 'notice' => 'primary'}[key] || key
         %div.bs-callout{class: "bs-callout-#{key}"}= value

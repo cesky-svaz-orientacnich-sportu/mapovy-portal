@@ -1,0 +1,31 @@
+.record-detail-header {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 16px;
+	padding-top: 20px;
+	padding-bottom: 8px;
+
+	h1 {
+		margin-top: 0;
+		margin-bottom: 0;
+	}
+}
+
+.record-detail-controls {
+	font-size: 32px;
+}
+
+.record-detail-report-issue {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-items: center;
+	gap: 12px;
+
+	p {
+		margin-bottom: 0;
+		padding-top: 0;
+		padding-bottom: 0;
+	}
+}

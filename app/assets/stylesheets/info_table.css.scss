@@ -1,9 +1,18 @@
+.info-table-wrapper {
+	margin-top: 8px;
+}
+
+.info-table,
 table.infoTable {
-  th {
-    font-weight: bold;
-    text-align: right;
-    color:black;
-    background-color:#ddd;
-    font-size: inherit;
-  }
+	th {
+		font-size: inherit;
+		font-weight: bold;
+		text-align: right;
+		background-color: #ddd;
+		color: #000;
+	}
+}
+
+.info-table {
+	margin-top: 0;
 }

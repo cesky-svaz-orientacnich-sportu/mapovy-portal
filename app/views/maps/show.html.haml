@@ -1,12 +1,13 @@
-%h1
-  - case @map.map_family
-  - when Map::MAP_FAMILY_MAP
-    = "#{t("mapserver.mapTitle.map")} #{@map}"
-  - when Map::MAP_FAMILY_EMBARGO
-    = "#{t("mapserver.mapTitle.embargo")} #{@map}"
-  = map_buttons(@map, maps_path)
-  - if current_user and current_user.has_role?(:organizer)
-    %span.pull-right
+%header.record-detail-header
+  %h1
+    - case @map.map_family
+    - when Map::MAP_FAMILY_MAP
+      = "#{t("mapserver.mapTitle.map")} #{@map}"
+    - when Map::MAP_FAMILY_EMBARGO
+      = "#{t("mapserver.mapTitle.embargo")} #{@map}"
+  .record-detail-controls
+    = map_buttons(@map, maps_path)
+    - if current_user and current_user.has_role?(:organizer)
       = link_to icon("sign-out", tooltip: "ohlásit připravovanou mapu se stejným obrysem"), register_maps_path(copy_shape_id: @map.id)
 
 - if @map.state == Map::STATE_PROPOSED
@@ -127,12 +128,9 @@
   %div.well Tato mapa není spárována s žádným závodem z ORISu.
 
 - if [Map::STATE_ARCHIVED, Map::STATE_SAVED_WITHOUT_FILING].include?(@map.state)
-  %div#issue_report.well.clearfix
+  #issue_report.record-detail-report-issue.well
+    %p Našli jste problém v záznamu (nesprávné nebo chybějící údaje, špatný obrys)? Budeme rádi, pokud nám o tom řeknete.
     = button_to 'Nahlásit problém', new_issue_report_path(map_id: @map.id), remote: true, class: 'btn btn-danger pull-right', method: :get
-    Našli jste problém v záznamu (nesprávné nebo chybějící údaje, špatný obrys)?
-    Budeme rádi, pokud nám o tom řeknete.
-
-%p &nbsp;
 
 - if current_user and !@map.record_log.blank?
   %h2 Informace o správě záznamu
@@ -140,49 +138,50 @@
 
 - if admin?
   %h2 Historie změn záznamu
-  %table.table
-    %colgroup
-      %col(width="30")
-      %col(width="80")
-      %col(width="120")
-      %col(width="120")
-      %col
-    %thead
-      %tr
-        %th
-        %th událost
-        %th uživatel
-        %th datum a čas
-        %th změny
-    %tbody
-      - @map.versions.reverse.each do |v|
-        - cx = v.changeset.dup
-        - cx.delete(:user_updated_at)
-        - cx.delete(:state_changed_at)
-        - cx.delete(:last_reminder_sent_at)
-        - cx.delete(:updated_at)
-        - unless cx.empty?
-          %tr
-            %td
-              = v.index
-              %br
-              [#{v.id}]
-            %td= v.event
-            %td
-              #{v.whodunnit ? User.find(v.whodunnit) : '---'}
-            %td= v.created_at.localtime.strftime("%d. %m. %Y %H:%M")
-            %td
-              %table.table
-                %colgroup
-                  %col(width="25%")
-                  %col(width="33%")
-                  %col
-                  %col(width="33%")
-                %tbody
-                  - cx.each do |key, value|
-                    %tr
-                      %td= key
-                      %td= (value[0] || "---").to_s.truncate(50)
-                      %td= icon('arrow-right')
-                      %td= (value[1] || "---").to_s.truncate(50)
+  .table-responsive
+    %table.table
+      %colgroup
+        %col(width="30")
+        %col(width="80")
+        %col(width="120")
+        %col(width="120")
+        %col
+      %thead
+        %tr
+          %th
+          %th událost
+          %th uživatel
+          %th datum a čas
+          %th změny
+      %tbody
+        - @map.versions.reverse.each do |v|
+          - cx = v.changeset.dup
+          - cx.delete(:user_updated_at)
+          - cx.delete(:state_changed_at)
+          - cx.delete(:last_reminder_sent_at)
+          - cx.delete(:updated_at)
+          - unless cx.empty?
+            %tr
+              %td
+                = v.index
+                %br
+                [#{v.id}]
+              %td= v.event
+              %td
+                #{v.whodunnit ? User.find(v.whodunnit) : '---'}
+              %td= v.created_at.localtime.strftime("%d. %m. %Y %H:%M")
+              %td
+                %table.table
+                  %colgroup
+                    %col(width="25%")
+                    %col(width="33%")
+                    %col
+                    %col(width="33%")
+                  %tbody
+                    - cx.each do |key, value|
+                      %tr
+                        %td= key
+                        %td= (value[0] || "---").to_s.truncate(50)
+                        %td= icon('arrow-right')
+                        %td= (value[1] || "---").to_s.truncate(50)
 

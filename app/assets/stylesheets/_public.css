@@ -17,8 +17,9 @@
  *= require dataTables/extras/dataTables.colReorder
  *= require dataTables/extras/dataTables.colVis
  *= require 'fancybox/jquery.fancybox'
+ *= require record_detail
  *= require_self
- 
+
 */
 
 .dataTables_wrapper {
@@ -27,7 +28,7 @@
   }
 }
 #maps_wrapper {
-  clear: both;    
+  clear: both;
 }
 
 .menuTopContainer {
