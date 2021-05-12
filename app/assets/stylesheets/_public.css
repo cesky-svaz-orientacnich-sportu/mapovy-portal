@@ -18,6 +18,7 @@
  *= require dataTables/extras/dataTables.colVis
  *= require 'fancybox/jquery.fancybox'
  *= require record_detail
+ *= require users
  *= require_self
 
 */

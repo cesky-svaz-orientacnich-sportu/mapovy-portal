@@ -1,9 +1,10 @@
-.info-table-wrapper {
+.info-table {
 	margin-top: 8px;
-}
 
-.info-table,
-table.infoTable {
+	table {
+		margin-top: 0;
+	}
+
 	th {
 		font-size: inherit;
 		font-weight: bold;
@@ -11,8 +12,4 @@ table.infoTable {
 		background-color: #ddd;
 		color: #000;
 	}
-}
-
-.info-table {
-	margin-top: 0;
 }

@@ -1,6 +1,4 @@
-%h1 Uživatel #{@user}
-
-%p &nbsp;
+%h1.users-detail-heading Uživatel #{@user}
 
 %table.table
   %tr
@@ -28,8 +26,7 @@
     %th= User.human_attribute_name(:authorized_regions)
     %td= @user.authorized_regions
 
-%div.panel.panel-primary
-  %div.panel.panel-heading Ověření proti ORISu
-  %div.panel.panel-body
+.user-detail-oris.panel.panel-primary
+  .panel.panel-heading Ověření proti ORISu
+  .panel.panel-body
     = (@check_against_oris.map{|x| h(x)} * "<br />").html_safe
-  
