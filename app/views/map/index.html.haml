@@ -1,33 +1,35 @@
-%button.map-show-help{:type => "button", :title => t("mapserver.showSideBar")}
-  = image_tag "/assets/icons/help.svg", alt: t("mapserver.showSideBar")
-= render :partial => 'search_results'
-%div#map_canvas
-= render :partial => 'toc'
-= render :partial => 'logos'
-.map-show-url-link.popupShadow(style="display:none")
-  .popup.simple.dialog
-    .header
-      %span= t("mapserver.urlLinkHeading")
-      = link_to image_tag("/img/ico-close.png", :alt => t("mapserver.urlLinkClose")), "javascript:void(0)", id: 'tools_link_close_button', class: 'close'
-    .content
-      %div
-        %input(id="urlInp" type="text" value="" style="border:2px inset; width:215px")
-        = link_to t("mapserver.urlLinkUpdate"), "javascript:void(0)", id: 'tools_link_update_button'
-.map-show-measure.popupShadow(style="display:none")
-  .popup.simple.dialog
-    .header
-      %span= t("mapserver.measureHeading")
-      = link_to image_tag("/img/ico-close.png", :alt => t("mapserver.urlLinkClose")), "javascript:void(0)", id: 'tools_measure_clear_button', class: 'close'
-    .content
-      #{t("mapserver.measureLength")}:
-      %span#span-length 0
-      km
-      %br
-      #{t("mapserver.measureArea")}:
-      %span#span-area 0
-      km²
-      %br
-      = link_to t("mapserver.measureReset"), "javascript:void(0)", id: 'tools_measure_reset_button'
+.map-wrapper
+  = render :partial => 'search_results'
+  .map-canvas-wrapper
+    %button.map-show-help{:type => "button", :title => t("mapserver.showSideBar")}
+      = image_tag "/assets/icons/help.svg", alt: t("mapserver.showSideBar")
+    #map_canvas
+    = render :partial => 'toc'
+    = render :partial => 'logos'
+    .map-show-url-link.popupShadow(style="display:none")
+      .popup.simple.dialog
+        .header
+          %span= t("mapserver.urlLinkHeading")
+          = link_to image_tag("/img/ico-close.png", :alt => t("mapserver.urlLinkClose")), "javascript:void(0)", id: 'tools_link_close_button', class: 'close'
+        .content
+          %div
+            %input(id="urlInp" type="text" value="" style="border:2px inset; width:215px")
+            = link_to t("mapserver.urlLinkUpdate"), "javascript:void(0)", id: 'tools_link_update_button'
+    .map-show-measure.popupShadow(style="display:none")
+      .popup.simple.dialog
+        .header
+          %span= t("mapserver.measureHeading")
+          = link_to image_tag("/img/ico-close.png", :alt => t("mapserver.urlLinkClose")), "javascript:void(0)", id: 'tools_measure_clear_button', class: 'close'
+        .content
+          #{t("mapserver.measureLength")}:
+          %span#span-length 0
+          km
+          %br
+          #{t("mapserver.measureArea")}:
+          %span#span-area 0
+          km²
+          %br
+          = link_to t("mapserver.measureReset"), "javascript:void(0)", id: 'tools_measure_reset_button'
 
 :javascript
   $(function() {

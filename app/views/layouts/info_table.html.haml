@@ -26,4 +26,6 @@
     = javascript_include_tag "mapserver/locale/#{I18n.locale}"
 
   %body
-    = yield
+    .page-wrapper
+      .page-body
+        = yield

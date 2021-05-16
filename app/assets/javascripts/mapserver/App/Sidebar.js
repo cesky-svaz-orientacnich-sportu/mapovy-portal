@@ -15,12 +15,12 @@ App.Sidebar = App.newClass({
     },
 
     show: function () {
-        $("#searchResult").animate({ left: "0" }, { duration: 'slow', easing: 'easeOutBack' }, 500);
+        $("#searchResult").show();
         $(".map-show-help, .linkShowResults").hide();
     },
 
     hide: function () {
-        $("#searchResult").animate({ left: '-' + this.width }, { duration: 'slow', easing: 'easeOutBack' }, 500);
+        $("#searchResult").hide();
         $(".map-show-help, .linkShowResults").show();
     },
 
@@ -34,10 +34,6 @@ App.Sidebar = App.newClass({
         $('#quickHelp').show();
 
         $('#sideHeadingLinks').html('');
-        $('#searchResult').jScrollPane({ showArrows: true });
-
-        //this.marker.setMap(null);
-        //$('input.fitem').removeAttr('disabled');
     },
 
     showWaiting: function () {
@@ -138,8 +134,8 @@ App.Sidebar = App.newClass({
             mapsId.push(mapId);
             var js = '';
             for (j = 0; j < 1; j++) {
-                dataHtml += '<li id="mapResult_' + mapId + '" class="cleaned">' +
-                '<div class="title cleaned" id="result' + data[i]['id'] + '" ">' +
+                dataHtml += '<li id="mapResult_' + mapId + '">' +
+                '<div class="title" id="result' + data[i]['id'] + '" ">' +
                   '<h3>'+
                     '<a href="/' + Config.locale + '/maps/' + mapId + '/fusion">' +
                       '<span>' + data[i]['title'] + '</span>' +
@@ -230,12 +226,9 @@ App.Sidebar = App.newClass({
           '<a href="/' + Config.locale + '/maps/download_search?list=' +  mapsIdAll.join("-") + '" target="_blank">' + sidebar.resourceString.sideBarDownload + '</a>';
         $('#sideHeadingLinks').html(cancel + sideHeadingLinks2);
 
-        $('#searchResult').jScrollPane({ showArrows: true });
         $(".map-controls").hide();
         $(".map-cancel-search").show();
 
         mapHelper.showSelectInMap();
-    },
-
-
+    }
 });

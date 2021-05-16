@@ -51,9 +51,10 @@
       });
       webshims.polyfill('forms forms-ext');
   %body
-    = render :partial => 'shared/top_menu'
-    %div.container.content
-      - flash.each do |key, value|
-        - key = {'error' => 'danger', 'alert' => 'warning', 'notice' => 'primary'}[key] || key
-        %div.bs-callout{class: "bs-callout-#{key}"}= value
-      = yield
+    .page-wrapper
+      = render :partial => 'shared/top_menu'
+      .page-body.container.content
+        - flash.each do |key, value|
+          - key = {'error' => 'danger', 'alert' => 'warning', 'notice' => 'primary'}[key] || key
+          .bs-callout{class: "bs-callout-#{key}"}= value
+        = yield

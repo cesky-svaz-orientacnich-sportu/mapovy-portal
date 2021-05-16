@@ -153,36 +153,37 @@
 	}
 }
 
+// ===============================================================
+// Results/Sidebar
+// ===============================================================
 #searchResult {
-	max-width: 100%;
-	width: 385px;
-	background: #fff;
-	border-right: 1px solid #b5b6b6;
-	position: absolute;
-	top: 0;
-	bottom: 0;
-	left: -385px;
 	z-index: 10;
+	flex-grow: 0;
+	flex-shrink: 0;
+	max-width: 100%;
+	border-right: 1px solid #b5b6b6;
+	background-color: #fff;
+
+	@media (min-width: 43em) {
+		overflow-y: auto;
+		width: 385px;
+		max-height: 85vh;
+		max-height: calc(100vh - 112px); // topbar + toolbar
+	}
 
 	.content {
 		width: 100%;
 	}
 
 	.header {
-		border-bottom: 1px solid #cbcccc;
-		padding: 0 0 6px 23px;
+		display: flex;
+		flex-wrap: wrap;
 		width: 100%;
-
-		.cleaned {
-			width: 100%;
-		}
+		padding: 0 0 6px 23px;
+		border-bottom: 1px solid #cbcccc;
 
 		span, a {
 			color: #7d7d7d;
-		}
-
-		h2 {
-			float: left;
 		}
 
 		span {
@@ -190,13 +191,11 @@
 		}
 
 		a.hide_search_results_button {
+			font-size: 13px;
 			background: url('/img/bg-arrow.png') no-repeat 0 2px;
 			color: #b0b1b1;
-			font-size: 13px;
-			float: right;
 			padding: 0 0 0 13px;
 			margin-right: 24px;
-			margin-top: 20px;
 			text-decoration: none;
 		}
 
@@ -210,12 +209,11 @@
 	}
 
 	.content > ul > li {
-		background: #f1f1f1;
-		border-bottom: 1px solid #cbcccc;
-		border-top: 1px solid #fff;
-		float: left;
-		padding: 0 0 10px 24px;
 		width: 100%;
+		padding: 0 24px 10px;
+		border-top: 1px solid #fff;
+		border-bottom: 1px solid #cbcccc;
+		background-color: #f1f1f1;
 	}
 
 	.content > ul > li:hover {
@@ -231,7 +229,12 @@
 	}
 
 	.title {
-		width: 329px;
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		align-items: center;
+		gap: 8px 16px;
+		padding: 14px 0 10px;
 	}
 
 	.contentText h2 {
@@ -256,13 +259,12 @@
 	}
 
 	h3 {
-		float: left;
+		max-width: 170px;
+		margin-top: 0;
+		margin-bottom: 0;
+		line-height: 18px;
 		font-size: 16px;
 		font-weight: bold;
-		line-height: 18px;
-		padding: 14px 0 10px 0;
-		margin: 0px;
-		max-width: 170px;
 
 		a {
 			color: #291a6b;
@@ -275,8 +277,7 @@
 	}
 
 	.tools-list {
-		margin-top: 11px;
-		float: right;
+		margin-top: 0;
 	}
 
 	table {
@@ -288,6 +289,27 @@
 	}
 }
 
+#resultsList {
+	margin-bottom: 0;
+}
+
+.search-result-header-base {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	width: 100%;
+	padding-top: 19px;
+	padding-bottom: 8px;
+
+	h2 {
+		padding-top: 0;
+		padding-bottom: 0;
+	}
+}
+
+// ===============================================================
+// Toolbar
+// ===============================================================
 .toolbar-search {
 	display: flex;
 	flex-wrap: wrap;

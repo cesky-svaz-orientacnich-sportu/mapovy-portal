@@ -1,40 +1,41 @@
 !!! 5
 %html{:lang => I18n.locale}
-  %head
-    %meta(charset="utf-8")
-    %meta(http-equiv="x-ua-compatible" content="ie=edge")
-    %meta(name="viewport" content="width=device-width, initial-scale=1")
-    %title= t('mapserver.title')
-    = csrf_meta_tags
-    = stylesheet_link_tag "_map", :media => "all"
-    = javascript_include_tag "https://maps.google.com/maps/api/js?libraries=geometry&key=#{GOOGLE_API_KEY}&language=#{I18n.locale}"
-    = javascript_include_tag "https://www.google.com/jsapi"
-    = javascript_include_tag "https://apis.google.com/js/client.js"
-    :javascript
-      google.load('visualization', '1', {});
-    - if current_user
-      :javascript
-        function loadUserConfig() {
-          Config.user = #{current_user.to_json.html_safe};
-          Config.apiKey = "#{GOOGLE_API_KEY}";
-        };
-    - else
-      :javascript
-        function loadUserConfig() {
-          Config.apiKey = "#{GOOGLE_API_KEY}";
-        };
-    = javascript_include_tag "_map"
-    = javascript_include_tag "mapserver/locale/#{I18n.locale}"
+	%head
+		%meta(charset="utf-8")
+		%meta(http-equiv="x-ua-compatible" content="ie=edge")
+		%meta(name="viewport" content="width=device-width, initial-scale=1")
+		%title= t('mapserver.title')
+		= csrf_meta_tags
+		= stylesheet_link_tag "_map", :media => "all"
+		= javascript_include_tag "https://maps.google.com/maps/api/js?libraries=geometry&key=#{GOOGLE_API_KEY}&language=#{I18n.locale}"
+		= javascript_include_tag "https://www.google.com/jsapi"
+		= javascript_include_tag "https://apis.google.com/js/client.js"
+		:javascript
+			google.load('visualization', '1', {});
+		- if current_user
+			:javascript
+				function loadUserConfig() {
+					Config.user = #{current_user.to_json.html_safe};
+					Config.apiKey = "#{GOOGLE_API_KEY}";
+				};
+		- else
+			:javascript
+				function loadUserConfig() {
+					Config.apiKey = "#{GOOGLE_API_KEY}";
+				};
+		= javascript_include_tag "_map"
+		= javascript_include_tag "mapserver/locale/#{I18n.locale}"
 
-  %body
-    = render :partial => 'shared/top_menu'
-    = render :partial => 'toolbar'
-    %div.map-wrapper
-      = yield
-    - unless flash.empty?
-      %div#flash_container
-        - flash.each do |key, value|
-          - key = {'error' => 'danger', 'alert' => 'warning', 'notice' => 'primary'}[key] || key
-          %div.bs-callout{class: "bs-callout-#{key}"}= value
-      :javascript
-        $('#flash_container').delay(5000).fadeOut();
+	%body
+		.page-wrapper
+			= render :partial => 'shared/top_menu'
+			= render :partial => 'toolbar'
+			.page-body
+				= yield
+			- unless flash.empty?
+				#flash_container
+					- flash.each do |key, value|
+						- key = {'error' => 'danger', 'alert' => 'warning', 'notice' => 'primary'}[key] || key
+						.bs-callout{class: "bs-callout-#{key}"}= value
+				:javascript
+					$('#flash_container').delay(5000).fadeOut();
