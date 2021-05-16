@@ -2,9 +2,11 @@
 // Base
 // ===============================================================
 .map-wrapper {
-		@media (min-width: 43em) {
-			display: flex;
-		}
+	height: 100%;
+
+	@media (min-width: 43em) {
+		display: flex;
+	}
 }
 
 .map-canvas-wrapper {
