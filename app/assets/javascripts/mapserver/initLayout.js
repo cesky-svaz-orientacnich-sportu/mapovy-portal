@@ -29,14 +29,10 @@ function initLayout() {
 	});
 
 	$(".popup .header a.close").click(function () {
-
 		$(this).parent().parent().parent().hide();
-
 	});
 
 	$(".draggable").draggable({ handle: ".header" });
-
-	$(".popup .content .inside").jScrollPane({ showArrows: true });
 
 	// reset Advanced Search Form values
 	$("#advancedSearchResetForm").click(function() {
