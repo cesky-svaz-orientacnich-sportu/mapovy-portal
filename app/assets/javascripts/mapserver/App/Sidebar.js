@@ -11,17 +11,17 @@ App.Sidebar = App.newClass({
     },
 
     init: function () {
-        $(".map-show-help, .linkShowResults").click(this.show);
+        $(".map-show-help").click(this.show);
     },
 
     show: function () {
         $(".search-result").show();
-        $(".map-show-help, .linkShowResults").hide();
+        $(".map-show-help").hide();
     },
 
     hide: function () {
         $(".search-result").hide();
-        $(".map-show-help, .linkShowResults").show();
+        $(".map-show-help").show();
     },
 
     reset: function () {

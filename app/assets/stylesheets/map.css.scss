@@ -269,17 +269,6 @@ ul.ui-autocomplete {
 	font-size: 12px;
 }
 
-.linkShowResults {
-	position: absolute;
-	top: 18px;
-	left: 0;
-	z-index: 1;
-	display: block;
-	width: 23px;
-	height: 31px;
-	background: url('/img/bg-link-res.png');
-}
-
 .cleaned:after {
 	content: ".";
 	clear: both;
