@@ -88,38 +88,34 @@
 // info window
 
 .infoWindow {
-	background: #fff;
-	min-height: 85px;
+	max-width: 100%;
 	width: 280px;
+	min-height: 85px;
+	background-color: #fff;
 
-	.header {
-		h3 {
-			font-size: 16px;
-			float: left;
-			padding-right: 25px;
-			margin-top:10px;
-			a {
-				color: #d93c00;
-				text-decoration: none;
-			}
-			a:hover {
-				color: #d93c00;
-				text-decoration: none;
-			}
+	.header h3 {
+		float: left;
+		margin-top: 10px;
+		padding-right: 25px;
+		font-size: 16px;
+
+		a,
+		a:focus,
+		a:hover {
+			text-decoration: none;
+			color: #d93c00;
 		}
 	}
 
 	.tools-list {
-			float: right;
-			margin-top: 5px;
+		float: right;
+		margin-top: 5px;
 	}
 
-	.data {
-		th {
-			vertical-align:middle;
-			padding-top: 3px;
-			padding-bottom: 3px;
-		}
+	.data th {
+		vertical-align: middle;
+		padding-top: 3px;
+		padding-bottom: 3px;
 	}
 }
 
