@@ -1,65 +1,57 @@
-.convergence-map
-  .convergence-map-canvas
-    #map_canvas
-    = render :partial => 'basemap_switch'
-    = render :partial => 'logos'
-  #convergence_info
-    .well.help= t('mapserver.convergence.help')
-
-    %h5= t('mapserver.convergence.sections.latlng')
-    %p
-      %strong WGS84: #{icon 'info-circle', tooltip: 'WGS84 -- EPSG:4326'}
-      %br
-      %span.wgs
-    %h5= t('mapserver.convergence.sections.planar')
-    %p
-      %strong S-JSTK: #{icon 'info-circle', tooltip: 'S-JTSK / Krovak East North (EPSG:5514)'}
-      %br
-      %span.sjstk
-    %p
-      %strong UTM 33N: #{icon 'info-circle', tooltip: 'WGS84 / UTM zone 33N (EPSG:32633)'}
-      %br
-      %span.utm33
-    %p
-      %strong UTM 34N: #{icon 'info-circle', tooltip: 'WGS84 / UTM zone 34N (EPSG:32634)'}
-      %br
-      %span.utm34
-    %h5= t('mapserver.convergence.sections.convergence')
-    %p
-      %strong S-JSTK:
-      %span.a_sjstk
-      %br
-      %strong UTM33N:
-      %span.a_utm33
-      %br
-      %strong UTM34N:
-      %span.a_utm34
-    %h5
-      = t('mapserver.convergence.sections.declination')
-      %br
-      (IGRF-12 (2015) Model)
-    %p
-      (vztaženo k dnešnímu datu)
-
-    %p
-      %strong Magnetická deklinace:
-      %span.mag
-    %p
-      %strong Roční změna:
-      %span.magc
-    %p
-      %strong Grivace (S-JSTK):
-      %span.g_sjstk
-      %br
-      %strong Grivace (UTM33N):
-      %span.g_utm33
-      %br
-      %strong Grivace (UTM34N):
-      %span.g_utm34
-    %h5
-      Nahlížení do KN
-    %p.kn_link
-
+#convergence_info
+  .well.help= t('mapserver.convergence.help')
+  %h5= t('mapserver.convergence.sections.latlng')
+  %p
+    %strong WGS84: #{icon 'info-circle', tooltip: 'WGS84 -- EPSG:4326'}
+    %br
+    %span.wgs
+  %h5= t('mapserver.convergence.sections.planar')
+  %p
+    %strong S-JSTK: #{icon 'info-circle', tooltip: 'S-JTSK / Krovak East North (EPSG:5514)'}
+    %br
+    %span.sjstk
+  %p
+    %strong UTM 33N: #{icon 'info-circle', tooltip: 'WGS84 / UTM zone 33N (EPSG:32633)'}
+    %br
+    %span.utm33
+  %p
+    %strong UTM 34N: #{icon 'info-circle', tooltip: 'WGS84 / UTM zone 34N (EPSG:32634)'}
+    %br
+    %span.utm34
+  %h5= t('mapserver.convergence.sections.convergence')
+  %p
+    %strong S-JSTK:
+    %span.a_sjstk
+    %br
+    %strong UTM33N:
+    %span.a_utm33
+    %br
+    %strong UTM34N:
+    %span.a_utm34
+  %h5
+    = t('mapserver.convergence.sections.declination')
+    %br
+    (IGRF-12 (2015) Model)
+  %p
+    (vztaženo k dnešnímu datu)
+  %p
+    %strong Magnetická deklinace:
+    %span.mag
+  %p
+    %strong Roční změna:
+    %span.magc
+  %p
+    %strong Grivace (S-JSTK):
+    %span.g_sjstk
+    %br
+    %strong Grivace (UTM33N):
+    %span.g_utm33
+    %br
+    %strong Grivace (UTM34N):
+    %span.g_utm34
+  %h5
+    Nahlížení do KN
+  %p.kn_link
 
 :javascript
   $(function() {

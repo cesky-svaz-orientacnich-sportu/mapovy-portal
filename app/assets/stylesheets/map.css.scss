@@ -1,41 +1,35 @@
 // ===============================================================
-// Main map components
+// Flash messages
 // ===============================================================
 #flash_container {
-	margin-top:41px;
-	bottom:10px;position:absolute;right:10px;
-	width:400px;
+	position: absolute;
+	right: 10px;
+	bottom: 10px;
 	z-index: 99;
+	width: 400px;
+	margin-top: 41px;
 
 	.bs-callout {
-		background-color: white;
+		background-color: #fff;
 	}
 }
 
-.convergence-map {
-	@media (min-width: 45em) {
-		display: flex;
+// ===============================================================
+// Convergence map
+// ===============================================================
+.map-wrapper.is-convergence #map_canvas {
+	min-height: 300px;
+	max-height: 60vh;
+
+	@media (min-width: 43em) {
+		max-height: none;
 	}
-
-	#map_canvas {
-		min-height: 300px;
-		max-height: 60vh;
-
-		@media (min-width: 45em) {
-			max-height: none;
-		}
-	}
-}
-
-.convergence-map-canvas {
-	position: relative;
-	flex-grow: 1;
 }
 
 #convergence_info {
 	padding: 20px;
 
-	@media (min-width: 45em) {
+	@media (min-width: 43em) {
 		width: 300px;
 		border-left: 2px solid #555;
 	}
@@ -51,6 +45,9 @@
 	}
 }
 
+// ===============================================================
+// Map components
+// ===============================================================
 #logo {
 	float: left;
 	margin: 13px 85px 0 25px;

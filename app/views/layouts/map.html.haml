@@ -31,13 +31,17 @@
       = render :partial => 'shared/top_menu'
       = render :partial => 'toolbar'
       .page-body
-        .map-wrapper
-          = render :partial => 'search_results'
+        .map-wrapper{:class => ("is-convergence" if @is_convergence)}
+          - unless @is_convergence
+            = render :partial => 'search_results'
           .map-canvas-wrapper
-            %button.map-show-help{:type => "button", :title => t("mapserver.showSideBar")}
-              = image_tag "icons/help.svg", alt: t("mapserver.showSideBar")
             #map_canvas
             = render :partial => 'logos'
+            - if @is_convergence
+              = render :partial => 'basemap_switch'
+            - else
+              = yield
+          - if @is_convergence
             = yield
       - unless flash.empty?
         #flash_container

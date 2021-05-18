@@ -63,6 +63,7 @@ class MapController < ApplicationController
 
   def convergence
     @map_title = t("mapserver.convergence.header")
+    @is_convergence = true
   end
 
 end

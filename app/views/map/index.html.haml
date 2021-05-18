@@ -1,3 +1,5 @@
+%button.map-show-help{:type => "button", :title => t("mapserver.showSideBar")}
+  = image_tag "icons/help.svg", alt: t("mapserver.showSideBar")
 = render :partial => 'map_controls'
 .map-show-url-link.popupShadow(style="display:none")
   .popup.simple.dialog
