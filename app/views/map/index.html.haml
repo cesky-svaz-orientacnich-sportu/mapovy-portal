@@ -2,7 +2,7 @@
   = render :partial => 'search_results'
   .map-canvas-wrapper
     %button.map-show-help{:type => "button", :title => t("mapserver.showSideBar")}
-      = image_tag "/assets/icons/help.svg", alt: t("mapserver.showSideBar")
+      = image_tag "icons/help.svg", alt: t("mapserver.showSideBar")
     #map_canvas
     = render :partial => 'toc'
     = render :partial => 'logos'
