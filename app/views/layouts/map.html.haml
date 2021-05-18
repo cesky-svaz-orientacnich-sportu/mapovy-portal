@@ -35,6 +35,13 @@
           - unless @is_convergence
             = render :partial => 'search_results'
           .map-canvas-wrapper
+            - unless flash.empty?
+              #flash_container
+                - flash.each do |key, value|
+                  - key = {'error' => 'danger', 'alert' => 'warning', 'notice' => 'primary'}[key] || key
+                  .bs-callout{class: "bs-callout-#{key}"}= value
+              :javascript
+                $('#flash_container').delay(5000).fadeOut();
             #map_canvas
             = render :partial => 'logos'
             - if @is_convergence
@@ -43,10 +50,3 @@
               = yield
           - if @is_convergence
             = yield
-      - unless flash.empty?
-        #flash_container
-          - flash.each do |key, value|
-            - key = {'error' => 'danger', 'alert' => 'warning', 'notice' => 'primary'}[key] || key
-            .bs-callout{class: "bs-callout-#{key}"}= value
-        :javascript
-          $('#flash_container').delay(5000).fadeOut();
