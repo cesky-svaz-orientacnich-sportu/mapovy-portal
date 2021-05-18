@@ -15,32 +15,32 @@ App.Sidebar = App.newClass({
     },
 
     show: function () {
-        $("#searchResult").show();
+        $(".search-result").show();
         $(".map-show-help, .linkShowResults").hide();
     },
 
     hide: function () {
-        $("#searchResult").hide();
+        $(".search-result").hide();
         $(".map-show-help, .linkShowResults").show();
     },
 
     reset: function () {
         this.hideWaiting();
 
-        $('#resultsList').html('');
+        $('.search-result-list').html('');
 
-        $('#sideHeading').html(sidebar.resourceString.sideBarQuickHelpH1);
-        $('#sideHeading').show();
+        $('.search-result-heading').html(sidebar.resourceString.sideBarQuickHelpH1);
+        $('.search-result-heading').show();
         $('#quickHelp').show();
 
-        $('#sideHeadingLinks').html('');
+        $('.search-result-header-links').html('');
     },
 
     showWaiting: function () {
         this.show();
 
-        $('#sideHeading').html('');
-        $('#resultsList').html('');
+        $('.search-result-heading').html('');
+        $('.search-result-list').html('');
         $('#news').hide();
         $('#quickHelp').hide();
         $('#waiting').show();
@@ -52,7 +52,6 @@ App.Sidebar = App.newClass({
 
     hideResults: function() {
        sidebar.reset();
-       $('#titlebar').remove();
        $('.map-cancel-search').hide();
        $('.map-controls').show();
        toc.refresh();
@@ -76,15 +75,15 @@ App.Sidebar = App.newClass({
           console.log("Search results blank? : " + data);
         }
 
-        var cancel = '<a href="#" onClick="sidebar.hideResults(); ">' + sidebar.resourceString.sideBarCancel + '</a>';
+        var cancel = $(".map-cancel-search").length ? '<button type="button" onClick="sidebar.hideResults();">'+sidebar.resourceString.sideBarCancel+'</button>' : '';
 
         // Create the list of results for display
         if (numRows == 0) {
-            $('#resultsList').html(sidebar.resourceString.sideBarNoResults);
-            $('#sideHeading').html(sidebar.resourceString.sideBarNoResultsHead);
-            $('#sideHeadingLinks').html(cancel);
+            $('.search-result-list').html(sidebar.resourceString.sideBarNoResults);
+            $('.search-result-heading').html(sidebar.resourceString.sideBarNoResultsHead);
+            $('.search-result-header-links').html(cancel);
             $('#quickHelp').hide();
-            $('#resultsList').show();
+            $('.search-result-list').show();
 
             sidebar.show();
             return;
@@ -120,7 +119,7 @@ App.Sidebar = App.newClass({
         if (allRows > numRows) {
           sideHeadingString += "<br />zobrazuji pouze " + numRows + " map";
         }
-        $('#sideHeading').html(sideHeadingString);
+        $('.search-result-heading').html(sideHeadingString);
 
         //concatenate the results into a string
         var dataHtml = '';
@@ -205,7 +204,7 @@ App.Sidebar = App.newClass({
             }
         }
         //display the results on the page
-        $('#resultsList').html(paginationHtml + dataHtml + paginationHtml);
+        $('.search-result-list').html(paginationHtml + dataHtml + paginationHtml);
 
         //highlighting map polygons on mouseenter
         for (i = 0; i < mapsId.length; i++) {
@@ -220,11 +219,10 @@ App.Sidebar = App.newClass({
             }(id));
         }
 
-        var sideHeadingLinks2 = '<span>|</span>' +
+        var sideHeadingLinks2 =
           '<a href="/' + Config.locale + '/maps/table_search?list=' + mapsIdAll.join("-") + '" target="_blank">' + sidebar.resourceString.sideBarTable + '</a>' +
-          '<span>|</span>' +
           '<a href="/' + Config.locale + '/maps/download_search?list=' +  mapsIdAll.join("-") + '" target="_blank">' + sidebar.resourceString.sideBarDownload + '</a>';
-        $('#sideHeadingLinks').html(cancel + sideHeadingLinks2);
+        $('.search-result-header-links').html(cancel + sideHeadingLinks2);
 
         $(".map-controls").hide();
         $(".map-cancel-search").show();

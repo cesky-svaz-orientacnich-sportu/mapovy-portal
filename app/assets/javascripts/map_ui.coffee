@@ -9,7 +9,7 @@ jQuery ->
   $('.map-controls-header').on 'click', ->
     if $(this).attr('aria-expanded') == 'true' then toc.collapse() else toc.expand()
 
-  $('.map-cancel-search, .hide_search_results_button').on 'click', ->
+  $('.map-cancel-search, .search-result-hide').on 'click', ->
     sidebar.hideResults()
 
   $('#map_tool_print_button').on 'click', ->

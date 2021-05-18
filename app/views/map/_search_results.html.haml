@@ -1,12 +1,12 @@
-#searchResult(style="display:none")
+.search-result(style="display:none")
   .content
-    .header
+    .search-result-header
       .search-result-header-base
-        %h2#sideHeading= t("mapserver.sideBarQuickHelpH1")
-        %h2#sideHeadingResults.hidden= t("mapserver.sideBarResults")
-        %a.hide_search_results_button(href="#")= t("mapserver.hideSideBar")
-      #sideHeadingLinks
-    %ul#resultsList
+        %h2.search-result-heading= t("mapserver.sideBarQuickHelpH1")
+        - unless @map_title
+          %button.search-result-hide(type="button")= t("mapserver.hideSideBar")
+      .search-result-header-links
+    %ul.search-result-list
     #news.contentText= text(:news)
     #quickHelp.contentText= text(:quick_help)
     #waiting(style="display:none")= image_tag("/img/working.gif")
