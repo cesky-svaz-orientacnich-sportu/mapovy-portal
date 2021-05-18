@@ -1,4 +1,4 @@
-%div.map-controls
+.map-controls
   %button.map-controls-header{:type => "button", "aria-expanded" => "false"}
     = t("mapserver.controls")
   .map-controls-body{:style => "display:none"}
@@ -27,34 +27,34 @@
               = t("mapserver.map_layers.years.lower", :y => y2)
     .map-controls-column
       %strong.map-controls-column-header= t("mapserver.areas")
-      %div.item{:class => 'item'}
+      .item{:class => 'item'}
         %label
           %input{:type => 'checkbox', :checked => true, :onclick => "toc.refresh()", :id => "area__embargoes"}
           %span{:style => "background-color:#{Color::RGB::from_html('#ff0000').lighten_by(40).html};border-color:#ff0000"}
           = t("mapserver.embargoes")
-      %div.item{:class => 'item'}
+      .item{:class => 'item'}
         %label
           %input{:type => 'checkbox', :checked => false, :onclick => "toc.refresh()", :id => "area__competition_areas"}
           %span{:style => "background-color:#{Color::RGB::from_html('#ff3300').lighten_by(20).html};border-color:#ff3300"}
           = t("mapserver.competitionAreas")
       .separator
-      %div.item{:class => 'item has-no-color-indicator'}
+      .item{:class => 'item has-no-color-indicator'}
         %label
           %input{:type => 'checkbox', :checked => false, :onclick => "toc.refresh()", :id => "area__blocking_foot"}
           #{t('mapserver.map_layers.blocking.title')} (#{t('mapserver.map_enums.map_sport.foot')})
-      %div.item{:class => 'item has-no-color-indicator'}
+      .item{:class => 'item has-no-color-indicator'}
         %label
           %input{:type => 'checkbox', :checked => false, :onclick => "toc.refresh()", :id => "area__blocking_bike"}
           #{t('mapserver.map_layers.blocking.title')} (#{t('mapserver.map_enums.map_sport.mtbo')})
-      %div.item{:class => 'item has-no-color-indicator'}
+      .item{:class => 'item has-no-color-indicator'}
         %label
           %input{:type => 'checkbox', :checked => false, :onclick => "toc.refresh()", :id => "area__blocking_ski"}
           #{t('mapserver.map_layers.blocking.title')} (#{t('mapserver.map_enums.map_sport.ski')})
-      %div.item{:class => 'item has-no-color-indicator'}
+      .item{:class => 'item has-no-color-indicator'}
         %label
           %input{:type => 'checkbox', :checked => false, :onclick => "toc.refresh()", :id => "area__blocking_other"}
           #{t('mapserver.map_layers.blocking.title')} (#{t('mapserver.other_sports')})
-      %div.item
+      .item
         %label.toc-blocking-year
           %select{:id => "area__blocking_year"}
             - (Date.today.year...Date.today.year+10).each do |y|
