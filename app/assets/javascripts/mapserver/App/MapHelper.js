@@ -29,9 +29,8 @@ App.MapHelper = App.newClass({
     },
 
     changeMapType: function (mapTypeId) {
-      console.dir(mapTypeId);
-        $("#baseMapSwitch, .map-controls-background-switch").find("a").removeClass("active");
-        $("#baseMapSwitch, .map-controls-background-switch").find("a[data-map-type=" + mapTypeId + "]").addClass("active");
+        $(".map-controls-background-switch").find("button").removeClass("is-active");
+        $(".map-controls-background-switch").find("button[data-map-type=" + mapTypeId + "]").addClass("is-active");
         if (mapTypeId == 'SHC') {
             this.map.setMapTypeId('SHC');
             $('.map-cuzk-copyright').show();

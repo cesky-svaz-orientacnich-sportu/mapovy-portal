@@ -62,11 +62,6 @@
 
     map.setOptions({draggableCursor: 'crosshair'});
 
-    $("#baseMapSwitch").css({
-        "top": 12,
-        "right": 12
-    });
-
     google.maps.event.addListener(map, 'click', function(e) {
       $("#convergence_info .help").fadeOut();
       var lat = e.latLng.lat();

@@ -61,12 +61,6 @@
               %option{value: y}= y
           %span.sr-only
             #{t('mapserver.map_layers.blocking.title')} #{t('mapserver.map_layers.blocking.year')}
-    .map-controls-column
-      %strong.map-controls-column-header= t("mapserver.backgroundSwitch")
-      %ul.map-controls-background-switch
-        %li= link_to t("mapserver.basemapSHC"),       "javascript:void(0);", data: {map_type: "SHC"      }, :class => 'active'
-        %li= link_to t("mapserver.basemapSatellite"), "javascript:void(0);", data: {map_type: "SATELLITE"}
-        %li= link_to t("mapserver.basemapRoadmap"),   "javascript:void(0);", data: {map_type: "ROADMAP"  }
 
 %button.map-cancel-search{:type => "button", :style => "display:none"}
   = t('mapserver.cancelSearch')

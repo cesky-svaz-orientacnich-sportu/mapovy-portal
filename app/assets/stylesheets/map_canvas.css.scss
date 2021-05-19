@@ -2,10 +2,20 @@
 // Base
 // ===============================================================
 .map-wrapper {
+	display: flex;
+	flex-direction: column;
 	height: 100%;
 
 	@media (min-width: 43em) {
-		display: flex;
+		flex-direction: row;
+	}
+
+	&.is-convergence {
+		flex-direction: column-reverse;
+
+		@media (min-width: 43em) {
+			flex-direction: row;
+		}
 	}
 }
 

@@ -32,7 +32,9 @@
       = render :partial => 'toolbar'
       .page-body
         .map-wrapper{:class => ("is-convergence" if @is_convergence)}
-          - unless @is_convergence
+          - if @is_convergence
+            = yield
+          - else
             = render :partial => 'search_results'
           .map-canvas-wrapper
             - unless flash.empty?
@@ -44,9 +46,16 @@
                 $('#flash_container').delay(5000).fadeOut();
             #map_canvas
             = render :partial => 'logos'
-            - if @is_convergence
-              = render :partial => 'basemap_switch'
-            - else
+            %p#map-controls-background-switch-label.sr-only= t("mapserver.backgroundSwitch")
+            %ul.map-controls-background-switch{"aria-labelledby" => "map-controls-background-switch-label"}
+              %li
+                %button.is-active{:type => "button", data: {map_type: "SHC"}}
+                  = t("mapserver.basemapSHC")
+              %li
+                %button{:type => "button", data: {map_type: "SATELLITE"}}
+                  = t("mapserver.basemapSatellite")
+              %li
+                %button{:type => "button", data: {map_type: "ROADMAP"}}
+                  = t("mapserver.basemapRoadmap")
+            - unless @is_convergence
               = yield
-          - if @is_convergence
-            = yield
