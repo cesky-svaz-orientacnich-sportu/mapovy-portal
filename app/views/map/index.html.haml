@@ -33,4 +33,7 @@
     initMapComponents();
     initLayout();
     toc.refresh();
+    if (typeof window.matchMedia != typeof undefined && matchMedia("(min-width:64em) and (min-height:40.5em)").matches) {
+      toc.expand();
+    }
   });
