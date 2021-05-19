@@ -413,12 +413,6 @@ function initMapComponents() {
         }
     });
 
-    //function handleMapClick(event) {
-    //    mapContextMenu.show(event.latLng);
-    //}
-
-    //mapHelper.registerMapClickListeners(handleMapClick);
-
     var overlay = new google.maps.OverlayView();
     overlay.draw = function () { };
     overlay.setMap(map);
@@ -437,8 +431,9 @@ function initMapComponents() {
         }
 
         if (rightclick) {
-            var x = e.pageX - this.offsetLeft;
-            var y = e.pageY - this.offsetTop;
+        	var $canvas = $('#map_canvas');
+            var x = e.pageX - $canvas.offset().left;
+            var y = e.pageY - $canvas.offset().top;
             var pxPoint = new google.maps.Point(x, y);
             var latLng = overlay.getProjection().fromContainerPixelToLatLng(pxPoint);
 
