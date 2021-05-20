@@ -1,6 +1,5 @@
-%div#inline_map_canvas(style="width:100%;height:800px")
-
-%div#inlineBaseMapSwitch
+#inline_map_canvas(style="width:100%;height:800px")
+#inlineBaseMapSwitch
   = link_to t("mapserver.basemapSHC"),       "javascript:void(0);", data: {map_type: "SHC"      }, :class => 'active'
   |
   = link_to t("mapserver.basemapSatellite"), "javascript:void(0);", data: {map_type: "SATELLITE"}
@@ -10,4 +9,4 @@
 = f.hidden_field :area_size, :class => 'areaField'
 = f.hidden_field :shape_json, :class => 'shapeField'
 
-%div.well= RedCloth.new(t('mapserver.shape_edit_help')).to_html.html_safe
+.well= RedCloth.new(t('mapserver.shape_edit_help')).to_html.html_safe

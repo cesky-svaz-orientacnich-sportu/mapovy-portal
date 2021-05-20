@@ -237,11 +237,11 @@
       %fieldset.form-group
         %legend.form-fieldset-legend= map_attribute_label(:archive_print_class, :edit)
         .form-fields-inline
-          = f.label t('mapserver.map_attributes.archive_print_class') + ' #1', :class => 'sr-only'
+          = f.label :archive_print1_class, map_attribute_label(:archive_print_class, false) + ' #1', :class => 'sr-only'
           = f.select :archive_print1_class, ["a", "b", "c", "n", "x", "q", "-", "0"], {:include_blank => true}, :class => 'form-control'
-          = f.label t('mapserver.map_attributes.archive_print_class') + ' #2', :class => 'sr-only'
+          = f.label :archive_print2_class, map_attribute_label(:archive_print_class, false) + ' #2', :class => 'sr-only'
           = f.select :archive_print2_class, ["a", "b", "c", "n", "x", "-"], {:include_blank => true}, :class => 'form-control'
-          = f.label t('mapserver.map_attributes.archive_print_class') + ' #3', :class => 'sr-only'
+          = f.label :archive_print3_class, map_attribute_label(:archive_print_class, false) + ' #3', :class => 'sr-only'
           = f.select :archive_print3_class, ["a", "b", "c", "n", "x", "-"], {:include_blank => true}, :class => 'form-control'
     .col-xs-5.col-sm-3.col-lg-2
       .form-group
