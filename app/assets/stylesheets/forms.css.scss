@@ -13,3 +13,20 @@
 		margin-top: 30px;
 	}
 }
+
+.form-fieldset-legend {
+	display: inline-block;
+	max-width: 100%;
+	margin-bottom: 5px;
+	border-bottom: 0;
+	font-size: inherit;
+	font-weight: 700;
+}
+
+.form-fields-inline {
+	display: flex;
+
+	> *:not(:last-child) {
+		margin-right: 8px;
+	}
+}

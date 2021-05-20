@@ -1,6 +1,5 @@
 %h1 Upravit mapu #{@map}
 
-
 - if @map.errors.any?
   %ul.map_errors.bs-callout.bs-callout-danger
     - @map.errors.messages.each do |key, err|
@@ -9,7 +8,7 @@
         #{err * " a "}
 
 - @map.shape_json ||= @map.shape_as_coords
-= nested_form_for @map, :html => {:id => 'map_form', :role => 'form', :class => 'form-horizontal', :multipart => true} do |f|
+= nested_form_for @map, :html => {:id => 'map_form', :role => 'form', :multipart => true} do |f|
 
   %h2= t("mapserver.mapBasicData")
 
@@ -382,7 +381,8 @@
 
     $("#map_oris_event_id").select2({
       allowClear: true,
-      theme: 'default col-sm-4'
+      theme: 'bootstrap',
+      width: '100%'
     });
   });
 
