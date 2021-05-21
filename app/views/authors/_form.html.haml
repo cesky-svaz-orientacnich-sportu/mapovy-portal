@@ -1,20 +1,24 @@
-= form_for author, :html => {:role => 'form', :class => 'form-horizontal'} do |f|
-  %div.form-group
-    = f.label :full_name, author_attribute_label(:full_name, :edit), :class => 'col-sm-2'
-    = f.text_field :full_name, :class => 'col-sm-6'
-  %div.form-group
-    = f.label :activity, author_attribute_label(:activity, :edit), :class => 'col-sm-2'
-    = f.text_field :activity, :class => 'col-sm-6'
-  %div.form-group
-    = f.label :club, author_attribute_label(:club, :edit), :class => 'col-sm-2'
-    = f.text_field :club, :class => 'col-sm-6'
-  %div.form-group
-    = f.label :year_of_birth, author_attribute_label(:year_of_birth, :edit), :class => 'col-sm-2'
-    = f.text_field :year_of_birth, :class => 'col-sm-6'
-  %div.form-group
-    = f.label :note, author_attribute_label(:note, :edit), :class => 'col-sm-2'
-    = f.text_field :note, :class => 'col-sm-6'
-  %div.form-group
-    %div.col-sm-2
-    %div.col-sm-6
-      = f.submit 'Uložit'
+= form_for author, :html => {:role => 'form'} do |f|
+  .row
+    .col-sm-4
+      .form-group
+        = f.label :full_name, author_attribute_label(:full_name, :edit)
+        = f.text_field :full_name, :class => 'form-control'
+    .col-sm-4
+      .form-group
+        = f.label :club, author_attribute_label(:club, :edit)
+        = f.text_field :club, :class => 'form-control'
+    .col-xs-6.col-sm-2
+      .form-group
+        = f.label :activity, author_attribute_label(:activity, :edit)
+        = f.text_field :activity, :class => 'form-control'
+    .col-xs-6.col-sm-2
+      .form-group
+        = f.label :year_of_birth, author_attribute_label(:year_of_birth, :edit)
+        = f.text_field :year_of_birth, :class => 'form-control'
+    .col-sm-12
+      .form-group
+        = f.label :note, author_attribute_label(:note, :edit)
+        = f.text_field :note, :class => 'form-control'
+    .col-sm-12
+      = f.submit 'Uložit', :class => 'btn btn-primary'
