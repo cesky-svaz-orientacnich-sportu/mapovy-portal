@@ -1,16 +1,19 @@
-= form_for [:backend, text], :html => {:role => 'form', :class => 'form-horizontal'} do |f|
-  %div.form-group
-    = f.label :name, :class => 'col-sm-2'
-    = f.text_field :name, :class => 'col-sm-6'
-  %div.form-group
-    = f.label :body_cs, :class => 'col-sm-2'
-    = f.text_area :body_cs, :class => 'col-sm-9', :rows => 20
-  %div.form-group
-    = f.label :body_en, :class => 'col-sm-2'
-    = f.text_area :body_en, :class => 'col-sm-9', :rows => 20
-  %div.form-group
-    %div.col-sm-2
-    %div.col-sm-6
-      = f.submit 'Uložit'
-
-/= render :partial => 'shared/textile'      
+= form_for [:backend, text], :html => {:role => 'form'} do |f|
+  .row
+    .col-sm-6.col-md-5.col-lg-4
+      .form-group
+        = f.label :name
+        = f.text_field :name, :class => 'form-control'
+  .row
+    .col-sm-12.col-md-9.col-lg-8
+      .form-group
+        = f.label :body_cs
+        = f.text_area :body_cs, :class => 'form-control', :rows => 20
+  .row
+    .col-sm-12.col-md-9.col-lg-8
+      .form-group
+        = f.label :body_en
+        = f.text_area :body_en, :class => 'form-control', :rows => 20
+  .row
+    .col-sm-12
+      = f.submit 'Uložit', :class => 'btn btn-primary'
