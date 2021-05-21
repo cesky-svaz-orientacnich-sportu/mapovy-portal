@@ -123,24 +123,6 @@
       = f.text_field :blocking_reason, :class => 'form-control'
 
 .row
-  .col-md-9.col-lg-6
-    .form-group
-      = f.label :oris_event_id, map_attribute_label(:main_race, :edit)
-      = f.select :oris_event_id, "<option value=\"0\"#{f.object.oris_event_id == 0 ? 'selected' : ''}>(žádný závod)</option>".html_safe + options_from_collection_for_select(f.object.year ? OrisEvent.in_year(f.object.year) : OrisEvent.sorted, :id, :to_label, f.object.oris_event_id), {:include_blank => true}, :class => 'form-control'
-  .col-sm-4.col-md-3.col-lg-2
-    .form-group
-      = f.label :main_race_date, map_attribute_label(:main_race_date, :edit)
-      = f.text_field :main_race_date, :class => 'form-control', :type => 'date'
-  .col-sm-8.col-md-6
-    .form-group
-      = f.label :main_race_title, map_attribute_label(:main_race_title, :edit)
-      = f.text_field :main_race_title, :class => 'form-control'
-  .col-sm-12.col-md-6
-    .form-group
-      = f.label :non_oris_event_url, map_attribute_label(:non_oris_event_url, :edit)
-      = f.url_field :non_oris_event_url, :class => 'form-control'
-
-.row
   .col-sm-6.col-md-3.col-lg-2
     .form-group
       = f.label :map_sport, map_attribute_label(:map_sport, :edit)
@@ -161,6 +143,24 @@
       .input-group
         = f.text_field :equidistance, size: 6, :class => 'form-control'
         %span.input-group-addon m
+
+.row
+  .col-md-9.col-lg-6
+    .form-group
+      = f.label :oris_event_id, map_attribute_label(:main_race, :edit)
+      = f.select :oris_event_id, "<option value=\"0\"#{f.object.oris_event_id == 0 ? 'selected' : ''}>(žádný závod)</option>".html_safe + options_from_collection_for_select(f.object.year ? OrisEvent.in_year(f.object.year) : OrisEvent.sorted, :id, :to_label, f.object.oris_event_id), {:include_blank => true}, :class => 'form-control'
+  .col-sm-4.col-md-3.col-lg-2
+    .form-group
+      = f.label :main_race_date, map_attribute_label(:main_race_date, :edit)
+      = f.text_field :main_race_date, :class => 'form-control', :type => 'date'
+  .col-sm-8.col-md-6
+    .form-group
+      = f.label :main_race_title, map_attribute_label(:main_race_title, :edit)
+      = f.text_field :main_race_title, :class => 'form-control'
+  .col-sm-12.col-md-6
+    .form-group
+      = f.label :non_oris_event_url, map_attribute_label(:non_oris_event_url, :edit)
+      = f.url_field :non_oris_event_url, :class => 'form-control'
 
 .row
   .col-xs-6.col-sm-4.col-lg-2
@@ -226,7 +226,7 @@
     .form-group
       = f.label :drawing_technique, map_attribute_label(:drawing_technique, :edit)
       = f.select :drawing_technique, Map::DRAWING_TECHNIQUES.map{|x| [t("mapserver.map_enums.drawing_technique.#{x}"), x]}, {:include_blank => true}, :class => 'form-control'
-  .col-xs-6.col-sm-6.col-lg-2
+  .col-xs-6.col-sm-6.col-md-3.col-lg-2
     .form-group
       = f.label :printing_technique, map_attribute_label(:printing_technique, :edit)
       = f.select :printing_technique, Map::PRINTING_TECHNIQUES.map{|x| [t("mapserver.map_enums.printing_technique.#{x}"), x]}, {:include_blank => true}, :class => 'form-control'
