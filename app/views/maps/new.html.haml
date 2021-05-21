@@ -7,7 +7,7 @@
         %strong= Map.human_attribute_name(key)
         #{err * " a "}
 
-= nested_form_for @map, :html => {:id => 'map_form', :role => 'form', :class => 'form-horizontal', :multipart => true} do |f|
+= nested_form_for @map, :html => {:id => 'map_form', :role => 'form', :multipart => true} do |f|
 
   %h2= t("mapserver.mapBasicData")
 
@@ -42,7 +42,11 @@
     setupMapEditorSubmit();
     fixMapHeight($('#inline_map_canvas'));
 
-    $("#map_oris_event_id").select2({allowClear: true});
+    $("#map_oris_event_id").select2({
+      allowClear: true,
+      theme: 'bootstrap',
+      width: '100%'
+    });
 
   });
 
