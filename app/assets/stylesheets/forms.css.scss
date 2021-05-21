@@ -37,3 +37,13 @@
 	margin-top: 14px;
 	padding: 12px 24px;
 }
+
+.login-form-links {
+	display: flex;
+	flex-direction: column;
+	margin-top: 16px;
+
+	a {
+		margin-top: 8px;
+	}
+}
