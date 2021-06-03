@@ -41,14 +41,16 @@
   .col-sm-10.col-md-4.col-lg-5
     .form-group
       = f.label :created_by_id, map_attribute_label(:created_by, :edit)
-      %p.form-control-static
-        = f.object.created_by ? print_user(f.object.created_by) : "archiv ČSOS"
+      .input-group
+        = f.text_field :created_by_id, :class => 'form-control', :disabled => true, :value => f.object.created_by ? (f.object.created_by ? f.object.created_by.name.html_safe : "---") : "archiv ČSOS"
+        - if f.object.created_by
+          %span.input-group-addon
+            = print_user_tooltip(f.object.created_by)
       = f.hidden_field :created_by_id
   .col-xs-3.col-sm-2.col-md-1
     .form-group
       = f.label :id, map_attribute_label(:id, :edit)
-      %p.form-control-static
-        = f.object.id || '---'
+      = f.text_field :id, :class => 'form-control', :disabled => true, :value => f.object.id || '---'
   .col-xs-9.col-sm-3.col-md-2
     .form-group
       = f.label :map_family, map_attribute_label(:map_family, :edit)
@@ -64,8 +66,7 @@
       - elsif @states && !@states.empty?
         = f.select :state, @states.map{|x| [t("mapserver.map_enums.state.#{x}"), x]}, {}, :class => 'form-control'
       - else
-        %p.form-control-static
-          = t("mapserver.map_enums.state.#{f.object.state}")
+        = f.text_field :state, :class => 'form-control', :disabled => true, :value => t("mapserver.map_enums.state.#{f.object.state}")
         = f.hidden_field :state
 
 .row
@@ -171,10 +172,11 @@
       - elsif (current_user.has_role?(:manager) and (f.object.identifier_filing.blank? or f.object.identifier_filing !~ /^\d\d[A-Z]\d\d\d[A-Z]$/ ))
         = f.text_field :identifier_filing, :class => 'form-control'
       - else
-        %p.form-control-static
-          = print_identifier_filing f.object.identifier_filing
-          = f.hidden_field :identifier_filing
-          = icon("question-circle", tooltip: "nelze měnit evidenční číslo, schváleno koordinátorem (krajským kartografem) #{f.object.approved_by}")
+        .input-group
+          = f.text_field :identifier_filing, :class => 'form-control', :disabled => true, :value => "#{print_identifier_filing_for_input_value f.object.identifier_filing}"
+          %span.input-group-addon
+            = icon("question-circle", tooltip: "nelze měnit evidenční číslo, schváleno koordinátorem (krajským kartografem) #{f.object.approved_by}")
+        = f.hidden_field :identifier_filing
       :javascript
         $(function() {
           console.dir("REG");

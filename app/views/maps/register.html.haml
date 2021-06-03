@@ -40,7 +40,7 @@
       .form-group
         = f.label :patron, map_attribute_label(:patron)
         - if allowed_clubs.size == 1
-          %p.form-control-static #{allowed_clubs.first.abbreviation} -- #{allowed_clubs.first.name}
+          = f.text_field :patron, :class => 'form-control', :disabled => true, :value => "#{allowed_clubs.first.abbreviation} -- #{allowed_clubs.first.name}"
           = f.hidden_field :patron
         - elsif allowed_clubs.any?
           = f.select :patron, allowed_clubs.map{|x| ["#{x.abbreviation} - #{x.name}", x.abbreviation]}, {:include_blank => true, :class => 'form-control'}
@@ -64,7 +64,7 @@
       .col-sm-6.col-md-3
         .form-group
           = f.label :identifier_filing, map_attribute_label(:identifier_filing)
-          %p.form-control-static= f.object.identifier_filing
+          = f.text_field :identifier_filing, :class => 'form-control', :disabled => true, :value => f.object.identifier_filing
     .col-xs-6.col-sm-4.col-md-2
       .form-group
         = f.label :year, map_attribute_label(:year)

@@ -2,23 +2,23 @@
   .col-sm-6.col-md-3
     .form-group
       = f.label :created_by_id, map_attribute_label(:created_by)
-      %p.form-control-static
-        = f.object.created_by ? print_user(f.object.created_by) : "archiv ČSOS"
+      .input-group
+        = f.text_field :created_by_id, :class => 'form-control', :disabled => true, :value => f.object.created_by ? (f.object.created_by ? f.object.created_by.name.html_safe : "---") : "archiv ČSOS"
+        - if f.object.created_by
+          %span.input-group-addon
+            = print_user_tooltip(f.object.created_by)
   .col-xs-7.col-sm-4.col-md-3
     .form-group
       = f.label :id, map_attribute_label(:id_)
-      %p.form-control-static
-        = f.object.id || '---'
-        = " / "
-        = f.object.state_
+      = f.text_field :id, :class => 'form-control', :disabled => true, :value => "#{f.object.id || '---'} / #{f.object.state_}"
   .col-xs-5.col-sm-3.col-md-2
     .form-group
       = f.label :map_family, map_attribute_label(:map_family)
-      %p.form-control-static= f.object.map_family_
+      = f.text_field :map_family, :class => 'form-control', :disabled => true, :value => f.object.map_family_
   .col-xs-7.col-sm-3.col-md-2
     .form-group
       = f.label :identifier_filing, map_attribute_label(:identifier_filing)
-      %p.form-control-static= print_identifier_filing f.object.identifier_filing
+      = f.text_field :identifier_filing, :class => 'form-control', :disabled => true, :value => "#{print_identifier_filing_for_input_value f.object.identifier_filing}"
   .col-xs-5.col-sm-3.col-md-2
     .form-group
       .checkbox.is-in-sm-grid-form
@@ -29,15 +29,15 @@
   .col-sm-8.col-md-3
     .form-group
       = f.label :title, map_attribute_label(:title)
-      %p.form-control-static= f.object.title
+      = f.text_field :title, :class => 'form-control', :disabled => true, :value => f.object.title
   .col-xs-3.col-sm-2.col-md-1
     .form-group
       = f.label :patron, map_attribute_label(:patron)
-      %p.form-control-static= f.object.patron
+      = f.text_field :patron, :class => 'form-control', :disabled => true, :value => f.object.patron
   .col-xs-9.col-sm-3.col-md-2
     .form-group
       = f.label :region, map_attribute_label(:region)
-      %p.form-control-static= Map::REGIONS[f.object.region]
+      = f.text_field :region, :class => 'form-control', :disabled => true, :value => Map::REGIONS[f.object.region]
   .col-xs-12.col-sm-6
     .form-group
       = f.label :locality, map_attribute_label(:locality)
@@ -46,32 +46,32 @@
   .col-xs-3.col-sm-2.col-md-1
     .form-group
       = f.label :year, map_attribute_label(:year)
-      %p.form-control-static= f.object.year
+      = f.text_field :year, :class => 'form-control', :disabled => true, :value => f.object.year
   .col-xs-4.col-sm-2
     .form-group
       = f.label :blocking_until, map_attribute_label(:blocking_until)
-      %p.form-control-static= f.object.blocking_until
+      = f.text_field :blocking_until, :class => 'form-control', :disabled => true, :value => f.object.blocking_until
   .col-xs-12.col-sm-8.col-md-9
     .form-group
       = f.label :blocking_reason, map_attribute_label(:blocking_reason)
-      %p.form-control-static= f.object.blocking_reason
+      = f.text_field :blocking_reason, :class => 'form-control', :disabled => true, :value => f.object.blocking_reason
 .row
   .col-xs-4.col-sm-2
     .form-group
       = f.label :map_sport, map_attribute_label(:map_sport)
-      %p.form-control-static= f.object.map_sport_
+      = f.text_field :map_sport, :class => 'form-control', :disabled => true, :value => f.object.map_sport_
   .col-xs-8.col-sm-3
     .form-group
       = f.label :map_type, map_attribute_label(:map_type)
-      %p.form-control-static= f.object.map_type_
+      = f.text_field :map_type, :class => 'form-control', :disabled => true, :value => f.object.map_type_
   .col-xs-4.col-sm-2
     .form-group
       = f.label :scale, map_attribute_label(:scale)
-      %p.form-control-static 1:#{f.object.scale}
+      = f.text_field :scale, :class => 'form-control', :disabled => true, :value => "1:#{f.object.scale}"
   .col-xs-4.col-sm-2
     .form-group
       = f.label :equidistance, map_attribute_label(:equidistance)
-      %p.form-control-static #{f.object.equidistance} m
+      = f.text_field :equidistance, :class => 'form-control', :disabled => true, :value => "#{f.object.equidistance} m"
 .row
   .col-md-9.col-lg-6
     .form-group
@@ -123,7 +123,6 @@
     .form-group
       = f.label :printing_technique, map_attribute_label(:printing_technique)
       = f.select :printing_technique, Map::PRINTING_TECHNIQUES.map{|x| [t("mapserver.map_enums.printing_technique.#{x}"), x]}, {:include_blank => true}, :class => 'form-control'
-
 .row
   .col-sm-6
     .form-group
@@ -133,7 +132,6 @@
     .form-group
       = f.label :administrator_email, map_attribute_label(:administrator_email)
       = f.text_field :administrator_email, :class => 'form-control'
-
 .row
   .col-sm-12
     .form-group

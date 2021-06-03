@@ -2,16 +2,16 @@
   = f.hidden_field :map_id
   .row
     - if issue_report.user
-      .col-xs-6.col-sm-4.col-md-3.col-lg-2
+      .col-xs-6.col-sm-4.col-md-3
         .form-group
           = f.label :user_id, 'Vloženo uživatelem'
+          = f.text_field :user_id, :class => 'form-control', :disabled => true, :value => issue_report.user.name
           = f.hidden_field :user_id
-          %p.form-control-static= issue_report.user.name
-      .col-xs-6.col-sm-4.col-md-3.col-lg-2
+      .col-xs-6.col-sm-4.col-md-3
         .form-group
           = f.label :email, 'E-mail'
+          = f.text_field :email, :class => 'form-control', :disabled => true, :value => issue_report.email
           = f.hidden_field :email
-          %p.form-control-static= issue_report.email
     - else
       .col-sm-6.col-md-5.col-lg-4
         .form-group
