@@ -1,8 +1,9 @@
 # Mapový portál ČSOS
 
-- backend v Ruby on Rails
-- mapová data v Postgres s Postgis extension
-- zobrazení dat na mapě přes WMS vrstvu servírovanou Mapserverem
+## Built with
+- [Ruby on Rails](https://rubyonrails.org/)
+- [PostgreSQL](https://www.postgresql.org/) with [PostGIS](https://postgis.net/)
+- [Mapserver](https://mapserver.org/)
 
 ## Requirements
 - [Ruby](https://www.ruby-lang.org/en/)
