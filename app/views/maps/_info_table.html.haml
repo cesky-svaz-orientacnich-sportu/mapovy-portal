@@ -52,11 +52,6 @@
         %th= map_attribute_label :is_educational
         %td= map.is_educational_
       %tr
-        %th= map_attribute_label :printed_by
-        %td(colspan=5)= map.printed_by
-        %th= map_attribute_label :resource
-        %td #{map.resource}
-      %tr
         %th= map_attribute_label :locality
         %td(colspan=3)= map.locality
         - unless map.region.blank?
@@ -69,19 +64,26 @@
           - if map.area_size and map.area_size > 0
             #{map.area_size.round(3)} km2
       %tr
+        %th= map_attribute_label :resource
+        %td(colspan=3) #{map.resource}
+        %th= map_attribute_label :mapping_state
+        %td #{map.mapping_state}
+        %th= map_attribute_label :drawing_technique
+        %td
+          - unless map.drawing_technique.blank?
+            = t("mapserver.map_enums.drawing_technique.#{map.drawing_technique}")
+            = icon('question-circle', tooltip: t("mapserver.map_enum_descriptions.drawing_technique.#{map.drawing_technique}") )
+      %tr
+        %th= map_attribute_label :printed_by
+        %td(colspan=3)= map.printed_by
         %th= map_attribute_label :printing_technique
-        %td(colspan=5)
+        %td(colspan=3)
           - unless map.printing_technique.blank?
             - if Map::PRINTING_TECHNIQUES.include?(map.printing_technique)
               = t("mapserver.map_enums.printing_technique.#{map.printing_technique}")
               = icon('question-circle', tooltip: t("mapserver.map_enum_descriptions.printing_technique.#{map.printing_technique}") )
             - else
               = "[? #{map.printing_technique}]"
-        %th= map_attribute_label :drawing_technique
-        %td(colspan=1)
-          - unless map.drawing_technique.blank?
-            = t("mapserver.map_enums.drawing_technique.#{map.drawing_technique}")
-            = icon('question-circle', tooltip: t("mapserver.map_enum_descriptions.drawing_technique.#{map.drawing_technique}") )
       - unless map.note_public.blank?
         %tr
           %th= map_attribute_label :note_public
