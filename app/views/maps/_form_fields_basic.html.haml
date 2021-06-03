@@ -259,11 +259,12 @@
       = f.text_field :administrator_email, :class => 'form-control'
 
 .row
-  .col-sm-12.col-md-6
+  .col-sm-12
     .form-group
       = f.label :note_public, map_attribute_label(:note_public, :edit)
       = f.text_field :note_public, :class => 'form-control'
-  .col-sm-12.col-md-6
+.row
+  .col-sm-12
     .form-group
       = f.label :note_internal, map_attribute_label(:note_internal, :edit)
       = f.text_field :note_internal, :class => 'form-control'
