@@ -1,0 +1,32 @@
+@import "settings/navbar-settings";
+
+.navbar {
+	flex-shrink: 0;
+	min-height: 0;
+	margin-bottom: 0;
+	font-size: 14px;
+}
+
+.navbar-brand {
+	@media (min-width: $grid-float-breakpoint) {
+		display: none !important;
+	}
+}
+
+.navbar-nav > li > a {
+	padding-top: 12px !important;
+	padding-bottom: 12px !important;
+}
+
+.navbar-text {
+	display: none !important;
+
+	@media (min-width: 67.5em) {
+		display: block !important;
+		margin: 10px 8px;
+	}
+
+	.label {
+		font-size: 13px;
+	}
+}
