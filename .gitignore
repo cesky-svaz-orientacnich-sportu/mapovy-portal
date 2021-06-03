@@ -32,3 +32,4 @@ yarn-debug.log*
 
 # Don't share the decrypt key to our credentials
 /config/master.key
+.env
