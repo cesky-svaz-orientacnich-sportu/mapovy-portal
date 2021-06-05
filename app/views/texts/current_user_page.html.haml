@@ -1,8 +1,7 @@
-%h1 
-  Moje stránka
-  = link_to icon('edit', tooltip: 'upravit údaje'), :edit_current_user_page 
-
-%p &nbsp;
+.users-my-page-header
+  %h1 Moje stránka
+  .users-my-page-controls
+    = link_to icon('edit', tooltip: 'upravit údaje'), :edit_current_user_page
 
 %table.table
   %tr
@@ -32,7 +31,7 @@
 
 - if current_user.name == current_user.email
   %div.panel.panel-danger
-    %div.panel-heading 
+    %div.panel-heading
       %h4.panel-title Není vyplněno jméno a příjmení
     %div.panel-body
       %p
@@ -44,7 +43,7 @@
 
 - if current_user.role.blank?
   %div.panel.panel-danger
-    %div.panel-heading 
+    %div.panel-heading
       %h4.panel-title Není přiřazeno žádné oprávnění
     %div.panel-body
       %p
@@ -56,7 +55,7 @@
 
 - if current_user.role == 'contributor'
   %div.panel.panel-primary
-    %div.panel-heading 
+    %div.panel-heading
       %h4.panel-title Není přiřazeno oprávnění vydavatel
     %div.panel-body
       %p Práva pro přístup se přidělují automaticky na základě informací z ORISu (oprávnění "přispěvatel" pro všechny registrované členy ČSOS a oprávnění "vydavatel" pro ty, kdo mají v ORISu přiděleno klubové právo evidence map).
@@ -65,7 +64,7 @@
 
 - if current_user.oris_registrations.blank?
   %div.panel.panel-warning
-    %div.panel-heading 
+    %div.panel-heading
       %h4.panel-title Párování s ORISem se nezdařilo
     %div.panel-body
       %p
@@ -73,8 +72,7 @@
       %p
         Změnte si e-mailovou adresu v ORIS (nebo požádejte vedoucího klubu o změnu) na tu, kterou používáte pro registraci do Mapového portálu ČSOS.
 
-%div.panel.panel-primary
-  %div.panel.panel-heading Ověření proti ORISu
-  %div.panel.panel-body
+.users-my-page-oris.panel.panel-primary
+  .panel.panel-heading Ověření proti ORISu
+  .panel.panel-body
     = (@check_against_oris.map{|x| h(x)} * "<br />").html_safe
-        

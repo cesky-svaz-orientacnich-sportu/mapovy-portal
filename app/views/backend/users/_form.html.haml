@@ -1,44 +1,51 @@
-= form_for [:backend, user], :html => {:role => 'form', :class => 'form-horizontal'} do |f|
-  %div.form-group
-    = f.label :full_name, :class => 'col-sm-2'
-    = f.text_field :full_name, :class => 'col-sm-6'
-  %div.form-group
-    = f.label :email, :class => 'col-sm-2'
-    = f.text_field :email, :class => 'col-sm-6', :type => 'email'
-  %div.form-group
-    = f.label :oris_registrations, :class => 'col-sm-2'
-    = f.text_field :oris_registrations, :class => 'col-sm-6'
-    %p.col-sm-3 registrační čísla oddělená mezerou (stahuje se automaticky z ORISu)
-  %div.form-group
-    = f.label :role, :class => 'col-sm-2'
-    = f.select :role, User::ROLES, :include_blank => true, :class => 'col-sm-6'
-  %div.form-group
-    = f.label :authorized_clubs, :class => 'col-sm-2'
-    = f.text_field :authorized_clubs, :class => 'col-sm-6'
-    %p.col-sm-3 zkratky (SHK, VSP) oddělené mezerou
-  %div.form-group
-    = f.label :authorized_regions, :class => 'col-sm-2'
-    = f.text_field :authorized_regions, :class => 'col-sm-6'
-    %div.col-sm-3 
-      zkratky (A, E) oddělené mezerou
-  %div.row
-    %div.col-sm-offset-2.col-sm-2
-      %ul(style="padding-left:0px")
-        - Map::REGIONS.keys.each_with_index do |x,i|
-          - if i % 3 == 0
-            %li #{x} -- #{Map::REGIONS[x]}
-    %div.col-sm-2
-      %ul(style="padding-left:0px")
-        - Map::REGIONS.keys.each_with_index do |x,i|
-          - if i % 3 == 1
-            %li #{x} -- #{Map::REGIONS[x]}
-    %div.col-sm-2
-      %ul(style="padding-left:0px")
-        - Map::REGIONS.keys.each_with_index do |x,i|
-          - if i % 3 == 2
-            %li #{x} -- #{Map::REGIONS[x]}
-  %div.form-group
-    %div.col-sm-2
-    %div.col-sm-6
-      = f.submit 'Uložit'
+= form_for [:backend, user], :html => {:role => 'form'} do |f|
+  .row
+    .col-sm-6.col-lg-4
+      .form-group
+        = f.label :full_name
+        = f.text_field :full_name, :class => 'form-control'
+    .col-sm-6.col-lg-4
+      .form-group
+        = f.label :email
+        = f.text_field :email, :class => 'form-control', :type => 'email'
+  .row
+    .col-sm-6.col-lg-4
+      .form-group
+        = f.label :oris_registrations
+        = f.text_field :oris_registrations, {:class => 'form-control', "aria-describedby" => "user-edit-form-oris-registration-desc"}
+        %p#user-edit-form-oris-registration-desc.help-text registrační čísla oddělená mezerou (stahuje se automaticky z&nbsp;ORISu)
+    .col-sm-6.col-lg-4
+      .form-group
+        = f.label :authorized_clubs
+        = f.text_field :authorized_clubs, {:class => 'form-control', "aria-describedby" => "user-edit-form-authorized-clubs-desc"}
+        %p#user-edit-form-authorized-clubs-desc.help-text zkratky (SHK, VSP) oddělené mezerou
+  .row
+    .col-sm-8.col-md-7.col-lg-6
+      .form-group
+        = f.label :authorized_regions
+        = f.text_field :authorized_regions, {:class => 'form-control', "aria-describedby" => "user-edit-form-authorized-regions-desc1 user-edit-form-authorized-regions-desc2"}
+        %p#user-edit-form-authorized-regions-desc1.help-text zkratky (A, E) oddělené mezerou
+      .row#user-edit-form-authorized-regions-desc2
+        .col-xs-6.col-sm-4
+          %ul.list-unstyled
+            - Map::REGIONS.keys.each_with_index do |x,i|
+              - if i % 3 == 0
+                %li #{x} – #{Map::REGIONS[x]}
+        .col-xs-6.col-sm-4
+          %ul.list-unstyled
+            - Map::REGIONS.keys.each_with_index do |x,i|
+              - if i % 3 == 1
+                %li #{x} – #{Map::REGIONS[x]}
+        .col-xs-6.col-sm-4
+          %ul.list-unstyled
+            - Map::REGIONS.keys.each_with_index do |x,i|
+              - if i % 3 == 2
+                %li #{x} – #{Map::REGIONS[x]}
+    .col-sm-4.col-md-2
+      .form-group
+        = f.label :role
+        = f.select :role, User::ROLES, {:include_blank => true}, :class => 'form-control'
+  .row
+    .col-sm-12
+      = f.submit 'Uložit', :class => 'btn btn-primary'
 

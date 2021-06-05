@@ -111,6 +111,14 @@ module MapsHelper
     end
   end
 
+  def print_identifier_filing_for_input_value(s)
+    if s and m = s.match(/(\d\d)([A-Z])(\d\d\d)([A-Z])/)
+      "#{m[1].to_s} | #{m[2].to_s} | #{m[3].to_s} | #{m[4].to_s}"
+    else
+      s
+    end
+  end
+
   def copy_link(map)
     link_to(icon('copy', tooltip: t('mapserver.copy')), [:copy, map], method: :post, data: {confirm: t("mapserver.copy-confirmation")})
   end

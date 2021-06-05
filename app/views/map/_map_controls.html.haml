@@ -1,0 +1,73 @@
+.map-controls
+  %button.map-controls-header{:type => "button", "aria-expanded" => "false"}
+    = t("mapserver.controls")
+  .map-controls-body{:style => "display:none"}
+    .map-controls-column
+      %strong.map-controls-column-header= t("mapserver.layers")
+      %input{:type => 'checkbox', :checked => 'checked', :"data-filter-column" => "MAP_FAMILY", :"data-filter-value" => Map::MAP_FAMILY_MAP, :style => 'display:none'}
+      - Map::MAP_SPORTS.each do |f|
+        %div{:class => Map::DEFAULT_LAYERS.include?(f) ? 'item active' : 'item'}
+          %label
+            %input{:type => 'checkbox', :checked => Map::DEFAULT_LAYERS.include?(f), :"data-filter-column" => "MAP_SPORT", :"data-filter-value" => f, :onclick => "toc.refresh()"}
+            %span{:style => "background-color:#{Color::RGB::from_html(Map::MAP_SPORTS_COLOR[f]).lighten_by(20).html};border-color:#{Map::MAP_SPORTS_COLOR[f]}"}
+            = t("mapserver.map_enums.map_sport.#{f}")
+      .separator
+      - Map::MAP_YEARS.each do |f|
+        - y1, y2, saturation = *f
+        - c = Color::RGB::SpringGreen.adjust_saturation(saturation).adjust_brightness(saturation)
+        %div{:class => Map::DEFAULT_LAYERS.include?(f) ? 'item active' : 'item'}
+          %label
+            %input{:type => 'checkbox', :checked => Map::DEFAULT_LAYERS.include?(f), :"data-filter-column" => 'ROK', :"data-filter-value1" => (y1 || -9999), :"data-filter-value2" => (y2 || 9999), :onclick => "toc.refresh()"}
+            %span{:style => "background-color:#{c.lighten_by(20).html};border-color:#{c.html}"}
+            - if y1 and y2
+              #{y1} – #{y2}
+            - elsif y1
+              = t("mapserver.map_layers.years.upper", :y => y1)
+            - elsif y2
+              = t("mapserver.map_layers.years.lower", :y => y2)
+    .map-controls-column
+      %strong.map-controls-column-header= t("mapserver.areas")
+      .item{:class => 'item'}
+        %label
+          %input{:type => 'checkbox', :checked => true, :onclick => "toc.refresh()", :id => "area__embargoes"}
+          %span{:style => "background-color:#{Color::RGB::from_html('#ff0000').lighten_by(40).html};border-color:#ff0000"}
+          = t("mapserver.embargoes")
+      .item{:class => 'item'}
+        %label
+          %input{:type => 'checkbox', :checked => false, :onclick => "toc.refresh()", :id => "area__competition_areas"}
+          %span{:style => "background-color:#{Color::RGB::from_html('#ff3300').lighten_by(20).html};border-color:#ff3300"}
+          = t("mapserver.competitionAreas")
+      .separator
+      .item{:class => 'item has-no-color-indicator'}
+        %label
+          %input{:type => 'checkbox', :checked => false, :onclick => "toc.refresh()", :id => "area__blocking_foot"}
+          #{t('mapserver.map_layers.blocking.title')} (#{t('mapserver.map_enums.map_sport.foot')})
+      .item{:class => 'item has-no-color-indicator'}
+        %label
+          %input{:type => 'checkbox', :checked => false, :onclick => "toc.refresh()", :id => "area__blocking_bike"}
+          #{t('mapserver.map_layers.blocking.title')} (#{t('mapserver.map_enums.map_sport.mtbo')})
+      .item{:class => 'item has-no-color-indicator'}
+        %label
+          %input{:type => 'checkbox', :checked => false, :onclick => "toc.refresh()", :id => "area__blocking_ski"}
+          #{t('mapserver.map_layers.blocking.title')} (#{t('mapserver.map_enums.map_sport.ski')})
+      .item{:class => 'item has-no-color-indicator'}
+        %label
+          %input{:type => 'checkbox', :checked => false, :onclick => "toc.refresh()", :id => "area__blocking_other"}
+          #{t('mapserver.map_layers.blocking.title')} (#{t('mapserver.other_sports')})
+      .item
+        %label.toc-blocking-year
+          %select{:id => "area__blocking_year"}
+            - (Date.today.year...Date.today.year+10).each do |y|
+              %option{value: y}= y
+          %span.sr-only
+            #{t('mapserver.map_layers.blocking.title')} #{t('mapserver.map_layers.blocking.year')}
+
+%button.map-cancel-search{:type => "button", :style => "display:none"}
+  = t('mapserver.cancelSearch')
+
+:javascript
+  $(function() {
+    $('#area__blocking_year').on('change', function() {
+      toc.refresh();
+    });
+  });

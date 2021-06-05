@@ -1,18 +1,16 @@
-%div#toolbar
-  %div.folder
-    = link_to image_tag("/img/mapovy-portal-csos-#{I18n.locale}.png", :id => 'logo', :alt => t("mapserver.mainLogoTitle"), :title => t("mapserver.mainLogoTitle")), :root
+.toolbar
+  .toolbar-bar{:class => ("has-search-and-tools" unless @map_title)}
+    = link_to image_tag("/img/mapovy-portal-csos-#{I18n.locale}.png", :alt => t("mapserver.mainLogoTitle"), :title => t("mapserver.mainLogoTitle")), :root, {:class => 'toolbar-logo'}
     - if @map_title
-      %div.text= @map_title
-    - else 
-      %div#formSearch
-        %fieldset
-          %div.inputtext
-            %input#simpleSearchName{:type => "text", :name => "search", :value => t("mapserver.searchBoxForm"), :title => t("mapserver.searchBoxForm")}
-          %div.submitWrapper
-            %div.searchSubmit.input(onclick="searchSimple.search()")= t("mapserver.search")
-            %input{:type => "submit", :value => t("mapserver.search"), :class => "oos"}
-      = link_to t("mapserver.advancedSearch"), "#", :class => "linkAdvSearch", :title => t("mapserver.advancedSearch")
-      %ul.toolsList
+      .toolbar-title= @map_title
+    - else
+      %form.toolbar-search(role="search")
+        %label.sr-only{:for => "toolbar-map-search"}= t("mapserver.searchBoxForm")
+        %input#toolbar-map-search.toolbar-search-input{:type => "text", :name => "search", :placeholder => t("mapserver.searchBoxForm")}
+        %button.toolbar-search-submit{:type => "submit"}= t("mapserver.search")
+        %button{:type => "button", :class => "toolbar-advanced-search-expand"}
+          = t("mapserver.advancedSearch")
+      %ul.tools-list
         / TODO : rename tool-XX to semantic names
         %li= link_to image_tag("/img/tool-01.png", alt: t("mapserver.buttonPrint")), "javascript:void(0)", id: "map_tool_print_button", title: t("mapserver.buttonPrint")
         %li= mail_to "mapovyportal@orientacnisporty.cz?subject=#{t("mapserver.emailSubject")}", image_tag("/img/tool-02.png", alt: t("mapserver.buttonMail")), title: t("mapserver.buttonMail")

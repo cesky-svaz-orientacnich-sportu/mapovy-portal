@@ -1,329 +1,264 @@
-// set the main navbar properly 
-
-.navbar-nav > li > a {padding-top:10px !important; padding-bottom:10px !important;}
-.navbar {min-height:40px !important}
-
-// main map components
-
+// ===============================================================
+// Flash messages
+// ===============================================================
 #flash_container {
-  margin-top:41px;
-  bottom:10px;position:absolute;right:10px;
-  width:400px;
-  z-index: 99;
-  .bs-callout {
-    background-color: white;
-  }
+	position: absolute;
+	right: 12px;
+	bottom: 12px;
+	z-index: 99;
+	max-width: 100%;
+	max-width: calc(100% - 24px);
+	width: 400px;
+
+	.bs-callout {
+		background-color: #fff;
+	}
+}
+
+// ===============================================================
+// Convergence map
+// ===============================================================
+.map-wrapper.is-convergence #map_canvas {
+	min-height: 300px;
+	max-height: 60vh;
+
+	@media (min-width: 43em) {
+		max-height: none;
+	}
 }
 
 #convergence_info {
-  position:absolute;
-  left:0px;
-  top:112px;
-  width:300px;
-  bottom:0px;
-  padding:20px;
-  border-right: 2px solid #555;
-  h5 {
-    border-bottom: 1px solid red;
-  }
-  p {
-    margin: 0px;
-    padding:0px;
-    padding-bottom:14px;
-  }
+	padding: 20px;
+
+	@media (min-width: 43em) {
+		width: 300px;
+		border-right: 2px solid #555;
+	}
+
+	h5 {
+		border-bottom: 1px solid red;
+	}
+
+	p {
+		margin: 0px;
+		padding:0px;
+		padding-bottom:14px;
+	}
 }
 
+// ===============================================================
+// Map components
+// ===============================================================
 #logo {
-  float: left;
-  margin: 13px 85px 0 25px;
+	float: left;
+	margin: 13px 85px 0 25px;
 }
 
 #waiting {
-  padding: 55px;
-}
-
-#showUrlLink {
-  top:165px; 
-  right:180px;
-}
-
-#showMeasure {
-  top:265px; 
-  right:180px;
+	padding: 32px;
+	text-align: center;
 }
 
 #map_canvas {
-    position: absolute;
-    left: 0px;
-    top: 102px;
-    right: 0px;
-    bottom: 0px;
-    overflow: hidden;
+	overflow: hidden;
+	width: 100%;
+	height: 100%;
+	min-height: 400px;
 }
 
-// context menu
-
+// ===============================================================
+// Context menu
+// ===============================================================
 .context_menu {
-	background-color:#F1F1F1;
-	border:1px solid #B5B6B6;
-}
-.context_menu_item{
-	padding:3px 6px;
-	color: black;
-}
-.context_menu_item:hover{
-	background-color:white;
-}
-.context_menu_separator{
-	background-color:#B5B6B6;
-	height:1px;
-	margin:0;
-	padding:0;
+	border: 1px solid #b5b6b6;
+	background-color: #f1f1f1;
 }
 
-// info window
+.context_menu_item {
+	padding: 3px 6px;
+	color: #000;
+}
 
+.context_menu_item:hover {
+	background-color: #fff;
+}
+
+.context_menu_separator {
+	height: 1px;
+	margin: 0;
+	padding: 0;
+	background-color: #b5b6b6;
+}
+
+// ===============================================================
+// Info window
+// ===============================================================
 .infoWindow {
-  background: #fff;
-  min-height: 85px;
-  width: 280px;
+	max-width: 100%;
+	width: 280px;
+	min-height: 85px;
+	background-color: #fff;
 
-  .header {
-    h3 {
-      font-size: 16px;
-      float: left;
-      padding-right: 25px;
-      margin-top:10px;
-      a {
-        color: #d93c00;
-        text-decoration: none;
-      }      
-      a:hover {
-        color: #d93c00;
-        text-decoration: none;
-      }      
-    }
-  }  
-  .toolsList {
-      float: right;
-      margin-top: 5px;
-  }
-  .data {
-    th {
-      vertical-align:middle;
-      padding-top: 3px;
-      padding-bottom: 3px;
-    }
-  }
+	.header h3 {
+		float: left;
+		margin-top: 10px;
+		padding-right: 25px;
+		font-size: 16px;
+
+		a,
+		a:focus,
+		a:hover {
+			text-decoration: none;
+			color: #d93c00;
+		}
+	}
+
+	.tools-list {
+		float: right;
+		margin-top: 5px;
+	}
+
+	.data th {
+		vertical-align: middle;
+		padding-top: 3px;
+		padding-bottom: 3px;
+	}
 }
 
-//
+// ===============================================================
+// Toolbar
+// ===============================================================
+@import "organisms/toolbar";
 
-#toolbar, #titlebar {
-    background: #f1f1f1;
-    border-bottom: 1px solid #646464;
-    min-height: 70px;
-    left: 0;
-    position: absolute;
-    top: 40;
-    width: 100%;
-    z-index: 9;
-    .folder {
-        height: 70px;
-        .text {
-          font-size:20px;
-          padding-top:20px;
-        }
-    }
-
-    .toolsList {
-        float: right;
-        margin: 22px 18px 0 0;
-    }
-
-
-    .linkHide {
-        background: url('/img/bg-link-hide.png');
-        bottom: -5px;
-        display: inline-block;
-        height: 18px;
-        position: absolute;
-        right: 18px;
-        width: 29px;
-    }
-}
-
-// branding
-
-#cuzkCopyright {
-    position: absolute;
-    z-index: 1;
-    bottom: 15px;
-    right: 0px;
-    padding-left: 4px;
-    padding-right: 4px;
-    padding-top: 2px;
-    font-size: 10px;
-    background: rgba(255, 255, 255, 0.3);
-}
-
-#tmapyLogo {
-    position: absolute;
-    z-index: 1;
-    bottom: 20px;
-    right: 46px;
-}
-
-// sidebar
-
+// ===============================================================
+// Sidebar
+// ===============================================================
 .sidebarPagination {
-  padding: 6px;
-  text-align: center;
-  a {
-    padding:5px;
-  }
-  a.current {
-    font-weight: bold;
-  }
+	padding: 6px;
+	text-align: center;
+
+	a {
+		padding: 5px;
+	}
+
+	a.current {
+		font-weight: bold;
+	}
 }
 
-// pop-up dialogs
-
-
+// ===============================================================
+// Popup dialogs
+// ===============================================================
 .popupShadow {
-    position: absolute;
-    z-index: 100;
+	position: absolute;
+	z-index: 100;
 }
 
 .popup {
-  background: #fff;
-  border: 1px solid #b5b6b6;
-  min-height: 86px;
-  width: 272px;
-  .header {
-    background: #f1f1f1;
-    border-bottom: 1px solid #b5b6b6;
-    color: #000;
-    font-size: 13px;
-    font-weight: bold;
-    line-height: 17px;
-    height: 26px;
-    span {
-      display: block;
-      float: left;
-      padding: 5px 0 0 6px;
-    }
-    a.close {
-      display: block;
-      float: right;
-      margin: 7px;
-    }
-  }
-  .content {
-    padding: 5px 7px;
-    outline: none;
-    .inside {
-      height: 129px;
-      width: 100%;
-      overflow: auto;
-      overflow-x: hidden;
-    }
-  }
+	min-height: 86px;
+	width: 272px;
+	border: 1px solid #b5b6b6;
+	background: #fff;
+
+	.header {
+		height: 26px;
+		border-bottom: 1px solid #b5b6b6;
+		line-height: 17px;
+		font-size: 13px;
+		font-weight: bold;
+		background: #f1f1f1;
+		color: #000;
+
+		span {
+			float: left;
+			display: block;
+			padding: 5px 0 0 6px;
+		}
+
+		a.close {
+			float: right;
+			display: block;
+			margin: 7px;
+		}
+	}
+
+	.content {
+		padding: 5px 7px;
+		outline: none;
+
+		.inside {
+			overflow: auto;
+			overflow-x: hidden;
+			width: 100%;
+			height: 129px;
+		}
+	}
 }
 
-
 .draggable .popup .header {
-    cursor: move;
+	cursor: move;
 }
 
 .popup.simple .header {
-    border: 0;
-    background: #fff;
+	border: 0;
+	background: #fff;
 }
 
 .popupShadow {
-    background-color: rgb(255,255,255);
-    -moz-box-shadow: 5px 10px 5px rgba(0,0,0,0.6);
-    -webkit-box-shadow: 5px 5px 5px rgba(0,0,0,0.6);
-    box-shadow: 5px 10px 5px rgba(0,0,0,0.6);
-    zoom: 1;
+	zoom: 1;
+	-moz-box-shadow: 5px 10px 5px rgba(0,0,0,0.6);
+	-webkit-box-shadow: 5px 5px 5px rgba(0,0,0,0.6);
+	box-shadow: 5px 10px 5px rgba(0,0,0,0.6);
+	background-color: rgb(255,255,255);
 }
-
 
 .simple.dialog {
-  .header {
-    height: 21px;
-  }
-  .content {
-    padding: 5px 10px;
-    .inside {
-      height: auto;
-      overflow: hidden;
-    }
-  }
+	.header {
+		height: 21px;
+	}
+
+	.content {
+		padding: 5px 10px;
+
+		.inside {
+			overflow: hidden;
+			height: auto;
+		}
+	}
 }
 
-// common styles for map
-
+// ===============================================================
+// Common styles for map
+// ===============================================================
 ul.ui-autocomplete {
-  font-size: 12px;
-  line-height: 1.5;
-}
-
-.linkShow {
-    background: url('/img/bg-link-show.png');
-    display: none;
-    height: 18px;
-    position: absolute;
-    right: 18px;
-    top: 0;
-    width: 29px;
-    z-index: 6;
-}
-
-.linkShowResults {
-    background: url('/img/bg-link-res.png');
-    display: block;
-    height: 31px;
-    left: 0;
-    position: absolute;
-    top: 121px;
-    width: 23px;
-    z-index: 1;
+	line-height: 1.5;
+	font-size: 12px;
 }
 
 .cleaned:after {
-    content: ".";
-    clear: both;
-    display: block;
-    height: 0;
-    visibility: hidden;
+	content: ".";
+	clear: both;
+	display: block;
+	height: 0;
+	visibility: hidden;
 }
 
-.hidden {
-    display: none;
+input[type=submit]:hover,
+select:hover {
+	border-color: #de3b04 !important;
 }
 
-.print, .oos {
-    position: absolute !important;
-    top: -10000px !important;
-}
-
-input[type=submit]:hover, select:hover {
-    border-color: #de3b04 !important;
-}
-
-.inputtext:hover, input[type=text]:hover {
-    border-color: #de3b04 !important;
+.toolbar-search-input:hover,
+input[type=text]:hover {
+	border-color: #de3b04 !important;
 }
 
 input[type=text] {
-    outline: none;
+	outline: none;
 }
 
-.focus, input[type=text]:focus {
-    color: #000;
-    border-color: #de3b04 !important;
-    ;
+.focus,
+input[type=text]:focus {
+	color: #000;
+	border-color: #de3b04 !important;		;
 }
-

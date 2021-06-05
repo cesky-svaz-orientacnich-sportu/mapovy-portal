@@ -1,31 +1,38 @@
 = f.fields_for :cartographers do |cartographer_form|
-  %div.form-group
-    %div.col-sm-4
-      = cartographer_form.select :author_id, Author.all.map{|x| [x.to_s, x.id]}, {:include_blank => true}, {:class => "authorSelect", :style => "width:90%"}
-      = map_attribute_label(:author_name, :edit_short)
-    %div.col-sm-4
-      = cartographer_form.select :role, options_for_select(Cartographer::CARTOGRAPHER_ROLES.map{|x| [t("mapserver.cartographer_roles.#{x}"), x]}, cartographer_form.object.role), {}, :style => "width:90%", :class => "roleSelect"
-      = map_attribute_label(:author_role, :edit_short)
-    %div.col-sm-4
+  .row
+    .col-sm-6.col-md-5.col-lg-4
+      .form-group
+        = cartographer_form.label :author_id, map_attribute_label(:author_name, :edit)
+        = cartographer_form.select :author_id, Author.all.map{|x| [x.to_s, x.id]}, {:include_blank => true}, {:class => "authorSelect"}
+    .col-xs-9.col-sm-4.col-md-3
+      .form-group
+        = cartographer_form.label :role, map_attribute_label(:author_role, :edit)
+        = cartographer_form.select :role, options_for_select(Cartographer::CARTOGRAPHER_ROLES.map{|x| [t("mapserver.cartographer_roles.#{x}"), x]}, cartographer_form.object.role), {}, :class => "roleSelect"
+    .col-xs-3.col-sm-1
       = cartographer_form.link_to_remove icon('times')
 %p= f.link_to_add "#{icon('plus-circle')} přidat autora".html_safe, :cartographers
 
 :javascript
-  function authorSelect(e) {
-    e.select2({
-      tags: true
-    });
-  }
-
   $(function() {
-    authorSelect($('.authorSelect'));
-    $(".roleSelect").select2();
+    $('.authorSelect').select2({
+      tags: true,
+      theme: 'bootstrap',
+      width: '100%'
+    });
+    $('.roleSelect').select2({
+      theme: 'bootstrap',
+      width: '100%'
+    });
   });
 
-  $(document).on('nested:fieldAdded', function(event){
-    var field = event.field;
-    var authorField = field.find('.authorSelect');
-    var roleField = field.find('.roleSelect');
-    authorSelect(authorField);
-    roleField.select2();
+  $(document).on('nested:fieldAdded', function(e) {
+    e.field.find('.authorSelect').select2({
+      tags: true,
+      theme: 'bootstrap',
+      width: '100%'
+    });
+    e.field.find('.roleSelect').select2({
+      theme: 'bootstrap',
+      width: '100%'
+    });
   });

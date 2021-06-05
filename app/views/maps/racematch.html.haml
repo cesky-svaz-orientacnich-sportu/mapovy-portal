@@ -23,12 +23,16 @@
               %td= oris_event.title
               %td= oris_event.date
               %td= oris_event.oris_data['Map']
-              %td= select_tag "map[#{oris_event.id}]", options_for_select(Map.where(year: y).map{|x| [x.to_label, x.id]}), {:include_blank => true, style: 'width: 100%', class: "mapSelect-#{y}", id: "assign_#{oris_event.id}"}
+              %td
+                = label_tag "map[#{oris_event.id}]", "Mapa pro #{oris_event.title}", :class => 'sr-only'
+                = select_tag "map[#{oris_event.id}]", options_for_select(Map.where(year: y).map{|x| [x.to_label, x.id]}), {:include_blank => true, style: 'width: 100%', class: "mapSelect-#{y} form-control", id: "assign_#{oris_event.id}"}
               %td= icon('eye', :"data-id" => oris_event.id, :class => "fa fa-eye mapView")
     :javascript
       $(function() {
         $('.mapSelect-#{y}').select2({
-          allowClear: true
+          allowClear: true,
+          theme: 'bootstrap',
+          width: '100%'
         });
       });
   = submit_tag "Spárovat"
@@ -40,14 +44,14 @@
       if (mid && mid != '') {
         console.log(mid);
         $.fancybox({
-        'href': ('/cs/maps/' + mid + '/info_table'),
-        'width': 740,
-        'height': 630,
-        'autoScale': false,
-        'transitionIn': 'none',
-        'transitionOut': 'none',
-        'type': 'iframe',
-        'titleShow': false
+          'href': ('/cs/maps/' + mid + '/info_table'),
+          'width': 740,
+          'height': 630,
+          'autoScale': false,
+          'transitionIn': 'none',
+          'transitionOut': 'none',
+          'type': 'iframe',
+          'titleShow': false
         });
       }
     });

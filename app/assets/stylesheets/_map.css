@@ -14,12 +14,9 @@
  *= require jquery-ui
  *= require 'common'
  *= require 'map'
- *= require 'map_toc'
- *= require 'map_switch'
+ *= require 'map_canvas'
+ *= require 'map_controls'
  *= require 'map_search'
  *= require 'tools_list'
  *= require 'fancybox/jquery.fancybox'
- *= require 'jscrollpane'
  */
-
-

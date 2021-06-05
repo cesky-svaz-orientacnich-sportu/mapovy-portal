@@ -103,4 +103,14 @@ module ApplicationHelper
     end
   end
 
+  def print_user_tooltip(u)
+    if u
+      tt = "ID: #{u.id}"
+      tt += " / role: #{I18n.t("roles.#{u.role}")}" if u.role
+      tt += " / kluby: #{u.clubs * " + "}" unless u.clubs.blank?
+      tt += " / kraje: #{u.regions * " + "}" unless u.regions.blank?
+      icon('info-circle', tooltip: tt).html_safe
+    end
+  end
+
 end

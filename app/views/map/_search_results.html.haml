@@ -1,12 +1,12 @@
-%div#searchResult.jspScrollable
-  %div.content.cleaned
-    %div.header
-      %div.cleaned
-        %h2#sideHeading= t("mapserver.sideBarQuickHelpH1")
-        %h2#sideHeadingResults.hidden= t("mapserver.sideBarResults")
-        %a.hide_search_results_button(href="#")= t("mapserver.hideSideBar") 
-      %div#sideHeadingLinks
-    %ul#resultsList.cleaned
-    %div#news.contentText= text(:news)
-    %div#quickHelp.contentText= text(:quick_help)
-    %div#waiting(style="display:none")= image_tag("/img/working.gif")
+.search-result(style="display:none")
+  .content
+    .search-result-header
+      .search-result-header-base
+        %h2.search-result-heading= t("mapserver.sideBarQuickHelpH1")
+        - unless @map_title
+          %button.search-result-hide(type="button")= t("mapserver.hideSideBar")
+      .search-result-header-links
+    %ul.search-result-list
+    #news.contentText= text(:news)
+    #quickHelp.contentText= text(:quick_help)
+    #waiting(style="display:none")= image_tag("/img/working.gif")

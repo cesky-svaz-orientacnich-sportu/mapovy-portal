@@ -1,28 +1,29 @@
 %h1 Správa uživatelů
 
-%table.table.table-striped
-  %thead
-    %tr
-      %th ID
-      %th e-mail
-      %th jméno
-      %th registrační číslo
-      %th role
-      %th kraje 
-      %th kluby
-      %th
-  %tbody
-    - User.all.sort_by(&:name_for_sort).each do |user|
+.data-table.table-responsive
+  %table.table.table-striped
+    %thead
       %tr
-        %td= user.id
-        %td= link_to user.email, [:backend, user]
-        %td= user.name
-        %td= user.oris_registrations
-        %td= (!user.role.blank?) ? t("roles.#{user.role}") : ""
-        %td= user.authorized_regions
-        %td= user.authorized_clubs
-        %td
-          = link_to icon('edit', tooltip: 'Upravit'), [:edit, :backend, user]
-          - if admin? and user.confirmed?
-            = link_to icon('github', tooltip: 'Přepnout na uživatele'), [:become, :backend, user]
-          = link_to icon('times', tooltip: 'Smazat'), [:backend, user], method: :delete, data: {confirm: "Opravdu chceš smazat uživatele #{user}?"}
+        %th ID
+        %th e-mail
+        %th jméno
+        %th registrační číslo
+        %th role
+        %th kraje
+        %th kluby
+        %th
+    %tbody
+      - User.all.sort_by(&:name_for_sort).each do |user|
+        %tr
+          %td= user.id
+          %td= link_to user.email, [:backend, user]
+          %td= user.name
+          %td= user.oris_registrations
+          %td= (!user.role.blank?) ? t("roles.#{user.role}") : ""
+          %td= user.authorized_regions
+          %td= user.authorized_clubs
+          %td
+            = link_to icon('edit', tooltip: 'Upravit'), [:edit, :backend, user]
+            - if admin? and user.confirmed?
+              = link_to icon('github', tooltip: 'Přepnout na uživatele'), [:become, :backend, user]
+            = link_to icon('times', tooltip: 'Smazat'), [:backend, user], method: :delete, data: {confirm: "Opravdu chceš smazat uživatele #{user}?"}

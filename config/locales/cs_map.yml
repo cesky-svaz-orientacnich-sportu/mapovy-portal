@@ -654,9 +654,6 @@ cs:
     advancedSearchEmpty: 'Nebyla zadána žádná kritéria.'
     advancedSearchInvalid: 'Chyba v zadaných hodnotách kritérií: '
 
-    panelMin: 'Zmenši'
-    panelMax: 'Zvětši'
-
     mapTitle:
       map: "Mapa"
       embargo: "Embargo"
@@ -666,8 +663,13 @@ cs:
 
     map_no_archive_prints: "Do Archivu nebyly dodány papírové výtisky."
 
+    controls: 'Možnosti prohlížení map'
     layers: 'O-mapy'
     areas: 'Prostory'
+    backgroundSwitch: 'Podklad'
+
+    embargoes: 'Embarga'
+    competitionAreas: 'Prostory závodů'
 
     other_sports: 'ostatní'
 

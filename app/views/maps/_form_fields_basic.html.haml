@@ -1,18 +1,4 @@
-/ 0. Druh záznamu, Záznam vložil, SQL ID (vše needitovatelné)
-/ 1. Název, Klub, Klub-MJ
-/ 2. Rok vydání, Rok-MJ, Měřítko, Ekvidistance, Disciplína, Norma
-/ 3. Kraj, Místo
-/ 4. Evidenční číslo, Schvalovací číslo, Jiný identifikátor
-/ 5. Poznámka
-/ 6. Interní poznámka
-/ 7. Stav, Podklad, Georeference
-/ 8. Vydal, Vytiskl
-/ 9. Technika kresby, Technika tisku
-/ 10. Správce
-/ 11. Závod ORIS, Závod, Datum
-/ 12. Kvalita archivních výtisků, Počet výtisků navíc
-
-%div.uniqueness-errors.bs-callout.bs-callout-danger(style="display:none")
+.uniqueness-errors.bs-callout.bs-callout-danger(style="display:none")
 :javascript
   function uniquenessCheck() {
     id = #{f.object.id || 0};
@@ -46,169 +32,241 @@
     $('#map_patron').select2({
       allowClear: true,
       tags: true,
-      theme: 'default col-sm-2'
+      theme: 'bootstrap',
+      width: '100%'
     });
   });
 
+.row
+  .col-sm-10.col-md-4.col-lg-5
+    .form-group
+      = f.label :created_by_id, map_attribute_label(:created_by, :edit)
+      .input-group
+        = f.text_field :created_by_id, :class => 'form-control', :disabled => true, :value => f.object.created_by ? (f.object.created_by ? f.object.created_by.name.html_safe : "---") : "archiv ČSOS"
+        - if f.object.created_by
+          %span.input-group-addon
+            = print_user_tooltip(f.object.created_by)
+      = f.hidden_field :created_by_id
+  .col-xs-3.col-sm-2.col-md-1
+    .form-group
+      = f.label :id, map_attribute_label(:id, :edit)
+      = f.text_field :id, :class => 'form-control', :disabled => true, :value => f.object.id || '---'
+  .col-xs-9.col-sm-3.col-md-2
+    .form-group
+      = f.label :map_family, map_attribute_label(:map_family, :edit)
+      - if admin?
+        = f.select :map_family, Map::MAP_FAMILIES.map{|x| [t("mapserver.map_enums.map_family.#{x}"), x]}, {}, :class => 'form-control'
+      - else
+        = f.select :map_family, [Map::MAP_FAMILY_MAP].map{|x| [t("mapserver.map_enums.map_family.#{x}"), x]}, {}, :class => 'form-control'
+  .col-xs-12.col-sm-6.col-md-5.col-lg-4
+    .form-group
+      = f.label :state, map_attribute_label(:state, :edit)
+      - if admin?
+        = f.select :state, Map::STATES.map{|x| [t("mapserver.map_enums.state.#{x}"), x]}, {}, :class => 'form-control'
+      - elsif @states && !@states.empty?
+        = f.select :state, @states.map{|x| [t("mapserver.map_enums.state.#{x}"), x]}, {}, :class => 'form-control'
+      - else
+        = f.text_field :state, :class => 'form-control', :disabled => true, :value => t("mapserver.map_enums.state.#{f.object.state}")
+        = f.hidden_field :state
 
-
-%div.form-group
-  = f.label :created_by_id, map_attribute_label(:created_by, :edit), :class => 'col-sm-2'
-  %div.col-sm-2= f.object.created_by ? print_user(f.object.created_by) : "archiv ČSOS"
-  = f.hidden_field :created_by_id
-  = f.label :id, map_attribute_label(:id, :edit), :class => 'col-sm-1'
-  %div.col-sm-1= f.object.id || '---'
-  = f.label :map_family, map_attribute_label(:map_family, :edit), :class => 'col-sm-2'
-  - if admin?
-    = f.select :map_family, Map::MAP_FAMILIES.map{|x| [t("mapserver.map_enums.map_family.#{x}"), x]}, {}, class: 'col-sm-1'
-  - else
-    = f.select :map_family, [Map::MAP_FAMILY_MAP].map{|x| [t("mapserver.map_enums.map_family.#{x}"), x]}, {}, class: 'col-sm-1'
-  = f.label :state, map_attribute_label(:state, :edit), :class => 'col-sm-2'
-  - if admin?
-    = f.select :state, Map::STATES.map{|x| [t("mapserver.map_enums.state.#{x}"), x]}, {}, :class => 'col-sm-1'
-  - elsif @states && !@states.empty?
-    = f.select :state, @states.map{|x| [t("mapserver.map_enums.state.#{x}"), x]}, {}, :class => 'col-sm-1'
-  - else
-    %div.col-sm-1= t("mapserver.map_enums.state.#{f.object.state}")
-    = f.hidden_field :state
-
-%div.form-group
-  = f.label :title, map_attribute_label(:title, :edit), :class => 'col-sm-2'
-  = f.text_field :title, :class => 'col-sm-2'
-  = f.label :patron, map_attribute_label(:patron, :edit), :class => 'col-sm-2'
-  = f.select :patron, Club.sorted.map{|x| ["#{x.abbreviation} - #{x.name}", x.abbreviation]}, {:include_blank => true}, {:class => 'col-sm-2'}
+.row
+  %div{:class => current_user.has_role?(:manager) ? 'col-sm-6' : 'col-sm-6 col-md-7'}
+    .form-group
+      = f.label :title, map_attribute_label(:title, :edit)
+      = f.text_field :title, :class => 'form-control'
+  %div{:class => current_user.has_role?(:manager) ? 'col-sm-6 col-lg-4' : 'col-sm-6 col-md-5'}
+    .form-group
+      = f.label :patron, map_attribute_label(:patron, :edit)
+      = f.select :patron, Club.sorted.map{|x| ["#{x.abbreviation} - #{x.name}", x.abbreviation]}, {:include_blank => true}, {:class => 'form-control'}
   - if current_user.has_role?(:manager)
-    = f.label :patron_accuracy, map_attribute_label(:patron_accuracy, :edit), :class => 'col-sm-2'
-    = f.select :patron_accuracy, Map::ACCURACIES.map{|x| [t("mapserver.map_enums.accuracy.#{x}"), x]}, {}, :class => 'col-sm-2'
+    .col-sm-6.col-lg-2
+      .form-group
+        = f.label :patron_accuracy, map_attribute_label(:patron_accuracy, :edit)
+        = f.select :patron_accuracy, Map::ACCURACIES.map{|x| [t("mapserver.map_enums.accuracy.#{x}"), x]}, {}, :class => 'form-control'
   - else
     = f.hidden_field :patron_accuracy
-    %div.col-sm-2
 
-%div.form-group
-  = f.label :year, map_attribute_label(:year, :edit), :class => 'col-sm-2'
-  = f.text_field :year, :class => 'col-sm-1'
+.row
+  .col-sm-4.col-md-3
+    .form-group
+      = f.label :region, map_attribute_label(:region, :edit)
+      = f.select :region, Map::REGIONS_OPTIONS, {:include_blank => true}, :class => 'form-control'
+  .col-sm-5.col-md-6
+    .form-group
+      = f.label :locality, map_attribute_label(:locality, :edit)
+      = f.text_field :locality, :class => 'form-control'
+  .col-sm-3.col-md-2
+    .form-group
+      .checkbox.is-in-sm-grid-form
+        = f.label :is_educational do
+          = f.check_box :is_educational
+          = map_attribute_label(:is_educational)
+
+.row
+  %div{:class => current_user.has_role?(:manager) ? 'col-xs-5 col-sm-2 col-lg-1' : 'col-xs-6 col-sm-2 col-lg-1'}
+    .form-group
+      = f.label :year, map_attribute_label(:year, :edit)
+      = f.text_field :year, :class => 'form-control'
   - if current_user.has_role?(:manager)
-    = f.label :year_accuracy, map_attribute_label(:year_accuracy, :edit), :class => 'col-sm-2'
-    = f.select :year_accuracy, Map::ACCURACIES.map{|x| [t("mapserver.map_enums.accuracy.#{x}"), x]}, {}, :class => 'col-sm-2'
+    %div{:class => current_user.has_role?(:manager) ? 'col-xs-7 col-sm-3 col-lg-2' : 'col-sm-3 col-lg-2'}
+      .form-group
+        = f.label :year_accuracy, map_attribute_label(:year_accuracy, :edit)
+        = f.select :year_accuracy, Map::ACCURACIES.map{|x| [t("mapserver.map_enums.accuracy.#{x}"), x]}, {}, :class => 'form-control'
   - else
     = f.hidden_field :year_accuracy
-    %div.col-sm-4
-  = f.label :blocking_until, map_attribute_label(:blocking_until, :edit), :class => 'col-sm-2'
-  = f.select :blocking_until, options_for_select(((Date.today.year..Date.today.year+9).to_a + [0]).sort.reverse.map { |v| [v, v] }, @map.blocking_until), {:include_blank => false}, :class => 'col-sm-1'
+  %div{:class => current_user.has_role?(:manager) ? 'col-xs-12 col-sm-2' : 'col-xs-6 col-sm-2'}
+    .form-group
+      = f.label :blocking_until, map_attribute_label(:blocking_until, :edit)
+      = f.select :blocking_until, options_for_select(((Date.today.year..Date.today.year+9).to_a + [0]).sort.reverse.map { |v| [v, v] }, @map.blocking_until), {:include_blank => false}, :class => 'form-control'
+  %div{:class => current_user.has_role?(:manager) ? 'col-xs-12 col-sm-5 col-lg-7' : 'col-xs-12 col-sm-8 col-lg-9'}
+    .form-group
+      = f.label :blocking_reason, map_attribute_label(:blocking_reason, :edit)
+      = f.text_field :blocking_reason, :class => 'form-control'
 
-%div.form-group
-  = f.label :blocking_reason, map_attribute_label(:blocking_reason, :edit), :class => 'col-sm-2'
-  = f.text_field :blocking_reason, :class => 'col-sm-10'
+.row
+  .col-sm-6.col-md-3.col-lg-2
+    .form-group
+      = f.label :map_sport, map_attribute_label(:map_sport, :edit)
+      = f.select :map_sport, Map::MAP_SPORTS.map{|x| [t("mapserver.map_enums.map_sport.#{x}"), x]}, {:include_blank => true}, :class => 'form-control'
+  .col-sm-6.col-md-3
+    .form-group
+      = f.label :map_type, map_attribute_label(:map_type, :edit)
+      = f.select :map_type, Map::MAP_TYPES.map{|x| [t("mapserver.map_enums.map_type.#{x}"), x]}, {:include_blank => true}, :class => 'form-control'
+  .col-xs-6.col-md-2
+    .form-group
+      = f.label :scale, map_attribute_label(:scale, :edit)
+      .input-group
+        %span.input-group-addon 1:
+        = f.text_field :scale, size: 6, :class => 'form-control'
+  .col-xs-6.col-md-2
+    .form-group
+      = f.label :equidistance, map_attribute_label(:equidistance, :edit)
+      .input-group
+        = f.text_field :equidistance, size: 6, :class => 'form-control'
+        %span.input-group-addon m
 
-%div.form-group
-  = f.label :map_sport, map_attribute_label(:map_sport, :edit), :class => 'col-sm-2'
-  = f.select :map_sport, Map::MAP_SPORTS.map{|x| [t("mapserver.map_enums.map_sport.#{x}"), x]}, {:include_blank => true}, :class => 'col-sm-1'
-  = f.label :map_type, map_attribute_label(:map_type, :edit), :class => 'col-sm-2'
-  = f.select :map_type, Map::MAP_TYPES.map{|x| [t("mapserver.map_enums.map_type.#{x}"), x]}, {:include_blank => true}, :class => 'col-sm-3'
-  = f.label :is_educational, map_attribute_label(:is_educational), class: "col-sm-3"
-  = f.check_box :is_educational
+.row
+  .col-md-9.col-lg-6
+    .form-group
+      = f.label :oris_event_id, map_attribute_label(:main_race, :edit)
+      = f.select :oris_event_id, "<option value=\"0\"#{f.object.oris_event_id == 0 ? 'selected' : ''}>(žádný závod)</option>".html_safe + options_from_collection_for_select(f.object.year ? OrisEvent.in_year(f.object.year) : OrisEvent.sorted, :id, :to_label, f.object.oris_event_id), {:include_blank => true}, :class => 'form-control'
+  .col-sm-4.col-md-3.col-lg-2
+    .form-group
+      = f.label :main_race_date, map_attribute_label(:main_race_date, :edit)
+      = f.text_field :main_race_date, :class => 'form-control', :type => 'date'
+  .col-sm-8.col-md-6
+    .form-group
+      = f.label :main_race_title, map_attribute_label(:main_race_title, :edit)
+      = f.text_field :main_race_title, :class => 'form-control'
+  .col-sm-12.col-md-6
+    .form-group
+      = f.label :non_oris_event_url, map_attribute_label(:non_oris_event_url, :edit)
+      = f.url_field :non_oris_event_url, :class => 'form-control'
 
-%div.form-group
-  = f.label :scale, map_attribute_label(:scale, :edit), :class => 'col-sm-2'
-  %div.col-sm-2
-    1:
-    = f.text_field :scale, size: 6
-  = f.label :equidistance, map_attribute_label(:equidistance, :edit), :class => 'col-sm-2'
-  %div.col-sm-2
-    = f.text_field :equidistance, size: 6
-    m
+.row
+  .col-xs-6.col-sm-4.col-lg-2
+    .form-group
+      = f.label :identifier_filing, map_attribute_label(:identifier_filing, :edit)
+      - if (current_user.has_role?(:admin) or !f.object.approved_by) and f.object.identifier_filing and f.object.identifier_filing.size > 1
+        = f.text_field :identifier_filing, :class => 'form-control'
+      - elsif (current_user.has_role?(:manager) and (f.object.identifier_filing.blank? or f.object.identifier_filing !~ /^\d\d[A-Z]\d\d\d[A-Z]$/ ))
+        = f.text_field :identifier_filing, :class => 'form-control'
+      - else
+        .input-group
+          = f.text_field :identifier_filing, :class => 'form-control', :disabled => true, :value => "#{print_identifier_filing_for_input_value f.object.identifier_filing}"
+          %span.input-group-addon
+            = icon("question-circle", tooltip: "nelze měnit evidenční číslo, schváleno koordinátorem (krajským kartografem) #{f.object.approved_by}")
+        = f.hidden_field :identifier_filing
+      :javascript
+        $(function() {
+          console.dir("REG");
+          $('#map_identifier_filing').on("change input paste", function() {
+            var orig = '#{f.object.identifier_filing}';
+            var val = $(this).val();
+            console.dir("test " + val + " TO " + orig);
+            var patt = new RegExp("^\\d\\d[A-Za-z]\\d\\d\\d[A-Za-z]$");
+            if (patt.test(val) && orig != val) {
+              console.dir("ERR");
+              $(this).addClass('field-my-error');
+            } else {
+              console.dir("OK");
+              $(this).removeClass('field-my-error');
+            }
+          });
+        });
+  .col-xs-6.col-sm-4.col-lg-2
+    .form-group
+      = f.label :identifier_approval, map_attribute_label(:identifier_approval, :edit)
+      = f.text_field :identifier_approval, :class => 'form-control'
+  .col-xs-6.col-sm-4.col-lg-2
+    .form-group
+      = f.label :identifier_other, map_attribute_label(:identifier_other, :edit)
+      = f.text_field :identifier_other, :class => 'form-control'
+  .col-xs-6.col-sm-4.col-lg-2
+    .form-group
+      = f.label :mapping_state, map_attribute_label(:mapping_state, :edit)
+      = f.text_field :mapping_state, :class => 'form-control'
+  .col-xs-5.col-sm-4.col-lg-2
+    .form-group
+      = f.label :resource, map_attribute_label(:resource, :edit)
+      = f.text_field :resource, :class => 'form-control'
+  .col-xs-7.col-sm-4.col-lg-2
+    .form-group
+      = f.label :georeference, map_attribute_label(:georeference, :edit)
+      = f.select :georeference, Map::GEOREFERENCES.map{|x| [t("mapserver.map_enums.georeference.#{x}"), x]}, {:include_blank => true}, :class => 'form-control'
 
-%div.form-group
-  = f.label :region, map_attribute_label(:region, :edit), :class => 'col-sm-2'
-  = f.select :region, Map::REGIONS_OPTIONS, {:include_blank => true}, :class => 'col-sm-2'
-  = f.label :locality, map_attribute_label(:locality, :edit), :class => 'col-sm-2'
-  = f.text_field :locality, :class => 'col-sm-6'
-
-%div.form-group
-  = f.label :identifier_filing, map_attribute_label(:identifier_filing, :edit), :class => 'col-sm-2'
-  - if (current_user.has_role?(:admin) or !f.object.approved_by) and f.object.identifier_filing and f.object.identifier_filing.size > 1
-    = f.text_field :identifier_filing, :class => 'col-sm-2'
-  - elsif (current_user.has_role?(:manager) and (f.object.identifier_filing.blank? or f.object.identifier_filing !~ /^\d\d[A-Z]\d\d\d[A-Z]$/ ))
-    = f.text_field :identifier_filing, :class => 'col-sm-2'
-  - else
-    %div.col-sm-2
-      = print_identifier_filing f.object.identifier_filing
-      = f.hidden_field :identifier_filing
-      = icon("question-circle", tooltip: "nelze měnit evidenční číslo, schváleno koordinátorem (krajským kartografem) #{f.object.approved_by}")
-  :javascript
-    $(function() {
-      console.dir("REG");
-      $('#map_identifier_filing').on("change input paste", function() {
-        var orig = '#{f.object.identifier_filing}';
-        var val = $(this).val();
-        console.dir("test " + val + " TO " + orig);
-        var patt = new RegExp("^\\d\\d[A-Za-z]\\d\\d\\d[A-Za-z]$");
-        if (patt.test(val) && orig != val) {
-          console.dir("ERR");
-          $(this).addClass('field-my-error');
-        } else {
-          console.dir("OK");
-          $(this).removeClass('field-my-error');
-        }
-      });
-    });
-  = f.label :identifier_approval, map_attribute_label(:identifier_approval, :edit), :class => 'col-sm-2'
-  = f.text_field :identifier_approval, :class => 'col-sm-2'
-  = f.label :identifier_other, map_attribute_label(:identifier_other, :edit), :class => 'col-sm-2'
-  = f.text_field :identifier_other, :class => 'col-sm-2'
-
-%div.form-group
-  = f.label :note_public, map_attribute_label(:note_public, :edit), :class => 'col-sm-2'
-  = f.text_field :note_public, :class => 'col-sm-10'
-
-%div.form-group
-  = f.label :note_internal, map_attribute_label(:note_internal, :edit), :class => 'col-sm-2'
-  = f.text_field :note_internal, :class => 'col-sm-10'
-
-%div.form-group
-  = f.label :mapping_state, map_attribute_label(:mapping_state, :edit), :class => 'col-sm-2'
-  = f.text_field :mapping_state, :class => 'col-sm-2'
-  = f.label :resource, map_attribute_label(:resource, :edit), :class => 'col-sm-2'
-  = f.text_field :resource, :class => 'col-sm-2'
-  = f.label :georeference, map_attribute_label(:georeference, :edit), :class => 'col-sm-2'
-  = f.select :georeference, Map::GEOREFERENCES.map{|x| [t("mapserver.map_enums.georeference.#{x}"), x]}, {:include_blank => true}, :class => 'col-sm-2'
-
-%div.form-group
-  = f.label :issued_by, map_attribute_label(:issued_by, :edit), :class => 'col-sm-2'
-  = f.text_field :issued_by, :class => 'col-sm-6'
-  = f.label :printed_by, map_attribute_label(:printed_by, :edit), :class => 'col-sm-2'
-  = f.text_field :printed_by, :class => 'col-sm-2'
-
-%div.form-group
-  = f.label :drawing_technique, map_attribute_label(:drawing_technique, :edit), :class => 'col-sm-2'
-  = f.select :drawing_technique, Map::DRAWING_TECHNIQUES.map{|x| [t("mapserver.map_enums.drawing_technique.#{x}"), x]}, {:include_blank => true}, :class => 'col-sm-4'
-  = f.label :printing_technique, map_attribute_label(:printing_technique, :edit), :class => 'col-sm-2'
-  = f.select :printing_technique, Map::PRINTING_TECHNIQUES.map{|x| [t("mapserver.map_enums.printing_technique.#{x}"), x]}, {:include_blank => true}, :class => 'col-sm-4'
-
-%div.form-group
-  = f.label :administrator, map_attribute_label(:administrator, :edit), :class => 'col-sm-2'
-  = f.text_field :administrator, :class => 'col-sm-6'
-  = f.label :administrator_email, map_attribute_label(:administrator_email, :edit), :class => 'col-sm-2'
-  = f.text_field :administrator_email, :class => 'col-sm-2'
-
-%div.form-group
-  = f.label :oris_event_id, map_attribute_label(:main_race, :edit), :class => 'col-sm-2'
-  = f.select :oris_event_id, "<option value=\"0\"#{f.object.oris_event_id == 0 ? 'selected' : ''}>(žádný závod)</option>".html_safe + options_from_collection_for_select(f.object.year ? OrisEvent.in_year(f.object.year) : OrisEvent.sorted, :id, :to_label, f.object.oris_event_id), {:include_blank => true}, :class => 'col-sm-6'
-  = f.label :main_race_date, map_attribute_label(:main_race_date, :edit), :class => 'col-sm-2'
-  = f.text_field :main_race_date, :class => 'col-sm-2', :type => 'date'
-
-%div.form-group
-  = f.label :main_race_title, map_attribute_label(:main_race_title, :edit), :class => 'col-sm-2'
-  = f.text_field :main_race_title, :class => 'col-sm-4'
-  = f.label :non_oris_event_url, map_attribute_label(:non_oris_event_url, :edit), :class => 'col-sm-2'
-  = f.url_field :non_oris_event_url, :class => 'col-sm-4'
+.row
+  .col-sm-9.col-md-5.col-lg-6
+    .form-group
+      = f.label :issued_by, map_attribute_label(:issued_by, :edit)
+      = f.text_field :issued_by, :class => 'form-control'
+  .col-sm-3.col-md-2
+    .form-group
+      = f.label :printed_by, map_attribute_label(:printed_by, :edit)
+      = f.text_field :printed_by, :class => 'form-control'
+  .col-xs-6.col-sm-6.col-md-2
+    .form-group
+      = f.label :drawing_technique, map_attribute_label(:drawing_technique, :edit)
+      = f.select :drawing_technique, Map::DRAWING_TECHNIQUES.map{|x| [t("mapserver.map_enums.drawing_technique.#{x}"), x]}, {:include_blank => true}, :class => 'form-control'
+  .col-xs-6.col-sm-6.col-md-3.col-lg-2
+    .form-group
+      = f.label :printing_technique, map_attribute_label(:printing_technique, :edit)
+      = f.select :printing_technique, Map::PRINTING_TECHNIQUES.map{|x| [t("mapserver.map_enums.printing_technique.#{x}"), x]}, {:include_blank => true}, :class => 'form-control'
 
 - if current_user.has_role?(:manager)
-  %div.form-group
-    = f.label :archive_print_class, map_attribute_label(:archive_print_class, :edit), :class => 'col-sm-2'
-    = f.select :archive_print1_class, ["a", "b", "c", "n", "x", "q", "-", "0"], {:include_blank => true}, :class => 'col-sm-1'
-    = f.select :archive_print2_class, ["a", "b", "c", "n", "x", "-"], {:include_blank => true}, :class => 'col-sm-1'
-    = f.select :archive_print3_class, ["a", "b", "c", "n", "x", "-"], {:include_blank => true}, :class => 'col-sm-1'
-    %div.col-sm-1
-    = f.label :archive_extra_print_count, map_attribute_label(:archive_extra_print_count, :edit), :class => 'col-sm-2'
-    = f.select :archive_extra_print_count, ["0", "1", "2", "3"], {:include_blank => true}, :class => 'col-sm-1'
+  .row
+    .col-xs-7.col-sm-4.col-md-3
+      %fieldset.form-group
+        %legend.form-fieldset-legend= map_attribute_label(:archive_print_class, :edit)
+        .form-fields-inline
+          = f.label :archive_print1_class, map_attribute_label(:archive_print_class, false) + ' #1', :class => 'sr-only'
+          = f.select :archive_print1_class, ["a", "b", "c", "n", "x", "q", "-", "0"], {:include_blank => true}, :class => 'form-control'
+          = f.label :archive_print2_class, map_attribute_label(:archive_print_class, false) + ' #2', :class => 'sr-only'
+          = f.select :archive_print2_class, ["a", "b", "c", "n", "x", "-"], {:include_blank => true}, :class => 'form-control'
+          = f.label :archive_print3_class, map_attribute_label(:archive_print_class, false) + ' #3', :class => 'sr-only'
+          = f.select :archive_print3_class, ["a", "b", "c", "n", "x", "-"], {:include_blank => true}, :class => 'form-control'
+    .col-xs-5.col-sm-3.col-lg-2
+      .form-group
+        = f.label :archive_extra_print_count, map_attribute_label(:archive_extra_print_count, :edit)
+        = f.select :archive_extra_print_count, ["0", "1", "2", "3"], {:include_blank => true}, :class => 'form-control'
+
+.row
+  .col-sm-6
+    .form-group
+      = f.label :administrator, map_attribute_label(:administrator, :edit)
+      = f.text_field :administrator, :class => 'form-control'
+  .col-sm-6
+    .form-group
+      = f.label :administrator_email, map_attribute_label(:administrator_email, :edit)
+      = f.text_field :administrator_email, :class => 'form-control'
+
+.row
+  .col-sm-12
+    .form-group
+      = f.label :note_public, map_attribute_label(:note_public, :edit)
+      = f.text_field :note_public, :class => 'form-control'
+.row
+  .col-sm-12
+    .form-group
+      = f.label :note_internal, map_attribute_label(:note_internal, :edit)
+      = f.text_field :note_internal, :class => 'form-control'

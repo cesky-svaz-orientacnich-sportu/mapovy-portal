@@ -8,7 +8,7 @@
         #{err * " a "}
 
 - @map.shape_json ||= @map.shape_as_coords
-= nested_form_for @map, :url => url_for([:complete, @map]), :html => {:id => 'map_form', :role => 'form', :class => 'form-horizontal', :multipart => true} do |f|
+= nested_form_for @map, :url => url_for([:complete, @map]), :html => {:id => 'map_form', :role => 'form', :multipart => true} do |f|
 
   %h2= t("mapserver.mapBasicData")
 
@@ -36,7 +36,6 @@
   var map;
 
   $(function() {
-
     map = setupMap(document.getElementById('inline_map_canvas'), false);
     setupMapEditor(map);
 
@@ -54,7 +53,6 @@
 
     setupMapEditorSubmit();
     fixMapHeight($('#inline_map_canvas'));
-
   });
 
 

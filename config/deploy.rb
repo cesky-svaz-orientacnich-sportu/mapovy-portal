@@ -25,7 +25,7 @@ set :scm_verbose, true
 # Rails
 
 # You'll probably want to symlink Rails shared files and directories.
-append :linked_files, 'config/master.key'
+append :linked_files, '.env', 'config/master.key'
 append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', '.bundle', 'public/system', 'public/uploads'
 
 # While migrations looks like a concern of the database layer, Rails migrations are strictly related to the framework.
