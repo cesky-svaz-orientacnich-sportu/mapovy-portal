@@ -14,16 +14,16 @@
   - n_approved = current_user.created_maps.where(state: Map::STATE_APPROVED).count
   - n_change_requested = current_user.created_maps.where(state: [Map::STATE_FINAL_CHANGE_REQUESTED, Map::STATE_CHANGE_REQUESTED]).count
 
-%div#menuTop.navbar.navbar-inverse.navbar-fixed-top(role="navigation")
-  %div.container-fluid.menuTopContainer
-    %div.navbar-header
+%nav#menuTop.navbar.navbar-static-top.navbar-inverse
+  .container-fluid.menuTopContainer
+    .navbar-header
       %button(type="button" class="navbar-toggle" data-toggle="collapse" data-target="#example-navbar-collapse")
         %span.sr-only Toggle navigation
         %span.icon-bar
         %span.icon-bar
         %span.icon-bar
-      %a.navbar-brand.visible-xs(href="#")= t('mapserver.title')
-    %div.collapse.navbar-collapse#example-navbar-collapse
+      %a.navbar-brand(href="#")= t('mapserver.title')
+    .collapse.navbar-collapse#example-navbar-collapse
       %ul.nav.navbar-nav
         %li= link_to t('mapserver.header_menu.archive'), :maps_map
         %li= link_to t('mapserver.header_menu.maps'), :maps
@@ -35,7 +35,7 @@
         %li= link_to t('mapserver.header_menu.help'), text_path('help')
       %ul.nav.navbar-nav.navbar-right
         - if current_user
-          %li.navbar-text.hidden-sm.hidden-xs
+          %li.navbar-text
             - if n_issues > 0
               %span.label.label-danger= link_to "#{n_issues} #{flex n_issues, "problém", "problémy", "problémů"}", :issue_reports
             - if n_proposed > 0

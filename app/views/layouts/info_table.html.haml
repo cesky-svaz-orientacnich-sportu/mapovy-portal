@@ -1,5 +1,5 @@
 !!! 5
-%html(lang="en")
+%html{:lang => I18n.locale}
   %head
     %meta(charset="utf-8")
     %meta(http-equiv="x-ua-compatible" content="ie=edge")
@@ -26,4 +26,6 @@
     = javascript_include_tag "mapserver/locale/#{I18n.locale}"
 
   %body
-    = yield
+    .page-wrapper
+      .page-body
+        = yield

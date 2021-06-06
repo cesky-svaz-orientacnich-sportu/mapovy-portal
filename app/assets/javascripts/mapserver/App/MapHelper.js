@@ -29,16 +29,15 @@ App.MapHelper = App.newClass({
     },
 
     changeMapType: function (mapTypeId) {
-      console.dir(mapTypeId);
-        $("#baseMapSwitch a").removeClass("active");
-        $("#baseMapSwitch a[data-map-type=" + mapTypeId + "]").addClass("active");
+        $(".map-controls-background-switch").find("button").removeClass("is-active");
+        $(".map-controls-background-switch").find("button[data-map-type=" + mapTypeId + "]").addClass("is-active");
         if (mapTypeId == 'SHC') {
             this.map.setMapTypeId('SHC');
-            $('#cuzkCopyright').show();
+            $('.map-cuzk-copyright').show();
         }
         else {
             this.map.setMapTypeId(google.maps.MapTypeId[mapTypeId]);
-            $('#cuzkCopyright').hide();
+            $('.map-cuzk-copyright').hide();
         }
     },
 
@@ -68,9 +67,8 @@ App.MapHelper = App.newClass({
         this.ftLayer2.hide();
       }
 
-      $("#toc").hide();
-      $("#area_toc").hide();
-      $("#cancelSearch").show();
+      $(".map-controls").hide();
+      $(".map-cancel-search").show();
 
       this.search.searchBySelect(select1, select2, this.zoomToResults, true);
     },

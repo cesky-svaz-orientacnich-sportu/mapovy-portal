@@ -342,9 +342,6 @@ en:
     advancedSearchClose: "Close advanced search"
     advancedSearchReset: "Reset form values"
 
-    panelMin: "Min"
-    panelMax: "Max"
-
     mapTitle:
       map: "Map"
       embargo: "Embargo"
@@ -352,8 +349,13 @@ en:
     mapAuthors: "Authors"
     mapPreview: "Map preview"
 
-    layers: "O - maps"
-    layerSel: "Selected"
+    controls: "Map browsing controls"
+    layers: "O-maps"
+    areas: "Areas"
+    backgroundSwitch: 'Background map'
+
+    embargoes: 'Embargoes'
+    competitionAreas: 'Competition areas'
 
     other_sports: 'other'
 

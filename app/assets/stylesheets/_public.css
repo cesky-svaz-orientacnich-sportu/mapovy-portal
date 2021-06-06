@@ -11,14 +11,18 @@
  *= require bootstrap_helper
  *= require font-awesome
  *= require common
- *= require 'info_table'
+ *= require forms
+ *= require info_table
  *= require select2
+ *= require select2-bootstrap
  *= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
  *= require dataTables/extras/dataTables.colReorder
  *= require dataTables/extras/dataTables.colVis
- *= require 'fancybox/jquery.fancybox'
+ *= require fancybox/jquery.fancybox
+ *= require record_detail
+ *= require users
  *= require_self
- 
+
 */
 
 .dataTables_wrapper {
@@ -27,7 +31,7 @@
   }
 }
 #maps_wrapper {
-  clear: both;    
+  clear: both;
 }
 
 .menuTopContainer {

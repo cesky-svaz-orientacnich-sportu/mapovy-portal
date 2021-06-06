@@ -41,26 +41,29 @@ class MapController < ApplicationController
     render json: data.to_json
   end
 
-
-
   def club
     @club = Club.find(params[:id])
+    @map_title = "#{t('mapserver.listClubContentMap')} #{@club}"
   end
 
   def show
     @map = Map.find(params[:id])
+    @map_title = @map.title
   end
 
   def author
     @author = Author.find(params[:id])
+    @map_title = "#{t('mapserver.listAuthContentMap')} #{@author}"
   end
 
   def collection
     @map_collection = MapCollection.friendly.find(params[:id])
+    @map_title = @map_collection.title
   end
 
   def convergence
     @map_title = t("mapserver.convergence.header")
+    @is_convergence = true
   end
 
 end

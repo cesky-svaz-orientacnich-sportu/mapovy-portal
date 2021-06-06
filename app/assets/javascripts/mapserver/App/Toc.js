@@ -28,21 +28,21 @@ App.Toc = App.newClass({
     },
 
     refresh: function () {
-        var $items = $("#toc .options .item, #areatoc .options .item");
-        
+        var $items = $(".map-controls .item");
+
         $items.removeClass("active");
         $items.find('input').each(function(i) {
           if ($(this).prop('checked')) {
             $(this).closest('.item').addClass('active');
           }
-        });          
-        
+        });
+
         var visibleFamilies = [];
         var visibleSports = [];
         var minYear = 9999;
         var maxYear = -9999;
-        
-        $("#toc .options input").each(function(i) {
+
+        $(".map-controls input").each(function(i) {
           if ($(this).prop('checked')) {
             col = $(this).attr('data-filter-column');
             if (col == 'MAP_FAMILY') {
@@ -61,21 +61,21 @@ App.Toc = App.newClass({
           if ($(this).attr('data-filter-value') == 'attribute') {
             if ($(this).prop('checked')) {
               // attrs.push("AND " + $(this).attr('data-filter-column') + " IS NOT NULL");
-              //attrs.push("AND " + $(this).attr('data-filter-column') + " = 1");              
+              //attrs.push("AND " + $(this).attr('data-filter-column') + " = 1");
             } else {
               attrs.push("AND ((" + $(this).attr('data-filter-column') + " != 1))");
             }
           }
         });
-              
+
         this.ftLayer1.hide();
         this.ftLayer2.hide();
         this.ftLayerE.hide();
         this.ftLayerCA.hide();
         this.ftLayerB.hide();
-        
+
         var attrs = [];
-        
+
         var where1 = "";
         var where2 = null;
         if ((visibleFamilies.length > 0) && (visibleSports.length > 0) && (minYear <= maxYear)) {
@@ -89,7 +89,7 @@ App.Toc = App.newClass({
                 where2 = (where + " AND state IN ('proposed', 'change_requested') AND created_by_id = " + Config.user.id);
               }
             }
-            
+
             console.log("TOC update with primary where query: " + where1);
             this.ftLayer1.where = where1;
             this.ftLayer1.show();
@@ -100,7 +100,7 @@ App.Toc = App.newClass({
               this.ftLayer2.show();
             }
         }
-        
+
         var today = new Date();
         var dd = today.getDate();
         var mm = today.getMonth()+1; //January is 0!
@@ -108,14 +108,14 @@ App.Toc = App.newClass({
 
         if(dd<10) {
             dd='0'+dd
-        } 
+        }
 
         if(mm<10) {
             mm='0'+mm
-        } 
+        }
 
         today = "'" + yyyy + "-" + mm + "-" + dd + " 00:00'";
-        
+
         if ($('#area__embargoes').prop('checked')) {
           this.showEmbargoes(today);
         }
@@ -145,35 +145,13 @@ App.Toc = App.newClass({
     },
 
     collapse: function () {
-        $("#toc .options").slideUp("medium");
-        $("#toc").addClass("minimized");
-
-        $("#toc .link.toc_expand").show();
-        $("#toc .link.toc_collapse").hide();
+        $(".map-controls-body").slideUp("medium");
+        $(".map-controls-header").attr('aria-expanded', 'false');
     },
 
     expand: function () {
-        $("#toc .options").slideDown("medium");
-        $("#toc").removeClass("minimized");
-
-        $("#toc .link.toc_expand").hide();
-        $("#toc .link.toc_collapse").show();
+        $(".map-controls-body").slideDown("medium");
+        $(".map-controls-header").attr('aria-expanded', 'true');
     },
-
-    area_collapse: function () {
-        $("#areatoc .options").slideUp("medium");
-        $("#areatoc").addClass("minimized");
-
-        $("#areatoc .link.toc_expand").show();
-        $("#areatoc .link.toc_collapse").hide();
-    },
-
-    area_expand: function () {
-        $("#areatoc .options").slideDown("medium");
-        $("#areatoc").removeClass("minimized");
-
-        $("#areatoc .link.toc_expand").hide();
-        $("#areatoc .link.toc_collapse").show();
-    }
 
 });

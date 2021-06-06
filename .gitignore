@@ -16,9 +16,10 @@ vendor/bundle
 /log/*.log
 /tmp
 
+/public/assets
 /public/data
-
 /public/system
+
 /spec/reports
 .DS_Store
 
@@ -31,3 +32,4 @@ yarn-debug.log*
 
 # Don't share the decrypt key to our credentials
 /config/master.key
+.env

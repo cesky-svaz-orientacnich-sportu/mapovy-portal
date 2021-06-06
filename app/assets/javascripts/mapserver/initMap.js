@@ -112,7 +112,7 @@ function renderInfoWindow(map) {
     return '<div class="infoWindow" data-map-family="' + map['map_family'] + '">' +
       '<div class="header title cleaned">' +
         '<h3><a href="/' + Config.locale + '/maps/' + map['id'] + '/fusion"><span>' + map['title'] + '</span></a></h3>' +
-        '<ul class="toolsList">' +
+        '<ul class="tools-list">' +
           '<li><a class="infoTableLink" href="/' + Config.locale + '/maps/' + map['id'] + '/info_table"><img src="/img/tool-08.png" alt="Ikona" /></a></li>' +
           (
             (map['has_jpg'] == '1') ?
@@ -334,7 +334,9 @@ function initMap() {
         scaleControl: true,
         mapTypeControl: false,
         scrollwheel: true,
-        draggableCursor: 'default'
+        draggableCursor: 'default',
+        fullscreenControl: false,
+        streetViewControl: false
     };
 
     geocoder = new google.maps.Geocoder();
@@ -361,7 +363,7 @@ function initMapComponents() {
 
     var mapTypeId = Config.mapInitParams.mapTypeId;
 
-    sidebar = new App.Sidebar(map, 385, Config.resourceString, Config.accessGranted);
+    sidebar = new App.Sidebar(map, Config.resourceString, Config.accessGranted);
     urlInterface = new App.UrlInterface();
     mapLink = new App.MapLink(urlInterface, Config.apiKey);
     searchSimple = new App.Search.Simple(state, sidebar.showResults, sidebar);
@@ -411,12 +413,6 @@ function initMapComponents() {
         }
     });
 
-    //function handleMapClick(event) {
-    //    mapContextMenu.show(event.latLng);
-    //}
-
-    //mapHelper.registerMapClickListeners(handleMapClick);
-
     var overlay = new google.maps.OverlayView();
     overlay.draw = function () { };
     overlay.setMap(map);
@@ -435,8 +431,9 @@ function initMapComponents() {
         }
 
         if (rightclick) {
-            var x = e.pageX - this.offsetLeft;
-            var y = e.pageY - this.offsetTop;
+        	var $canvas = $('#map_canvas');
+            var x = e.pageX - $canvas.offset().left;
+            var y = e.pageY - $canvas.offset().top;
             var pxPoint = new google.maps.Point(x, y);
             var latLng = overlay.getProjection().fromContainerPixelToLatLng(pxPoint);
 

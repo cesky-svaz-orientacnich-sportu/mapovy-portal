@@ -1,0 +1,19 @@
+.auth-form
+  %h1 Reset hesla
+  = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f|
+    = render "devise/shared/error_messages", resource: resource
+    = f.hidden_field :reset_password_token
+    .row
+      .col-sm-5.col-md-4.col-lg-3
+        .form-group
+          = f.label :password, "Nové heslo"
+          - if @minimum_password_length
+            %em= "(alespoň #{@minimum_password_length} znaků)"
+          = f.password_field :password, class: "form-control", autofocus: true, autocomplete: "new-password"
+    .row
+      .col-sm-5.col-md-4.col-lg-3
+        .form-group
+          = f.label :password_confirmation, "Heslo znovu"
+          = f.password_field :password_confirmation, class: "form-control", autocomplete: "new-password"
+    = f.submit "Resetovat heslo", class: "btn btn-primary"
+  = render "devise/shared/links"

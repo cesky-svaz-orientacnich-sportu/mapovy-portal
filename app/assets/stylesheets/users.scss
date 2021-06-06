@@ -1,0 +1,34 @@
+.users-detail-heading {
+	margin-bottom: 20px;
+}
+
+.users-my-page-header { // TODO: dry (.record-detail-header)
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 16px;
+	padding-top: 20px;
+	padding-bottom: 20px;
+
+	h1 {
+		margin-top: 0;
+		margin-bottom: 0;
+	}
+}
+
+.users-my-page-controls {
+	font-size: 32px;
+}
+
+.user-detail-oris,
+.users-my-page-oris {
+	.panel-heading {
+		margin-bottom: 0;
+	}
+
+	.panel-body {
+		overflow-wrap: break-word;
+		word-wrap: break-word;
+		margin-bottom: 0;
+	}
+}

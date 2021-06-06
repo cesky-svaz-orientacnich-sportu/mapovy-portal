@@ -1,24 +1,16 @@
 jQuery ->
-  
+
   $('#advanced_search_gps_button').on 'click', ->
     searchAdvanced.userGpsCoords()
-  
-  $('#baseMapSwitch a').on 'click', ->
+
+  $('.map-controls-background-switch button').on 'click', (e) ->
+    e.preventDefault()
     mapHelper.changeMapType($(this).data('map-type'))
 
-  $('#TOC_collapse_button').on 'click', ->
-    toc.collapse()
+  $('.map-controls-header').on 'click', ->
+    if $(this).attr('aria-expanded') == 'true' then toc.collapse() else toc.expand()
 
-  $('#TOC_expand_button').on 'click', ->
-    toc.expand()
-
-  $('#TOC_area_collapse_button').on 'click', ->
-    toc.area_collapse()
-
-  $('#TOC_area_expand_button').on 'click', ->
-    toc.area_expand()
-    
-  $('.hide_search_results_button').on 'click', ->
+  $('.map-cancel-search, .search-result-hide').on 'click', ->
     sidebar.hideResults()
 
   $('#map_tool_print_button').on 'click', ->
@@ -36,7 +28,7 @@ jQuery ->
     sidebar.show()
     toc.refresh(true)
     searchAdvanced.clearOverlays();
-    
+
   $('#tools_link_close_button').on 'click', ->
     mapLink.hide()
 

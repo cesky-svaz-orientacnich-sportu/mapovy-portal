@@ -13,3 +13,4 @@ Rails.application.config.assets.paths << Rails.root.join('node_modules')
 # folder are already added.
 # Rails.application.config.assets.precompile += %w( admin.js admin.css )
 Rails.application.config.assets.precompile += %w( _map.css _public.css _info_table.css _map.js _minimap.js _public.js mapserver/locale/cs.js mapserver/locale/en.js )
+Rails.application.config.assets.precompile += [ Dir["#{Rails.root}/app/assets/images/**/*"].reject {|fn| File.directory?(fn) } ]

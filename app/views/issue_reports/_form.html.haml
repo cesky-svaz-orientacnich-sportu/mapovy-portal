@@ -1,24 +1,28 @@
-= form_for issue_report, remote: remote, :html => {:role => 'form', :class => 'form-horizontal'} do |f|
+= form_for issue_report, remote: remote, :html => {:role => 'form'} do |f|
   = f.hidden_field :map_id
-  - if issue_report.user
-    %div.form-group
-      = f.label :user_id, 'Vloženo uživatelem', class: 'col-sm-2'
-      = f.hidden_field :user_id
-      %span.col-sm-4= issue_report.user.name
-    %div.form-group
-      = f.label :email, 'E-mail', class: 'col-sm-2'
-      = f.hidden_field :email
-      %span.col-sm-4= issue_report.email
-  - else
-    %div.form-group
-      = f.label :email, 'E-mail', class: 'col-sm-2'
-      %div.col-sm-6
-        = f.text_field :email, style: "width: 100%"
-      %span.col-sm-4 Prosíme, vyplňte svůj email, abychom se mohli případně ozvat, pokud bychom potřebovali nějaké upřesnění, anebo aspoň poděkovat.
-  %div.form-group
-    = f.label :message, 'Text zprávy', class: 'col-sm-2'
-    %div.col-sm-6
-      = f.text_area :message, style: 'height:140px;width:100%'
-  %div.form-group
-    %div.col-sm-2.col-sm-offset-2
+  .row
+    - if issue_report.user
+      .col-xs-6.col-sm-4.col-md-3
+        .form-group
+          = f.label :user_id, 'Vloženo uživatelem'
+          = f.text_field :user_id, :class => 'form-control', :disabled => true, :value => issue_report.user.name
+          = f.hidden_field :user_id
+      .col-xs-6.col-sm-4.col-md-3
+        .form-group
+          = f.label :email, 'E-mail'
+          = f.text_field :email, :class => 'form-control', :disabled => true, :value => issue_report.email
+          = f.hidden_field :email
+    - else
+      .col-sm-6.col-md-5.col-lg-4
+        .form-group
+          = f.label :email, 'E-mail'
+          = f.text_field :email, {"aria-describedby" => "issue-report-email-desc", :class => 'form-control'}
+          %p#issue-report-email-desc.help-block Prosíme, vyplňte svůj email, abychom se mohli případně ozvat, pokud bychom potřebovali nějaké upřesnění, anebo aspoň poděkovat.
+  .row
+    .col-sm-9.col-md-7.col-lg-6
+      .form-group
+        = f.label :message, 'Text zprávy'
+        = f.text_area :message, :class => 'form-control', style: 'min-height:140px'
+  .row
+    .col-sm-12
       = f.submit 'Odeslat', class: 'btn btn-danger'

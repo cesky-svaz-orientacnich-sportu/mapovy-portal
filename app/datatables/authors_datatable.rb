@@ -51,10 +51,10 @@ private
 
   def sort_column
     columns = %w[full_name year_of_birth]
-    columns[params[:order]['0'][:column].to_i] || "id"
+    params.key?(:order) ? columns[params[:order]['0'][:column].to_i] || "id" : "id"
   end
 
   def sort_direction
-    (params[:order]['0'][:dir]) == "desc" ? "desc" : "asc"
+    params.key?(:order) && (params[:order]['0'][:dir]) == "desc" ? "desc" : "asc"
   end
 end

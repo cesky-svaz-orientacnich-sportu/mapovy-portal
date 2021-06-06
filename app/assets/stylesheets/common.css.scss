@@ -1,41 +1,71 @@
-.navbar-nav > li > a {padding-top:10px !important; padding-bottom:10px !important;}
-.navbar {min-height:40px !important}
-.navbar-text {
-  font-size:120%;
-  margin-top:10px;
-  margin-bottom:10px;
-  margin-left:8px;
-  margin-right:8px;
+// ===============================================================
+// Browser CSS resets and default styles
+// ===============================================================
+html {
+	box-sizing: border-box;
+	height: 100%;
 }
 
-tr.muted td {
-  color: #999;
-  font-style:italic;
-}
-
-.label {
-  a {
-    color: inherit;
-  }
-}
-
-ul.dropdown-menu {
-  font-size: inherit;
-}
-
-ul.toolsList {
-    background: url('/img/bg-gradient.png') repeat-x;
-    border: 1px solid #b0b1b1;
-    height: 18px;
-    padding: 5px 0 0 0;
+*,
+*:before,
+*:after {
+	box-sizing: inherit;
+	margin: 0;
 }
 
 body {
-	background:#fff;
-	color:#000;
-  font-family:"Arial";
-  font-size:12px;
-  line-height:17px;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	line-height: 1.5;
+	font-size: 12px; // TODO: 16px and use relative units everywhere
+	font-family: Arial, sans-serif;
+	background-color: #fff;
+	color: #000;
+}
+
+// ===============================================================
+// LAYOUT
+// ===============================================================
+.page-wrapper {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+}
+
+.page-body {
+	flex-grow: 1;
+	max-width: 100%;
+}
+
+// ===============================================================
+// NAVBAR
+// ===============================================================
+@import "organisms/navbar";
+
+// ===============================================================
+// COMMON STYLES
+// ===============================================================
+tr.muted td {
+	color: #999;
+	font-style:italic;
+}
+
+.label {
+	a {
+		color: inherit;
+	}
+}
+
+ul.dropdown-menu {
+	font-size: inherit;
+}
+
+ul.tools-list {
+		background: url('/img/bg-gradient.png') repeat-x;
+		border: 1px solid #b0b1b1;
+		height: 18px;
+		padding: 5px 0 0 0;
 }
 
 p {
@@ -51,31 +81,31 @@ a:hover {
 }
 
 .content {
-  a {
-  	color:#428bca;
-  }
+	a {
+		color:#428bca;
+	}
 
-  a:hover {
-    color: red;
-  	text-decoration:none;
-  }
+	a:hover {
+		color: red;
+		text-decoration:none;
+	}
 }
 
 h2 {
-    color:#000;
-    font-size:15px;
-  	font-weight:bold;
-    line-height:2čpx;
-    margin:0 0 0 0;
-    padding:19px 0 8px 0;
+		color:#000;
+		font-size:15px;
+		font-weight:bold;
+		line-height:2čpx;
+		margin:0 0 0 0;
+		padding:19px 0 8px 0;
 }
 
 h2.orange {
-  color: #D93C00;
+	color: #D93C00;
 }
 
 ul {
-  list-style-type:none;
+	list-style-type:none;
 }
 
 td, th {
@@ -101,162 +131,196 @@ table {
 }
 
 label {
-  font-weight: normal;
+	font-weight: normal;
 }
 
 .select2-container {
-  padding-left: 0px;
-  padding-right: 0px;
+	padding-left: 0px;
+	padding-right: 0px;
 }
 
 nav#pagination {
-  width: 100%;
-  text-align: center;
+	width: 100%;
+	text-align: center;
 }
 
 div#map_form {
-  div.form-group {
-    padding-bottom:5px;
-  }
+	div.form-group {
+		padding-bottom:5px;
+	}
 }
 
 .content {
-  div#inlineBaseMapSwitch {
-    background-color: #aaa;
-    padding: 5px;
-    a {
-      color: #fff;
-      display: inline-block;
-      font-size: 13px;
-      text-decoration: none;
-    }
-    a.active {
-      background: #F1F1F1;
-      color: #000;
-    }
-  }
+	div#inlineBaseMapSwitch {
+		background-color: #aaa;
+		padding: 5px;
+		a {
+			color: #fff;
+			display: inline-block;
+			font-size: 13px;
+			text-decoration: none;
+		}
+		a.active {
+			background: #F1F1F1;
+			color: #000;
+		}
+	}
 }
 
 div.field_with_errors {
-  label {
-    font-weight: bold;
-    color: red;
-  }
-  input {
-    display: inline;
-    background-color: #fb9;
-  }
+	label {
+		font-weight: bold;
+		color: red;
+	}
+	input {
+		display: inline;
+		background-color: #fb9;
+	}
 }
 
 input[type="date"]::-webkit-inner-spin-button {
-    /* display: none; <- Crashes Chrome on hover */
-    -webkit-appearance: none;
-    margin: 0;
+		/* display: none; <- Crashes Chrome on hover */
+		-webkit-appearance: none;
+		margin: 0;
 }
 input[type="date"]::-moz-inner-spin-button {
-    /* display: none; <- Crashes Chrome on hover */
-    -moz-appearance: none;
-    margin: 0;
+		/* display: none; <- Crashes Chrome on hover */
+		-moz-appearance: none;
+		margin: 0;
 }
 
 #map_form {
-  label {
-    text-align: right;
-  }
+	label {
+		text-align: right;
+	}
 }
 
 table.dataTable thead tr th+th {
-  border-left: 1px solid #ddd;
+	border-left: 1px solid #ddd;
 }
 
 .bs-callout {
-    padding: 20px;
-    margin: 20px 0;
-    border: 1px solid #eee;
-    border-left-width: 5px;
-    border-radius: 3px;
+		padding: 20px;
+		margin: 20px 0;
+		border: 1px solid #eee;
+		border-left-width: 5px;
+		border-radius: 3px;
 }
 .bs-callout h4 {
-    margin-top: 0;
-    margin-bottom: 5px;
+		margin-top: 0;
+		margin-bottom: 5px;
 }
 .bs-callout p:last-child {
-    margin-bottom: 0;
+		margin-bottom: 0;
 }
 .bs-callout code {
-    border-radius: 3px;
+		border-radius: 3px;
 }
 .bs-callout+.bs-callout {
-    margin-top: -5px;
+		margin-top: -5px;
 }
 .bs-callout-default {
-    border-left-color: #777;
+		border-left-color: #777;
 }
 .bs-callout-default h4 {
-    color: #777;
+		color: #777;
 }
 .bs-callout-primary {
-    border-left-color: #428bca;
+		border-left-color: #428bca;
 }
 .bs-callout-primary h4 {
-    color: #428bca;
+		color: #428bca;
 }
 .bs-callout-success {
-    border-left-color: #5cb85c;
+		border-left-color: #5cb85c;
 }
 .bs-callout-success h4 {
-    color: #5cb85c;
+		color: #5cb85c;
 }
 .bs-callout-danger {
-    border-left-color: #d9534f;
+		border-left-color: #d9534f;
 }
 .bs-callout-danger h4 {
-    color: #d9534f;
+		color: #d9534f;
 }
 .bs-callout-warning {
-    border-left-color: #f0ad4e;
+		border-left-color: #f0ad4e;
 }
 .bs-callout-warning h4 {
-    color: #f0ad4e;
+		color: #f0ad4e;
 }
 .bs-callout-info {
-    border-left-color: #5bc0de;
+		border-left-color: #5bc0de;
 }
 .bs-callout-info h4 {
-    color: #5bc0de;
+		color: #5bc0de;
 }
 
 .column-toggler {
-  .btn {
-    font-size: 12px;
-    margin: 5px;
-    width: 150px;
-  }
+	.btn {
+		font-size: 12px;
+		margin: 5px;
+		width: 150px;
+	}
 }
 
 
 .identifier_filing_component + .identifier_filing_component {
-  margin-left:2px;
-  border-left:1px solid #59b;
-  padding-left:3px;
+	margin-left:2px;
+	border-left:1px solid #59b;
+	padding-left:3px;
 }
 
 input.field-my-error {
-  background-color:#f99;
+	background-color:#f99;
 }
 
 .form-updated {
-  .form-group + .form-group {
-  	margin-top: 2rem;
-  }
+	.form-group + .form-group {
+		margin-top: 2rem;
+	}
 
-  label {
-  	font-weight: bold;
-  }
+	label {
+		font-weight: bold;
+	}
 
-  .help-block {
-  	padding-top: 0;
-  	padding-bottom: 0;
-  	color: inherit;
-  }
+	.help-block {
+		padding-top: 0;
+		padding-bottom: 0;
+		color: inherit;
+	}
+}
+
+.data-table {
+	margin-top: 8px;
+
+	table {
+		margin-top: 0;
+	}
+}
+
+.dataTables_filter {
+	padding-left: 8px;
+}
+
+.rich-text {
+	max-width: 100%;
+
+	h1,
+	h2,
+	p,
+	li {
+		max-width: 400px;
+		margin-right: auto;
+		margin-left: auto;
+	}
+
+	iframe {
+		max-width: 100%;
+		max-height: 225px;
+	}
+}
+
+div.ColVis.ColVis {
+	float: left;
 }

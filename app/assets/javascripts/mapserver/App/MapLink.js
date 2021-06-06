@@ -7,7 +7,7 @@ App.MapLink = App.newClass({
 
     show: function (mapId) {
         this.update(mapId);
-        $('#showUrlLink').show();
+        $('.map-show-url-link').show();
     },
 
     update: function (mapId) {
@@ -25,11 +25,11 @@ App.MapLink = App.newClass({
         // window.open(url);
         window.print();
     },
-    
+
     getLink: function () {
         var locPath = location.pathname;
         var locHost = Config.hostname;
-                        
+
         var url = locHost + locPath;
         var pairs = [];
 
@@ -51,7 +51,7 @@ App.MapLink = App.newClass({
     },
 
     hide: function () {
-        $('#showUrlLink').hide();
+        $('.map-show-url-link').hide();
     },
 
     shorten: function () {

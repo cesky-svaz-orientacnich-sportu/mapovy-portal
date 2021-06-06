@@ -1,0 +1,78 @@
+.input-group-addon ~ .select2 .select2-selection {
+	border-top-left-radius: 0;
+	border-bottom-left-radius: 0;
+}
+
+.input-group.has-input-group-addon-after-select2 .select2-selection {
+	border-top-right-radius: 0;
+	border-bottom-right-radius: 0;
+}
+
+.checkbox.is-in-sm-grid-form {
+	@media (min-width: 768px) {
+		margin-top: 30px;
+	}
+}
+
+.form-fieldset-legend {
+	display: inline-block;
+	max-width: 100%;
+	margin-bottom: 5px;
+	border-bottom: 0;
+	font-size: inherit;
+	font-weight: 700;
+}
+
+.form-fields-inline {
+	display: flex;
+	align-items: center;
+
+	> *:not(:last-child) {
+		margin-right: 8px;
+	}
+}
+
+.remove_nested_fields {
+	display: inline-block;
+	margin-top: 14px;
+	padding: 12px 24px;
+}
+
+.auth-form {
+	padding-bottom: 16px;
+
+	h1 + form {
+		margin-top: 16px;
+	}
+
+	p {
+		max-width: 36em;
+	}
+}
+
+.auth-form-errors {
+	color: darkred;
+
+	ul {
+		margin-bottom: 24px;
+		padding-left: 2.25em;
+		list-style-type: disc;
+		list-style-position: outside;
+	}
+}
+
+.auth-form-sso-links {
+	.auth-form-links + & {
+		margin-top: 16px;
+	}
+}
+
+.auth-form-links {
+	display: flex;
+	flex-direction: column;
+	margin-top: 16px;
+
+	a {
+		margin-top: 8px;
+	}
+}

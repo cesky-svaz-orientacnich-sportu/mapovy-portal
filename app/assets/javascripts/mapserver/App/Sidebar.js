@@ -1,8 +1,8 @@
 App.Sidebar = App.newClass({
 
-    constructor: function (map, width, resourceString, accessGranted) {
+    constructor: function (map, resourceString, accessGranted) {
         this.map = map;
-        this.width = width;
+        this.width = 385;
         this.resourceString = resourceString;
         this.accessGranted = accessGranted;
         this.pageSize = 30;
@@ -11,47 +11,36 @@ App.Sidebar = App.newClass({
     },
 
     init: function () {
-        $(".hide_search_results_button").click(this.hide);
-        $(".linkShowResults").click(this.show);
+        $(".map-show-help").click(this.show);
     },
 
     show: function () {
-        $("#searchResult").animate({ left: "0" }, { duration: 'slow', easing: 'easeOutBack' }, 500);
-        $(".linkShowResults").hide();
-
-        $("#map_canvas").css("left", sidebar.width);
-        google.maps.event.trigger(map, "resize");
+        $(".search-result").show();
+        $(".map-show-help").hide();
     },
 
     hide: function () {
-        $("#searchResult").animate({ left: '-' + sidebar.width }, { duration: 'slow', easing: 'easeOutBack' }, 500);
-        $(".linkShowResults").show();
-
-        $("#map_canvas").css("left", 0);
-        google.maps.event.trigger(map, "resize");
+        $(".search-result").hide();
+        $(".map-show-help").show();
     },
 
     reset: function () {
         this.hideWaiting();
 
-        $('#resultsList').html('');
+        $('.search-result-list').html('');
 
-        $('#sideHeading').html(sidebar.resourceString.sideBarQuickHelpH1);
-        $('#sideHeading').show();
+        $('.search-result-heading').html(sidebar.resourceString.sideBarQuickHelpH1);
+        $('.search-result-heading').show();
         $('#quickHelp').show();
 
-        $('#sideHeadingLinks').html('');
-        $('#searchResult').jScrollPane({ showArrows: true });
-        
-        //this.marker.setMap(null);
-        //$('input.fitem').removeAttr('disabled');
+        $('.search-result-header-links').html('');
     },
 
     showWaiting: function () {
         this.show();
 
-        $('#sideHeading').html('');
-        $('#resultsList').html('');
+        $('.search-result-heading').html('');
+        $('.search-result-list').html('');
         $('#news').hide();
         $('#quickHelp').hide();
         $('#waiting').show();
@@ -60,15 +49,13 @@ App.Sidebar = App.newClass({
     hideWaiting: function () {
         $('#waiting').hide();
     },
-    
+
     hideResults: function() {
-       sidebar.reset(); 
-       $('#titlebar').remove();
-       $('#cancelSearch').hide();
-       $('#toc').show();
-       $('#area_toc').show();
-       toc.refresh(); 
-       searchAdvanced.clearOverlays(); 
+       sidebar.reset();
+       $('.map-cancel-search').hide();
+       $('.map-controls').show();
+       toc.refresh();
+       searchAdvanced.clearOverlays();
        sidebar.hide();
     },
 
@@ -82,21 +69,21 @@ App.Sidebar = App.newClass({
         var numRows = 0;
         if (data) {
           numRows = data.length;
-          console.log("Search results " + numRows + " : " + data);       
+          console.log("Search results " + numRows + " : " + data);
           sidebar.lastData = data;
         } else {
-          console.log("Search results blank? : " + data);                 
+          console.log("Search results blank? : " + data);
         }
 
-        var cancel = '<a href="#" onClick="sidebar.hideResults(); ">' + sidebar.resourceString.sideBarCancel + '</a>';
+        var cancel = $(".map-cancel-search").length ? '<button type="button" onClick="sidebar.hideResults();">'+sidebar.resourceString.sideBarCancel+'</button>' : '';
 
         // Create the list of results for display
         if (numRows == 0) {
-            $('#resultsList').html(sidebar.resourceString.sideBarNoResults);
-            $('#sideHeading').html(sidebar.resourceString.sideBarNoResultsHead);
-            $('#sideHeadingLinks').html(cancel);
+            $('.search-result-list').html(sidebar.resourceString.sideBarNoResults);
+            $('.search-result-heading').html(sidebar.resourceString.sideBarNoResultsHead);
+            $('.search-result-header-links').html(cancel);
             $('#quickHelp').hide();
-            $('#resultsList').show();
+            $('.search-result-list').show();
 
             sidebar.show();
             return;
@@ -117,7 +104,7 @@ App.Sidebar = App.newClass({
         var paginationHtml = '';
         var sideHeadingString = sidebar.resourceString.sideBarResults;
         console.log("Found " + numRows + " results, page size is " + sidebar.pageSize + " and current page is " + currentPage);
-        if (numRows > sidebar.pageSize) {          
+        if (numRows > sidebar.pageSize) {
           numberOfResults = sidebar.pageSize;
           nPages = Math.ceil(numRows / sidebar.pageSize);
           paginationHtml = "<nav class=\"sidebarPagination\">";
@@ -130,9 +117,9 @@ App.Sidebar = App.newClass({
           sideHeadingString += numberOfResults;
         }
         if (allRows > numRows) {
-          sideHeadingString += "<br />zobrazuji pouze " + numRows + " map";          
+          sideHeadingString += "<br />zobrazuji pouze " + numRows + " map";
         }
-        $('#sideHeading').html(sideHeadingString);
+        $('.search-result-heading').html(sideHeadingString);
 
         //concatenate the results into a string
         var dataHtml = '';
@@ -146,45 +133,45 @@ App.Sidebar = App.newClass({
             mapsId.push(mapId);
             var js = '';
             for (j = 0; j < 1; j++) {
-                dataHtml += '<li id="mapResult_' + mapId + '" class="cleaned">' + 
-                '<div class="title cleaned" id="result' + data[i]['id'] + '" ">' + 
+                dataHtml += '<li id="mapResult_' + mapId + '">' +
+                '<div class="title" id="result' + data[i]['id'] + '" ">' +
                   '<h3>'+
-                    '<a href="/' + Config.locale + '/maps/' + mapId + '/fusion">' + 
-                      '<span>' + data[i]['title'] + '</span>' + 
-                    '</a>' + 
+                    '<a href="/' + Config.locale + '/maps/' + mapId + '/fusion">' +
+                      '<span>' + data[i]['title'] + '</span>' +
+                    '</a>' +
                   '</h3>' +
-                  '<ul class="toolsList">';
-                
+                  '<ul class="tools-list">';
+
                 urlImg = Config.assetRoot + '/data/jpg/' + data[i]['preview_identifier'] + '.jpg';
                 urlKML = Config.assetRoot + '/data/kml/' + mapId + '.kml';
-                
+
                 if (data[i]['preview_identifier'] && data[i]['preview_identifier'] != '' && data[i]['preview_identifier'] != '0') {
                   dataHtml += '<li>' +
-                    '<a href="' + urlImg + '" class="mapPreviewLink" title="' + sidebar.resourceString.preview + '">' + 
-                      '<img class="mapa" src="/img/tool-06.png" alt="Nahled" />' + 
-                    '</a>' + 
+                    '<a href="' + urlImg + '" class="mapPreviewLink" title="' + sidebar.resourceString.preview + '">' +
+                      '<img class="mapa" src="/img/tool-06.png" alt="Nahled" />' +
+                    '</a>' +
                   '</li>';
                 } else {
                   dataHtml += '<li><img class="mapa" src="/img/tool-06-dis.png" /></li>';
                 }
-                
+
                 dataHtml += '<li>' +
                   '<a href="javascript:zoom2one(' + mapId + ')" title="' + sidebar.resourceString.zoomTo + '">' +
                     '<img src="/img/tool-07.png" alt="Zoom to" />'
                   '</a>' +
                 '</li>';
-                
-                dataHtml += '<li>' + 
+
+                dataHtml += '<li>' +
                   '<a class="infoTableLink" href="/' + Config.locale + '/maps/' + mapId + '/info_table" title="' + sidebar.resourceString.info + '">' +
                     '<img src="/img/tool-08.png" alt="Ikona" />' +
                   '</a>' +
                 '</li>' +
-                '<li>' + 
+                '<li>' +
                   '<a href="javascript:mapLink.show(' + mapId + ')" title="' + sidebar.resourceString.link2oneMap + '">' +
                     '<img src="/img/tool-03.png" alt="Ikona" />' +
                   '</a>' +
                 '</li>';
-                
+
                 // if (mapShapeExists(mapId)) {
                 //   dataHtml += '<li>' +
                 //     '<a href="' + urlKML + '" target="_blank" title="' + sidebar.resourceString.georefKML + '">' +
@@ -194,7 +181,7 @@ App.Sidebar = App.newClass({
                 // } else {
                 //     dataHtml += '<li><img src="/img/tool-09-dis.png" /></li>';
                 // }
-                
+
 
                 dataHtml += '</ul></div>' +
                     '<table class="tableData">' +
@@ -217,7 +204,7 @@ App.Sidebar = App.newClass({
             }
         }
         //display the results on the page
-        $('#resultsList').html(paginationHtml + dataHtml + paginationHtml);
+        $('.search-result-list').html(paginationHtml + dataHtml + paginationHtml);
 
         //highlighting map polygons on mouseenter
         for (i = 0; i < mapsId.length; i++) {
@@ -232,18 +219,14 @@ App.Sidebar = App.newClass({
             }(id));
         }
 
-        var sideHeadingLinks2 = '<span>|</span>' +
+        var sideHeadingLinks2 =
           '<a href="/' + Config.locale + '/maps/table_search?list=' + mapsIdAll.join("-") + '" target="_blank">' + sidebar.resourceString.sideBarTable + '</a>' +
-          '<span>|</span>' + 
           '<a href="/' + Config.locale + '/maps/download_search?list=' +  mapsIdAll.join("-") + '" target="_blank">' + sidebar.resourceString.sideBarDownload + '</a>';
-        $('#sideHeadingLinks').html(cancel + sideHeadingLinks2);
+        $('.search-result-header-links').html(cancel + sideHeadingLinks2);
 
-        $('#searchResult').jScrollPane({ showArrows: true });
-        $("#toc").hide();
-        $("#cancelSearch").show();
-        
+        $(".map-controls").hide();
+        $(".map-cancel-search").show();
+
         mapHelper.showSelectInMap();
-    },
-
-
+    }
 });

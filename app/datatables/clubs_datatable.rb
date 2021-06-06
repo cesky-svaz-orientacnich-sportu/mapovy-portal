@@ -36,7 +36,7 @@ private
     clubs = if sort_column
       Club.order("#{sort_column} #{sort_direction}")
     else
-      Club.where(1)
+      Club.all
     end
     clubs = clubs.page(page).per(per_page)
     if params[:search].present? and params[:search][:value].present?
@@ -55,7 +55,7 @@ private
 
   def sort_column
     columns = %w[name abbreviation region district]
-    columns[params[:order]['0'][:column].to_i]  rescue nil
+    columns[params[:order]['0'][:column].to_i] rescue nil
   end
 
   def sort_direction

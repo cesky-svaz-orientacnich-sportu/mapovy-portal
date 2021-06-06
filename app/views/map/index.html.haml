@@ -1,27 +1,21 @@
-%a.linkShow{:href => "#", :title => t("mapserver.panelMax")}
-  %span.oos= t("mapserver.panelMax")
-%a.linkShowResults{:href => "#", :title => t("mapserver.showSideBar")}
-  %span.oos= t("mapserver.showSideBar")
-= render :partial => 'search_results'
-%div#map_canvas
-= render :partial => 'basemap_switch'
-= render :partial => 'toc'
-= render :partial => 'logos'
-%div#showUrlLink.popupShadow(style="display:none")
-  %div.popup.simple.dialog
-    %div.header
+%button.map-show-help{:type => "button", :title => t("mapserver.showSideBar")}
+  = image_tag "icons/help.svg", alt: t("mapserver.showSideBar")
+= render :partial => 'map_controls'
+.map-show-url-link.popupShadow(style="display:none")
+  .popup.simple.dialog
+    .header
       %span= t("mapserver.urlLinkHeading")
       = link_to image_tag("/img/ico-close.png", :alt => t("mapserver.urlLinkClose")), "javascript:void(0)", id: 'tools_link_close_button', class: 'close'
-    %div.content
+    .content
       %div
         %input(id="urlInp" type="text" value="" style="border:2px inset; width:215px")
         = link_to t("mapserver.urlLinkUpdate"), "javascript:void(0)", id: 'tools_link_update_button'
-%div#showMeasure.popupShadow(style="display:none")
-  %div.popup.simple.dialog
-    %div.header
+.map-show-measure.popupShadow(style="display:none")
+  .popup.simple.dialog
+    .header
       %span= t("mapserver.measureHeading")
       = link_to image_tag("/img/ico-close.png", :alt => t("mapserver.urlLinkClose")), "javascript:void(0)", id: 'tools_measure_clear_button', class: 'close'
-    %div.content
+    .content
       #{t("mapserver.measureLength")}:
       %span#span-length 0
       km
@@ -39,6 +33,7 @@
     initMapComponents();
     initLayout();
     toc.refresh();
-    sidebar.show();
-  })
-  
+    if (typeof window.matchMedia != typeof undefined && matchMedia("(min-width:64em) and (min-height:40.5em)").matches) {
+      toc.expand();
+    }
+  });

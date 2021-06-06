@@ -1,21 +1,22 @@
-= nested_form_for map_collection, :html => {:id => 'map_form', :role => 'form', :class => 'form-horizontal', :multipart => true} do |f|
-
-  %div.form-group
-    = f.label :title, :class => 'col-sm-2'
-    = f.text_field :title, :class => 'col-sm-6'
-  %div.form-group
-    = f.label :logo, :class => 'col-sm-2'
-    = f.file_field :logo, :class => 'col-sm-6'
-  %div.form-group
-    = f.label :description, :class => 'col-sm-2'
-    = f.text_area :description, :class => 'col-sm-6'
+= nested_form_for map_collection, :html => {:id => 'map_form', :role => 'form', :multipart => true} do |f|
+  .row
+    .col-sm-6
+      .form-group
+        = f.label :title
+        = f.text_field :title, :class => 'form-control'
+  .row
+    .col-sm-6
+      .form-group
+        = f.label :logo
+        = f.file_field :logo
+  .row
+    .col-sm-6
+      .form-group
+        = f.label :description
+        = f.text_area :description, :class => 'form-control', :rows => 5
 
   %h2 Mapy
-  
+
   = render :partial => 'form_fields_map', :locals => {:f => f}
 
-  %div.form-group
-    %div.col-sm-2
-    %div.col-sm-6
-      = f.submit 'Uložit'
-      
+  = f.submit 'Uložit', :class => 'btn btn-primary'

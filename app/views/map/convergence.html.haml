@@ -1,11 +1,5 @@
-%div#map_canvas(style="left:300px")
-= render :partial => 'basemap_switch'
-= render :partial => 'logos'
-
-%div#convergence_info
-
-  %div.well.help= t('mapserver.convergence.help')
-
+#convergence_info
+  .well.help= t('mapserver.convergence.help')
   %h5= t('mapserver.convergence.sections.latlng')
   %p
     %strong WGS84: #{icon 'info-circle', tooltip: 'WGS84 -- EPSG:4326'}
@@ -40,7 +34,6 @@
     (IGRF-12 (2015) Model)
   %p
     (vztaženo k dnešnímu datu)
-
   %p
     %strong Magnetická deklinace:
     %span.mag
@@ -60,7 +53,6 @@
     Nahlížení do KN
   %p.kn_link
 
-
 :javascript
   $(function() {
     // basic map setup
@@ -69,11 +61,6 @@
     initMapComponents();
 
     map.setOptions({draggableCursor: 'crosshair'});
-
-    // adjust for missing top panel
-    $("#map_canvas").css('top', '41px');
-    $("#baseMapSwitch").css("top", 118);
-    $("#baseMapSwitch").css("right", 5);
 
     google.maps.event.addListener(map, 'click', function(e) {
       $("#convergence_info .help").fadeOut();
