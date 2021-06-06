@@ -55,7 +55,8 @@ cs:
         full_name: 'Jméno a příjmení'
         email: "E-mailová adresa (ideálně shodná s ORISem)"
         password: "Heslo"
-        password_confirmation: "Heslo (potvrzení)"
+        password_confirmation: "Heslo znovu"
+        current_password: "Současné heslo"
         name: 'Jméno (převzaté z autentizace)'
         oris_registrations: 'Registrační číslo z ORISu'
         remember_me: 'Zapamatovat přihlášení'

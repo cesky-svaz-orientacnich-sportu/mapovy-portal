@@ -1,0 +1,29 @@
+.auth-form
+  %h1 Registrovat
+  %p Do registrace, prosím, uvádějte jméno a příjmení spolu s e-mailovou adresou odpovídající záznamu v systému ORIS. Bez toho nemůžeme automaticky spárovat vaši identitu s ORISem a tudíž ani rovnou přidělit potřebná práva.
+  = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+    = render "devise/shared/error_messages", resource: resource
+    .row
+      .col-sm-5.col-md-4.col-lg-3
+        .form-group
+          = f.label :email
+          = f.email_field :email, class: "form-control", autofocus: true, autocomplete: "email"
+    .row
+      .col-sm-5.col-md-4.col-lg-3
+        .form-group
+          = f.label :full_name
+          = f.text_field :full_name, :class => 'form-control'
+    .row
+      .col-sm-5.col-md-4.col-lg-3
+        .form-group
+          = f.label :password
+          - if @minimum_password_length
+            %em= "(alespoň #{@minimum_password_length} znaků)"
+          = f.password_field :password, class: "form-control", autocomplete: "new-password"
+    .row
+      .col-sm-5.col-md-4.col-lg-3
+        .form-group
+          = f.label :password_confirmation
+          = f.password_field :password_confirmation, class: "form-control", autocomplete: "new-password"
+    = f.submit "Registrovat", class: "btn btn-primary"
+  = render "devise/shared/links"
