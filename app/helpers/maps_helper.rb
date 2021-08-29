@@ -173,7 +173,7 @@ module MapsHelper
     s = "".html_safe
     if current_user
       if map.created_by == current_user or has_role?(:manager)
-        s+= link_to icon('repeat', tooltip: "Aktualizovat data z ORISu"), [:update_oris_data, @map], class: "pull-right"
+        s+= link_to icon('repeat', tooltip: "Aktualizovat data z ORISu"), [:update_oris_data, map], class: "pull-right"
       end
     end
     s.html_safe
