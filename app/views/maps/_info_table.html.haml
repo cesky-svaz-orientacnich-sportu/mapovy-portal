@@ -99,7 +99,7 @@
             = map_attribute_label :main_race_title
           %td(colspan=5)
             = link_to map.oris_event.title.html_safe + " " + icon('globe', tooltip: "ORIS"), map.oris_event.oris_url, target: '_blank'
-            = update_oris_event_link(@map)
+            = update_oris_event_link(map)
           %th= map_attribute_label :main_race_date
           %td= map.oris_event.date
       - elsif !map.main_race_title.blank?
