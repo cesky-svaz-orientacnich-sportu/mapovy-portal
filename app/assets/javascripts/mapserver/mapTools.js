@@ -11,39 +11,41 @@ function zoom2one(mapId) {
             window.alert("Could not zoom : S = " + status + " E = " + error);
         },
         success: function (res) {
-            if (!res) {
+            if (res) {
                 alert('no response');
-                return;
-            }
-            numRows = res.data.length;
-            if (numRows == 0) {
-              window.alert("Mapa s tímto ID neexistuje");
-            }
-            if (numRows == 1) {
-              var kml = res.data[0]['shape_kml'];
-              var kmlString = "<Placemark>" + kml + "</Placemark>";
-            }
-            if (numRows > 1) {
-              var count = numRows - 1;
-              for (i = 0; i <= count; i++) {
-                var kml = res.data[i]['shape_kml'];
-                kmlString += "<Placemark>" + kml + "</Placemark>";
-              }
-            }
-            if (kml == '')
-                { window.alert("Omlouváme se, ale tato mapa nedisponuje obrysem"); }
-            // create a geoXml3 parser for the click handlers
-            var geoXml = new geoXML3.parser({
-                map: map,
-                zoom: false
-            });
+            } else if (res.status == 'success') {
+                numRows = res.data.length;
+                if (numRows == 0) {
+                  window.alert("Mapa s tímto ID neexistuje");
+                }
+                if (numRows == 1) {
+                  var kml = res.data[0]['shape_kml'];
+                  var kmlString = "<Placemark>" + kml + "</Placemark>";
+                }
+                if (numRows > 1) {
+                  var count = numRows - 1;
+                  for (i = 0; i <= count; i++) {
+                    var kml = res.data[i]['shape_kml'];
+                    kmlString += "<Placemark>" + kml + "</Placemark>";
+                  }
+                }
+                if (kml == '')
+                    { window.alert("Omlouváme se, ale tato mapa nedisponuje obrysem"); }
+                // create a geoXml3 parser for the click handlers
+                var geoXml = new geoXML3.parser({
+                    map: map,
+                    zoom: false
+                });
 
-            geoXml.parseKmlString(kmlString);
-            geoXml.docs[0].gpolygons[0].setMap(null);
-            google.maps.event.trigger(map, 'resize');
-            map.fitBounds(geoXml.docs[0].gpolygons[0].bounds);
-            var zoomLevel = map.getZoom();
-            map.setZoom(zoomLevel);
+                geoXml.parseKmlString(kmlString);
+                geoXml.docs[0].gpolygons[0].setMap(null);
+                google.maps.event.trigger(map, 'resize');
+                map.fitBounds(geoXml.docs[0].gpolygons[0].bounds);
+                var zoomLevel = map.getZoom();
+                map.setZoom(zoomLevel);
+            } else {
+                window.alert("Could not zoom : S = error E = " + res.message);
+            }
         }
     });
 }

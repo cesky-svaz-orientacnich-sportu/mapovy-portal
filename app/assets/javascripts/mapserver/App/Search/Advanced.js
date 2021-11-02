@@ -175,21 +175,22 @@ App.Search.Advanced = App.newClass({
 			},
 			jsonp: 'jsonCallback',//
 			success: function (res) {
-				// Create the list of results for display of autocomplete
-				list = [];
-				for (i = 0; i < res.data.length; i++) {
-					list.push(res.data[i]['title']);
+				if (res.status == 'success') {
+					// Create the list of results for display of autocomplete
+					list = [];
+					for (i = 0; i < res.data.length; i++) {
+						list.push(res.data[i]['title']);
+					}
+
+					// Use the results to create the autocomplete options
+					$("#advancedSearchName").autocomplete({
+						source: function(request, response) {
+							var filtered_results = $.ui.autocomplete.filter(list, request.term);
+							response(filtered_results.slice(0, 20));
+						},
+						minLength: 2
+					});
 				}
-
-				// Use the results to create the autocomplete options
-				$("#advancedSearchName").autocomplete({
-					source: function(request, response) {
-						var filtered_results = $.ui.autocomplete.filter(list, request.term);
-						response(filtered_results.slice(0, 20));
-					},
-					minLength: 2
-				});
-
 			}
 		});
 	},

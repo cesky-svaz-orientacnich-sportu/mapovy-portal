@@ -42,24 +42,27 @@ App.Search.Simple = App.newClass({
                 group_by: 'title'
             },
             error: function(jqxhr, status, error) {
-              window.alert("Could not load autocomplete list : S = " + status + " E = " + error + " while request was sent to `/api/select`");
+              console.log("Could not load autocomplete list : S = " + status + " E = " + error + " while request was sent to `/api/select`");
             },
             success: function (res) {
-                // Create the list of results for display of autocomplete
-                list = [];
-                for (i = 0; i < res.data.length; i++) {
-                    list.push(res.data[i]['title']);
+                if (res.status == 'success') {
+                    // Create the list of results for display of autocomplete
+                    list = [];
+                    for (i = 0; i < res.data.length; i++) {
+                        list.push(res.data[i]['title']);
+                    }
+
+                    // Use the results to create the autocomplete options
+                    $(".toolbar-search-input").autocomplete({
+                        source: function(request, response) {
+                          var filtered_results = $.ui.autocomplete.filter(list, request.term);
+                          response(filtered_results.slice(0, 20));
+                        },
+                        minLength: 2
+                    });
+                } else {
+                    console.log("Could not load autocomplete list : S = error E = " + res.message + " while request was sent to `/api/select`");
                 }
-
-                // Use the results to create the autocomplete options
-                $(".toolbar-search-input").autocomplete({
-                    source: function(request, response) {
-                      var filtered_results = $.ui.autocomplete.filter(list, request.term);
-                      response(filtered_results.slice(0, 20));
-                    },
-                    minLength: 2
-                });
-
             }
         });
     },

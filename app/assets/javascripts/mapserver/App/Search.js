@@ -69,26 +69,36 @@ App.Search = App.newClass({
             dataType: 'json',
             data: select1,
             success: function(res1) {
-              if (select2) {
-                $.ajax({
-                  url: '/api/select',
-                  dataType: 'json',
-                  data: select2,
-                  success: function(res2) {
-                    callback(res2.data, true);
-                  },
+              if (res1.status == 'success') {
+                if (select2) {
+                  $.ajax({
+                    url: '/api/select',
+                    dataType: 'json',
+                    data: select2,
+                    success: function(res2) {
+                      if (res2.status == 'success') {
+                        callback(res2.data, true);
+                      } else {
+                        alert('search error? S = error E = ' + res2.message + " -- the request was `...WHERE " + select2.where + "...`"); // TODO: replace with error message in sidebar
+                        sidebar.hideWaiting();
+                      }
+                    },
                     error: function(xhr, status, error) {
-                    alert('search error? S = ' + status + " E = " + error + " -- the request was `...WHERE " + select2.where + "...`");
-                    App.sidebar.hideWaiting();
-                  }
-                });
+                      alert('search error? S = ' + status + " E = " + error + " -- the request was `...WHERE " + select2.where + "...`"); // TODO: replace with error message in sidebar
+                      sidebar.hideWaiting();
+                    }
+                  });
+                } else {
+                  callback(res1.data, false);
+                }
               } else {
-                callback(res1.data, false);
+                alert('search error? S = error E = ' + res1.message + ' -- the request was `...WHERE ' + select1.where + '...`'); // TODO: replace with error message in sidebar
+                sidebar.hideWaiting();
               }
             },
             error: function(xhr, status, error) {
-              alert('search error? S = ' + status + " E = " + error + " -- the request was `...WHERE " + select1.where + "...`");
-              App.sidebar.hideWaiting();
+              alert('search error? S = ' + status + " E = " + error + " -- the request was `...WHERE " + select1.where + "...`"); // TODO: replace with error message in sidebar
+              sidebar.hideWaiting();
             }
         });
 
