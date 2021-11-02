@@ -10,7 +10,7 @@ function zoom2one(mapId) {
 			window.alert("Could not zoom : S = " + status + " E = " + error);
 		},
 		success: function (res) {
-			if (res) {
+			if (!res) {
 				alert('no response');
 			} else if (res.status == 'success') {
 				numRows = res.data.length;
