@@ -113,10 +113,24 @@ class ApiController < ApplicationController
     sql += (request.query_parameters.has_key?('where') and not request.query_parameters['where'].blank?) ? " WHERE #{request.query_parameters['where']}" : ""
     sql += (request.query_parameters.has_key?('group_by') and not request.query_parameters['group_by'].blank?) ? " GROUP BY #{request.query_parameters['group_by']}" : ""
     sql += (request.query_parameters.has_key?('order_by') and not request.query_parameters['order_by'].blank?) ? " ORDER BY #{request.query_parameters['order_by']}" : ""
-    maps = Map.find_by_sql(sql)
+
+    begin
+      maps = Map.find_by_sql(sql)
+    rescue ActiveRecord::StatementInvalid => e
+      if e.message.start_with?("PG::UndefinedColumn")
+        maps = nil
+      else
+       raise
+      end
+    end
+
     respond_to do |format|
       format.json do
-        render json: {status: 'success', data: maps}.to_json
+        if maps
+          render json: {status: 'success', data: maps}.to_json
+        else
+          render json: {status: 'error', message: 'Invalid SQL'}.to_json
+        end
       end
     end
   end
