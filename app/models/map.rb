@@ -225,7 +225,6 @@ class Map < ApplicationRecord
         json['Data'].each do |_, event_data|
           vr_id = event_data['ID']
           oris_id = event_data['OrisId']
-          coords = event_data['RaceArea']
           attrs = {
             state: STATE_NON_MAP,
             map_family: MAP_FAMILY_EMBARGO,
