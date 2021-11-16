@@ -41,4 +41,3 @@ set :db_remote_clean, true
 
 # Whenever crontab integration
 set :whenever_roles, ->{ :cron }
-set :whenever_path, ->{ current_path }
