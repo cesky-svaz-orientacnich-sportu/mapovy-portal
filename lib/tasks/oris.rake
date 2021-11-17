@@ -11,7 +11,7 @@ namespace :oris do
     puts "After build: #{Club.count} clubs"
   end
   task :obpostupy => :environment do
-    OrisEvent.obpostupy_lookup
+    #OrisEvent.obpostupy_lookup
   end
   task :events => :environment do
     OrisEvent.fetch(Date.today.year, true)
