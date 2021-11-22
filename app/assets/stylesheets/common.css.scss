@@ -80,12 +80,12 @@ a:hover {
 	text-decoration:none;
 }
 
-.content:not(.btn-primary) {
-	a {
+.content {
+	a:not(.btn-primary) {
 		color:#428bca;
 	}
 
-	a:hover {
+	a:not(.btn-primary):hover {
 		color: red;
 		text-decoration:none;
 	}
