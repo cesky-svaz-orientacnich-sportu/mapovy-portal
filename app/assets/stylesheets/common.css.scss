@@ -81,23 +81,23 @@ a:hover {
 }
 
 .content {
-	a {
+	a:not(.btn-primary) {
 		color:#428bca;
 	}
 
-	a:hover {
+	a:not(.btn-primary):hover {
 		color: red;
 		text-decoration:none;
 	}
 }
 
 h2 {
-		color:#000;
-		font-size:15px;
-		font-weight:bold;
-		line-height:2čpx;
-		margin:0 0 0 0;
-		padding:19px 0 8px 0;
+	color:#000;
+	font-size:15px;
+	font-weight:bold;
+	line-height:2čpx;
+	margin:0 0 0 0;
+	padding:19px 0 8px 0;
 }
 
 h2.orange {
