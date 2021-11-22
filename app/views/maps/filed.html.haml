@@ -1,7 +1,7 @@
 %h1 Mapy s evidenčním číslem v roce #{@year}
 
 %div.btn-group
-  - (2015..Date.today.year).each do |y|
+  - (2015..(Date.today.year + 1)).each do |y|
     = link_to y, {year: y}, class: "btn btn-#{y.to_i == @year.to_i ? "primary" : "default"}"
 
 - collection = Map.where(year: @year).where('identifier_filing IS NOT NULL').where('identifier_filing <> ?', "-").where('state <> ?', Map::STATE_SAVED_WITHOUT_FILING).order(:identifier_filing)
