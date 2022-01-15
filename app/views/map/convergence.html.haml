@@ -30,10 +30,11 @@
     %span.a_utm34
   %h5
     = t('mapserver.convergence.sections.declination')
-    %br
-    (IGRF-12 (2015) Model)
   %p
     (vztaženo k dnešnímu datu)
+  %p
+    %strong Model:
+    %span.model
   %p
     %strong Magnetická deklinace:
     %span.mag
@@ -101,8 +102,8 @@
 
       $('#convergence_info .wgs').html(
         "Lat: " + wgs[1].toFixed(5) + " Long: " + wgs[0].toFixed(5) + "<br />" +
-        "Lat: " + Math.floor(wgs[1]) + "&deg;" + Math.floor((wgs[1]-Math.floor(wgs[1]))*60) + "'"+ Math.floor((wgs[1]*60-Math.floor(wgs[1]*60))*60) + "''" + " " +
-        "Long: " + Math.floor(wgs[0]) + "&deg;" + Math.floor((wgs[0]-Math.floor(wgs[0]))*60) + "'"+ Math.floor((wgs[0]*60-Math.floor(wgs[0]*60))*60) + "''"
+        "Lat: " + Math.floor(wgs[1]) + "°" + Math.floor((wgs[1]-Math.floor(wgs[1]))*60) + "'"+ Math.floor((wgs[1]*60-Math.floor(wgs[1]*60))*60) + "''" + " " +
+        "Long: " + Math.floor(wgs[0]) + "°" + Math.floor((wgs[0]-Math.floor(wgs[0]))*60) + "'"+ Math.floor((wgs[0]*60-Math.floor(wgs[0]*60))*60) + "''"
       );
       $('#convergence_info .sjstk').html(
         "X=" + sjstk[0].toFixed(2) + " m Y=" + sjstk[1].toFixed(2) + " m"
@@ -117,10 +118,11 @@
         'E=' + utm34[0].toFixed(2) + " m N=" + utm34[1].toFixed(2) + " m"
       );
 
-      $('#convergence_info .a_sjstk').html( a_sjstk.toFixed(4) + "&deg;" );
-      $('#convergence_info .a_utm33').html( a_utm33.toFixed(4) + "&deg;" );
-      $('#convergence_info .a_utm34').html( a_utm34.toFixed(4) + "&deg;" );
+      $('#convergence_info .a_sjstk').html( a_sjstk.toFixed(4) + "°" );
+      $('#convergence_info .a_utm33').html( a_utm33.toFixed(4) + "°" );
+      $('#convergence_info .a_utm34').html( a_utm34.toFixed(4) + "°" );
 
+      $('#convergence_info .model').html("...");
       $('#convergence_info .mag').html("...");
       $('#convergence_info .magc').html("...");
       $('#convergence_info .g_sjstk').html("...");
@@ -128,18 +130,20 @@
       $('#convergence_info .g_utm34').html("...");
       $.get('/convergence/calculator?lat='+lat+'&lng='+lng).done(function(data){
         console.dir(data);
-        if (data['status'] == 'OK') {
-          $('#convergence_info .mag').html( data['mag_text'] + " | " + data.mag.toFixed(4) + "&deg;");
-          $('#convergence_info .magc').html( data['chg'].toFixed(4) + "&deg;");
-          $('#convergence_info .g_sjstk').html( (a_sjstk + data['mag']).toFixed(4) + "&deg;" );
-          $('#convergence_info .g_utm33').html( (a_utm33 + data['mag']).toFixed(4) + "&deg;" );
-          $('#convergence_info .g_utm34').html( (a_utm34 + data['mag']).toFixed(4) + "&deg;" );
+        if (data.status == 'OK') {
+          $('#convergence_info .model').html(data.model);
+          $('#convergence_info .mag').html(data.mag_text + ' | ' + data.mag.toFixed(4) + '°');
+          $('#convergence_info .magc').html(data.chg.toFixed(4) + '°');
+          $('#convergence_info .g_sjstk').html((a_sjstk + data.mag).toFixed(4) + '°');
+          $('#convergence_info .g_utm33').html((a_utm33 + data.mag).toFixed(4) + '°');
+          $('#convergence_info .g_utm34').html((a_utm34 + data.mag).toFixed(4) + '°');
         } else {
-          $('#convergence_info .mag').html( data['message'] );
-          $('#convergence_info .magc').html( "---" );
-          $('#convergence_info .g_sjstk').html( "---" );
-          $('#convergence_info .g_utm33').html( "---" );
-          $('#convergence_info .g_utm34').html( "---" );
+          $('#convergence_info .model').html('---');
+          $('#convergence_info .mag').html(data.message);
+          $('#convergence_info .magc').html('---');
+          $('#convergence_info .g_sjstk').html('---');
+          $('#convergence_info .g_utm33').html('---');
+          $('#convergence_info .g_utm34').html('---');
         }
       });
     });

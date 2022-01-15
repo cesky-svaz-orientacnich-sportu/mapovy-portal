@@ -8,34 +8,23 @@ class MapController < ApplicationController
   end
 
   def convergence_calculator
-    date = Date.today.strftime("%Y-%m-%d")
     lat, lng = params[:lat], params[:lng]
     require 'open-uri'
-    url = "https://geomag.nrcan.gc.ca/calc/mdcal-r-en.php?latitude=#{lat}&longitude=#{lng}&latitude_north=1&longitude_east=1&date=#{date}"
-    doc = Nokogiri::HTML(open(url))
-    paragraphs = doc.root.css("main p")
-    paragraphs.size >= 2 or begin
-      render json: {status: 'error', message: "Could not fetch geomag data! Url was [#{url}]."}.to_json
-      return
-    end
+    url = "https://www.ngdc.noaa.gov/geomag-web/calculators/calculateDeclination?browserRequest=true&magneticComponent=d&lat1=#{lat}&lat1Hemisphere=N&lon1=#{lng}&lon1Hemisphere=E&model=IGRF&startYear=#{Date.today.strftime("%Y")}&startMonth=#{Date.today.strftime("%m")}&startDay=#{Date.today.strftime("%e")}&resultFormat=json"
+    json = JSON.load(open(url))
 
-    mag = paragraphs[1].text.split(":").last.strip
-    chg = paragraphs[2].text.split(":").last.strip
+    declination = json['result'][0]['declination'].to_f
+    declination_deg = declination.to_i
+    declination_min = ((declination - declination_deg) * 60).to_i
 
-    m_deg = mag.split[0].to_i
-    m_min = mag.split[1].to_f
-    m_sgn = (mag.split[2] == 'West') ? -1 : +1
-    m_deg *= m_sgn
-
-    c_min = chg.split[0].to_f
-    c_sgn = (chg.split[1] == 'West') ? -1 : +1
-    c_min *= c_sgn / 60.0
+    declination_change = json['result'][0]['declnation_sv'].to_f
 
     data = {
       status: 'OK',
-      mag: m_deg + m_min / 60.0,
-      mag_text: "#{m_deg}&deg; #{m_min}'",
-      chg: c_min,
+      model: json['model'],
+      mag: declination,
+      mag_text: "#{declination_deg}° #{declination_min}'",
+      chg: declination_change
     }
 
     render json: data.to_json
