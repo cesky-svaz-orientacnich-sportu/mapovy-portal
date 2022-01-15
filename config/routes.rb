@@ -65,6 +65,7 @@ Mapserver::Application.routes.draw do
         get :noncompleted
         get :finalized
         get :list
+        get :list_for_select
         post :check_map_title
         get :racematch
         post :racematch

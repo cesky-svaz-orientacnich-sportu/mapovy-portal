@@ -2,8 +2,10 @@
   .row
     .col-sm-4.col-lg-5
       .form-group
+        - map_id = map_collection_membership_form.object.map_id
+        - map = map_collection_membership_form.object.map
         = map_collection_membership_form.label :map_id, "Mapa"
-        = map_collection_membership_form.select :map_id, Map.order(:title).map{|x| ["#{x} [#{x.id}]", x.id]}, {:include_blank => true}, :class => "mapSelect form-control"
+        = map_collection_membership_form.select :map_id, map_id.present? ? [["#{map} [#{map_id}]", map_id]] : [], {:include_blank => true}, :class => "mapSelect form-control"
     .col-sm-2.col-lg-1
       .form-group
         = map_collection_membership_form.label :year, "Rok"
@@ -18,8 +20,13 @@
 %p= f.link_to_add "#{icon('plus-circle')} přidat mapu".html_safe, :map_collection_memberships
 
 :javascript
-  function mapSelect(e) {
-    e.select2({
+  function mapSelect($element) {
+    $element.select2({
+      ajax: {
+        url: '#{list_for_select_maps_url(format: "json")}',
+        dataType: 'json',
+        minimumInputLength: 3
+      },
       theme: 'bootstrap',
       width: '100%'
     });

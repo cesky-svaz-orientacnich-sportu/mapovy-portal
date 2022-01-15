@@ -59,3 +59,7 @@
 
 /- ifx = maps0.where("identifier_filing IS NOT NULL AND identifier_filing <> ? AND identifier_filing <> ?", "-", "?").select("id, count(id) as quantity").distinct(:id).group(:identifier_filing).having("quantity > 1").map{|x| Map.find(x).identifier_filing}.select{|x| x.match(/\d\d[A-Z]\d\d\d[A-Z]/)}
 /= render partial: 'check', locals: {maps: maps0.where(identifier_filing: ifx).order("identifier_filing ASC, year DESC"), extra_column: :identifier_filing}
+
+%h3 Mapy bez autora
+
+= render partial: 'check', locals: {maps: maps.where.missing(:authors)}

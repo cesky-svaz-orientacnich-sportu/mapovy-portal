@@ -225,6 +225,20 @@ class MapsController < ApplicationController
     end
   end
 
+  def list_for_select
+    respond_to do |format|
+      format.json do
+        if q = params[:q]
+          render json: {
+            results: Map.where("LOWER(title) LIKE ?", "%" + params[:q].downcase + "%").order(:title).map{|m| {id: m.id, text: "#{m} [#{m.id}]"}}
+          }.to_json
+        else
+          render json: {}
+        end
+      end
+    end
+  end
+
   def index
     respond_to do |format|
       format.html
