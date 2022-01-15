@@ -117,7 +117,7 @@
   %div{:class => current_user.has_role?(:manager) ? 'col-xs-12 col-sm-2' : 'col-xs-6 col-sm-2'}
     .form-group
       = f.label :blocking_until, map_attribute_label(:blocking_until, :edit)
-      = f.select :blocking_until, options_for_select(((Date.today.year..Date.today.year+9).to_a + [0]).sort.reverse.map { |v| [v, v] }, @map.blocking_until), {:include_blank => false}, :class => 'form-control'
+      = f.text_field :blocking_until, :class => 'form-control'
   %div{:class => current_user.has_role?(:manager) ? 'col-xs-12 col-sm-5 col-lg-7' : 'col-xs-12 col-sm-8 col-lg-9'}
     .form-group
       = f.label :blocking_reason, map_attribute_label(:blocking_reason, :edit)
