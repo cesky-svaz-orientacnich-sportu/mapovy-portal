@@ -30,6 +30,7 @@
         %li= link_to t('mapserver.header_menu.authors'), :authors
         %li= link_to t('mapserver.header_menu.clubs'), :clubs
         %li= link_to t('mapserver.header_menu.convergence'), :convergence
+        %li= link_to t('mapserver.header_menu.map_collections'), :map_collections
         %li= link_to t('mapserver.header_menu.about'), text_path('about')
         %li= link_to t('mapserver.header_menu.links'), text_path('links')
         %li= link_to t('mapserver.header_menu.help'), text_path('help')
@@ -87,9 +88,8 @@
                 %li= link_to "Moje mapy", by_user_maps_path(:user_id => current_user.id)
                 %li.divider
               %li= link_to "Odhlásit", destroy_user_session_path
-              %li.divider
-              %li= link_to "Soubory map", :map_collections
               - if admin?
+                %li.divider
                 %li= link_to "Texty", [:backend, :texts]
                 %li= link_to "Uživatelé", [:backend, :users]
         - else

@@ -22,6 +22,9 @@ set :ssh_options, verify_host_key: :never
 set :ssh_options, forward_agent: true
 set :scm_verbose, true
 
+# Set correct rbenv path
+set :rbenv_prefix, "RBENV_ROOT=#{fetch(:rbenv_path)} RBENV_VERSION=#{fetch(:rbenv_ruby)} /usr/bin/rbenv exec"
+
 # Rails
 
 # You'll probably want to symlink Rails shared files and directories.

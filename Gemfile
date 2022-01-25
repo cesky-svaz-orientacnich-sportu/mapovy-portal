@@ -62,10 +62,9 @@ group :development do
   gem "better_errors"
   gem "binding_of_caller"
   gem "capistrano", require: false
-  gem "capistrano-bundler", require: false
   gem "capistrano-db-tasks", :require => false
   gem "capistrano-rails", require: false
-  gem "capistrano-rvm", require: false
+  gem "capistrano-rbenv", require: false
   gem "capistrano-yarn", require: false
   gem "lorem-ipsum"
   gem "thin"

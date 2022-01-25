@@ -12,13 +12,13 @@ install_plugin Capistrano::SCM::Git
 #
 # For documentation on these, see for example:
 #
-#   https://github.com/capistrano/rvm
+#   https://github.com/capistrano/rbenv
 #   https://github.com/capistrano/rails
 #   https://github.com/j-arnaiz/capistrano-yarn
 #   https://github.com/sgruhier/capistrano-db-tasks
 #   https://github.com/javan/whenever
 #
-require "capistrano/rvm"
+require "capistrano/rbenv"
 require "capistrano/rails"
 require "capistrano/yarn"
 require 'capistrano-db-tasks'
