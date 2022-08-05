@@ -59,7 +59,7 @@
 
 module MapsHelper
 
-  def map_attribute_label(key, with_help = true)
+  def map_attribute_label(key, with_help = true, placement = 'top')
     if with_help == :edit
       (
         I18n.translate("mapserver.map_attributes.#{key}") +
@@ -74,7 +74,7 @@ module MapsHelper
       (
         I18n.translate("mapserver.map_attributes.#{key}") +
         "&nbsp;" +
-        icon('question-circle', tooltip: I18n.translate("mapserver.map_attribute_descriptions.#{key}"), color: "#9bf")
+        icon('question-circle', tooltip: I18n.translate("mapserver.map_attribute_descriptions.#{key}"), tooltip_placement: placement, color: "#9bf")
       ).html_safe
     else
       I18n.translate("mapserver.map_attributes.#{key}")

@@ -38,7 +38,7 @@
         = f.text_field :title, :class => 'form-control'
     .col-sm-6.col-md-3
       .form-group
-        = f.label :patron, map_attribute_label(:patron)
+        = f.label :patron, map_attribute_label(:patron, true, :bottom)
         - if allowed_clubs.size == 1
           = f.text_field :patron, :class => 'form-control', :disabled => true, :value => "#{allowed_clubs.first.abbreviation} -- #{allowed_clubs.first.name}"
           = f.hidden_field :patron
