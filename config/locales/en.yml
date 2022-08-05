@@ -36,7 +36,7 @@ en:
       count:
     download:
   clubs:
-    oris_link: "ORIS link"
+    oris_link: "Club ORIS link"
   roles:
     contributor: přispěvatel
     organizer: vydavatel
@@ -51,7 +51,7 @@ en:
     loadingRecords: "Loading..."
     processing:     "Processing..."
     search:         "Search:"
-    search_maps:    "Filter (map title / club / ID):"
+    search_maps:    "Filter (map title / publisher / ID):"
     zeroRecords:    "No matching records found"
     paginate:
       first: "« First"

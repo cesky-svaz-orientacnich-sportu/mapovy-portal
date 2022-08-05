@@ -39,7 +39,7 @@ en:
       archive: "Map browser"
       maps: "Map registry"
       authors: "Authors"
-      clubs: "Clubs"
+      clubs: "Publishers"
       downloads: "Download"
       about: "About"
       help: "Help"
@@ -63,12 +63,12 @@ en:
       id_: 'ID/status'
       state: 'Record status'
       title: 'Name'
-      patron: 'Club'
+      patron: 'Publisher'
       scale: 'Scale'
       year: 'Year'
       blocking_until: 'Blocking until'
       blocking_reason: 'Blocking reason'
-      map_type: 'Type'
+      map_type: 'Specification'
       sport: 'Sport'
       map_sport: 'Sport'
       map_sport_: 'Sport'
@@ -88,7 +88,7 @@ en:
       area_size: 'Area size'
       administrator: 'Map admin'
       administrator_email: 'Map admin email'
-      issued_by: 'Publisher'
+      issued_by: 'Published by'
       printed_by: 'Printed in'
       drawing_technique: 'Drawing technique'
       printing_technique: 'Print technique'
@@ -101,12 +101,12 @@ en:
       id: 'ID'
       id_: 'ID/State'
       title: 'Name'
-      patron: 'Club'
+      patron: 'Publisher. In case of an orienteering club state the code of the club from ORIS. In case of association of orienteering clubs state the club with major rights to the published map. In case of ČSOS state code S00, in case of the OB section code S01, in case of the LOB section code S02, in case of the MTBO section code S03 and in case of the Trail-O section S04. In case of the regional union state the code of the union by ČSOS structur (K01 – K14). In case of physical person with ČSOS membership or membership in an association created for a purpose of organizing an important orienteering competition state the code of one of the subjects above, to which the map copyright will belong.'
       scale: 'Scale'
       year: 'Year'
       blocking_until: 'Blocking ends with the last day of the year'
       blocking_reason: 'Reason for shorter blocking period'
-      map_type: 'Type'
+      map_type: 'Specification'
       sport: 'Sport'
       map_sport: 'Sport'
       equidistance: 'Equidistance'
@@ -123,7 +123,7 @@ en:
       area_size: 'Area size'
       administrator: 'Map admin'
       administrator_email: 'Map admin email'
-      issued_by: 'Publisher'
+      issued_by: 'Publisher in the form stated in the map imprint'
       printed_by: 'Printed in'
       drawing_technique: 'Drawing technique'
       printing_technique: 'Print technique'
@@ -135,12 +135,12 @@ en:
       full_name: 'Name'
       year_of_birth: 'Year of birth'
       activity: 'Years of activity'
-      club: 'Club(s)'
+      club: 'Publisher(s)'
       maps: 'Map(s)'
 
     club_attributes:
       name: 'Name'
-      abbreviation: 'Abbreviation'
+      abbreviation: 'Code'
       region: 'Region'
       district: 'District'
       oris: 'ORIS'
@@ -419,7 +419,7 @@ en:
     edit: "edit map entry"
     copy: "duplicate map entry"
     inNewWindow: "open in new window"
-    previewCopyright: "Using the map without publisher permission for organized events is copyright piracy. Please contact the map administrator listed in the Map Archive database and obtains maps in full quality for printing."
+    previewCopyright: "Using the map without publisher's permission for organized events is copyright piracy. Please contact the map administrator listed in the Map Archive database and obtain maps in full quality for printing."
     zoomTo: "zoom to map shape"
     info: "detailed information about map"
     link2oneMap: "URL link to this map"
@@ -448,8 +448,8 @@ en:
     listMapClubInfo: "detailed information about club"
     listMapTableLinkYear: "Open table with all maps from this year"
 
-    listClubHead: "Czech orienteering federation map archive - list of clubs"
-    listClubHeadLow: "list of clubs that are registrated in Czech orienteering federation"
+    listClubHead: "Czech orienteering federation map archive - list of publishers"
+    listClubHeadLow: "list of publishers that are registrated in Czech orienteering federation"
     listClubTableMap: "Map"
     listClubTableTable: "Table"
     listClubContentMap: "Maps of club"
