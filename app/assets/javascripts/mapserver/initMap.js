@@ -149,15 +149,7 @@ function renderInfoWindow(map) {
           '<td colspan="2"></td>' +
         '</tr>' +
         '<tr>' +
-          (
-            (map['has_blocking'] == 1) ?
-            (
-              '<th colspan="2">' + Config.resourceString.map_layers.blocking.title + ':' +'</th>'
-            ) :
-            (
-              '<th colspan="2"></td>'
-            )
-          ) +
+			'<th colspan="2">' + Config.resourceString.map_layers.blocking.title + ':' +'</th>' +
           (
             (map['has_embargo'] == 1) ?
             (
@@ -188,6 +180,12 @@ function renderInfoWindow(map) {
             )
           ) +
         '</tr>' +
+        (
+        	(map['has_blocking'] == 1 && map['blocking_until'] != 0 && map['blocking_reason'] && map['blocking_reason'].length) ?
+        		'<tr><th colspan="4">' + Config.resourceString.map_layers.blocking.reason + '</th></tr>' +
+        		'<tr><td colspan="4">' + map['blocking_reason'] + '</td></tr>'
+        		: ''
+        ) +
       '</table>' +
     '</div>';
 

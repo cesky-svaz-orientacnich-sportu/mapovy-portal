@@ -99,6 +99,7 @@ class ApiController < ApplicationController
             has_embargo: m.has_embargo,
             blocking_from: m.blocking_from,
             blocking_until: m.blocking_until,
+            blocking_reason: m.blocking_reason,
             embargo_until: m.embargo_until
           }}.to_json
         else

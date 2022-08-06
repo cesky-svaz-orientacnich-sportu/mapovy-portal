@@ -618,6 +618,7 @@ cs:
         title: 'Blokace'
         year: 'v roce'
         without_claim: 'bez nároku'
+        reason: 'Blokace – zdůvodnění'
       embargo:
         info_title: 'Embargo do'
 
