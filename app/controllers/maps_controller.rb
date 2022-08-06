@@ -276,6 +276,9 @@ class MapsController < ApplicationController
 
   def show
     @map = Map.find(params[:id])
+    if @map.state == Map::STATE_REMOVED and not has_role?(:admin)
+      render :file => File.join(Rails.root, 'public/403.html'), :status => 403, :layout => false
+    end
     respond_to do |format|
       format.html
       format.json do
