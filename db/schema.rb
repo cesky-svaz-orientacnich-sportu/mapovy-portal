@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_06_074445) do
-
+ActiveRecord::Schema[7.0].define(version: 2022_08_06_164413) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgrouting"
   enable_extension "plpgsql"
@@ -27,8 +26,8 @@ ActiveRecord::Schema.define(version: 2022_08_06_074445) do
     t.string "secret", limit: 255
     t.string "name", limit: 255
     t.string "link", limit: 255
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
   end
 
   create_table "authors", id: :serial, force: :cascade do |t|
@@ -37,16 +36,16 @@ ActiveRecord::Schema.define(version: 2022_08_06_074445) do
     t.text "club"
     t.string "activity", limit: 255
     t.integer "year_of_birth"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
   end
 
   create_table "cartographers", id: :serial, force: :cascade do |t|
     t.integer "map_id"
     t.integer "author_id"
     t.string "role", limit: 255
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
   end
 
   create_table "clubs", id: :serial, force: :cascade do |t|
@@ -56,8 +55,8 @@ ActiveRecord::Schema.define(version: 2022_08_06_074445) do
     t.string "district", limit: 255
     t.string "url", limit: 255
     t.string "division", limit: 255
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.text "oris_data_json"
     t.string "slug", limit: 255
     t.boolean "is_public", default: false
@@ -69,8 +68,8 @@ ActiveRecord::Schema.define(version: 2022_08_06_074445) do
     t.integer "user_id"
     t.string "email", limit: 255
     t.text "message"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
     t.boolean "resolved", default: false, null: false
   end
 
@@ -79,20 +78,20 @@ ActiveRecord::Schema.define(version: 2022_08_06_074445) do
     t.integer "map_collection_id"
     t.integer "year"
     t.string "note", limit: 255
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
   end
 
   create_table "map_collections", id: :serial, force: :cascade do |t|
     t.string "title", limit: 255
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.string "slug", limit: 255
     t.text "description"
     t.string "logo_file_name", limit: 255
     t.string "logo_content_type", limit: 255
     t.integer "logo_file_size"
-    t.datetime "logo_updated_at"
+    t.datetime "logo_updated_at", precision: nil
     t.index ["slug"], name: "index_map_collections_on_slug", unique: true
   end
 
@@ -102,8 +101,8 @@ ActiveRecord::Schema.define(version: 2022_08_06_074445) do
     t.string "title_en", limit: 255
     t.string "color", limit: 255
     t.boolean "visible_by_default"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
   end
 
   create_table "maps", id: :serial, force: :cascade do |t|
@@ -135,8 +134,8 @@ ActiveRecord::Schema.define(version: 2022_08_06_074445) do
     t.text "note_public"
     t.text "note_internal"
     t.string "preview_identifier", limit: 255
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.integer "created_by_id"
     t.string "map_family", limit: 255
     t.string "map_sport", limit: 255
@@ -156,7 +155,7 @@ ActiveRecord::Schema.define(version: 2022_08_06_074445) do
     t.date "last_reminder_sent_at"
     t.date "state_changed_at"
     t.integer "completed_by_id"
-    t.datetime "user_updated_at"
+    t.datetime "user_updated_at", precision: nil
     t.geometry "shape_geom", limit: {:srid=>0, :type=>"geometry"}
     t.string "cartographers_for_api", limit: 255
     t.string "color", limit: 255
@@ -180,9 +179,9 @@ ActiveRecord::Schema.define(version: 2022_08_06_074445) do
     t.string "title", limit: 255
     t.text "oris_json"
     t.string "place", limit: 255
-    t.datetime "oris_timestamp"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "oris_timestamp", precision: nil
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.string "obpostupy_url", limit: 255
     t.string "obpostupy_map_url", limit: 255
   end
@@ -191,26 +190,26 @@ ActiveRecord::Schema.define(version: 2022_08_06_074445) do
     t.string "name", limit: 255
     t.text "body_cs"
     t.text "body_en"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
   end
 
   create_table "users", id: :serial, force: :cascade do |t|
     t.string "email", limit: 255, default: "", null: false
     t.string "encrypted_password", limit: 255, default: "", null: false
     t.string "reset_password_token", limit: 255
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
+    t.datetime "reset_password_sent_at", precision: nil
+    t.datetime "remember_created_at", precision: nil
     t.integer "sign_in_count", default: 0, null: false
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
+    t.datetime "current_sign_in_at", precision: nil
+    t.datetime "last_sign_in_at", precision: nil
     t.string "current_sign_in_ip", limit: 255
     t.string "last_sign_in_ip", limit: 255
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.string "confirmation_token", limit: 255
-    t.datetime "confirmed_at"
-    t.datetime "confirmation_sent_at"
+    t.datetime "confirmed_at", precision: nil
+    t.datetime "confirmation_sent_at", precision: nil
     t.string "unconfirmed_email", limit: 255
     t.string "oris_registrations", limit: 255
     t.string "role", limit: 255
@@ -228,7 +227,7 @@ ActiveRecord::Schema.define(version: 2022_08_06_074445) do
     t.string "event", limit: 255, null: false
     t.string "whodunnit", limit: 255
     t.text "object"
-    t.datetime "created_at"
+    t.datetime "created_at", precision: nil
     t.text "object_changes"
     t.index ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id"
   end
