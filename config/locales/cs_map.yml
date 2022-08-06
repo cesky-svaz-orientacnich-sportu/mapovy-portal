@@ -296,13 +296,13 @@ cs:
       id: 'ID mapy v archivu'
       state: 'Stav záznamu v databázi'
       title: 'Název mapy. Není-li na mapě uveden, odvodí se z jiných map prostoru nebo z místního názvu, ukončí se kulatou závorkou.'
-      patron: 'Vydavatel. V případě oddílu, klubu nebo kroužku orientačních sportů se jedná o kód subjektu v ORIS. V případě sdružení oddílů, klubů či kroužků orientačních sportů bude zvolen kód subjektu v ORIS s převažujícím rozsahem práv k vydávané mapě. V případě ČSOS bude zvolen kód S00, v případě sekce OB kód S01, v případě sekce LOB kód S02, v případě sekce MTBO kód S03 a v případě sekce Trail-O kód S04. V případě krajského svazu bude zvolen kód krajského svazu dle organizační struktury ČSOS (K01 – K14). V případě fyzické osoby s členstvím v ČSOS či spolku zřízeného za účelem uspořádání významné sportovní soutěže v orientačních sportech bude zvolen kód některého z výše uvedených subjektů, na který bude převeden výkon autorského práva k mapovému dílu.'
+      patron: 'V případě oddílu, klubu nebo kroužku orientačních sportů se jedná o kód subjektu v ORIS. V případě sdružení oddílů, klubů či kroužků orientačních sportů bude zvolen kód subjektu v ORIS s převažujícím rozsahem práv k vydávané mapě. V případě ČSOS bude zvolen kód S00, v případě sekce OB kód S01, v případě sekce LOB kód S02, v případě sekce MTBO kód S03 a v případě sekce Trail-O kód S04. V případě krajského svazu bude zvolen kód krajského svazu dle organizační struktury ČSOS (K01 – K14). V případě fyzické osoby s členstvím v ČSOS či spolku zřízeného za účelem uspořádání významné sportovní soutěže v orientačních sportech bude zvolen kód některého z výše uvedených subjektů, na který bude převeden výkon autorského práva k mapovému dílu.'
       scale: 'Měřítko, v němž je mapa vytištěna'
       year: 'Rok vydání mapy'
       blocking_until: 'Blokace končí s posledním dnem roku'
       blocking_reason: 'Důvod zkrácení základní délky blokace resp. ztráty nároku na blokaci'
       region: 'Kraj podle převažující příslušnosti prostoru'
-      patron_accuracy: 'Způsob určení klubu (vydavatele)'
+      patron_accuracy: 'Způsob určení vydavatele'
       year_accuracy: 'Způsob určení roku vydání'
       map_type: 'Specifikace, podle niž je mapa zpracována'
       map_sport: 'Disciplína, pro niž je mapa určena'
@@ -352,8 +352,8 @@ cs:
         Mapa se dvěma názvy se do archivu fyzicky zařazuje jen jednou, v databázi je však uvedena pod oběma názvy se vzájemnými odkazy v poli Poznámka (počty výtisků  jsou však jen na tom z těchto dvou záznamů, pod jehož názvem je mapa uložena).
         Mapy s různými názvy tištěné ”zaklesnutě” (neoddělitelně) na společný papír se považují za samostatné mapy (a mají počty výtisků uvedené na obou záznamech). Naopak mapa tištěná spolu s jinak pojmenovaným výřezem se považuje za jedinou mapu a má jediný záznam. Stejně tak i mapa tištěná v různých měřítcích se stejným názvem na společný arch se považuje za jedinou mapu, pokud tyto dvě varianty nelze jednoduše oddělit přímým řezem, nebo pokud mají společný rámeček, tiráž apod. Zcela jednoznačné kriterium pro odlišení těchto případů není dosud stanoveno.
       patron: |
-        Smyslem tohoto pole je odlišit od sebe mapy se shodným názvem, případně i rokem vydání i měřítkem. Tuto roli nejlépe plní označení klubu “odpovědného”  za mapu. Zapisuje se třemi velkými písmeny zavedenými v adresáři klubů ČSOB přibližně od roku 1990. U „živých“ klubů je pole  navázáno na databázi klubů v systému ORIS. Zapište klub, uvedený v tiráži mapy jako „Vydal”, případně „Zpracoval“. Je-li na mapě uvedeno více klubů, zapište jen první či určující. Zrušený, transformovaný či přejmenovaný klub zapište pokud možno zkratkou z doby vzniku mapy (např. TGT).
-        Pokud v tiráži mapy není uveden klub, ale svaz OB, nebo sdružení či jiná instituce nebo vůbec nic, zapište klub, do jehož spádové oblasti mapa patří, nebo jehož členové mapu zpracovali, nebo který na ní pořádal premiérový závod, nebo v daném prostoru vydal později další mapu.
+        Smyslem tohoto pole je odlišit od sebe mapy se shodným názvem, případně i rokem vydání i měřítkem. Zrušený, transformovaný či přejmenovaný klub zapište pokud možno zkratkou z doby vzniku mapy (např. TGT).
+        V případě oddílu, klubu nebo kroužku orientačních sportů se jedná o kód subjektu v ORIS. V případě sdružení oddílů, klubů či kroužků orientačních sportů bude zvolen kód subjektu v ORIS s převažujícím rozsahem práv k vydávané mapě. V případě ČSOS bude zvolen kód S00, v případě sekce OB kód S01, v případě sekce LOB kód S02, v případě sekce MTBO kód S03 a v případě sekce Trail-O kód S04. V případě krajského svazu bude zvolen kód krajského svazu dle organizační struktury ČSOS (K01 – K14). V případě fyzické osoby s členstvím v ČSOS či spolku zřízeného za účelem uspořádání významné sportovní soutěže v orientačních sportech bude zvolen kód některého z výše uvedených subjektů, na který bude převeden výkon autorského práva k mapovému dílu.
         Přesnější originální údaj o vydavateli přepsaný z mapy patří do pole Vydal.
       patron_accuracy: |
         Udává míru spolehlivosti údaje v poli Klub. Přípustné hodnoty jsou:
@@ -773,7 +773,7 @@ cs:
     listMapHeadLow: "seznam map pro orientační sporty včetně dalších podrobností o nich"
     listMapYear: "seznam map z roku"
     listMapAuthor: "seznam map autora"
-    listMapClub: "seznam map klubu"
+    listMapClub: "seznam map vydavatele"
     listMapSelection1: "výběr"
     listMapSelection2: "map"
     listMapInMap: "v MAPĚ"
@@ -784,7 +784,7 @@ cs:
     listClubHeadLow: "seznam vydavatelů registrovaných v ČSOS"
     listClubTableMap: "zobrazit všechny záznamy v mapě"
     listClubTableTable: "v tabulce"
-    listClubContentMap: "Mapy klubu"
+    listClubContentMap: "Mapy vydavatele"
     listClubContentTable: "v tabulce"
     listClubContentGraph: "v mapě"
     listClubLink2Registry: "Otevře podrobné informace o klubu z adresáře ČSOS"
