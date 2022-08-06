@@ -10,12 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_23_115757) do
+ActiveRecord::Schema.define(version: 2022_08_06_074445) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgrouting"
   enable_extension "plpgsql"
   enable_extension "postgis"
+  enable_extension "postgis_raster"
+  enable_extension "postgis_topology"
 
   create_table "authorizations", id: :serial, force: :cascade do |t|
     t.string "provider", limit: 255
@@ -58,6 +60,7 @@ ActiveRecord::Schema.define(version: 2021_04_23_115757) do
     t.datetime "updated_at", null: false
     t.text "oris_data_json"
     t.string "slug", limit: 255
+    t.boolean "is_public", default: false
     t.index ["slug"], name: "index_clubs_on_slug", unique: true
   end
 

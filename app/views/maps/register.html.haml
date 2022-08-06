@@ -4,9 +4,9 @@
   - else
     Ohlásit připravovanou mapu
 
-- allowed_clubs = (current_user.has_role?(:cartographer,:manager) ? Club.sorted : Club.where(abbreviation: current_user.clubs).sorted)
-- if allowed_clubs.size == 1
-  - @map.patron = allowed_clubs.first.abbreviation
+- patrons = current_user.patrons
+- if patrons.size == 1
+  - @map.patron = patrons.first.abbreviation
 
 - if @map.errors.any?
   %ul.map_errors.bs-callout.bs-callout-danger
@@ -39,11 +39,11 @@
     .col-sm-6.col-md-3
       .form-group
         = f.label :patron, map_attribute_label(:patron, true, :bottom)
-        - if allowed_clubs.size == 1
-          = f.text_field :patron, :class => 'form-control', :disabled => true, :value => "#{allowed_clubs.first.abbreviation} -- #{allowed_clubs.first.name}"
+        - if patrons.size == 1
+          = f.text_field :patron, :class => 'form-control', :disabled => true, :value => "#{patrons.first.abbreviation} -- #{patrons.first.name}"
           = f.hidden_field :patron
-        - elsif allowed_clubs.any?
-          = f.select :patron, allowed_clubs.map{|x| ["#{x.abbreviation} - #{x.name}", x.abbreviation]}, {:include_blank => true, :class => 'form-control'}
+        - elsif patrons.any?
+          = f.select :patron, patrons.map{|x| ["#{x.abbreviation} - #{x.name}", x.abbreviation]}, {:include_blank => true, :class => 'form-control'}
       = f.hidden_field :patron_accuracy
     .col-sm-6.col-md-3
       .form-group
@@ -129,7 +129,7 @@
         width: "100%"
       });
     });
-  - if allowed_clubs.size != 1
+  - if patrons.size != 1
     :javascript
       $('#map_patron').select2({
         tags: true,

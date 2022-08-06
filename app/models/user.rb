@@ -135,6 +135,16 @@ class User < ApplicationRecord
     (authorized_clubs || "").strip.split
   end
 
+  def patrons
+    priv = (has_role?(:cartographer,:manager) ? Club.where(is_public: false) : Club.where(abbreviation: clubs))
+    pub = Club::PUBLIC_CLUBS.reject{|k,p| !has_public_club_permission?(p)}.map{|k,p| Club.where(:abbreviation => k).first}
+    (pub + priv).sort{|a,b| a.abbreviation <=> b.abbreviation}
+  end
+
+  def has_public_club_permission?(patron)
+    has_role?(:manager) or (patron.key?("region") and has_role?(:cartographer) and regions.include?(patron["region"]))
+  end
+
   def to_json
     {
       id: id,

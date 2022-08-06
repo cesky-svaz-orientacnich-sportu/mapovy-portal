@@ -797,8 +797,6 @@ class Map < ApplicationRecord
     end
   end
 
-
-
   def reminder__on_proposed
     if state == STATE_PROPOSED and state_changed_at
       dt = (Date.today - state_changed_at).to_i
@@ -827,7 +825,3 @@ class Map < ApplicationRecord
   end
 
 end
-
-# email fishing
-#
-#.scan(/\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b/i)
