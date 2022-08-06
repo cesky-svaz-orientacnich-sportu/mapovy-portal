@@ -726,7 +726,7 @@ class Map < ApplicationRecord
 
     Dir.chdir(File.join(Rails.root, "public")) do
       Bundler.with_unbundled_env do
-        system("rbenv shell 2.6.5 ; ./cream #{self.id}X.#{ext}")
+        system("rbenv shell 2.7.1 ; ./cream #{self.id}X.#{ext}")
       end
     end
 
