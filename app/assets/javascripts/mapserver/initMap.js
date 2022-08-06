@@ -172,7 +172,7 @@ function renderInfoWindow(map) {
           (
             (map['has_blocking'] == 1 && map['blocking_until'] != 0) ?
             (
-              '<td colspan="2">' + map['blocking_from'] + " -- " + map['blocking_until'] + '</td>'
+              '<td colspan="2">' + map['blocking_from'] + " – " + map['blocking_until'] + '</td>'
             ) :
             (
               '<td colspan="2">' + Config.resourceString.map_layers.blocking.without_claim + '</td>'
