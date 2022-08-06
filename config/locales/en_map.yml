@@ -31,9 +31,6 @@
 
 en:
   mapserver:
-    metaDescription: "Map application of Czech Orienteering Federation Map Archive"
-    metaLanguage: "english"
-
     title: "Czech Orienteering Federation Map Portal"
     header_menu:
       archive: "Map browser"
@@ -431,72 +428,27 @@ en:
     listAuthHead: "Czech orienteering federation map archive - list of authors"
     listAuthHeadLow: "list of authors of maps for o-sports including some more information, exlusively the list of maps for each author"
     listAuthTableWork: "Active years"
-    listAuthTableClubs: "Club(s)"
-    listAuthTableMaps: "Map(s)"
-    listAuthContentMaps: "show in map"
     listAuthTableLink2Map: "Open map with all maps by this author"
 
     listMapHead: "COF map archive"
-    listMapHeadPart1: "list of maps"
     listMapHeadLow: "list of maps for o-sports including some more information about them"
-    listMapYear: "list of maps from year"
-    listMapAuthor: "list of maps created by"
-    listMapClub: "list of publisher's maps"
-    listMapSelection1: "selection of"
-    listMapSelection2: "maps"
-    listMapInMap: "in MAP"
-    listMapClubInfo: "detailed information about club"
-    listMapTableLinkYear: "Open table with all maps from this year"
 
     listClubHead: "Czech orienteering federation map archive - list of publishers"
     listClubHeadLow: "list of publishers that are registrated in Czech orienteering federation"
     listClubTableMap: "Map"
-    listClubTableTable: "Table"
     listClubContentMap: "Publisher's maps"
-    listClubContentTable: "in table"
-    listClubContentGraph: "in map"
-    listClubLink2Registry: "Open detailed information about club from registry"
 
-    infoTableLink2Club: "Open table with all maps by this club"
-    infoTableLink2Auth: "Open table with all maps by this author"
-
-    aboutHead: "Brief summary about this project"
-
-    downHead: "Downloads"
     downExport: "Export into"
-    downQuery: "Selection of"
-    downQuery2: "maps"
-    downQueryAll: "All maps"
     downNote: "Warning: charset encoding for CSV and XLS files is set to UTF-8"
-    downOther: "Other"
-    downLogos: "Application Logos"
-    downModifiedDatabase: "Modified Czech O-map Database"
-    downLastUpdate: "Last update"
-    downShortInfo: "short info"
-    downOriginalDatabaseLink: "Original Czech O-map Database is available"
-    downMapOutlines: "Map outlines"
-    downCoordSys: "coord. system"
-    format: "format"
-    here: "here"
 
     gpsFromMap: "Choose location on map"
     gpsTooltip: "Click on map to get GPS"
 
     urlLinkHeading: "URL link to this html page"
-    urlLinkClipboard: "Copy to clipboard"
     urlLinkClose: "Close"
     urlLinkUpdate: "Refresh"
-    urlLinkUpdateTitle: "Refresh URL link"
 
     measureHeading: "Measuring of the Distance and Area"
     measureLength: "Length (red line)"
     measureArea: "Area (grey area)"
     measureReset: "Reset Measure"
-
-    legendsHead: "History of map keys and symbols for o-sports"
-
-    inWork: "We apologize, but this part of this application is under construction"
-
-    help: "HELP"
-    about: "ABOUT"
-
