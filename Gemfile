@@ -50,7 +50,7 @@ gem "factory_bot_rails", :group => [:test, :development]
 gem "ci_reporter_rspec"
 
 gem "execjs", :group => [:production, :staging]
-gem "uglifier", :group => [:production, :staging]
+gem "terser", :group => [:production, :staging]
 
 group :test do
   gem "database_cleaner"

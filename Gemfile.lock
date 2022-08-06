@@ -428,6 +428,8 @@ GEM
     temple (0.8.2)
     terrapin (0.6.0)
       climate_control (>= 0.0.3, < 1.0)
+    terser (1.1.12)
+      execjs (>= 0.3.0, < 3)
     thin (1.8.1)
       daemons (~> 1.0, >= 1.0.9)
       eventmachine (~> 1.0, >= 1.0.4)
@@ -444,8 +446,6 @@ GEM
       tilt (>= 1.4, < 3)
     tzinfo (2.0.5)
       concurrent-ruby (~> 1.0)
-    uglifier (4.2.0)
-      execjs (>= 0.3.0, < 3)
     uuidtools (2.2.0)
     warden (1.2.9)
       rack (>= 2.0.9)
@@ -520,10 +520,10 @@ DEPENDENCIES
   sass-rails
   select2-rails
   sprockets-rails
+  terser
   thin
   to_xls
   turnout
-  uglifier
   uuidtools
   webpacker
   whenever
