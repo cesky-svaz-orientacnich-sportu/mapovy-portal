@@ -64,6 +64,7 @@ group :development do
   gem "binding_of_caller"
   gem "capistrano", require: false
   gem "capistrano-db-tasks", :require => false
+  gem 'capistrano-nvm', require: false
   gem "capistrano-rails", require: false
   gem "capistrano-rbenv", require: false
   gem "capistrano-yarn", require: false

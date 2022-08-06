@@ -101,6 +101,8 @@ GEM
       capistrano (~> 3.1)
     capistrano-db-tasks (0.6)
       capistrano (>= 3.0.0)
+    capistrano-nvm (0.0.7)
+      capistrano (~> 3.1)
     capistrano-rails (1.6.2)
       capistrano (~> 3.1)
       capistrano-bundler (>= 1.1, < 3)
@@ -473,6 +475,7 @@ DEPENDENCIES
   bootstrap-sass
   capistrano
   capistrano-db-tasks
+  capistrano-nvm
   capistrano-rails
   capistrano-rbenv
   capistrano-yarn

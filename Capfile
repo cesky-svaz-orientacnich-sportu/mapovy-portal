@@ -14,12 +14,14 @@ install_plugin Capistrano::SCM::Git
 #
 #   https://github.com/capistrano/rbenv
 #   https://github.com/capistrano/rails
+#   https://github.com/koenpunt/capistrano-nvm
 #   https://github.com/j-arnaiz/capistrano-yarn
 #   https://github.com/sgruhier/capistrano-db-tasks
 #   https://github.com/javan/whenever
 #
 require "capistrano/rbenv"
 require "capistrano/rails"
+require 'capistrano/nvm'
 require "capistrano/yarn"
 require 'capistrano-db-tasks'
 require "whenever/capistrano"
