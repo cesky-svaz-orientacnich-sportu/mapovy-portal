@@ -1,6 +1,6 @@
 source "http://rubygems.org"
 
-ruby "3.1.2"
+ruby "2.7.6"
 
 gem 'activerecord-postgis-adapter'
 gem "bootsnap", "~> 1.7"
