@@ -286,7 +286,7 @@ en:
         indoor  : 'Indoor foot-O'
         other   : 'Skating, kayaking and other orienteering'
       map_type:
-        none      : 'no norm'
+        none      : 'no specification'
         military  : 'Military Cartography'
         isom      : 'ISOM'
         issprom   : 'ISSprOM'
@@ -294,7 +294,7 @@ en:
         isskiom   : 'ISSkiOM'
         topo      : 'Topografická'
         iof_4color: 'IOF four-color'
-        combined  : 'Combined norms'
+        combined  : 'Combined specifications'
       georeference:
         s_jstk : 'S-JTSK'
         utm    : 'UTM'

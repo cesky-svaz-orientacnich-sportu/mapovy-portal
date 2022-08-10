@@ -153,7 +153,7 @@ cs:
         isskiom   : 'ISSkiOM (lyžařský OB)'
         topo      : 'Topografická mapa'
         iof_4color: 'IOF čtyřbarevná (černé hustníky)'
-        combined  : 'Části podle různých norem'
+        combined  : 'Části podle různých specifikací'
       georeference:
         s_jstk : 'S-JTSK'
         utm    : 'UTM'
@@ -219,7 +219,7 @@ cs:
         indoor  : 'OB v hale, pod střechou'
         other   : 'OB bruslařský, vodácký, apod.'
       map_type:
-        none      : 'bez normy'
+        none      : 'bez specifikace'
         military  : 'VZÚ'
         isom      : 'ISOM'
         issprom   : 'ISSprOM'
@@ -386,7 +386,7 @@ cs:
         Indoor = orientační běh v hale, v budově,
         Jiný = vodácký, bruslařský OB apod.
       map_type: |
-        Druh mapy podle použité normy nebo stylu. Přípustné hodnoty:
+        Druh mapy podle použité specifikace nebo stylu. Přípustné hodnoty:
         ISOM (klasický pěší OB),
         ISSprOM (OB sprint),
         ISMTBOM (cyklistický OB),
@@ -395,7 +395,7 @@ cs:
         IOF čtyřbarevná (černé hustníky),
         Náčrtek, malůvka, fotokopie,
         ”zeleňavka” (mapy pro OB vydávané VZÚ kolem r. 1970),
-        Části podle různých norem.
+        Části podle různých specifikací.
       region: |
         Kraj podle převažující příslušnosti prostoru mapy (vyberte z nabídky). Nerozhoduje tedy sídlo vydavatele, ani sídlo pořadatele závodu, ani místo centra závodu, ale jen to, ve kterém kraji leží prostor mapy, resp. jeho největší části. Podle tohoto údaje systém určuje, kterému z krajských kartografů přísluší kontrolovat a schvalovat záznam v procesu evidence.
       locality: |
