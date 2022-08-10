@@ -245,7 +245,7 @@ cs:
       blocking_until: 'Blokace do'
       blocking_reason: 'Blokace – zdůvodnění'
       region: 'Kraj'
-      patron_accuracy: 'Klub - míra jistoty'
+      patron_accuracy: 'Vydavatel - míra jistoty'
       year_accuracy: 'Rok - míra jistoty'
       map_type: 'Specifikace'
       map_type_: 'Specifikace'
@@ -353,7 +353,7 @@ cs:
         V případě oddílu, klubu nebo kroužku orientačních sportů se jedná o kód subjektu v ORIS. V případě sdružení oddílů, klubů či kroužků orientačních sportů bude zvolen kód subjektu v ORIS s převažujícím rozsahem práv k vydávané mapě. V případě ČSOS bude zvolen kód S00, v případě sekce OB kód S01, v případě sekce LOB kód S02, v případě sekce MTBO kód S03 a v případě sekce Trail-O kód S04. V případě krajského svazu bude zvolen kód krajského svazu dle organizační struktury ČSOS (K01 – K14). V případě fyzické osoby s členstvím v ČSOS či spolku zřízeného za účelem uspořádání významné sportovní soutěže v orientačních sportech bude zvolen kód některého z výše uvedených subjektů, na který bude převeden výkon autorského práva k mapovému dílu.
         Přesnější originální údaj o vydavateli přepsaný z mapy patří do pole Vydal.
       patron_accuracy: |
-        Udává míru spolehlivosti údaje v poli Klub. Přípustné hodnoty jsou:
+        Udává míru spolehlivosti údaje v poli Vydavatel. Přípustné hodnoty jsou:
         z tiráže	= opsáno z tiráže mapy
         odhad = odhadnuto ze souvislostí, nejasné
         dohledáno = zjištěno spolehlivě (od pořadatele závodu, autora mapy, ze stránek vydavatele, ...)
@@ -491,7 +491,7 @@ cs:
         nezjištěno
         bez georeference
       issued_by: |
-        Plný název vydavatele či zpracovatele, tak jak je uveden na mapě. Nemusí nutně odpovídat poli Klub, zejména když uvedený vydavatel není v adresáři klubů ČSOS. Nezapisuje se formální vydavatel (ČSOS apod.), ale konkrétní zpracovatel, obvykle oddíl OB. Pro vydavatele neuvedené na mapě se používá ukončovací závorka (dohledáno bezpečně), nebo otazník (pouze odhadnuto), nebo pomlčka (nezjištěno).
+        Plný název vydavatele či zpracovatele, tak jak je uveden na mapě. Nemusí nutně odpovídat poli Vydavatel, zejména když uvedený vydavatel není v adresáři klubů ČSOS. Nezapisuje se formální vydavatel (ČSOS apod.), ale konkrétní zpracovatel, obvykle oddíl OB. Pro vydavatele neuvedené na mapě se používá ukončovací závorka (dohledáno bezpečně), nebo otazník (pouze odhadnuto), nebo pomlčka (nezjištěno).
         Příklady:
         KOB Tretra Praha,
         Omphale pro OOB Slavia Kroměříž a Dům pionýrů ve Zhoři.
@@ -591,7 +591,7 @@ cs:
       activity: |
         Nevyplňujte, neměňte. Zjišťuje se automaticky z roků vydání map, u nichž je tento autor uveden. Aktualizuje se automaticky s každou novou mapou tohoto autora.
       club: |
-        Nevyplňujte, neměňte. Zjišťuje se automaticky z pole Klub u map, u nichž je tento autor uveden. Aktualizuje se automaticky s každou novou mapou tohoto autora.
+        Nevyplňujte, neměňte. Zjišťuje se automaticky z pole Vydavatel u map, u nichž je tento autor uveden. Aktualizuje se automaticky s každou novou mapou tohoto autora.
       note: |
         Poznámky sloužící k objasnění sporných případů. Vysvětlení rodinných vztahů mezi stejnojmennými autory, podezření na více osob pod jedním jménem apod. (uvést otazníkem), přezdívka nebo firma či značka (uvést rovnítkem). Příklady:
         =Pakuo

@@ -61,6 +61,7 @@ en:
       state: 'Record status'
       title: 'Name'
       patron: 'Publisher'
+      patron_accuracy: 'Publisher - accuracy'
       scale: 'Scale'
       year: 'Year'
       blocking_until: 'Blocking until'
