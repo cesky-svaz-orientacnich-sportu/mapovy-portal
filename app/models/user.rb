@@ -145,6 +145,10 @@ class User < ApplicationRecord
     has_role?(:manager) or (patron.key?("region") and has_role?(:cartographer) and regions.include?(patron["region"]))
   end
 
+  def authorized_to_view_removed_map?
+    return admin?
+  end
+
   def to_json
     {
       id: id,

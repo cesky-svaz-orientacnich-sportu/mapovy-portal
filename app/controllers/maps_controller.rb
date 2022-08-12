@@ -277,7 +277,7 @@ class MapsController < ApplicationController
 
   def show
     @map = Map.find(params[:id])
-    if @map.state == Map::STATE_REMOVED and not has_role?(:admin)
+    if @map.state == Map::STATE_REMOVED and !current_user.authorized_to_view_removed_map?
       render :file => File.join(Rails.root, 'public/403.html'), :status => 403, :layout => false
     end
     respond_to do |format|
@@ -297,7 +297,7 @@ class MapsController < ApplicationController
       if params.has_key?(:redirect_to)
         redirect_to params[:redirect_to]
       else
-        redirect_back fallback_location: { action: 'show', id: params[:id] }
+        redirect_to current_user.authorized_to_view_removed_map? ? { action: 'show', id: params[:id] } : { controller: 'maps', action: 'index' }
       end
     else
       flash[:error] = "Uživatel #{current_user} nemá oprávnění smazat mapu #{@map}!"
