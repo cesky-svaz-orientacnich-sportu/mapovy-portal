@@ -99,7 +99,7 @@ en:
       id: 'ID'
       id_: 'ID/State'
       title: 'Name'
-      patron: 'In case of an orienteering club state the code of the club from ORIS. In case of association of orienteering clubs state the club with major rights to the published map. In case of ČSOS state code S00, in case of the OB section code S01, in case of the LOB section code S02, in case of the MTBO section code S03 and in case of the Trail-O section S04. In case of the regional union state the code of the union by ČSOS structur (K01 – K14). In case of physical person with ČSOS membership or membership in an association created for a purpose of organizing an important orienteering competition state the code of one of the subjects above, to which the map copyright will belong.'
+      patron: 'Subject that published the map'
       scale: 'Scale'
       year: 'Year'
       blocking_until: 'Blocking ends with the last day of the year'

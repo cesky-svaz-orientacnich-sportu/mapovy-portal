@@ -293,7 +293,7 @@ cs:
       id: 'ID mapy v archivu'
       state: 'Stav záznamu v databázi'
       title: 'Název mapy. Není-li na mapě uveden, odvodí se z jiných map prostoru nebo z místního názvu, ukončí se kulatou závorkou.'
-      patron: 'V případě oddílu, klubu nebo kroužku orientačních sportů se jedná o kód subjektu v ORIS. V případě sdružení oddílů, klubů či kroužků orientačních sportů bude zvolen kód subjektu v ORIS s převažujícím rozsahem práv k vydávané mapě. V případě ČSOS bude zvolen kód S00, v případě sekce OB kód S01, v případě sekce LOB kód S02, v případě sekce MTBO kód S03 a v případě sekce Trail-O kód S04. V případě krajského svazu bude zvolen kód krajského svazu dle organizační struktury ČSOS (K01 – K14). V případě fyzické osoby s členstvím v ČSOS či spolku zřízeného za účelem uspořádání významné sportovní soutěže v orientačních sportech bude zvolen kód některého z výše uvedených subjektů, na který bude převeden výkon autorského práva k mapovému dílu.'
+      patron: 'Subjekt, který mapu vydal'
       scale: 'Měřítko, v němž je mapa vytištěna'
       year: 'Rok vydání mapy'
       blocking_until: 'Blokace končí s posledním dnem roku'
