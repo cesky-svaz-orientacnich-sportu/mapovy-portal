@@ -106,6 +106,7 @@ class MapsController < ApplicationController
     else
       state = Map::STATE_SAVED_WITHOUT_FILING
     end
+    @disable_blocking = true # map created without registrations isn't eligible for blocking
     @map = Map.new(created_by_id: current_user.id, map_family: Map::MAP_FAMILY_MAP, state: state, patron_accuracy: 'authored', year_accuracy: 'authored')
   end
 
