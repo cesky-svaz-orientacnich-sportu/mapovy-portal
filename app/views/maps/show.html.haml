@@ -115,17 +115,17 @@
 
   %div.well Pro tuto mapu není náhled dostupný.
 
-%h2 OB postupy
-
-- if @map.oris_event
-  - if @map.oris_event.obpostupy_url.blank?
-    %div.well Závod #{@map.oris_event} nemá záznam v aplikaci OB postupy.
-  - else
-    %div.well= link_to "Přejít na stránku záznamu v OB postupech", @map.oris_event.obpostupy_url
-    - unless @map.oris_event.obpostupy_map_url.blank?
-      = image_tag @map.oris_event.obpostupy_map_url, :style => 'max-width:100%'
-- else
-  %div.well Tato mapa není spárována s žádným závodem z ORISu.
+/ %h2 OB postupy
+/
+/ - if @map.oris_event
+/   - if @map.oris_event.obpostupy_url.blank?
+/     %div.well Závod #{@map.oris_event} nemá záznam v aplikaci OB postupy.
+/   - else
+/     %div.well= link_to "Přejít na stránku záznamu v OB postupech", @map.oris_event.obpostupy_url
+/     - unless @map.oris_event.obpostupy_map_url.blank?
+/       = image_tag @map.oris_event.obpostupy_map_url, :style => 'max-width:100%'
+/ - else
+/   %div.well Tato mapa není spárována s žádným závodem z ORISu.
 
 - if [Map::STATE_ARCHIVED, Map::STATE_SAVED_WITHOUT_FILING].include?(@map.state)
   #issue_report.record-detail-report-issue.well
