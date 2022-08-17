@@ -296,7 +296,7 @@ cs:
       patron: 'Subjekt, který mapu vydal'
       scale: 'Měřítko, v němž je mapa vytištěna'
       year: 'Rok vydání mapy'
-      blocking_until: 'Blokace končí s posledním dnem roku'
+      blocking_until: 'Poslední rok přednostního práva na tvorbu nové mapy v prostoru této mapy. Blokace končí s posledním dnem roku. (0 = prostor není blokován)'
       blocking_reason: 'Důvod zkrácení základní délky blokace resp. ztráty nároku na blokaci'
       region: 'Kraj podle převažující příslušnosti prostoru'
       patron_accuracy: 'Způsob určení vydavatele'
@@ -366,6 +366,7 @@ cs:
         odhad = odhadnuto ze souvislostí, nejasné
         dohledáno = zjištěno spolehlivě (od pořadatele závodu, autora mapy, ze stránek vydavatele, ...)
         zadáno autorem = zadáno vydavatelem mapy při požadavku na přidělení evidenčního čísla pro plánovanou evidovanou mapu (nad 100 výtisků).
+      blocking_until: Poslední rok přednostního práva na tvorbu nové mapy v prostoru této mapy. Pro nové evidované mapy Rok + 9, pro neevidované mapy 0 (prostor není blokován).
       scale: |
         Až šestimístné měřítkové číslo, např. místo 1:15 000 se uvádí jen 15000.
         Zapisujte skutečné měřítko mapy. Jsou-li rozdíly mezi tiráží a skutečností, např. tisk omylem v jiném měřítku, měřítko pouze grafické, nebo uvedené slovně (např. “by voko”), nebo vůbec neuvedené, komentujte to do pole Poznámka.
@@ -465,7 +466,7 @@ cs:
         - popis výřezů v podrobnějším měřítku,
         apod.
       note_internal: |
-        Pomocné a provizorní organizační poznámky, např: „vrátit Vlčkovi“, „skenovat znovu“, linky na zdroje informací, nejčastěji však datum a charakteristika významnějších změn v záznamu. Doporučená podoba je datum d.m.r., dvojtečka, kvalita přírůstku, názvy změněných polí (případně i hodnoty), tečka.
+        Pomocné a provizorní organizační poznámky, vykřičník indikuje požadavek na akci, po provedení akce jej odstranit. Např: „vrátit Vlčkovi!“, „skenovat znovu!“. Dále linky na zdroje informací, nejčastěji však datum a charakteristika významnějších změn v záznamu. Doporučená podoba je datum d.m.r., dvojtečka, kvalita přírůstku, názvy změněných polí (případně i hodnoty), tečka.
         Příklady:
         12.3.2013: abnn. 24.12.2014: +aaa, Název(Bába=>Baba),Kraj,Počty(abn1=>aaa3).
         5.7.2007: Autoři(info Novák jnov@gmail.com)
@@ -562,6 +563,7 @@ cs:
         Obvod zmapovaného prostoru s přeností lepší než 5% průměru mapy. Při sporných rozvolněných hranicích kresby zahrňte vše, kam lze ještě regulérně umístit kontrolu. Návod ke kreslení je pod mapovým oknem. Případné „díry“ v mapě nelze nakreslit jako díry, je nutno udělat přiměřené vchlípení z obvodové čáry.
       author_name: |
         Příjmení a jméno autora mapy, v nabídce je seznam autorů. Lze zapsat i nové jméno, pozor na pořadí příjmení-jméno. Lze uvést i firmu. Kolektivní autorství se zapisuje slovem „členové ...“.
+        Je-li autor neznámý, uveďte „nezjištěn“ a roli „zpracoval“.
       author_role: |
         Role autora při tvorbě mapy. Má-li autor při tvorbě mapy více rolí, uveďte autora vícekrát.
         Rozhodující jsou údaje v tiráži. Pokud schází nebo se liší od reality, lze zaznamenat skutečnost, komentujte do pole Poznámka.
