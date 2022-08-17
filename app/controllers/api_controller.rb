@@ -50,13 +50,15 @@ class ApiController < ApplicationController
     layers = URI.decode(request.query_parameters['layers']).split(',')
     where = "St_Intersects(shape_geom, St_MakeEnvelope(#{lon.to_f - 0.000001},#{lat.to_f - 0.000001},#{lon.to_f + 0.000001},#{lat.to_f + 0.000001}))"
 
-    case current_user.role
-    when 'admin'
-      where += ""
-    when 'manager', 'cartographer'
-      where += " AND " + Map::FULL_STATE_QUERY
-    else
-      where += " AND " + Map::STATE_QUERY
+    if current_user
+      case current_user.role
+      when 'admin'
+        where += ""
+      when 'manager', 'cartographer'
+        where += " AND " + Map::FULL_STATE_QUERY
+      else
+        where += " AND " + Map::STATE_QUERY
+      end
     end
 
     # pořadí zjišťování je důležité, mělo by inverzně odpovídat pořadí WMS vrstvech v nastavení Mapserveru
