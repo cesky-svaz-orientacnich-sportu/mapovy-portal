@@ -163,6 +163,9 @@ class Map < ApplicationRecord
     STATE_NON_MAP = 'non_map'
   ]
 
+  FULL_STATE_QUERY = "state IN ('proposed', 'change_requested', 'archived', 'saved_without_filing', 'approved', 'completed', 'finalized', 'final_change_requested')"
+  STATE_QUERY = "state IN ('archived', 'saved_without_filing', 'approved', 'completed', 'finalized', 'final_change_requested')"
+
   scope :visible, ->{ where(state: [STATE_APPROVED, STATE_COMPLETED, STATE_FINALIZED, STATE_FINAL_CHANGE_REQUESTED, STATE_SAVED_WITHOUT_FILING, STATE_ARCHIVED]) }
   scope :not_removed, ->{ where('state <> ?', STATE_REMOVED) }
 

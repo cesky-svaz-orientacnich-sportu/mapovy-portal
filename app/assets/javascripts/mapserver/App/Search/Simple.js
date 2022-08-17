@@ -22,13 +22,16 @@ App.Search.Simple = App.newClass({
 	},
 
 	initAutocomplete: function () {
-		where = '';
-		if (! Config.user || ! (Config.user.role == 'admin' || Config.user.role == 'manager' || Config.user.role == 'cartographer')) {
-			if (Config.user) {
-				//where = Config.stateQuery + " OR created_by_id = " + Config.user.id;
-				where = Config.stateQuery;
-			} else {
-				where = Config.stateQuery;
+		where = Config.stateQuery;
+		if (Config.user) {
+			switch (Config.user.role) {
+				case 'admin':
+					where = '';
+					break;
+				case 'manager':
+				case 'cartographer':
+					where = Config.fullStateQuery;
+					break;
 			}
 		}
 		console.log("Autocomplete init with query = " + where);

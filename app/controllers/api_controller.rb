@@ -48,35 +48,45 @@ class ApiController < ApplicationController
     lon = URI.decode(request.query_parameters['lonlat']).split(',').first
     lat = URI.decode(request.query_parameters['lonlat']).split(',').last
     layers = URI.decode(request.query_parameters['layers']).split(',')
+    where = "St_Intersects(shape_geom, St_MakeEnvelope(#{lon.to_f - 0.000001},#{lat.to_f - 0.000001},#{lon.to_f + 0.000001},#{lat.to_f + 0.000001}))"
+
+    case current_user.role
+    when 'admin'
+      where += ""
+    when 'manager', 'cartographer'
+      where += " AND " + Map::FULL_STATE_QUERY
+    else
+      where += " AND " + Map::STATE_QUERY
+    end
 
     # pořadí zjišťování je důležité, mělo by inverzně odpovídat pořadí WMS vrstvech v nastavení Mapserveru
     if layers.include? 'blocking'
       m = Map
-            .where("St_Intersects(shape_geom, St_MakeEnvelope(#{lon.to_f - 0.000001},#{lat.to_f - 0.000001},#{lon.to_f + 0.000001},#{lat.to_f + 0.000001}))")
+            .where(where)
             .where(URI.decode(request.query_parameters['whereB']))
             .order(year: :desc).first
     end
     if not m.present? and layers.include? 'competitionareas'
       m = Map
-            .where("St_Intersects(shape_geom, St_MakeEnvelope(#{lon.to_f - 0.000001},#{lat.to_f - 0.000001},#{lon.to_f + 0.000001},#{lat.to_f + 0.000001}))")
+            .where(where)
             .where(URI.decode(request.query_parameters['whereCA']))
             .order(year: :desc).first
     end
     if not m.present? and layers.include? 'embargoes'
       m = Map
-            .where("St_Intersects(shape_geom, St_MakeEnvelope(#{lon.to_f - 0.000001},#{lat.to_f - 0.000001},#{lon.to_f + 0.000001},#{lat.to_f + 0.000001}))")
+            .where(where)
             .where(URI.decode(request.query_parameters['whereE']))
             .order(year: :desc).first
     end
     if not m.present? and layers.include? 'maps2'
       m = Map
-            .where("St_Intersects(shape_geom, St_MakeEnvelope(#{lon.to_f - 0.000001},#{lat.to_f - 0.000001},#{lon.to_f + 0.000001},#{lat.to_f + 0.000001}))")
+            .where(where)
             .where(URI.decode(request.query_parameters['where2']))
             .order(year: :desc).first
     end
     if not m.present? and layers.include? 'maps'
       m = Map
-            .where("St_Intersects(shape_geom, St_MakeEnvelope(#{lon.to_f - 0.000001},#{lat.to_f - 0.000001},#{lon.to_f + 0.000001},#{lat.to_f + 0.000001}))")
+            .where(where)
             .where(URI.decode(request.query_parameters['where']))
             .order(year: :desc).first
     end

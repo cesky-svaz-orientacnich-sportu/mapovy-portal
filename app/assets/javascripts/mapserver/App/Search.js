@@ -24,15 +24,20 @@ App.Search = App.newClass({
 	},
 
 	searchByFilter: function (filter, callback) {
-		var filter1 = null;
+		var filter1 = filter + " AND " + Config.stateQuery;
 		var filter2 = null;
-		if (Config.user && (Config.user.role == 'admin' || Config.user.role == 'manager' || Config.user.role == 'cartographer')) {
-			filter1 = filter + " AND " + Config.fullStateQuery;
-		} else {
-			if (Config.user) {
-				filter2 = filter + " AND created_by_id = " + Config.user.id;
+		if (Config.user) {
+			switch (Config.user.role) {
+				case 'admin':
+					filter1 = filter;
+					break;
+				case 'manager':
+				case 'cartographer':
+					filter1 = filter + " AND " + Config.fullStateQuery;
+					break;
+				default:
+					filter2 = filter + " AND created_by_id = " + Config.user.id;
 			}
-			filter1 = filter + " AND " + Config.stateQuery;
 		}
 		var select1 = {
 			select: ['id', 'title', 'patron', 'year', 'scale', 'preview_identifier', 'map_sport', 'map_family', 'has_jpg', 'has_kml', 'has_blocking', 'has_embargo', 'blocking_from', 'blocking_until', 'embargo_until'],
