@@ -55,6 +55,9 @@ private
        "main_race_title"     => map.main_race_title,
        "main_race_date"      => map.main_race_date,
        "non_oris_event_url"  => map.non_oris_event_url,
+       "is_educational"      => map.is_educational_,
+       "blocking_until"      => map.blocking_until,
+       "blocking_reason"     => map.blocking_reason,
        "buttons"             => map_buttons(map),
      }
     end
@@ -127,7 +130,7 @@ private
   end
 
   def columns
-    %w[id state title patron patron_accuracy year year_accuracy scale equidistance map_sport map_type map_family region locality area_size resource georeference mapping_state drawing_technique printing_technique issued_by printed_by administrator identifier_filing identifier_approval identifier_other archive_ note_public note_internal created_by_id approved_by_id oris_event_id main_race_title main_race_date non_oris_event_url]
+    %w[id state title patron patron_accuracy year year_accuracy scale equidistance map_sport map_type map_family region locality area_size resource georeference mapping_state drawing_technique printing_technique issued_by printed_by administrator identifier_filing identifier_approval identifier_other archive_ note_public note_internal created_by_id approved_by_id oris_event_id main_race_title main_race_date non_oris_event_url is_educational blocking_until blocking_reason]
   end
 
   def column_is_numeric(column)

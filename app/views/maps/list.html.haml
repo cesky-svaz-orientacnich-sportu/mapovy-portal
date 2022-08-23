@@ -46,7 +46,10 @@
         %th(data-column="32" style="width:120px")= map_attribute_label :main_race_title, false
         %th(data-column="33" style="width:120px")= map_attribute_label :main_race_date, false
         %th(data-column="34" style="width:120px")= map_attribute_label :non_oris_event_url, false
-        %th(data-column="35" style="width:70px") (akce)
+        %th(data-column="35" style="width:120px")= map_attribute_label :is_educational, false
+        %th(data-column="36" style="width:120px")= map_attribute_label :blocking_until, false
+        %th(data-column="37" style="width:120px")= map_attribute_label :blocking_reason, false
+        %th(data-column="38" style="width:70px") (akce)
     %tbody
 
 %h4 Filtrování
@@ -97,6 +100,10 @@
       = list_filter_text 32, :main_race_title
       = list_filter_text 33, :main_race_date
       = list_filter_text 34, :non_oris_event_url
+    %tr
+      / 35 is educational
+      = list_filter_text 36, :blocking_until
+      = list_filter_text 37, :blocking_reason
 
 %div.well.well-sm
   %strong =
@@ -186,6 +193,9 @@
         {'data': "main_race_title"    ,'visible': false},
         {'data': "main_race_date"     ,'visible': false},
         {'data': "non_oris_event_url" ,'visible': false},
+        {'data': "is_educational"     ,'visible': false},
+        {'data': "blocking_until"     ,'visible': false},
+        {'data': "blocking_reason"    ,'visible': false},
         {'data': "buttons"            ,"searchable": false ,"orderable": false }
         ],
       'fnDrawCallback': initPreviewAndInfo,
