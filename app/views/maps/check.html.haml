@@ -33,7 +33,7 @@
 
 %h3 Mapy s neplatným měřítkem
 
-= render partial: 'check', locals: {maps: maps.where('scale < ? OR scale > ?', 100, 100000), extra_column: :scale}
+= render partial: 'check', locals: {maps: maps.where('(scale < ? OR scale > ?) AND scale <> 0 AND scale <> 999999', 100, 100000), extra_column: :scale}
 
 %h3 Mapy s neplatnými technikami kreslení
 
