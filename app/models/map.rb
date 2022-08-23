@@ -524,6 +524,10 @@ class Map < ApplicationRecord
     patron_accuracy.blank? ? "---" : I18n.t("mapserver.map_enums.accuracy.#{patron_accuracy}")
   end
 
+  def is_educational_
+    is_educational ? "ano" : "ne"
+  end
+
   def embargo?
     map_family == MAP_FAMILY_EMBARGO
   end

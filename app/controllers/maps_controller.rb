@@ -165,6 +165,9 @@ class MapsController < ApplicationController
       :main_race_date     ,
       :non_oris_event_url ,
       :link_to_web        ,
+      :is_educational_    ,
+      :blocking_until     ,
+      :blocking_reason    ,
     ]
 
     document_headers = document_columns.map{|x| t("mapserver.map_attributes.#{x[-1..-1]=='_' ? x[0...-1] : x}")}
