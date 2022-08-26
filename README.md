@@ -22,7 +22,7 @@ bundle install
 bin/rails db:create
 bin/rails db:schema:load
 ```
-3. Generate JS translation files:
+3. Generate JS localization files:
 ```
 rake locale_js
 ```
