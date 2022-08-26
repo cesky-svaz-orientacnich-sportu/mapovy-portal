@@ -65,4 +65,4 @@
 = render partial: 'check', locals: {maps: maps.where.missing(:authors)}
 
 %h3 Mapy od roku 2015 s evidenčním číslem a bez blokace
-= render partial: 'check', locals: {maps: maps.where("identifier_filing IS NOT NULL AND identifier_filing <> ? AND identifier_filing <> ? AND year > 2015 AND (has_blocking IS FALSE OR blocking_until = 0)", "-", "?")}
+= render partial: 'check', locals: {maps: maps.where("identifier_filing IS NOT NULL AND identifier_filing <> ? AND identifier_filing <> ? AND year > 2015 AND (has_blocking IS FALSE OR blocking_until = 0)", "-", "?"), extra_column: :state}

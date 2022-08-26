@@ -37,7 +37,7 @@
             %td= link_to map.title, _map_path(map)
             - if extra_column
               %td
-                = map.send(extra_column)
+                = map.send(extra_column == :state ? :state_ : extra_column)
             %td= map.patron
             %td= map.year
             %td= map.note_internal
