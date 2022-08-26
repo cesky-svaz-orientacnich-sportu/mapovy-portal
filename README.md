@@ -22,7 +22,11 @@ bundle install
 bin/rails db:create
 bin/rails db:schema:load
 ```
-3. Run dev server:
+3. Generate JS translation files:
+```
+rake locale_js
+```
+4. Run dev server:
 ```
 rails s -b 0.0.0.0
 ```
