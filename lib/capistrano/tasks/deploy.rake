@@ -24,17 +24,16 @@ namespace :deploy do
 
   desc "Generate JS localization files"
   task :locale_js do
-    on roles(:app) do
-      within release_path do
+    on roles :app do
+      within current_path do
         with rails_env: fetch(:rails_env) do
-          execute :rake, ask :locale_js
+          execute :bundle, 'exec', 'rake', 'locale_js'
         end
       end
     end
   end
 end
-end
 
-after "deploy:updating", "bundler:install", "deploy:migrate", "deploy:cleanup", "deploy:locale_js"
+before "deploy:updated", "deploy:locale_js"
 after "deploy:symlink:release", "deploy:link_data"
 after 'deploy:published', 'deploy:restart'
