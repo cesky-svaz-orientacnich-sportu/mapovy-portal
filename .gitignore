@@ -17,7 +17,7 @@ vendor/bundle
 /tmp
 
 # Ignore generated files
-/app/assets/javascript/mapserver/locale
+/app/assets/javascripts/mapserver/locale
 
 /public/assets
 /public/data
