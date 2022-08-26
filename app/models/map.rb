@@ -83,8 +83,8 @@ class Map < ApplicationRecord
   accepts_nested_attributes_for :cartographers, :allow_destroy => true
 
   scope :sorted, ->{ order(:title, :patron, :year, :scale, :id) }
-
-  scope :no_archive_prints, ->{ where(archive_print1_class: [nil, '0'], archive_print2_class: [nil, '0'], archive_print3_class: [nil, '0']) }
+  scope :no_archive_prints, ->{ where(archive_print1_class: [nil, '0', '-'], archive_print2_class: [nil, '0', '-'], archive_print3_class: [nil, '0', '-']) }
+  scope :any_archive_prints, ->{ where.not(archive_print1_class: [nil, '0', '-'], archive_print2_class: [nil, '0', '-'], archive_print3_class: [nil, '0', '-']) }
 
   extend FriendlyId
   friendly_id :slug_candidates, use: [:slugged, :finders]
@@ -351,9 +351,9 @@ class Map < ApplicationRecord
   end
 
   def no_archive_prints?
-    (archive_print1_class.blank? or (archive_print1_class == '0')) and
-    (archive_print2_class.blank? or (archive_print2_class == '0')) and
-    (archive_print3_class.blank? or (archive_print3_class == '0'))
+    (archive_print1_class.blank? or (archive_print1_class == '0') or (archive_print1_class == '-')) and
+    (archive_print2_class.blank? or (archive_print2_class == '0') or (archive_print2_class == '-')) and
+    (archive_print3_class.blank? or (archive_print3_class == '0') or (archive_print3_class == '-'))
   end
 
   def cartographers_attributes_with_creation=(attrs)
