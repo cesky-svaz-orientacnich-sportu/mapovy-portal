@@ -23,6 +23,6 @@ namespace :deploy do
   end
 end
 
-after "deploy:updating", "bundler:install", "deploy:migrate", "deploy:cleanup"
+after "deploy:updating", "bundler:install", "deploy:migrate", "deploy:cleanup", "locale_js"
 after "deploy:symlink:release", "deploy:link_data"
 after 'deploy:published', 'deploy:restart'
