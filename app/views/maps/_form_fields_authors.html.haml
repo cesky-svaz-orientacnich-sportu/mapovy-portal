@@ -3,7 +3,7 @@
     .col-sm-6.col-md-5.col-lg-4
       .form-group
         = cartographer_form.label :author_id, map_attribute_label(:author_name, :edit)
-        = cartographer_form.select :author_id, Author.all.map{|x| [x.to_s, x.id]}, {:include_blank => true}, {:class => "authorSelect"}
+        = cartographer_form.select :author_id, Author.sorted.map{|x| [x.to_s, x.id]}, {:include_blank => true}, {:class => "authorSelect"}
     .col-xs-9.col-sm-4.col-md-3
       .form-group
         = cartographer_form.label :role, map_attribute_label(:author_role, :edit)
