@@ -81,6 +81,13 @@ private
         t = search[0..0]
         x = search[1..-1]
         case t
+        when "?"
+          case x
+          when "0"
+            maps = maps.where("#{columns[ci.to_i]} IS FALSE")
+          when "1"
+            maps = maps.where("#{columns[ci.to_i]} IS TRUE")
+          end
         when "0"
           maps = maps.where("#{columns[ci.to_i]} IS NULL OR #{columns[ci.to_i]} = ''")
         when "*"

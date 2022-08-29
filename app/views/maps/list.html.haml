@@ -1,12 +1,5 @@
 %h1 Podrobná tabulka
 
-:javascript
-  $(function() {
-    $('.column_filter').on( 'input paste propertychange change', function () {
-        filterColumn( $(this).attr('data-column') );
-    } );
-  })
-
 .data-table.table-responsive
   %table.table.table-striped.compact#maps{:"data-source" => list_maps_url(format: "json")}
     %thead
@@ -101,7 +94,7 @@
       = list_filter_text 33, :main_race_date
       = list_filter_text 34, :non_oris_event_url
     %tr
-      / 35 is educational
+      = list_filter_boolean 35, :is_educational
       = list_filter_text 36, :blocking_until
       = list_filter_text 37, :blocking_reason
 
@@ -127,8 +120,8 @@
     var val = $('#col_'+i+'_filter').val();
     var ftype_input = $('#col_'+i+'_filter_type');
     var ftype = "~";
-    if (ftype_input) ftype = ftype_input.val();
-    col.search(ftype + val,false,false).draw();
+    if (ftype_input.length) ftype = ftype_input.val();
+    col.search(ftype + val, false, false).draw();
     initPreviewAndInfo();
   }
 
@@ -226,4 +219,7 @@
       reorderCallback: rebuildSearch
     } );
 
+    $('.column_filter').on('input paste propertychange change', function () {
+        filterColumn($(this).attr('data-column'));
+    });
   });

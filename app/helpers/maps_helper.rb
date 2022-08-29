@@ -169,6 +169,14 @@ module MapsHelper
     end
   end
 
+  def list_filter_boolean(index, var)
+    content_tag(:th, map_attribute_label(var, false)) +
+    content_tag(:td, style: "white-space:nowrap") do
+      hidden_field_tag(nil, "?", id: "col_#{index}_filter_type", data: {column: index}) +
+      select_tag(nil, options_for_select({"" => -1, "ano" => 1, "ne" => 0}), id: "col_#{index}_filter", class: 'column_filter', data: {column: index})
+    end
+  end
+
   def update_oris_event_link(map)
     s = "".html_safe
     if current_user
