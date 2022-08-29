@@ -97,7 +97,7 @@ private
           unless column_is_numeric(columns[ci.to_i]) and x.blank?
             maps = maps.where("#{columns[ci.to_i]} < :search", search: x)
           end
-        when "!="
+        when "!"
           maps = maps.where("#{columns[ci.to_i]} <> :search", search: x)
         when "~"
           unless column_is_numeric(columns[ci.to_i])
