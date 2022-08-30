@@ -518,7 +518,7 @@ DEPENDENCIES
   pg
   rails (~> 7.0)
   rails-controller-testing
-  rgeo (~> 2.2)
+  rgeo (~> 2.4)
   rgeo-geojson
   rspec-rails
   sass-rails
