@@ -126,7 +126,7 @@ module MapsHelper
   def map_buttons(map, destroy_redirect_path = nil)
     s = "".html_safe
     if current_user
-      if (map.created_by == current_user and [Map::STATE_PROPOSED, Map::STATE_SAVED_WITHOUT_FILING].include?(map.state)) or has_role?(:manager)
+      if (map.created_by == current_user and [Map::STATE_PROPOSED, Map::STATE_SAVED_WITHOUT_FILING, Map::STATE_COMPLETED].include?(map.state)) or has_role?(:manager)
         s+= link_to icon('pencil-square-o', tooltip: 'upravit'), [:edit, map]
         s+= " ".html_safe
       end
