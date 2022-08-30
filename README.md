@@ -35,5 +35,9 @@ rails s -b 0.0.0.0
 Klíče jsou v nastavení apache a jsou nastavené jako proměnné prostředí.
 
 ### Projekt mapserver na Google + API klíče
-
 archiv.map.csos@gmail.com
+
+## Changelog
+In separate file [CHANGELOG.md](CHANGELOG.md). Please [keep a CHANGELOG](http://keepachangelog.com/).
+
+This project adheres to [Semantic Versioning](http://semver.org/).
