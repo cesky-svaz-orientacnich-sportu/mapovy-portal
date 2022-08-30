@@ -338,7 +338,7 @@ cs:
       updated_at: 'Datum a čas poslední změny záznamu'
       is_educational: 'Mapa byla vydána v rámci projektu výukových map'
 
-    map_attribute_hints:
+    map_attribute_form_hints:
       state: |
         Indikuje etapu v procesu evidence a archivace mapy, v nabídce jsou jen další přípustné etapy, což závisí i na roli uživatele.
         Evidované mapy (nad 100 výtisků, od r.2015): požádáno o číslo => číslo schváleno => doplněno vydavatelem => evidence uzavřena, archivovat! => archivováno
