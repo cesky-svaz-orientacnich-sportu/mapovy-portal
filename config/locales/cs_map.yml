@@ -576,7 +576,7 @@ cs:
         revidoval (revize v terénu včetně kresby změn)
         delegovaný kartograf (kontrola kvality, praktikováno mapovou komisí svazu v 80. letech 20. stol.)
         firma (jen pokud nejsou jmenovány konkrétní osoby)
-        jiná role
+        jiná role (např. příprava podkladů)
     author_attributes:
       full_name: 'Příjmení a jméno'
       year_of_birth: 'Rok narození'
