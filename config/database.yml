@@ -3,7 +3,7 @@ development:
   schema_search_path: public
   database: <%= ENV["DB_NAME_DEV"] %>
   host: localhost
-  username: postgres
+  username: <%= ENV["DB_USER"] %>
   password: <%= ENV["DB_PASSWORD"] %>
   encoding: unicode
   pool: 5
@@ -17,7 +17,7 @@ test:
   schema_search_path: public
   database: <%= ENV["DB_NAME_TEST"] %>
   host: localhost
-  username: postgres
+  username: <%= ENV["DB_USER"] %>
   password: <%= ENV["DB_PASSWORD"] %>
   encoding: unicode
   pool: 5

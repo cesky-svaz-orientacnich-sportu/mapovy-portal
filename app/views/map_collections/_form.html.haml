@@ -16,6 +16,8 @@
         = f.text_area :description, :class => 'form-control', :rows => 5
 
   %h2 Mapy
+  %p
+    %strong Soubor map nelze uložit, pokud je hned při založení zadána i nějaká mapa. Nejdříve soubor vytvořte bez map, poté mapy přidejte v editaci.
 
   = render :partial => 'form_fields_map', :locals => {:f => f}
 

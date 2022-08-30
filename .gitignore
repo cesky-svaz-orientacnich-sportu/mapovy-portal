@@ -16,6 +16,9 @@ vendor/bundle
 /log/*.log
 /tmp
 
+# Ignore generated files
+/app/assets/javascripts/mapserver/locale
+
 /public/assets
 /public/data
 /public/system

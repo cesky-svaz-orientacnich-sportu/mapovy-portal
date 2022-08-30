@@ -155,15 +155,17 @@ App.Search.Advanced = App.newClass({
 	},
 
 	initAutocomplete: function () {
-		where = '';
-		// visibility
-		if (! Config.user || ! (Config.user.role == 'admin' || Config.user.role == 'manager' || Config.user.role == 'cartographer')) {
-		  if (Config.user) {
-			//where = Config.stateQuery + " OR created_by_id = " + Config.user.id;
-			where = Config.stateQuery;
-		  } else {
-			where = Config.stateQuery;
-		  }
+		where = Config.stateQuery;
+		if (Config.user) {
+			switch (Config.user.role) {
+				case 'admin':
+					where = '';
+					break;
+				case 'manager':
+				case 'cartographer':
+					where = Config.fullStateQuery;
+					break;
+			}
 		}
 		$.ajax({
 			url: '/api/select',

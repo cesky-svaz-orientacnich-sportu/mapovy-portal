@@ -15,6 +15,9 @@ module Mapserver
     #
     # These settings can be overridden in specific environments using the files
     # in config/environments, which are processed later.
+    #
+    # config.time_zone = "Central Time (US & Canada)"
+    # config.eager_load_paths << Rails.root.join("extras")
 
     # Autoload paths are added to $LOAD_PATH by default. However, Zeitwerk uses
     # absolute file names internally, and your application should not issue require

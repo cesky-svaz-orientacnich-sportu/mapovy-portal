@@ -31,9 +31,6 @@
 
 cs:
   mapserver:
-    metaDescription: "Mapová aplikace Archivu map ČSOS"
-    metaLanguage: "czech"
-
     cancelSearch: "zrušit vyhledávání"
 
     shape_edit_help: |
@@ -62,7 +59,7 @@ cs:
       convergence: "Pro kartografy"
       maps: "Mapy"
       authors: "Autoři"
-      clubs: "Kluby"
+      clubs: "Vydavatelé"
       downloads: "Ke stažení"
       map_collections: "Soubory map"
       about: "O projektu"
@@ -156,7 +153,7 @@ cs:
         isskiom   : 'ISSkiOM (lyžařský OB)'
         topo      : 'Topografická mapa'
         iof_4color: 'IOF čtyřbarevná (černé hustníky)'
-        combined  : 'Části podle různých norem'
+        combined  : 'Části podle různých specifikací'
       georeference:
         s_jstk : 'S-JTSK'
         utm    : 'UTM'
@@ -222,7 +219,7 @@ cs:
         indoor  : 'OB v hale, pod střechou'
         other   : 'OB bruslařský, vodácký, apod.'
       map_type:
-        none      : 'bez normy'
+        none      : 'bez specifikace'
         military  : 'VZÚ'
         isom      : 'ISOM'
         issprom   : 'ISSprOM'
@@ -243,15 +240,15 @@ cs:
       state: 'Stav záznamu'
       title: 'Název'
       scale: 'Měřítko'
-      patron: 'Klub'
+      patron: 'Vydavatel'
       year: 'Rok'
       blocking_until: 'Blokace do'
       blocking_reason: 'Blokace – zdůvodnění'
       region: 'Kraj'
-      patron_accuracy: 'Klub - míra jistoty'
+      patron_accuracy: 'Vydavatel - míra jistoty'
       year_accuracy: 'Rok - míra jistoty'
-      map_type: 'Norma'
-      map_type_: 'Norma'
+      map_type: 'Specifikace'
+      map_type_: 'Specifikace'
       sport: 'Disciplína'
       map_sport: 'Disciplína'
       map_sport_: 'Disciplína'
@@ -296,15 +293,15 @@ cs:
       id: 'ID mapy v archivu'
       state: 'Stav záznamu v databázi'
       title: 'Název mapy. Není-li na mapě uveden, odvodí se z jiných map prostoru nebo z místního názvu, ukončí se kulatou závorkou.'
-      patron: 'Klub, který mapu vydal. Není-li znám, odvodí se podle jiných map prostoru nebo podle příslušnosti autora.'
+      patron: 'Subjekt, který mapu vydal'
       scale: 'Měřítko, v němž je mapa vytištěna'
       year: 'Rok vydání mapy'
-      blocking_until: 'Blokace končí s posledním dnem roku'
+      blocking_until: 'Poslední rok přednostního práva na tvorbu nové mapy v prostoru této mapy. Blokace končí s posledním dnem roku. (0 = prostor není blokován)'
       blocking_reason: 'Důvod zkrácení základní délky blokace resp. ztráty nároku na blokaci'
       region: 'Kraj podle převažující příslušnosti prostoru'
-      patron_accuracy: 'Způsob určení klubu (vydavatele)'
+      patron_accuracy: 'Způsob určení vydavatele'
       year_accuracy: 'Způsob určení roku vydání'
-      map_type: 'Norma, podle niž je mapa zpracována'
+      map_type: 'Specifikace, podle niž je mapa zpracována'
       map_sport: 'Disciplína, pro niž je mapa určena'
       oris_event: 'První závod na mapě (z ORISu)'
       main_race: 'První závod na mapě, je-li v kalendáři ORIS'
@@ -341,7 +338,7 @@ cs:
       updated_at: 'Datum a čas poslední změny záznamu'
       is_educational: 'Mapa byla vydána v rámci projektu výukových map'
 
-    map_attribute_hints:
+    map_attribute_form_hints:
       state: |
         Indikuje etapu v procesu evidence a archivace mapy, v nabídce jsou jen další přípustné etapy, což závisí i na roli uživatele.
         Evidované mapy (nad 100 výtisků, od r.2015): požádáno o číslo => číslo schváleno => doplněno vydavatelem => evidence uzavřena, archivovat! => archivováno
@@ -352,11 +349,9 @@ cs:
         Mapa se dvěma názvy se do archivu fyzicky zařazuje jen jednou, v databázi je však uvedena pod oběma názvy se vzájemnými odkazy v poli Poznámka (počty výtisků  jsou však jen na tom z těchto dvou záznamů, pod jehož názvem je mapa uložena).
         Mapy s různými názvy tištěné ”zaklesnutě” (neoddělitelně) na společný papír se považují za samostatné mapy (a mají počty výtisků uvedené na obou záznamech). Naopak mapa tištěná spolu s jinak pojmenovaným výřezem se považuje za jedinou mapu a má jediný záznam. Stejně tak i mapa tištěná v různých měřítcích se stejným názvem na společný arch se považuje za jedinou mapu, pokud tyto dvě varianty nelze jednoduše oddělit přímým řezem, nebo pokud mají společný rámeček, tiráž apod. Zcela jednoznačné kriterium pro odlišení těchto případů není dosud stanoveno.
       patron: |
-        Smyslem tohoto pole je odlišit od sebe mapy se shodným názvem, případně i rokem vydání i měřítkem. Tuto roli nejlépe plní označení klubu “odpovědného”  za mapu. Zapisuje se třemi velkými písmeny zavedenými v adresáři klubů ČSOB přibližně od roku 1990. U „živých“ klubů je pole  navázáno na databázi klubů v systému ORIS. Zapište klub, uvedený v tiráži mapy jako „Vydal”, případně „Zpracoval“. Je-li na mapě uvedeno více klubů, zapište jen první či určující. Zrušený, transformovaný či přejmenovaný klub zapište pokud možno zkratkou z doby vzniku mapy (např. TGT).
-        Pokud v tiráži mapy není uveden klub, ale svaz OB, nebo sdružení či jiná instituce nebo vůbec nic, zapište klub, do jehož spádové oblasti mapa patří, nebo jehož členové mapu zpracovali, nebo který na ní pořádal premiérový závod, nebo v daném prostoru vydal později další mapu.
-        Přesnější originální údaj o vydavateli přepsaný z mapy patří do pole Vydal.
+        Subjekt, který mapu vydává. Pro sdružení oddílů, klubů či kroužků zvolte nejvýznamnější z nich vzhledem k vydávané mapě. Pro ČSOS zvolte kód S00, pro sekci OB kód S01, pro sekci LOB kód S02, pro sekci MTBO kód S03 a pro sekci Trail-O kód S04. Pro krajský svaz zvolte kód dle organizační struktury ČSOS (K01 – K14). V ostatních případech (např. vydavatelem je fyzická osoba) zvolte kód toho z výše uvedených subjektů, na nějž bude převeden výkon autorského práva. Zrušený, transformovaný či přejmenovaný klub (oddíl, kroužek) neuvedený v ORIS zapište zkratkou z doby vzniku mapy (např. TGT).
       patron_accuracy: |
-        Udává míru spolehlivosti údaje v poli Klub. Přípustné hodnoty jsou:
+        Udává míru spolehlivosti údaje v poli Vydavatel. Přípustné hodnoty jsou:
         z tiráže	= opsáno z tiráže mapy
         odhad = odhadnuto ze souvislostí, nejasné
         dohledáno = zjištěno spolehlivě (od pořadatele závodu, autora mapy, ze stránek vydavatele, ...)
@@ -369,6 +364,7 @@ cs:
         odhad = odhadnuto ze souvislostí, nejasné
         dohledáno = zjištěno spolehlivě (od pořadatele závodu, autora mapy, ze stránek vydavatele, ...)
         zadáno autorem = zadáno vydavatelem mapy při požadavku na přidělení evidenčního čísla pro plánovanou evidovanou mapu (nad 100 výtisků).
+      blocking_until: Poslední rok přednostního práva na tvorbu nové mapy v prostoru této mapy. Pro nové evidované mapy Rok + 9, pro neevidované mapy 0 (prostor není blokován).
       scale: |
         Až šestimístné měřítkové číslo, např. místo 1:15 000 se uvádí jen 15000.
         Zapisujte skutečné měřítko mapy. Jsou-li rozdíly mezi tiráží a skutečností, např. tisk omylem v jiném měřítku, měřítko pouze grafické, nebo uvedené slovně (např. “by voko”), nebo vůbec neuvedené, komentujte to do pole Poznámka.
@@ -389,7 +385,7 @@ cs:
         Indoor = orientační běh v hale, v budově,
         Jiný = vodácký, bruslařský OB apod.
       map_type: |
-        Druh mapy podle použité normy nebo stylu. Přípustné hodnoty:
+        Druh mapy podle použité specifikace nebo stylu. Přípustné hodnoty:
         ISOM (klasický pěší OB),
         ISSprOM (OB sprint),
         ISMTBOM (cyklistický OB),
@@ -398,7 +394,7 @@ cs:
         IOF čtyřbarevná (černé hustníky),
         Náčrtek, malůvka, fotokopie,
         ”zeleňavka” (mapy pro OB vydávané VZÚ kolem r. 1970),
-        Části podle různých norem.
+        Části podle různých specifikací.
       region: |
         Kraj podle převažující příslušnosti prostoru mapy (vyberte z nabídky). Nerozhoduje tedy sídlo vydavatele, ani sídlo pořadatele závodu, ani místo centra závodu, ale jen to, ve kterém kraji leží prostor mapy, resp. jeho největší části. Podle tohoto údaje systém určuje, kterému z krajských kartografů přísluší kontrolovat a schvalovat záznam v procesu evidence.
       locality: |
@@ -468,7 +464,7 @@ cs:
         - popis výřezů v podrobnějším měřítku,
         apod.
       note_internal: |
-        Pomocné a provizorní organizační poznámky, např: „vrátit Vlčkovi“, „skenovat znovu“, linky na zdroje informací, nejčastěji však datum a charakteristika významnějších změn v záznamu. Doporučená podoba je datum d.m.r., dvojtečka, kvalita přírůstku, názvy změněných polí (případně i hodnoty), tečka.
+        Pomocné a provizorní organizační poznámky, vykřičník indikuje požadavek na akci, po provedení akce jej odstranit. Např: „vrátit Vlčkovi!“, „skenovat znovu!“. Dále linky na zdroje informací, nejčastěji však datum a charakteristika významnějších změn v záznamu. Doporučená podoba je datum d.m.r., dvojtečka, kvalita přírůstku, názvy změněných polí (případně i hodnoty), tečka.
         Příklady:
         12.3.2013: abnn. 24.12.2014: +aaa, Název(Bába=>Baba),Kraj,Počty(abn1=>aaa3).
         5.7.2007: Autoři(info Novák jnov@gmail.com)
@@ -494,7 +490,7 @@ cs:
         nezjištěno
         bez georeference
       issued_by: |
-        Plný název vydavatele či zpracovatele, tak jak je uveden na mapě. Nemusí nutně odpovídat poli Klub, zejména když uvedený vydavatel není v adresáři klubů ČSOS. Nezapisuje se formální vydavatel (ČSOS apod.), ale konkrétní zpracovatel, obvykle oddíl OB. Pro vydavatele neuvedené na mapě se používá ukončovací závorka (dohledáno bezpečně), nebo otazník (pouze odhadnuto), nebo pomlčka (nezjištěno).
+        Plný název vydavatele či zpracovatele, tak jak je uveden na mapě. Nemusí nutně odpovídat poli Vydavatel, zejména když uvedený vydavatel není v adresáři klubů ČSOS. Nezapisuje se formální vydavatel (ČSOS apod.), ale konkrétní zpracovatel, obvykle oddíl OB. Pro vydavatele neuvedené na mapě se používá ukončovací závorka (dohledáno bezpečně), nebo otazník (pouze odhadnuto), nebo pomlčka (nezjištěno).
         Příklady:
         KOB Tretra Praha,
         Omphale pro OOB Slavia Kroměříž a Dům pionýrů ve Zhoři.
@@ -565,6 +561,7 @@ cs:
         Obvod zmapovaného prostoru s přeností lepší než 5% průměru mapy. Při sporných rozvolněných hranicích kresby zahrňte vše, kam lze ještě regulérně umístit kontrolu. Návod ke kreslení je pod mapovým oknem. Případné „díry“ v mapě nelze nakreslit jako díry, je nutno udělat přiměřené vchlípení z obvodové čáry.
       author_name: |
         Příjmení a jméno autora mapy, v nabídce je seznam autorů. Lze zapsat i nové jméno, pozor na pořadí příjmení-jméno. Lze uvést i firmu. Kolektivní autorství se zapisuje slovem „členové ...“.
+        Je-li autor neznámý, uveďte „nezjištěn“ a roli „zpracoval“.
       author_role: |
         Role autora při tvorbě mapy. Má-li autor při tvorbě mapy více rolí, uveďte autora vícekrát.
         Rozhodující jsou údaje v tiráži. Pokud schází nebo se liší od reality, lze zaznamenat skutečnost, komentujte do pole Poznámka.
@@ -577,24 +574,24 @@ cs:
         revidoval (revize v terénu včetně kresby změn)
         delegovaný kartograf (kontrola kvality, praktikováno mapovou komisí svazu v 80. letech 20. stol.)
         firma (jen pokud nejsou jmenovány konkrétní osoby)
-        jiná role
+        jiná role (např. příprava podkladů)
     author_attributes:
       full_name: 'Příjmení a jméno'
       year_of_birth: 'Rok narození'
       activity: 'Rok působení'
-      club: 'Klub(y)'
+      club: 'Vydavatel(é)'
       maps: 'Mapa(y)'
       note: 'Poznámka'
     author_attribute_hints:
       full_name: |
-        Příjmení a křestní jméno, v tomto pořadí. Je-li křestní jméno uvedeno na mapě jen zkráceně a nelze je jednoznačně dohledat, zapište je v uvedené podobě. Pokud příjmení nebo křestní jméno není známo, nahradí se pomlčkou.  Duplicitní jména (shoda příjmení i křestního jména) se rozliší přidáním roku narození nebo zkratky mateřského klubu. Naznačuje-li jméno uvedené na mapě možnost duplicity a nelze-li zjistit rok narození, zapíše se včetně uvedeného rozlišení (st., ml. apod). Přezdívky a firmy, které nelze jednoznačně přiřadit k jedinému oficiálnímu jménu osoby, se zapisují jako samostatné záznamy. Je-li místo jednotlivých autorů uveden jen oddíl, zapíše se zkratkou s předsazeným slovem  „členové“.
+        Příjmení a křestní jméno, v tomto pořadí. Je-li křestní jméno uvedeno na mapě jen zkráceně a nelze je jednoznačně dohledat, zapište je v uvedené podobě. Pokud příjmení nebo křestní jméno není známo, nahradí se pomlčkou.  Duplicitní jména (shoda příjmení i křestního jména) se rozliší přidáním roku narození nebo zkratky mateřského klubu. Naznačuje-li jméno uvedené na mapě možnost duplicity a nelze-li zjistit rok narození, zapíše se včetně uvedeného rozlišení (st., ml. apod). Přezdívky a firmy, které nelze jednoznačně přiřadit k jedinému oficiálnímu jménu osoby, se zapisují jako samostatné záznamy. Je-li místo jednotlivých autorů uveden jen klub, zapíše se zkratkou s předsazeným slovem „členové“.
         Příklady: Tupá Eliška, Ostrý J., - Skoupý, Štědrý -, Novák Jan SHK, Voda Jan 1972, Voda Jan st., O-mapy, Rumcajs, členové ABM.
       year_of_birth: |
         Nevyplňujte, pole bude zrušeno. Je-li rok narození potřebný k odllišení shodných jmen, připište jej přímo za jméno.
       activity: |
         Nevyplňujte, neměňte. Zjišťuje se automaticky z roků vydání map, u nichž je tento autor uveden. Aktualizuje se automaticky s každou novou mapou tohoto autora.
       club: |
-        Nevyplňujte, neměňte. Zjišťuje se automaticky z pole Klub u map, u nichž je tento autor uveden. Aktualizuje se automaticky s každou novou mapou tohoto autora.
+        Nevyplňujte, neměňte. Zjišťuje se automaticky z pole Vydavatel u map, u nichž je tento autor uveden. Aktualizuje se automaticky s každou novou mapou tohoto autora.
       note: |
         Poznámky sloužící k objasnění sporných případů. Vysvětlení rodinných vztahů mezi stejnojmennými autory, podezření na více osob pod jedním jménem apod. (uvést otazníkem), přezdívka nebo firma či značka (uvést rovnítkem). Příklady:
         =Pakuo
@@ -604,8 +601,8 @@ cs:
         ?rozdělit na Hubert, Tomáš (Petr?)
     club_attributes:
       name: 'Název'
-      abbreviation: 'Zkratka'
-      region: 'Oblast'
+      abbreviation: 'Kód'
+      region: 'Kraj'
       district: 'Okres'
       oris: 'ORIS'
       maps: 'Mapy'
@@ -621,6 +618,7 @@ cs:
         title: 'Blokace'
         year: 'v roce'
         without_claim: 'bez nároku'
+        reason: 'Blokace – zdůvodnění'
       embargo:
         info_title: 'Embargo do'
 
@@ -751,7 +749,7 @@ cs:
     copy: "vytvořit kopii záznamu"
     copy-confirmation: "Opravdu chcete vytvořit kopii mapy?"
     inNewWindow: "otevřít v novém okně"
-    previewCopyright: "Náhledy map zpřístupněné mapovým portálem neopravňují bez souhlasu vydavatele mapy k jejich použití pro organizované či hromadné akce. Prosíme, kontaktujte správce mapy uvedeného v databázi a získejte od něho mapy odpovídající tiskové kvality. Pokud není správce mapy uveden, kontaktujte klub, který mapu vydal."
+    previewCopyright: "Náhledy map zpřístupněné mapovým portálem neopravňují bez souhlasu vydavatele mapy k jejich použití pro organizované či hromadné akce. Prosíme, kontaktujte správce mapy uvedeného v databázi a získejte od něho mapy odpovídající tiskové kvality. Pokud není správce mapy uveden, kontaktujte vydavatele, který mapu vydal."
     zoomTo: "přiblížení na obrys mapy"
     info: "podrobné informace o mapě"
     link2oneMap: "odkaz na tuto mapu"
@@ -762,54 +760,19 @@ cs:
 
     listAuthHead: "Archiv map ČSOS - registr autorů"
     listAuthHeadLow: "seznam autorů map pro orientační sporty včetně dalších podrobností o nich, jako jsou především vytvořené mapy"
-    listAuthTableClubs: "Klub(y)"
-    listAuthTableMaps: "Mapa(y)"
-    listAuthContentMaps: "v mapě"
     listAuthTableLink2Map: "Otevře mapu se všemi mapami tohoto autora"
     listAuthContentMap: "Mapy autora"
 
     listMapHead: "Archiv map ČSOS"
-    listMapHeadPart1: "registr map"
     listMapHeadLow: "seznam map pro orientační sporty včetně dalších podrobností o nich"
-    listMapYear: "seznam map z roku"
-    listMapAuthor: "seznam map autora"
-    listMapClub: "seznam map klubu"
-    listMapSelection1: "výběr"
-    listMapSelection2: "map"
-    listMapInMap: "v MAPĚ"
-    listMapClubInfo: "podrobné informace o klubu"
-    listMapTableLinkYear: "Otevře tabulku se všemi mapami vydanými v tomto roce"
 
-    listClubHead: "Archiv map ČSOS - registr klubů"
-    listClubHeadLow: "seznam klubů registrovaných v ČSOS"
+    listClubHead: "Archiv map ČSOS - registr vydavatelů"
+    listClubHeadLow: "seznam vydavatelů registrovaných v ČSOS"
     listClubTableMap: "zobrazit všechny záznamy v mapě"
-    listClubTableTable: "v tabulce"
-    listClubContentMap: "Mapy klubu"
-    listClubContentTable: "v tabulce"
-    listClubContentGraph: "v mapě"
-    listClubLink2Registry: "Otevře podrobné informace o klubu z adresáře ČSOS"
+    listClubContentMap: "Mapy vydavatele"
 
-    infoTableLink2Club: "Otevře tabulku se všemi mapami oddílu"
-    infoTableLink2Auth: "Otevře tabulku se všemi mapami tohoto autora"
-
-    aboutHead: "Stručné informace o tomto projektu"
-
-    downHead: "Ke stažení"
     downExport: "Export do formátu"
-    downQuery: "Výběr"
-    downQuery2: "map"
-    downQueryAll: "Všechny mapy"
     downNote: "Upozornění: kódování CSV a XLS souborů je UTF-8"
-    downOther: "Ostatní"
-    downLogos: "Loga aplikace"
-    downModifiedDatabase: "Upravená databáze Archivu map ČSOS"
-    downLastUpdate: "Aktualizace dat"
-    downShortInfo: "stručné info"
-    downOriginalDatabaseLink: "Originální databáze Archivu map je ke stažení"
-    downMapOutlines: "Obrysy map"
-    downCoordSys: "souř. systém"
-    format: "formát"
-    here: "zde"
 
     listSearchHead: "Výsledky vyhledávání"
 
@@ -817,20 +780,12 @@ cs:
     downloadSearchResults: "Nalezeno %{count} map."
 
     gpsFromMap: "Zadat polohu v mapě"
-    gpsInfoMessage: "Klikni do mapy"
 
     urlLinkHeading: "URL odkaz na tuto stránku"
-    urlLinkClipboard: "Zkopíruj do schránky"
     urlLinkClose: "Zavřít"
     urlLinkUpdate: "Obnovit"
-    urlLinkUpdateTitle: "Obnovit URL odkaz"
 
     measureHeading: "Měření vzdálenosti a plochy"
     measureLength: "Délka (červená linie)"
     measureArea: "Plocha (šedá plocha)"
     measureReset: "Měřit znovu"
-
-    legendsHead: "Historie mapových klíčů pro o-sporty"
-
-    inWork: "Omlouváme se, ale tato část stránek je v rekonstrukci"
-

@@ -4,62 +4,51 @@
 - maps = maps0.order('year DESC')
 
 %h3 Neupravené kopie
-
 = render partial: 'check', locals: {maps: maps.where("LOWER(title) LIKE LOWER(?)", "%copy ID%")}
 
 %h3 Špatně zařazené mapy (ev. číslo versus kraj)
-
 - xmaps = maps.where('year = ? AND identifier_filing LIKE ?', 2015, "15%").select{|m| Map::REGIONS.keys.include?(m.identifier_filing[2..2]) and (m.identifier_filing[2..2] != m.region)}
-
 = render partial: 'check', locals: {maps: xmaps}
 
 %h3 Mapy s náhledem a bez obrysu
 / (JSON)
-
 = render partial: 'check', locals: {maps: maps.where("has_jpg = ? AND (shape_json IS NULL OR shape_json = ?)", true, "[]")}
 
 %h3 Mapy bez obrysu
 / (KML neb JSON)
-
 = render partial: 'check', locals: {maps: maps.where("(shape_kml IS NULL OR shape_kml = ?) OR (shape_json IS NULL OR shape_json = ?)", "<Polygon><outerBoundaryIs><LinearRing><coordinates></coordinates></LinearRing></outerBoundaryIs></Polygon>", "[]")}
 
 %h3 Mapy bez náhledu
-
 = render partial: 'check', locals: {maps: maps.where(has_jpg: false).reject(&:has_jpg?) }
 
 %h3 Mapy s neplatným rokem
-
 = render partial: 'check', locals: {maps: maps.where('year < ? OR year > ?', 1900, 2100)}
 
 %h3 Mapy s neplatným měřítkem
-
-= render partial: 'check', locals: {maps: maps.where('scale < ? OR scale > ?', 100, 100000), extra_column: :scale}
+= render partial: 'check', locals: {maps: maps.where('(scale < ? OR scale > ?) AND scale <> 0 AND scale <> 999999', 100, 100000), extra_column: :scale}
 
 %h3 Mapy s neplatnými technikami kreslení
-
 = render partial: 'check', locals: {maps: maps.where('NOT (drawing_technique IN (?))', Map::DRAWING_TECHNIQUES), extra_column: :drawing_technique}
 
 %h3 Mapy s neplatnými technikami tisku
-
 = render partial: 'check', locals: {maps: maps.where('NOT (printing_technique IN (?))', [nil] + Map::PRINTING_TECHNIQUES), extra_column: :printing_technique}
 
 %h3 Mapy s vykřičníkem v interní poznámce
-
 = render partial: 'check', locals: {maps: maps.where("note_internal LIKE '%!%'")}
 
 %h3 Archivované mapy bez výtisků
-
 = render partial: 'check', locals: {maps: maps.where(state: 'archived').no_archive_prints}
 
+%h3 Nearchivované mapy s výtisky
+= render partial: 'check', locals: {maps: maps.where.not(state: 'archived').any_archive_prints}
+
 %h3 Duplicitní evidenční číslo
-
-%p Nepovedlo se ověřit.
-
-/%p Pouze nové formáty ev. čísel (nnXnnnX)
-
-/- ifx = maps0.where("identifier_filing IS NOT NULL AND identifier_filing <> ? AND identifier_filing <> ?", "-", "?").select("id, count(id) as quantity").distinct(:id).group(:identifier_filing).having("quantity > 1").map{|x| Map.find(x).identifier_filing}.select{|x| x.match(/\d\d[A-Z]\d\d\d[A-Z]/)}
-/= render partial: 'check', locals: {maps: maps0.where(identifier_filing: ifx).order("identifier_filing ASC, year DESC"), extra_column: :identifier_filing}
+%p Pouze nové formáty ev. čísel (nnXnnnX)
+- ifx = maps0.where("identifier_filing IS NOT NULL AND identifier_filing <> ? AND identifier_filing <> ?", "-", "?").select("identifier_filing, count(id)").group(:identifier_filing).having("count(id) > 1").map{|x| x.identifier_filing}.select{|x| x.match(/\d\d[A-Z]\d\d\d[A-Z]/)}
+= render partial: 'check', locals: {maps: maps0.where(identifier_filing: ifx).order("identifier_filing ASC, year DESC"), extra_column: :identifier_filing}
 
 %h3 Mapy bez autora
-
 = render partial: 'check', locals: {maps: maps.where.missing(:authors)}
+
+%h3 Mapy od roku 2015 s evidenčním číslem a bez blokace
+= render partial: 'check', locals: {maps: maps.where("identifier_filing IS NOT NULL AND identifier_filing <> ? AND identifier_filing <> ? AND year > 2015 AND (has_blocking IS FALSE OR blocking_until = 0)", "-", "?"), extra_column: :state}

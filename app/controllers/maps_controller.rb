@@ -106,6 +106,7 @@ class MapsController < ApplicationController
     else
       state = Map::STATE_SAVED_WITHOUT_FILING
     end
+    @disable_blocking = true # map created without registrations isn't eligible for blocking
     @map = Map.new(created_by_id: current_user.id, map_family: Map::MAP_FAMILY_MAP, state: state, patron_accuracy: 'authored', year_accuracy: 'authored')
   end
 
@@ -164,6 +165,9 @@ class MapsController < ApplicationController
       :main_race_date     ,
       :non_oris_event_url ,
       :link_to_web        ,
+      :is_educational_    ,
+      :blocking_until     ,
+      :blocking_reason    ,
     ]
 
     document_headers = document_columns.map{|x| t("mapserver.map_attributes.#{x[-1..-1]=='_' ? x[0...-1] : x}")}
@@ -276,6 +280,9 @@ class MapsController < ApplicationController
 
   def show
     @map = Map.find(params[:id])
+    if @map.state == Map::STATE_REMOVED and !current_user.authorized_to_view_removed_map?
+      render :file => File.join(Rails.root, 'public/403.html'), :status => 403, :layout => false
+    end
     respond_to do |format|
       format.html
       format.json do
@@ -293,7 +300,7 @@ class MapsController < ApplicationController
       if params.has_key?(:redirect_to)
         redirect_to params[:redirect_to]
       else
-        redirect_back fallback_location: { action: 'show', id: params[:id] }
+        redirect_to current_user.authorized_to_view_removed_map? ? { action: 'show', id: params[:id] } : { controller: 'maps', action: 'index' }
       end
     else
       flash[:error] = "Uživatel #{current_user} nemá oprávnění smazat mapu #{@map}!"

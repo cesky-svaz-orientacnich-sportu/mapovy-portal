@@ -10,7 +10,8 @@ class MapController < ApplicationController
   def convergence_calculator
     lat, lng = params[:lat], params[:lng]
     require 'open-uri'
-    url = "https://www.ngdc.noaa.gov/geomag-web/calculators/calculateDeclination?browserRequest=true&magneticComponent=d&lat1=#{lat}&lat1Hemisphere=N&lon1=#{lng}&lon1Hemisphere=E&model=IGRF&startYear=#{Date.today.strftime("%Y")}&startMonth=#{Date.today.strftime("%m")}&startDay=#{Date.today.strftime("%e")}&resultFormat=json"
+    # Resources: https://www.ngdc.noaa.gov/geomag/CalcSurveyFin.shtml
+    url = "https://www.ngdc.noaa.gov/geomag-web/calculators/calculateDeclination?key=zNEw7&lat1=#{lat}&lon1=#{lng}&model=IGRF&startYear=#{Date.today.strftime("%Y")}&startMonth=#{Date.today.strftime("%-m")}&startDay=#{Date.today.strftime("%-d")}&resultFormat=json"
     json = JSON.load(open(url))
 
     declination = json['result'][0]['declination'].to_f

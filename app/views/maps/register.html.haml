@@ -4,9 +4,9 @@
   - else
     Ohlásit připravovanou mapu
 
-- allowed_clubs = (current_user.has_role?(:cartographer,:manager) ? Club.sorted : Club.where(abbreviation: current_user.clubs).sorted)
-- if allowed_clubs.size == 1
-  - @map.patron = allowed_clubs.first.abbreviation
+- patrons = current_user.patrons
+- if patrons.size == 1
+  - @map.patron = patrons.first.abbreviation
 
 - if @map.errors.any?
   %ul.map_errors.bs-callout.bs-callout-danger
@@ -34,89 +34,89 @@
   .row
     .col-md-6
       .form-group
-        = f.label :title, map_attribute_label(:title)
+        = f.label :title, map_attribute_label(:title, :edit)
         = f.text_field :title, :class => 'form-control'
     .col-sm-6.col-md-3
       .form-group
-        = f.label :patron, map_attribute_label(:patron)
-        - if allowed_clubs.size == 1
-          = f.text_field :patron, :class => 'form-control', :disabled => true, :value => "#{allowed_clubs.first.abbreviation} -- #{allowed_clubs.first.name}"
+        = f.label :patron, map_attribute_label(:patron, :edit)
+        - if patrons.size == 1
+          = f.text_field :patron, :class => 'form-control', :disabled => true, :value => "#{patrons.first.abbreviation} -- #{patrons.first.name}"
           = f.hidden_field :patron
-        - elsif allowed_clubs.any?
-          = f.select :patron, allowed_clubs.map{|x| ["#{x.abbreviation} - #{x.name}", x.abbreviation]}, {:include_blank => true, :class => 'form-control'}
+        - elsif patrons.any?
+          = f.select :patron, patrons.map{|x| ["#{x.abbreviation} - #{x.name}", x.abbreviation]}, {:include_blank => true, :class => 'form-control'}
       = f.hidden_field :patron_accuracy
     .col-sm-6.col-md-3
       .form-group
-        = f.label :region, map_attribute_label(:region)
+        = f.label :region, map_attribute_label(:region, :edit)
         = f.select :region, Map::REGIONS_OPTIONS, {:include_blank => true}, :class => 'form-control'
 
   .row
     - if f.object.identifier_filing.blank?
       .col-md-6
         .form-group
-          = f.label :locality, map_attribute_label(:locality)
+          = f.label :locality, map_attribute_label(:locality, :edit)
           = f.text_field :locality, :class => 'form-control'
     - else
       .col-sm-6.col-md-3
         .form-group
-          = f.label :locality, map_attribute_label(:locality)
+          = f.label :locality, map_attribute_label(:locality, :edit)
           = f.text_field :locality, :class => 'form-control'
       .col-sm-6.col-md-3
         .form-group
-          = f.label :identifier_filing, map_attribute_label(:identifier_filing)
+          = f.label :identifier_filing, map_attribute_label(:identifier_filing, :edit)
           = f.text_field :identifier_filing, :class => 'form-control', :disabled => true, :value => f.object.identifier_filing
     .col-xs-6.col-sm-4.col-md-2
       .form-group
-        = f.label :year, map_attribute_label(:year)
+        = f.label :year, map_attribute_label(:year, :edit)
         = f.select :year, [Date.today.year, Date.today.year+1], {}, :class => 'form-control'
       = f.hidden_field :year_accuracy
     .col-xs-6.col-sm-4.col-md-2
       .form-group
-        = f.label :blocking_until, map_attribute_label(:blocking_until)
+        = f.label :blocking_until, map_attribute_label(:blocking_until, :edit)
         = f.select :blocking_until, ((Date.today.year..Date.today.year+9).to_a + [0]).sort.reverse, {}, :class => 'form-control'
     .col-xs-12.col-sm-4.col-md-2
       .form-group
         .checkbox.is-in-sm-grid-form
           = f.label :is_educational do
             = f.check_box :is_educational
-            = map_attribute_label :is_educational
+            = map_attribute_label :is_educational, :edit
 
   .row
     .col-md-9.col-lg-6
       .form-group
-        = f.label :oris_event_id, map_attribute_label(:main_race)
+        = f.label :oris_event_id, map_attribute_label(:main_race, :edit)
         = f.select :oris_event_id, "<option value=\"0\"#{f.object.oris_event_id == 0 ? 'selected' : ''}>(žádný závod)</option>".html_safe + options_from_collection_for_select(f.object.year ? OrisEvent.in_year(f.object.year) : OrisEvent.sorted, :id, :to_label, f.object.oris_event_id), {:include_blank => true}, :class => 'form-control'
     .col-sm-4.col-md-3.col-lg-2
       .form-group
-        = f.label :main_race_date, map_attribute_label(:main_race_date)
+        = f.label :main_race_date, map_attribute_label(:main_race_date, :edit)
         = f.text_field :main_race_date, :class => 'form-control', :type => 'date'
     .col-sm-8.col-md-6
       .form-group
-        = f.label :main_race_title, map_attribute_label(:main_race_title)
+        = f.label :main_race_title, map_attribute_label(:main_race_title, :edit)
         = f.text_field :main_race_title, :class => 'form-control'
     .col-sm-12.col-md-6
       .form-group
-        = f.label :non_oris_event_url, map_attribute_label(:non_oris_event_url)
+        = f.label :non_oris_event_url, map_attribute_label(:non_oris_event_url, :edit)
         = f.text_field :non_oris_event_url, :class => 'form-control'
 
   .row
     .col-sm-6.col-md-3.col-lg-2
       .form-group
-        = f.label :map_sport, map_attribute_label(:map_sport)
+        = f.label :map_sport, map_attribute_label(:map_sport, :edit)
         = f.select :map_sport, Map::MAP_SPORTS.map{|x| [t("mapserver.map_enums.map_sport.#{x}"), x]}, {:include_blank => true}, :class => 'form-control'
     .col-sm-6.col-md-3
       .form-group
-        = f.label :map_type, map_attribute_label(:map_type)
+        = f.label :map_type, map_attribute_label(:map_type, :edit)
         = f.select :map_type, Map::MAP_TYPES.map{|x| [t("mapserver.map_enums.map_type.#{x}"), x]}, {:include_blank => true}, :class => 'form-control'
     .col-xs-6.col-md-2
       .form-group
-        = f.label :scale, map_attribute_label(:scale)
+        = f.label :scale, map_attribute_label(:scale, :edit)
         .input-group
           %span.input-group-addon 1:
           = f.select :scale, %w{20000 15000 12500 10000 7500 5000 4000 2500}, {:include_blank => true, :class => 'form-control', :style => 'width: 80px'}
     .col-xs-6.col-md-2
       .form-group
-        = f.label :equidistance, map_attribute_label(:equidistance)
+        = f.label :equidistance, map_attribute_label(:equidistance, :edit)
         .input-group.has-input-group-addon-after-select2
           = f.select :equidistance, %w{10.0 5.0 2.5 2.0}, {:include_blank => true, :class => 'form-control', :style => 'width: 60px'}
           %span.input-group-addon m
@@ -129,7 +129,7 @@
         width: "100%"
       });
     });
-  - if allowed_clubs.size != 1
+  - if patrons.size != 1
     :javascript
       $('#map_patron').select2({
         tags: true,

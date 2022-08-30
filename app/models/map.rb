@@ -83,8 +83,8 @@ class Map < ApplicationRecord
   accepts_nested_attributes_for :cartographers, :allow_destroy => true
 
   scope :sorted, ->{ order(:title, :patron, :year, :scale, :id) }
-
-  scope :no_archive_prints, ->{ where(archive_print1_class: [nil, '0'], archive_print2_class: [nil, '0'], archive_print3_class: [nil, '0']) }
+  scope :no_archive_prints, ->{ where(archive_print1_class: [nil, '0', '-'], archive_print2_class: [nil, '0', '-'], archive_print3_class: [nil, '0', '-']) }
+  scope :any_archive_prints, ->{ where.not(archive_print1_class: [nil, '0', '-'], archive_print2_class: [nil, '0', '-'], archive_print3_class: [nil, '0', '-']) }
 
   extend FriendlyId
   friendly_id :slug_candidates, use: [:slugged, :finders]
@@ -162,6 +162,9 @@ class Map < ApplicationRecord
     # non-map
     STATE_NON_MAP = 'non_map'
   ]
+
+  FULL_STATE_QUERY = "state IN ('proposed', 'change_requested', 'archived', 'saved_without_filing', 'approved', 'completed', 'finalized', 'final_change_requested')"
+  STATE_QUERY = "state IN ('archived', 'saved_without_filing', 'approved', 'completed', 'finalized', 'final_change_requested')"
 
   scope :visible, ->{ where(state: [STATE_APPROVED, STATE_COMPLETED, STATE_FINALIZED, STATE_FINAL_CHANGE_REQUESTED, STATE_SAVED_WITHOUT_FILING, STATE_ARCHIVED]) }
   scope :not_removed, ->{ where('state <> ?', STATE_REMOVED) }
@@ -348,9 +351,9 @@ class Map < ApplicationRecord
   end
 
   def no_archive_prints?
-    (archive_print1_class.blank? or (archive_print1_class == '0')) and
-    (archive_print2_class.blank? or (archive_print2_class == '0')) and
-    (archive_print3_class.blank? or (archive_print3_class == '0'))
+    (archive_print1_class.blank? or (archive_print1_class == '0') or (archive_print1_class == '-')) and
+    (archive_print2_class.blank? or (archive_print2_class == '0') or (archive_print2_class == '-')) and
+    (archive_print3_class.blank? or (archive_print3_class == '0') or (archive_print3_class == '-'))
   end
 
   def cartographers_attributes_with_creation=(attrs)
@@ -519,6 +522,10 @@ class Map < ApplicationRecord
 
   def patron_accuracy_
     patron_accuracy.blank? ? "---" : I18n.t("mapserver.map_enums.accuracy.#{patron_accuracy}")
+  end
+
+  def is_educational_
+    is_educational ? "ano" : "ne"
   end
 
   def embargo?
@@ -726,7 +733,7 @@ class Map < ApplicationRecord
 
     Dir.chdir(File.join(Rails.root, "public")) do
       Bundler.with_unbundled_env do
-        system("rbenv shell 2.6.5 ; ./cream #{self.id}X.#{ext}")
+        system("rbenv shell 2.7.6 ; ./cream #{self.id}X.#{ext}")
       end
     end
 
@@ -797,8 +804,6 @@ class Map < ApplicationRecord
     end
   end
 
-
-
   def reminder__on_proposed
     if state == STATE_PROPOSED and state_changed_at
       dt = (Date.today - state_changed_at).to_i
@@ -827,7 +832,3 @@ class Map < ApplicationRecord
   end
 
 end
-
-# email fishing
-#
-#.scan(/\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b/i)

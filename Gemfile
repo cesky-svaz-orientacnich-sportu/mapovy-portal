@@ -1,6 +1,6 @@
 source "http://rubygems.org"
 
-ruby "2.6.5"
+ruby "2.7.6"
 
 gem 'activerecord-postgis-adapter'
 gem "bootsnap", "~> 1.7"
@@ -30,14 +30,15 @@ gem "omniauth-facebook"
 gem "omniauth-google-oauth2"
 gem "omniauth-rails_csrf_protection"
 gem "paperclip"
-gem "paper_trail", "~> 11.0"
-gem "rails", "~> 6.1"
+gem "paper_trail", "~> 12.3"
+gem "rails", "~> 7.0"
 gem "rails-controller-testing"
 gem "RedCloth"
-gem "rgeo", "~> 2.2"
+gem "rgeo", "~> 2.4"
 gem "rgeo-geojson"
 gem "sass-rails"
 gem "select2-rails"
+gem "sprockets-rails"
 gem "to_xls"
 gem "turnout"
 gem "uuidtools"
@@ -49,7 +50,7 @@ gem "factory_bot_rails", :group => [:test, :development]
 gem "ci_reporter_rspec"
 
 gem "execjs", :group => [:production, :staging]
-gem "uglifier", :group => [:production, :staging]
+gem "terser", :group => [:production, :staging]
 
 group :test do
   gem "database_cleaner"
@@ -60,12 +61,15 @@ end
 group :development do
   gem "annotate"
   gem "better_errors"
+  gem "bcrypt_pbkdf", ">= 1.0", "< 2.0"
   gem "binding_of_caller"
   gem "capistrano", require: false
   gem "capistrano-db-tasks", :require => false
+  gem 'capistrano-nvm', require: false
   gem "capistrano-rails", require: false
   gem "capistrano-rbenv", require: false
   gem "capistrano-yarn", require: false
+  gem "ed25519", ">= 1.2", "< 2.0"
   gem "lorem-ipsum"
   gem "thin"
 end

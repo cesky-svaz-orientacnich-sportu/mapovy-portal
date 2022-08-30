@@ -12,18 +12,12 @@ task :locale_js => :environment do
     end
   end
   
-
   %w(cs en).each do |lang|
-    
     langfilejs = File.join(Rails.root, "app", "assets", "javascripts", "mapserver", "locale", "#{lang}.js")
-    
     FileUtils.mkdir_p(File::dirname(langfilejs))
-    
     File.open(langfilejs, 'w') do |f|
       f.write("Config.locale = '#{lang}';\n")
       f.write("Config.resourceString = " + resources[lang]['mapserver'].to_json + ";\n\n")
     end
-    
   end
-  
 end

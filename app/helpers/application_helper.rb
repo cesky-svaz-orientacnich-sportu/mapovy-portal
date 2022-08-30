@@ -95,7 +95,7 @@ module ApplicationHelper
     if u
       tt = "ID: #{u.id}"
       tt += " / role: #{I18n.t("roles.#{u.role}")}" if u.role
-      tt += " / kluby: #{u.clubs * " + "}" unless u.clubs.blank?
+      tt += " / vydavatelé: #{u.clubs * " + "}" unless u.clubs.blank?
       tt += " / kraje: #{u.regions * " + "}" unless u.regions.blank?
       (u.name.html_safe + " ".html_safe + icon('info-circle', tooltip: tt) + "&nbsp;".html_safe + (w_email ? mail_to(u.email, icon('envelope', tooltip: u.email)) : "")).html_safe
     else
@@ -107,7 +107,7 @@ module ApplicationHelper
     if u
       tt = "ID: #{u.id}"
       tt += " / role: #{I18n.t("roles.#{u.role}")}" if u.role
-      tt += " / kluby: #{u.clubs * " + "}" unless u.clubs.blank?
+      tt += " / vydavatelé: #{u.clubs * " + "}" unless u.clubs.blank?
       tt += " / kraje: #{u.regions * " + "}" unless u.regions.blank?
       icon('info-circle', tooltip: tt).html_safe
     end

@@ -1,12 +1,5 @@
 %h1 Podrobná tabulka
 
-:javascript
-  $(function() {
-    $('.column_filter').on( 'input paste propertychange change', function () {
-        filterColumn( $(this).attr('data-column') );
-    } );
-  })
-
 .data-table.table-responsive
   %table.table.table-striped.compact#maps{:"data-source" => list_maps_url(format: "json")}
     %thead
@@ -46,7 +39,10 @@
         %th(data-column="32" style="width:120px")= map_attribute_label :main_race_title, false
         %th(data-column="33" style="width:120px")= map_attribute_label :main_race_date, false
         %th(data-column="34" style="width:120px")= map_attribute_label :non_oris_event_url, false
-        %th(data-column="35" style="width:70px") (akce)
+        %th(data-column="35" style="width:120px")= map_attribute_label :is_educational, false
+        %th(data-column="36" style="width:120px")= map_attribute_label :blocking_until, false
+        %th(data-column="37" style="width:120px")= map_attribute_label :blocking_reason, false
+        %th(data-column="38" style="width:70px") (akce)
     %tbody
 
 %h4 Filtrování
@@ -93,10 +89,14 @@
       / 29 created by
       / 30 approved by
     %tr
-      = list_filter_text 31, :oris_event_id
+      / 31 oris event id
       = list_filter_text 32, :main_race_title
       = list_filter_text 33, :main_race_date
       = list_filter_text 34, :non_oris_event_url
+    %tr
+      = list_filter_boolean 35, :is_educational
+      = list_filter_text 36, :blocking_until
+      = list_filter_text 37, :blocking_reason
 
 %div.well.well-sm
   %strong =
@@ -120,8 +120,8 @@
     var val = $('#col_'+i+'_filter').val();
     var ftype_input = $('#col_'+i+'_filter_type');
     var ftype = "~";
-    if (ftype_input) ftype = ftype_input.val();
-    col.search(ftype + val,false,false).draw();
+    if (ftype_input.length) ftype = ftype_input.val();
+    col.search(ftype + val, false, false).draw();
     initPreviewAndInfo();
   }
 
@@ -186,6 +186,9 @@
         {'data': "main_race_title"    ,'visible': false},
         {'data': "main_race_date"     ,'visible': false},
         {'data': "non_oris_event_url" ,'visible': false},
+        {'data': "is_educational"     ,'visible': false},
+        {'data': "blocking_until"     ,'visible': false},
+        {'data': "blocking_reason"    ,'visible': false},
         {'data': "buttons"            ,"searchable": false ,"orderable": false }
         ],
       'fnDrawCallback': initPreviewAndInfo,
@@ -216,4 +219,7 @@
       reorderCallback: rebuildSearch
     } );
 
+    $('.column_filter').on('input paste propertychange change', function () {
+        filterColumn($(this).attr('data-column'));
+    });
   });

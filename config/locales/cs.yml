@@ -63,12 +63,12 @@ cs:
       map:
         id: 'ID'
         title: 'Název'
-        patron: 'Klub'
+        patron: 'Vydavatel'
         scale: 'Měřítko'
         year: 'Rok'
         blocking_until: 'Blokace do'
-        map_type: 'Norma'
-        map_type_: 'Norma'
+        map_type: 'Specifikace'
+        map_type_: 'Specifikace'
         oris_event_id: "Závod ORIS"
         sport: 'Disciplína'
         map_sport: 'Disciplína'
@@ -105,7 +105,7 @@ cs:
         updated_at: 'Změněno'
         link_to_web: "Odkaz na mapový portál"
   clubs:
-    oris_link: "Stránka oddílu v ORISu"
+    oris_link: "Stránka klubu v ORISu"
   datatable:
     emptyTable:     "Žádné záznamy nenalezeny"
     info:           "Zobrazuji _START_ až _END_ z _TOTAL_ záznamů"
@@ -114,7 +114,7 @@ cs:
     loadingRecords: "Nahrávám..."
     processing:     "Zpracovávám..."
     search:         "Vyhledávání:"
-    search_maps:    "Filtr (Název nebo Klub nebo ID):"
+    search_maps:    "Filtr (Název nebo Vydavatel nebo ID):"
     zeroRecords:    "Žádné záznamy nenalezeny"
     paginate:
       first: "« První"

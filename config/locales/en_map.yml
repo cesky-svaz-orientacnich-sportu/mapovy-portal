@@ -31,15 +31,12 @@
 
 en:
   mapserver:
-    metaDescription: "Map application of Czech Orienteering Federation Map Archive"
-    metaLanguage: "english"
-
     title: "Czech Orienteering Federation Map Portal"
     header_menu:
       archive: "Map browser"
       maps: "Map registry"
       authors: "Authors"
-      clubs: "Clubs"
+      clubs: "Publishers"
       downloads: "Download"
       about: "About"
       help: "Help"
@@ -63,12 +60,13 @@ en:
       id_: 'ID/status'
       state: 'Record status'
       title: 'Name'
-      patron: 'Club'
+      patron: 'Publisher'
+      patron_accuracy: 'Publisher - accuracy'
       scale: 'Scale'
       year: 'Year'
       blocking_until: 'Blocking until'
       blocking_reason: 'Blocking reason'
-      map_type: 'Type'
+      map_type: 'Specification'
       sport: 'Sport'
       map_sport: 'Sport'
       map_sport_: 'Sport'
@@ -88,7 +86,7 @@ en:
       area_size: 'Area size'
       administrator: 'Map admin'
       administrator_email: 'Map admin email'
-      issued_by: 'Publisher'
+      issued_by: 'Published by'
       printed_by: 'Printed in'
       drawing_technique: 'Drawing technique'
       printing_technique: 'Print technique'
@@ -101,12 +99,12 @@ en:
       id: 'ID'
       id_: 'ID/State'
       title: 'Name'
-      patron: 'Club'
+      patron: 'Subject that published the map'
       scale: 'Scale'
       year: 'Year'
       blocking_until: 'Blocking ends with the last day of the year'
       blocking_reason: 'Reason for shorter blocking period'
-      map_type: 'Type'
+      map_type: 'Specification'
       sport: 'Sport'
       map_sport: 'Sport'
       equidistance: 'Equidistance'
@@ -123,7 +121,7 @@ en:
       area_size: 'Area size'
       administrator: 'Map admin'
       administrator_email: 'Map admin email'
-      issued_by: 'Publisher'
+      issued_by: 'Publisher in the form stated in the map imprint'
       printed_by: 'Printed in'
       drawing_technique: 'Drawing technique'
       printing_technique: 'Print technique'
@@ -135,12 +133,12 @@ en:
       full_name: 'Name'
       year_of_birth: 'Year of birth'
       activity: 'Years of activity'
-      club: 'Club(s)'
+      club: 'Publisher(s)'
       maps: 'Map(s)'
 
     club_attributes:
       name: 'Name'
-      abbreviation: 'Abbreviation'
+      abbreviation: 'Code'
       region: 'Region'
       district: 'District'
       oris: 'ORIS'
@@ -288,7 +286,7 @@ en:
         indoor  : 'Indoor foot-O'
         other   : 'Skating, kayaking and other orienteering'
       map_type:
-        none      : 'no norm'
+        none      : 'no specification'
         military  : 'Military Cartography'
         isom      : 'ISOM'
         issprom   : 'ISSprOM'
@@ -296,7 +294,7 @@ en:
         isskiom   : 'ISSkiOM'
         topo      : 'Topografická'
         iof_4color: 'IOF four-color'
-        combined  : 'Combined norms'
+        combined  : 'Combined specifications'
       georeference:
         s_jstk : 'S-JTSK'
         utm    : 'UTM'
@@ -314,6 +312,7 @@ en:
         title: 'Blocked'
         year: 'in year'
         without_claim: 'without claim'
+        reason: 'Blockin reason'
       embargo:
         info_title: 'Embargo until'
 
@@ -419,7 +418,7 @@ en:
     edit: "edit map entry"
     copy: "duplicate map entry"
     inNewWindow: "open in new window"
-    previewCopyright: "Using the map without publisher permission for organized events is copyright piracy. Please contact the map administrator listed in the Map Archive database and obtains maps in full quality for printing."
+    previewCopyright: "Using the map without publisher's permission for organized events is copyright piracy. Please contact the map administrator listed in the Map Archive database and obtain maps in full quality for printing."
     zoomTo: "zoom to map shape"
     info: "detailed information about map"
     link2oneMap: "URL link to this map"
@@ -431,72 +430,27 @@ en:
     listAuthHead: "Czech orienteering federation map archive - list of authors"
     listAuthHeadLow: "list of authors of maps for o-sports including some more information, exlusively the list of maps for each author"
     listAuthTableWork: "Active years"
-    listAuthTableClubs: "Club(s)"
-    listAuthTableMaps: "Map(s)"
-    listAuthContentMaps: "show in map"
     listAuthTableLink2Map: "Open map with all maps by this author"
 
     listMapHead: "COF map archive"
-    listMapHeadPart1: "list of maps"
     listMapHeadLow: "list of maps for o-sports including some more information about them"
-    listMapYear: "list of maps from year"
-    listMapAuthor: "list of maps created by"
-    listMapClub: "list of maps in ownership by club"
-    listMapSelection1: "selection of"
-    listMapSelection2: "maps"
-    listMapInMap: "in MAP"
-    listMapClubInfo: "detailed information about club"
-    listMapTableLinkYear: "Open table with all maps from this year"
 
-    listClubHead: "Czech orienteering federation map archive - list of clubs"
-    listClubHeadLow: "list of clubs that are registrated in Czech orienteering federation"
+    listClubHead: "Czech orienteering federation map archive - list of publishers"
+    listClubHeadLow: "list of publishers that are registrated in Czech orienteering federation"
     listClubTableMap: "Map"
-    listClubTableTable: "Table"
-    listClubContentMap: "Maps of club"
-    listClubContentTable: "in table"
-    listClubContentGraph: "in map"
-    listClubLink2Registry: "Open detailed information about club from registry"
+    listClubContentMap: "Publisher's maps"
 
-    infoTableLink2Club: "Open table with all maps by this club"
-    infoTableLink2Auth: "Open table with all maps by this author"
-
-    aboutHead: "Brief summary about this project"
-
-    downHead: "Downloads"
     downExport: "Export into"
-    downQuery: "Selection of"
-    downQuery2: "maps"
-    downQueryAll: "All maps"
     downNote: "Warning: charset encoding for CSV and XLS files is set to UTF-8"
-    downOther: "Other"
-    downLogos: "Application Logos"
-    downModifiedDatabase: "Modified Czech O-map Database"
-    downLastUpdate: "Last update"
-    downShortInfo: "short info"
-    downOriginalDatabaseLink: "Original Czech O-map Database is available"
-    downMapOutlines: "Map outlines"
-    downCoordSys: "coord. system"
-    format: "format"
-    here: "here"
 
     gpsFromMap: "Choose location on map"
     gpsTooltip: "Click on map to get GPS"
 
     urlLinkHeading: "URL link to this html page"
-    urlLinkClipboard: "Copy to clipboard"
     urlLinkClose: "Close"
     urlLinkUpdate: "Refresh"
-    urlLinkUpdateTitle: "Refresh URL link"
 
     measureHeading: "Measuring of the Distance and Area"
     measureLength: "Length (red line)"
     measureArea: "Area (grey area)"
     measureReset: "Reset Measure"
-
-    legendsHead: "History of map keys and symbols for o-sports"
-
-    inWork: "We apologize, but this part of this application is under construction"
-
-    help: "HELP"
-    about: "ABOUT"
-

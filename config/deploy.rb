@@ -1,5 +1,5 @@
 # config valid for current version and patch releases of Capistrano
-lock "~> 3.16.0"
+lock "~> 3.17.0"
 
 set :application, "mapserver"
 set :repo_url, "git@github.com:cesky-svaz-orientacnich-sportu/mapovy-portal.git"
@@ -24,6 +24,9 @@ set :scm_verbose, true
 
 # Set correct rbenv path
 set :rbenv_prefix, "RBENV_ROOT=#{fetch(:rbenv_path)} RBENV_VERSION=#{fetch(:rbenv_ruby)} /usr/bin/rbenv exec"
+
+# Set NodeJS version
+set :nvm_node, 'v16.16.0'
 
 # Rails
 

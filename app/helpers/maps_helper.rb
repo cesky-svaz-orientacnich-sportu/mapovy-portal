@@ -59,22 +59,22 @@
 
 module MapsHelper
 
-  def map_attribute_label(key, with_help = true)
+  def map_attribute_label(key, with_help = true, placement = 'top')
     if with_help == :edit
       (
         I18n.translate("mapserver.map_attributes.#{key}") +
         "&nbsp;" +
-        icon('question-circle', popover: I18n.translate("mapserver.map_attribute_hints.#{key}", default: I18n.translate("mapserver.map_attribute_descriptions.#{key}")).gsub("\n", "<br />").html_safe, popover_placement: :bottom, popover_trigger: "hover", color: "#9bf")
+        icon('question-circle', popover: I18n.translate("mapserver.map_attribute_form_hints.#{key}", default: I18n.translate("mapserver.map_attribute_descriptions.#{key}")).gsub("\n", "<br />").html_safe, popover_placement: :bottom, popover_trigger: "hover", color: "#9bf")
       ).html_safe
     elsif with_help == :edit_short
       (
-        icon('question-circle', popover: I18n.translate("mapserver.map_attribute_hints.#{key}", default: I18n.translate("mapserver.map_attribute_descriptions.#{key}")).gsub("\n", "<br />").html_safe, popover_placement: :bottom, popover_trigger: "hover", color: "#9bf")
+        icon('question-circle', popover: I18n.translate("mapserver.map_attribute_form_hints.#{key}", default: I18n.translate("mapserver.map_attribute_descriptions.#{key}")).gsub("\n", "<br />").html_safe, popover_placement: :bottom, popover_trigger: "hover", color: "#9bf")
       ).html_safe
     elsif with_help
       (
         I18n.translate("mapserver.map_attributes.#{key}") +
         "&nbsp;" +
-        icon('question-circle', tooltip: I18n.translate("mapserver.map_attribute_descriptions.#{key}"), color: "#9bf")
+        icon('question-circle', tooltip: I18n.translate("mapserver.map_attribute_descriptions.#{key}"), tooltip_placement: placement, color: "#9bf")
       ).html_safe
     else
       I18n.translate("mapserver.map_attributes.#{key}")
@@ -126,7 +126,7 @@ module MapsHelper
   def map_buttons(map, destroy_redirect_path = nil)
     s = "".html_safe
     if current_user
-      if (map.created_by == current_user and [Map::STATE_PROPOSED, Map::STATE_SAVED_WITHOUT_FILING].include?(map.state)) or has_role?(:manager)
+      if (map.created_by == current_user and [Map::STATE_PROPOSED, Map::STATE_SAVED_WITHOUT_FILING, Map::STATE_COMPLETED].include?(map.state)) or has_role?(:manager)
         s+= link_to icon('pencil-square-o', tooltip: 'upravit'), [:edit, map]
         s+= " ".html_safe
       end
@@ -166,6 +166,14 @@ module MapsHelper
     content_tag(:td, style: "white-space:nowrap") do
       select_tag(nil, options_for_select(["~", "=", "!", ">", "<", "0", "*"]), id: "col_#{index}_filter_type", class: 'column_filter', data: {column: index}) +
       select_tag(nil, options_for_select([["", nil]] + opts), id: "col_#{index}_filter", class: 'column_filter', data: {column: index})
+    end
+  end
+
+  def list_filter_boolean(index, var)
+    content_tag(:th, map_attribute_label(var, false)) +
+    content_tag(:td, style: "white-space:nowrap") do
+      hidden_field_tag(nil, "?", id: "col_#{index}_filter_type", data: {column: index}) +
+      select_tag(nil, options_for_select({"" => -1, "ano" => 1, "ne" => 0}), id: "col_#{index}_filter", class: 'column_filter', data: {column: index})
     end
   end
 

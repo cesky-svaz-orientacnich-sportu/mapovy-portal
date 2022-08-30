@@ -28,6 +28,28 @@ class Club < ApplicationRecord
   extend FriendlyId
   friendly_id :abbreviation, use: [:slugged, :finders]
 
+  PUBLIC_CLUBS = {
+    "S00" => { "name" => "ČSOS",                                              },
+    "S01" => { "name" => "Sekce OB ČSOS",                                     },
+    "S02" => { "name" => "Sekce LOB ČSOS",                                    },
+    "S03" => { "name" => "Sekce MTBO ČSOS",                                   },
+    "S04" => { "name" => "Sekce Trail-O ČSOS",                                },
+    "K01" => { "name" => "Pražský krajský svaz ČSOS",         "region" => "A" },
+    "K02" => { "name" => "Středočeský krajský svaz ČSOS",     "region" => "S" },
+    "K03" => { "name" => "Karlovarský krajský svaz ČSOS",     "region" => "K" },
+    "K04" => { "name" => "Plzeňský krajský svaz ČSOS",        "region" => "P" },
+    "K05" => { "name" => "Jihočeský krajský svaz ČSOS",       "region" => "C" },
+    "K06" => { "name" => "Ústecký krajský svaz ČSOS",         "region" => "U" },
+    "K07" => { "name" => "Liberecký krajský svaz ČSOS",       "region" => "L" },
+    "K08" => { "name" => "Královéhradecký krajský svaz ČSOS", "region" => "H" },
+    "K09" => { "name" => "Pardubický krajský svaz ČSOS",      "region" => "E" },
+    "K10" => { "name" => "Krajský svaz ČSOS Vysočina",        "region" => "J" },
+    "K11" => { "name" => "Moravskoslezský krajský svaz ČSOS", "region" => "T" },
+    "K12" => { "name" => "Olomoucký krajský svaz ČSOS",       "region" => "M" },
+    "K13" => { "name" => "Zlínský krajský svaz ČSOS",         "region" => "Z" },
+    "K14" => { "name" => "Jihomoravský krajský svaz ČSOS",    "region" => "B" },
+  }
+
   def to_s
     s = "#{abbreviation}"
     s += " - #{name}" unless name.blank?
@@ -86,7 +108,5 @@ class Club < ApplicationRecord
     return {} if oris_data_json.blank?
     @oris_data ||= JSON[oris_data_json]['Data']
   end
-
-
 
 end
