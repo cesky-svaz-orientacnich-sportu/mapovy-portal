@@ -280,7 +280,7 @@ class MapsController < ApplicationController
 
   def show
     @map = Map.find(params[:id])
-    if @map.state == Map::STATE_REMOVED and !current_user.authorized_to_view_removed_map?
+    if @map.state == Map::STATE_REMOVED and (!current_user or !current_user.authorized_to_view_removed_map?)
       render :file => File.join(Rails.root, 'public/403.html'), :status => 403, :layout => false
     end
     respond_to do |format|
