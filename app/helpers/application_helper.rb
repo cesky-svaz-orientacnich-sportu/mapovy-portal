@@ -69,12 +69,14 @@ module ApplicationHelper
   end
 
   def login_button(p)
-    if p == 'facebook'
-      image_tag('facebook.png')
+    if p == 'oris'
+      image_tag('icons/oris.svg', alt: '', _size: '16x10') + 'Přihlásit se přes ORIS'
+    elsif p == 'facebook'
+      image_tag('icons/facebook.svg', alt: '', _size: '16x10') + 'Přihlásit se přes Facebook'
     elsif p == 'google' or p == 'google_oauth2'
-      image_tag('google.png')
+      image_tag('icons/google.svg', alt: '', _size: '16x10') + 'Přihlásit se přes Google'
     else
-      "Sign in with #{p.titleize}"
+      "Přihlásit se přes #{p.titleize}"
     end
   end
 
