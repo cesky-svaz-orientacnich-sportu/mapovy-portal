@@ -223,6 +223,9 @@ Devise.setup do |config|
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', :scope => 'user,public_repo'
 
+  require 'omniauth/strategies/oris'
+  config.omniauth :oris, ENV['ORIS_CLIENT_ID'], ENV['ORIS_CLIENT_SECRET']
+
   require "omniauth-facebook"
   # require 'openid/store/filesystem'
 

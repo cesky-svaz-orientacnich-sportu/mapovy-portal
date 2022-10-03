@@ -9,7 +9,8 @@
     = link_to "Nedostali jste aktivační e-mail?", new_confirmation_path(resource_name)
   - if devise_mapping.lockable? && resource_class.unlock_strategy_enabled?(:email) && controller_name != 'unlocks'
     = link_to "Didn't receive unlock instructions?", new_unlock_path(resource_name)
-.auth-form-sso-links
-  - if devise_mapping.omniauthable? && controller_name != 'sessions'
-    - resource_class.omniauth_providers.each do |provider|
-      = link_to login_button(provider.to_s), omniauth_authorize_path(resource_name, provider), method: :post
+- if devise_mapping.omniauthable? && controller_name != 'sessions'
+  .auth-form-sso-links.row
+    .col-sm-5.col-md-4.col-lg-3
+      - resource_class.omniauth_providers.each do |provider|
+        = link_to login_button(provider.to_s), omniauth_authorize_path(resource_name, provider), method: :post,  class: 'btn btn-default'

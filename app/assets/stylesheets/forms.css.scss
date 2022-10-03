@@ -63,7 +63,30 @@
 
 .auth-form-sso-links {
 	.auth-form-links + & {
-		margin-top: 16px;
+		margin-top: 2rem;
+	}
+
+	&:not(:last-child) {
+		margin-bottom: 1rem;
+	}
+
+	[class^="col-"] {
+		display: flex;
+		flex-direction: column;
+		align-items: stretch;
+		gap: .75rem;
+	}
+
+	a {
+		display: inline-flex;
+		justify-content: center;
+		align-items: center;
+		gap: 1em;
+	}
+
+	img {
+		width: 1.75rem;
+		height: 1.75rem;
 	}
 }
 

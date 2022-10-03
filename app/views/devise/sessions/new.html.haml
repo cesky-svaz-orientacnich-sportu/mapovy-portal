@@ -1,11 +1,12 @@
 .auth-form
   %h1 Přihlášení
 
-  %p Abyste si nemuseli pamatovat další jméno a heslo, doporučujeme přihlášení pomocí vašeho Google nebo Facebook účtu (mapový portál je použije pouze k ověření tvojí identity, k ničemu jinému). Pokud tento způsob nemůžete nebo nechcete využít, můžete se níže zaregistrovat klasicky pomocí jména a hesla.
+  %p Abyste si nemuseli pamatovat další jméno a heslo, doporučujeme přihlášení pomocí vašeho ORIS účtu, případně účtu Google nebo Facebook účtu (mapový portál je použije pouze k ověření tvojí identity, k ničemu jinému). Pokud tento způsob nemůžete nebo nechcete využít, můžete se níže zaregistrovat klasicky pomocí jména a hesla.
 
-  .auth-form-sso-links
-    - resource_class.omniauth_providers.each do |provider|
-      = link_to login_button(provider.to_s), omniauth_authorize_path(resource_name, provider), method: :post
+  .auth-form-sso-links.row
+    .col-sm-5.col-md-4.col-lg-3
+      - resource_class.omniauth_providers.each do |provider|
+        = link_to login_button(provider.to_s), omniauth_authorize_path(resource_name, provider), method: :post, class: 'btn btn-default'
 
   %h2 Přihlásit se pomocí jména a hesla
 

@@ -3,6 +3,10 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   require 'uuidtools'
 
+  def oris
+    oauthorize "ORIS"
+  end
+
   def facebook
     oauthorize "Facebook"
   end
@@ -35,6 +39,11 @@ private
   def find_for_ouath(provider, access_token, resource=nil)
     user, email, name, uid, auth_attr = nil, nil, nil, {}
     case provider
+    when "ORIS"
+      puts "ORIS access token : #{access_token.inspect}"
+      uid = access_token['uid']
+      email = access_token['info']['email']
+      auth_attr = { :uid => uid, :token => nil, :secret => nil, :name => access_token['info']['name'], :link => nil }
     when "Facebook"
       puts "Facebook access token : #{access_token.inspect}"
       puts "Facebook extra : #{access_token['extra'].inspect}"
