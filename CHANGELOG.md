@@ -2,6 +2,9 @@
 
 ## [Unreleased]
 
+## [2.3.0] - 2022-10-03
+- ORIS SSO
+
 ## [2.2.0] - 2022-08-30
 - added public clubs as patrons
 - renamed "Autor" to "Vydavatel"
