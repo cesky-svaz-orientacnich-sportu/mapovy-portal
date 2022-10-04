@@ -1,6 +1,7 @@
 # Change Log
 
 ## [Unreleased]
+- redirect back to current page after sign in
 
 ## [2.3.0] - 2022-10-03
 - ORIS SSO
