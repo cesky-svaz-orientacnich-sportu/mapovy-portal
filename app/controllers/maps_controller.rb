@@ -66,6 +66,7 @@ class MapsController < ApplicationController
   before_action :require_contributor, only: [:edit, :new, :create, :remove]
   before_action :require_organizer, only: [:register]
   before_action :require_cartographer, only: [:authorize_proposal, :reject_proposal, :authorize_completion, :reject_completion]
+  before_action :require_any_user, only: [:my_approved]
 
   before_action :use_map, only: [:new, :show, :edit, :register, :re_register, :complete, :create, :update]
 
