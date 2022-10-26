@@ -1,6 +1,8 @@
 # Change Log
 
 ## [Unreleased]
+
+## [2.3.1] - 2022-10-26
 - redirect back to current page after sign in
 
 ## [2.3.0] - 2022-10-03
