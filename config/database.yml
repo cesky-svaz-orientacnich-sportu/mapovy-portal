@@ -1,42 +1,28 @@
-development:
+# PostgreSQL. Versions 9.3 and up are supported.
+default: &default
   adapter: postgis
-  schema_search_path: public
-  database: <%= ENV["DB_NAME_DEV"] %>
-  host: localhost
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: <%= ENV["DB_USER"] %>
   password: <%= ENV["DB_PASSWORD"] %>
-  encoding: unicode
-  pool: 5
-  timeout: 5000
+  host: <%= ENV["DB_HOST"] %>
+  schema_search_path: public
+
+development:
+  <<: *default
+  database: <%= ENV["DB_NAME"] %>
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
-  adapter: postgis
-  schema_search_path: public
+  <<: *default
   database: <%= ENV["DB_NAME_TEST"] %>
-  host: localhost
-  username: <%= ENV["DB_USER"] %>
-  password: <%= ENV["DB_PASSWORD"] %>
-  encoding: unicode
-  pool: 5
-  timeout: 5000
 
 staging:
-  adapter: postgis
-  schema_search_path: public
-  database: mapserver_staging
-  host: localhost
-  username: mapserver_staging
-  password: <%= ENV["DB_PASSWORD"] %>
-  encoding: unicode
+  <<: *default
+  database: <%= ENV["DB_NAME"] %>
 
 production:
-  adapter: postgis
-  schema_search_path: public
-  database: mapserver
-  host: localhost
-  username: mapserver
-  password: <%= ENV["DB_PASSWORD"] %>
-  encoding: unicode
+  <<: *default
+  database: <%= ENV["DB_NAME"] %>
