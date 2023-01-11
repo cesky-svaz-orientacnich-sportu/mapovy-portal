@@ -61,15 +61,15 @@ end
 group :development do
   gem "annotate"
   gem "better_errors"
-  gem "bcrypt_pbkdf", ">= 1.0", "< 2.0"
+  gem "bcrypt_pbkdf", "~> 1.1", require: false
   gem "binding_of_caller"
-  gem "capistrano", require: false
+  gem "capistrano", "~> 3.17", require: false
   gem "capistrano-db-tasks", :require => false
   gem 'capistrano-nvm', require: false
-  gem "capistrano-rails", require: false
-  gem "capistrano-rbenv", require: false
+  gem "capistrano-rails", "~> 1.6", require: false
+  gem "capistrano-rbenv", "~> 2.2", require: false
   gem "capistrano-yarn", require: false
-  gem "ed25519", ">= 1.2", "< 2.0"
+  gem "ed25519", "~> 1.3", require: false
   gem "lorem-ipsum"
   gem "thin"
 end

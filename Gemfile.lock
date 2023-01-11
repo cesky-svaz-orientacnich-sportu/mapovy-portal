@@ -468,16 +468,16 @@ DEPENDENCIES
   RedCloth
   activerecord-postgis-adapter
   annotate
-  bcrypt_pbkdf (>= 1.0, < 2.0)
+  bcrypt_pbkdf (~> 1.1)
   better_errors
   binding_of_caller
   bootsnap (~> 1.7)
   bootstrap-sass
-  capistrano
+  capistrano (~> 3.17)
   capistrano-db-tasks
   capistrano-nvm
-  capistrano-rails
-  capistrano-rbenv
+  capistrano-rails (~> 1.6)
+  capistrano-rbenv (~> 2.2)
   capistrano-yarn
   ci_reporter_rspec
   coffee-rails
@@ -485,8 +485,8 @@ DEPENDENCIES
   dalli
   database_cleaner
   devise (~> 4.8)
-  dotenv-rails
-  ed25519 (>= 1.2, < 2.0)
+  dotenv-rails (~> 2.8)
+  ed25519 (~> 1.3)
   exception_notification
   exception_notification-rake (~> 0.3.1)
   execjs
@@ -512,7 +512,7 @@ DEPENDENCIES
   omniauth-rails_csrf_protection
   paper_trail (~> 12.3)
   paperclip
-  pg
+  pg (~> 1.1)
   rails (~> 7.0)
   rails-controller-testing
   rgeo (~> 2.4)
