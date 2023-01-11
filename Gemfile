@@ -48,7 +48,7 @@ gem "webpacker", "~> 5.4"
 gem 'whenever', "~> 1.0", require: false
 
 group :test, :development do
-  gem "rspec-rails", "~> 5.1"
+  gem "rspec-rails", "~> 6.0"
   gem "factory_bot_rails", "~> 6.2"
 end
 
