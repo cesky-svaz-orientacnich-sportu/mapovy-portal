@@ -468,6 +468,7 @@ DEPENDENCIES
   RedCloth
   activerecord-postgis-adapter
   annotate
+  autoprefixer-rails (~> 10.4)
   bcrypt_pbkdf (~> 1.1)
   better_errors
   binding_of_caller

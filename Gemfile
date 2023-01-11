@@ -3,6 +3,7 @@ source "http://rubygems.org"
 ruby "2.7.6"
 
 gem 'activerecord-postgis-adapter'
+gem "autoprefixer-rails", "~> 10.4" # vendor prefixin CSS
 gem "bootsnap", "~> 1.7"
 gem "bootstrap-sass"
 gem "coffee-rails"
