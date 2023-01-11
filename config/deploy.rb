@@ -11,12 +11,12 @@ set :repo_url, "git@github.com:cesky-svaz-orientacnich-sportu/mapovy-portal.git"
 # set :local_user, -> { `git config user.name`.chomp }
 
 # Default value for keep_releases is 5
-set :keep_releases, 2
+set :keep_releases, 3
 
 # Defaults to nil (no asset cleanup is performed)
 # If you use Rails 4+ and you'd like to clean up old assets after each deploy,
 # set this to the number of versions to keep
-set :keep_assets, 2
+set :keep_assets, 3
 
 set :ssh_options, verify_host_key: :never
 set :ssh_options, forward_agent: true

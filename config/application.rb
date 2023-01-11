@@ -17,7 +17,10 @@ module Mapserver
     # in config/environments, which are processed later.
     #
     config.time_zone = "Prague"
+    config.active_record.default_timezone = :local
     # config.eager_load_paths << Rails.root.join("extras")
+
+    config.beginning_of_week = :monday
 
     # Autoload paths are added to $LOAD_PATH by default. However, Zeitwerk uses
     # absolute file names internally, and your application should not issue require
