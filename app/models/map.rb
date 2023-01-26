@@ -219,7 +219,6 @@ class Map < ApplicationRecord
     require 'open-uri'
     puts "Opening #{url}"
     data = URI.open(url).read rescue nil
-    nil
     if data
       puts "Got data from VYBRIZ"
       json = JSON[data] rescue nil
