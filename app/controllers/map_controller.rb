@@ -12,7 +12,7 @@ class MapController < ApplicationController
     require 'open-uri'
     # Resources: https://www.ngdc.noaa.gov/geomag/CalcSurveyFin.shtml
     url = "https://www.ngdc.noaa.gov/geomag-web/calculators/calculateDeclination?key=zNEw7&lat1=#{lat}&lon1=#{lng}&model=IGRF&startYear=#{Date.today.strftime("%Y")}&startMonth=#{Date.today.strftime("%-m")}&startDay=#{Date.today.strftime("%-d")}&resultFormat=json"
-    json = JSON.load(open(url))
+    json = JSON.load(URI.open(url))
 
     declination = json['result'][0]['declination'].to_f
     declination_deg = declination.to_i
