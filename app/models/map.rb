@@ -218,7 +218,9 @@ class Map < ApplicationRecord
     url = "https://vybriz.orientacnisporty.cz/api/?method=getEventCoordsList&year=#{year}&orisonly=1"
     require 'open-uri'
     puts "Opening #{url}"
-    data = open(url).read rescue nil
+    data = URI.open(url).read rescue nil
+    puts data
+    nil
     if data
       puts "Got data from VYBRIZ"
       json = JSON[data] rescue nil
@@ -250,7 +252,7 @@ class Map < ApplicationRecord
           end
 
           oris_url = "https://oris.orientacnisporty.cz/API/?format=json&method=getEvent&id=#{oris_id}"
-          odata = open(oris_url).read rescue nil
+          odata = URI.open(oris_url).read rescue nil
           if odata
             puts "Got data from ORIS for #{map} on #{oris_url}"
             ojson = JSON[odata] rescue nil

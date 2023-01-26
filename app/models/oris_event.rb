@@ -47,7 +47,7 @@ class OrisEvent < ApplicationRecord
     require 'nokogiri'
 
     url = "http://www.obpostupy.cz/index.php"
-    doc = Nokogiri::HTML(open(url).read)
+    doc = Nokogiri::HTML(URI.open(url).read)
     if doc and doc.root
       puts "Loaded obpostupy."
       doc.root.css("#obsah > table.zavody tr").each do |row|
@@ -63,7 +63,7 @@ class OrisEvent < ApplicationRecord
               if e = OrisEvent.where(oris_id: oris_id).first
                 e.update_attribute(:obpostupy_url, url)
 
-                s = open(url).read
+                s = URI.open(url).read
                 if m = s.encode('ASCII-8BIT',invalid: :replace, undef: :replace).match(/imageUrl = '\/gadget\/kartat\/(\d+)\.jpg'/)
                   map_url = "http://www.obpostupy.cz/gadget/kartat/#{m[1]}.jpg"
                   puts " --> #{map_url}"
@@ -81,7 +81,7 @@ class OrisEvent < ApplicationRecord
 
   def self.fetch(year, only_new = false)
     require 'open-uri'
-    json = JSON.parse(open(oris_list_url(year)).read)
+    json = JSON.parse(URI.open(oris_list_url(year)).read)
     json['Data'].values.each do |ev|
       oris_id, title, date, place = ev['ID'], ev['Name'], ev['Date'], ev['Place']
       print "[%5s] " % oris_id
@@ -126,7 +126,7 @@ class OrisEvent < ApplicationRecord
   end
 
   def get(key, url)
-    data = open(url).read rescue nil
+    data = URI.open(url).read rescue nil
     if data
       json = JSON[data] rescue nil
       if json and json['Status'] == 'OK'

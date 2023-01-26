@@ -75,7 +75,7 @@ class Club < ApplicationRecord
   def self.build
     require 'open-uri'
     puts "Opening #{oris_url}"
-    data = open(oris_url).read rescue nil
+    data = URI.open(oris_url).read rescue nil
     if data
       puts "Got data from ORIS"
       json = JSON[data] rescue nil
@@ -94,7 +94,7 @@ class Club < ApplicationRecord
 
   def get
     require 'open-uri'
-    data = open(oris_url).read rescue nil
+    data = URI.open(oris_url).read rescue nil
     if data
       json = JSON[data] rescue nil
       if json and json['Status'] == 'OK'

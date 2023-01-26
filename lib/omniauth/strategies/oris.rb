@@ -26,7 +26,7 @@ module OmniAuth
 
       info do
         require 'open-uri'
-        data = open("https://oris.orientacnisporty.cz/API/?format=json&method=ssoUser&cid=#{@id}&csc=#{@secret}&uid=#{session['oris.token']}").read rescue nil
+        data = URI.open("https://oris.orientacnisporty.cz/API/?format=json&method=ssoUser&cid=#{@id}&csc=#{@secret}&uid=#{session['oris.token']}").read rescue nil
         res = {}
         if data
           json = JSON[data] rescue nil
