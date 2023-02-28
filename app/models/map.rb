@@ -242,7 +242,7 @@ class Map < ApplicationRecord
             Map.create(attrs)
           end
           map.title ||= "Embargo / VR #{vr_id}"
-          map.shape_json = event_data['RaceArea'].to_json
+          map.shape_json ||= event_data['RaceArea'].to_json
           map.convert_shape_to_kml
 
           if oris_id and oris_event = OrisEvent.where(oris_id: oris_id).first
