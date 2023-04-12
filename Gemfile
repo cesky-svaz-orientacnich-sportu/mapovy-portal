@@ -26,7 +26,7 @@ gem "magic_encoding", "~> 0.0.2"
 gem "pg", "~> 1.1" # PostgreSQL as the database for Active Record
 gem "nested_form", "~> 0.3"
 gem "nilify_blanks", "~> 1.4"
-gem "nokogiri", "~> 1.13" # XML handling
+gem "nokogiri", "~> 1.14" # XML handling
 gem "omniauth", "~> 2.1"
 gem "omniauth-facebook", "~> 9.0"
 gem "omniauth-google-oauth2", "~> 1.1"
