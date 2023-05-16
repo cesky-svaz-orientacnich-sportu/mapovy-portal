@@ -36,7 +36,7 @@ gem "paperclip", "~> 6.1"
 gem "rails", "~> 7.0.4"
 gem "rails-controller-testing", "~> 1.0"
 gem "RedCloth", "~> 4.3"
-gem "rgeo", "~> 2.4"
+gem "rgeo", "~> 3.0"
 gem "rgeo-geojson", "~> 2.1"
 gem "sass-rails", "~> 6.0" # SCSS compiling
 gem "select2-rails", "~> 4.0"
