@@ -77,11 +77,19 @@
 		gap: .75rem;
 	}
 
-	a {
+	button {
 		display: inline-flex;
 		justify-content: center;
 		align-items: center;
 		gap: 1em;
+		width: 100%;
+		color: #428bca;
+
+		&:hover,
+		&:focus,
+		&:active {
+			color: red;
+		}
 	}
 
 	img {
