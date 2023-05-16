@@ -12,8 +12,7 @@
 #
 
 class TextsController < ApplicationController
-
-  before_action :require_any_user, only: :current_user_page
+  before_action :require_any_user, only: [:current_user_page, :current_user_edit, :current_user_update]
 
   def current_user_page
     @check_against_oris = current_user.check_against_oris
@@ -32,5 +31,4 @@ class TextsController < ApplicationController
   def show
     @text = Text.where(:name => params[:name]).first
   end
-
 end
