@@ -309,11 +309,10 @@ function initMap() {
 
     var getShcTile = new google.maps.ImageMapType({
         getTileUrl: function (coord, zoom) {
-            if(zoom == 8) {
+            if (zoom == 8) {
                 return Config.assetRoot + "/data/tiles/" + zoom + "/" + coord.y + "/" + coord.x + ".png";
-            }
-            else {
-                return "https://ags.cuzk.cz/ArcGIS/rest/services/zmwm/MapServer/tile/" + (zoom) + "/" + coord.y + "/" + coord.x;
+            } else {
+                return "https://ags.cuzk.cz/arcgis1/rest/services/ZTM_WM/MapServer/tile/" + (zoom) + "/" + coord.y + "/" + coord.x;
             }
 
         },
