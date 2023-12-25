@@ -2,6 +2,9 @@
 
 ## [Unreleased]
 
+## [2.3.9] - 2023-12-25
+- use new ČÚZK map tiles
+
 ## [2.3.1] - 2022-10-26
 - redirect back to current page after sign in
 
