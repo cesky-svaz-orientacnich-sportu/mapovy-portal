@@ -13,22 +13,5 @@
         %div.description(style="font-size:120%")
           = RedCloth.new(map_collection.description || "").to_html.html_safe
 
-- if false
-  / %table.table.table-striped
-  /   %thead
-  /     %tr
-  /       %td Název
-  /       %td Počet map
-  /   %tbody
-  /     - @map_collections.each do |map_collection|
-  /       %tr
-  /         %td= link_to map_collection.title, map_collection
-  /         %td= map_collection.maps.count
-  /         %td
-  /           = link_to icon('globe', tooltip: 'zobrazit v mapě'), map_by_collection_path(name: map_collection.friendly_id)
-  /           - if has_role?(:manager)
-  /             = link_to icon('edit'), [:edit, map_collection]
-  /             = link_to icon('times'), map_collection, :method => :delete, :confirm => "Opravdu chcete smazat soubor map #{map_collection}?"
-
 - if has_role?(:manager)
   %div.well= link_to "#{icon('plus-circle')} Přidat soubor map".html_safe, new_map_collection_path
