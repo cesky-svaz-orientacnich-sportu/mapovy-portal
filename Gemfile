@@ -1,6 +1,6 @@
 source "http://rubygems.org"
 
-ruby "2.7.6"
+ruby "3.1.2"
 
 gem 'activerecord-postgis-adapter'
 gem "autoprefixer-rails", "~> 10.4" # vendor prefixin CSS
