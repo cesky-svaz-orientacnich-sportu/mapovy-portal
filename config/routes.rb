@@ -70,7 +70,7 @@ Mapserver::Application.routes.draw do
         get :racematch
         post :racematch
         get :export_objev_sok
-
+        get :new_embargo
         get :my_approved
         get :my_change_requested
       end

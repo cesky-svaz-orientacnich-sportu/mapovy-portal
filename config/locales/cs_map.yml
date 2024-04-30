@@ -659,6 +659,7 @@ cs:
     mapBasicData: "Základní údaje o mapě"
     mapAuthors: "Autoři"
     mapPreview: "Náhled mapy"
+    embargoBasicData: "Základní údaje o embargu"
 
     map_no_archive_prints: "Do Archivu nebyly dodány papírové výtisky."
 

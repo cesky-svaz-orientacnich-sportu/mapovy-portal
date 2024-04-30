@@ -1,0 +1,107 @@
+.uniqueness-errors.bs-callout.bs-callout-danger(style="display:none")
+:javascript
+  function uniquenessCheck() {
+    const id = #{f.object.id || 0}
+    const title = $('#map_title').val()
+    const year = $('#map_year').val()
+    $.ajax({
+      url: '#{check_map_title_maps_path}',
+      type: 'POST',
+      data: {
+        id: id,
+        title: title,
+        year: year,
+      },
+      success: data => {
+        if (data != 'OK') {
+          $('.uniqueness-errors').show()
+          $('.uniqueness-errors').html(data)
+        } else {
+          $('.uniqueness-errors').hide()
+        }
+      },
+      error: () => {
+        $('.uniqueness-errors').hide()
+      }
+    });
+  }
+  $(function() {
+    $('#map_title').on('input change propertychange paste', uniquenessCheck)
+    $('#map_year').on('input change propertychange paste', uniquenessCheck)
+    $('#map_map_sport').on('input change propertychange paste', uniquenessCheck)
+    $('#map_patron').select2({
+      allowClear: true,
+      tags: true,
+      theme: 'bootstrap',
+      width: '100%'
+    })
+  })
+
+.row
+  .col-sm-10.col-md-4.col-lg-5
+    .form-group
+      = f.label :created_by_id, map_attribute_label(:created_by, :edit)
+      .input-group
+        = f.text_field :created_by_id, :class => 'form-control', :disabled => true, :value => f.object.created_by ? (f.object.created_by ? f.object.created_by.name.html_safe : "---") : "archiv ČSOS"
+        - if f.object.created_by
+          %span.input-group-addon
+            = print_user_tooltip(f.object.created_by)
+      = f.hidden_field :created_by_id
+  .col-xs-3.col-sm-2.col-md-1
+    .form-group
+      = f.label :id, map_attribute_label(:id, :edit)
+      = f.text_field :id, :class => 'form-control', :disabled => true, :value => f.object.id || '---'
+  .col-xs-9.col-sm-3.col-md-2
+    .form-group
+      = f.label :map_family, map_attribute_label(:map_family, :edit)
+      = f.text_field :map_family, :class => 'form-control', :disabled => true, :value => t("mapserver.map_enums.map_family.#{f.object.map_family}")
+      = f.hidden_field :map_family
+  .col-xs-12.col-sm-6.col-md-5.col-lg-4
+    .form-group
+      = f.label :state, map_attribute_label(:state, :edit)
+      = f.text_field :state, :class => 'form-control', :disabled => true, :value => t("mapserver.map_enums.state.#{f.object.state}")
+      = f.hidden_field :state
+
+.row
+  .col-sm-6.col-md-7
+    .form-group
+      = f.label :title, map_attribute_label(:title, :edit)
+      = f.text_field :title, :class => 'form-control'
+  .col-sm-6.col-md-5
+    .form-group
+      = f.label :patron, map_attribute_label(:patron, :edit)
+      = f.select :patron, current_user.patrons.map{|x| ["#{x.abbreviation} - #{x.name}", x.abbreviation]}, {:include_blank => true}, {:class => 'form-control'}
+  = f.hidden_field :patron_accuracy
+
+.row
+  .col-xs-6.col-sm-3.col-md-2.col-lg-2
+    .form-group
+      = f.label :year, map_attribute_label(:year, :edit)
+      = f.text_field :year, :class => 'form-control'
+  = f.hidden_field :year_accuracy
+  .col-xs-6.col-sm-3.col-md-3.col-lg-2
+    .form-group
+      = f.label :map_sport, map_attribute_label(:map_sport, :edit)
+      = f.select :map_sport, Map::MAP_SPORTS.map{|x| [t("mapserver.map_enums.map_sport.#{x}"), x]}, {:include_blank => true}, :class => 'form-control'
+  .col-sm-6.col-md-3
+    .form-group
+      = f.label :map_type, map_attribute_label(:map_type, :edit)
+      = f.select :map_type, Map::MAP_TYPES.map{|x| [t("mapserver.map_enums.map_type.#{x}"), x]}, {:include_blank => true}, :class => 'form-control'
+
+.row
+  .col-md-9.col-lg-6
+    .form-group
+      = f.label :oris_event_id, map_attribute_label(:main_race, :edit)
+      = f.select :oris_event_id, "<option value=\"0\"#{f.object.oris_event_id == 0 ? 'selected' : ''}>(žádný závod)</option>".html_safe + options_from_collection_for_select(f.object.year ? OrisEvent.in_year(f.object.year) : OrisEvent.sorted, :id, :to_label, f.object.oris_event_id), {:include_blank => true}, :class => 'form-control'
+  .col-sm-4.col-md-3.col-lg-2
+    .form-group
+      = f.label :main_race_date, map_attribute_label(:main_race_date, :edit)
+      = f.text_field :main_race_date, :class => 'form-control', :type => 'date'
+  .col-sm-8.col-md-6
+    .form-group
+      = f.label :main_race_title, map_attribute_label(:main_race_title, :edit)
+      = f.text_field :main_race_title, :class => 'form-control'
+  .col-sm-12.col-md-6
+    .form-group
+      = f.label :non_oris_event_url, map_attribute_label(:non_oris_event_url, :edit)
+      = f.url_field :non_oris_event_url, :class => 'form-control'
