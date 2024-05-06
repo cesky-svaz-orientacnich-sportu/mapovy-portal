@@ -43,6 +43,10 @@ class ApplicationController < ActionController::Base
     current_user && (admin? || current_user.has_role?(*roles))
   end
 
+  def has_above_role_authorization?(authorization)
+    current_user && current_user.above_role_authorizations.include?(authorization.to_s)
+  end
+
   def require_admin
     if admin?
       true
@@ -109,8 +113,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  helper_method :admin?, :has_role?
-
+  helper_method :admin?, :has_role?, :has_above_role_authorization?
 
   def after_sign_in_path_for(resource_or_scope)
     stored_location_for(resource_or_scope) || root_path

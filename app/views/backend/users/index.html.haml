@@ -4,22 +4,26 @@
   %table.table.table-striped
     %thead
       %tr
-        %th ID
-        %th e-mail
-        %th jméno
-        %th registrační číslo
-        %th role
-        %th kraje
-        %th kluby
-        %th
+        %th{:scope => "column"} ID
+        %th{:scope => "column"} e-mail
+        %th{:scope => "column"} jméno
+        %th{:scope => "column"} registrační číslo
+        %th{:scope => "column"} role
+        %th{:scope => "column"} kraje
+        %th{:scope => "column"} kluby
+        %th{:scope => "column"}
+          .sr-only akce
     %tbody
       - User.all.sort_by(&:name_for_sort).each do |user|
         %tr
           %td= user.id
-          %td= link_to user.email, [:backend, user]
-          %td= user.name
+          %td= user.email
+          %th{:scope => "row"}= link_to user.name, [:backend, user]
           %td= user.oris_registrations
-          %td= (!user.role.blank?) ? t("roles.#{user.role}") : ""
+          %td
+            = (!user.role.blank?) ? t("roles.#{user.role}") : ""
+            - if !user.above_role_authorizations.blank?
+              #{icon 'exclamation-circle', tooltip: "#{User.human_attribute_name(:above_role_authorizations)}: #{user.above_role_authorizations_to_s}"}
           %td= user.authorized_regions
           %td= user.authorized_clubs
           %td

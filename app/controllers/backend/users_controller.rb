@@ -20,8 +20,9 @@ class Backend::UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
+    params[:user][:above_role_authorizations].reject!(&:blank?)
     @user.update(params[:user])
-    redirect_to :action => :index
+    redirect_to [:backend, @user]
   end
 
   def become

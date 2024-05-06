@@ -50,6 +50,7 @@ cs:
         year_of_birth: 'Rok narození'
         note: 'Poznámka'
       user:
+        above_role_authorizations: 'Oprávnění nad rámec role'
         authorized_clubs: 'Kluby'
         authorized_regions: 'Kraje'
         full_name: 'Jméno a příjmení'

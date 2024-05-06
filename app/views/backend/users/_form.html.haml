@@ -1,5 +1,5 @@
 = form_for [:backend, user], :html => {:role => 'form'} do |f|
-  .row
+  .row{:style => 'padding-top:16px'}
     .col-sm-6.col-lg-4
       .form-group
         = f.label :full_name
@@ -46,6 +46,15 @@
         = f.label :role
         = f.select :role, User::ROLES, {:include_blank => true}, :class => 'form-control'
   .row
+    .col-sm-12.col-lg-8
+      %fieldset{:style => 'margin-top:16px'}
+        %legend{:style => 'margin-bottom:0'}= User.human_attribute_name(:above_role_authorizations)
+        = f.collection_check_boxes :above_role_authorizations, User.above_role_authorizations.map {|k, v| [k, User::ABOVE_ROLE_AUTHORIZATIONS[k.to_sym]]}, :first, :last do |b|
+          .checkbox
+            = b.label do
+              = b.check_box
+              = b.text
+  .row{:style => 'margin-top:16px;padding-bottom:32px'}
     .col-sm-12
       = f.submit 'Uložit', :class => 'btn btn-primary'
 

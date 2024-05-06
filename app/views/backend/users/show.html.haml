@@ -1,4 +1,8 @@
-%h1.users-detail-heading Uživatel #{@user}
+%header.record-detail-header
+  %h1.users-detail-heading Uživatel #{@user}
+  %nav.record-detail-controls
+    %h2.sr-only Uživatel
+    = link_to icon('edit', tooltip: 'Upravit uživatele'), [:edit, :backend, @user]
 
 %table.table
   %tr
@@ -16,6 +20,9 @@
   %tr
     %th= User.human_attribute_name(:role)
     %td= @user.role_to_s
+  %tr
+    %th= User.human_attribute_name(:above_role_authorizations)
+    %td= @user.above_role_authorizations_to_s
   %tr
     %th= User.human_attribute_name(:oris_registrations)
     %td= @user.oris_registrations
