@@ -20,6 +20,7 @@ Mapserver::Application.routes.draw do
   get '/api/list' => "api#list"
   get '/api/maps_in_point' => "api#maps_in_point"
   get '/api/select' => "api#select"
+  get '/api/get_upcoming_embargoes' => "api#get_upcoming_embargoes"
 
   get '/filter_oris_events/:year' => "maps#filter_oris_events"
 
