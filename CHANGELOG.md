@@ -1,7 +1,13 @@
 # Change Log
 
 ## [Unreleased]
+
+## [2.4.0] - 2024-11-14
 - Ruby 3.1.2
+- embargo creation form
+- import map shape from GPX
+- above role authorizations (embargoes)
+- API endpoint for upcoming embargoes
 
 ## [2.3.9] - 2023-12-25
 - use new ČÚZK map tiles
