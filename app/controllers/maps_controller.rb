@@ -62,7 +62,10 @@ class MapsController < ApplicationController
   require 'fileutils'
 
   before_action :require_admin, only: [:destroy]
-  before_action :require_manager, only: [:racematch, :new_embargo]
+  before_action only: [:new_embargo] do
+    require_above_role_authorization_or_manager(:embargoes)
+  end
+  before_action :require_manager, only: [:racematch]
   before_action :require_contributor, only: [:edit, :new, :create, :remove]
   before_action :require_organizer, only: [:register]
   before_action :require_cartographer, only: [:authorize_proposal, :reject_proposal, :authorize_completion, :reject_completion]

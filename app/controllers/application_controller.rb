@@ -113,6 +113,19 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def require_above_role_authorization_or_manager(role)
+    if has_role?(:manager) or has_above_role_authorization?(role)
+      true
+    else
+      flash.keep
+      if current_user
+        redirect_to root_path
+      else
+        redirect_to new_user_session_path
+      end
+    end
+  end
+
   helper_method :admin?, :has_role?, :has_above_role_authorization?
 
   def after_sign_in_path_for(resource_or_scope)
