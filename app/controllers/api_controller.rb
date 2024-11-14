@@ -48,9 +48,9 @@ class ApiController < ApplicationController
     unless request.query_parameters.include? 'lonlat'
       render json: {status: 'error', message: "coordinates missing"}.to_json
     else
-      lon = URI.decode(request.query_parameters['lonlat']).split(',').first
-      lat = URI.decode(request.query_parameters['lonlat']).split(',').last
-      layers = URI.decode(request.query_parameters['layers']).split(',')
+      lon = CGI.unescape(request.query_parameters['lonlat']).split(',').first
+      lat = CGI.unescape(request.query_parameters['lonlat']).split(',').last
+      layers = CGI.unescape(request.query_parameters['layers']).split(',')
       where = "St_Intersects(shape_geom, St_MakeEnvelope(#{lon.to_f - 0.000001},#{lat.to_f - 0.000001},#{lon.to_f + 0.000001},#{lat.to_f + 0.000001}))"
 
       if current_user
@@ -68,31 +68,31 @@ class ApiController < ApplicationController
       if layers.include? 'blocking'
         m = Map
               .where(where)
-              .where(URI.decode(request.query_parameters['whereB']))
+              .where(CGI.unescape(request.query_parameters['whereB']))
               .order(year: :desc).first
       end
       if not m.present? and layers.include? 'competitionareas'
         m = Map
               .where(where)
-              .where(URI.decode(request.query_parameters['whereCA']))
+              .where(CGI.unescape(request.query_parameters['whereCA']))
               .order(year: :desc).first
       end
       if not m.present? and layers.include? 'embargoes'
         m = Map
               .where(where)
-              .where(URI.decode(request.query_parameters['whereE']))
+              .where(CGI.unescape(request.query_parameters['whereE']))
               .order(year: :desc).first
       end
       if not m.present? and layers.include? 'maps2'
         m = Map
               .where(where)
-              .where(URI.decode(request.query_parameters['where2']))
+              .where(CGI.unescape(request.query_parameters['where2']))
               .order(year: :desc).first
       end
       if not m.present? and layers.include? 'maps'
         m = Map
               .where(where)
-              .where(URI.decode(request.query_parameters['where']))
+              .where(CGI.unescape(request.query_parameters['where']))
               .order(year: :desc).first
       end
 
