@@ -1,2 +1,3 @@
 .rich-text
-  = RedCloth.new(@text.send(:"body_#{I18n.locale}")).to_html.html_safe
+  - if @text
+    = RedCloth.new(@text.send(:"body_#{I18n.locale}")).to_html.html_safe
