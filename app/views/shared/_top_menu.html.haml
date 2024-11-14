@@ -85,6 +85,8 @@
                 %li.divider
               - if has_role?(:contributor, :organizer, :cartographer, :manager)
                 %li= link_to "Přidat mapu bez evidence #{icon('question-circle', tooltip: "Přidat mapu, která nedostane evidenční číslo – pouze pro mapy mimo oficiální závody", tooltip_placement: 'left')}".html_safe, new_map_path
+                - if has_role?(:manager)
+                  %li= link_to "Přidat embargo", new_embargo_maps_path
                 %li= link_to "Moje mapy", by_user_maps_path(:user_id => current_user.id)
                 %li.divider
               %li= link_to "Odhlásit", destroy_user_session_path

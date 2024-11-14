@@ -83,9 +83,79 @@ function setupMap(mapElement, useScrollWheel) {
   return map;
 }
 
-function setupMapEditor(map) {
+const setupGPXImport = (map) => {
+  const readFile = file => new Promise((resolve, reject) => {
+    const reader = new FileReader()
+    reader.onload = () => {
+      resolve(reader.result)
+    }
+    reader.onerror = reject
+    reader.readAsText(file)
+  })
 
-  var drawingManager = new google.maps.drawing.DrawingManager({
+  const $button = document.createElement('button')
+  const $label = document.createElement('label')
+  const $input = document.createElement('input')
+
+  $button.classList.add('btn', 'btn-primary')
+  $button.setAttribute('type', 'button')
+  $button.setAttribute('style', 'margin-top:4px;margin-bottom:16px')
+  $button.innerHTML = 'Nahrát obrys z GPX'
+  $button.addEventListener('click', e => {
+    e.preventDefault()
+    $input.click()
+  })
+
+  $label.setAttribute('for', 'map-editor-gpx-import')
+  $label.classList.add('sr-only')
+  $label.innerHTML = 'GPX obrysu mapy'
+
+  $input.classList.add('sr-only')
+  $input.setAttribute('id', 'map-editor-gpx-import')
+  $input.setAttribute('type', 'file')
+  $input.setAttribute('accept', '.gpx')
+  $input.addEventListener('change', async e => {
+    const $loading = document.createElement('div')
+    $loading.classList.add('loading')
+    $loading.innerHTML =
+      '<svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><rect x="0" y="0" width="24" height="24" fill="none" stroke="none" /><path fill="currentColor" d="m7 17l3.2-6.8L17 7l-3.2 6.8L7 17m5-5.9a.9.9 0 0 0-.9.9a.9.9 0 0 0 .9.9a.9.9 0 0 0 .9-.9a.9.9 0 0 0-.9-.9M12 2a10 10 0 0 1 10 10a10 10 0 0 1-10 10A10 10 0 0 1 2 12A10 10 0 0 1 12 2m0 2a8 8 0 0 0-8 8a8 8 0 0 0 8 8a8 8 0 0 0 8-8a8 8 0 0 0-8-8Z"/></svg>'+
+      '<p class="sr-only">Načítám</p>'
+    $button.append($loading)
+    const $mapLoading = $loading.cloneNode(true)
+    map.getDiv().append($mapLoading)
+
+    if (e.target && e.target.files) {
+      const gpx = await readFile(e.target.files[0])
+      const points = []
+      for (const line of gpx.split('\n')) {
+        const coords = line.match(/lat="([0-9.]+)".+lon="([0-9.]+)"/)
+        if (coords) {
+          points.push(new google.maps.LatLng(parseFloat(coords[1]), parseFloat(coords[2])))
+        }
+      }
+      if (points.length) {
+        polygon = new google.maps.Polygon({
+          paths: points,
+          editable: true
+        })
+        polygon.setMap(map)
+
+        const bounds = new google.maps.LatLngBounds()
+        for (const point of points) {
+          bounds.extend(point)
+        }
+        map.fitBounds(bounds)
+      }
+      $loading.remove()
+      $mapLoading.remove()
+    }
+  })
+
+  map.getDiv().before($button, $label, $input)
+}
+
+function setupMapEditor(map) {
+  const drawingManager = new google.maps.drawing.DrawingManager({
     drawingMode: google.maps.drawing.OverlayType.POLYGON,
     drawingControl: true,
     drawingControlOptions: {
@@ -97,16 +167,18 @@ function setupMapEditor(map) {
     polygonOptions: {
       editable: true
     }
-  });
+  })
 
-  drawingManager.setMap(map);
+  drawingManager.setMap(map)
 
-  google.maps.event.addListener(drawingManager, 'overlaycomplete', function(e) {
+  google.maps.event.addListener(drawingManager, 'overlaycomplete', e => {
     if (polygon) {
-      polygon.setMap(null);
+      polygon.setMap(null)
     }
-    polygon = e.overlay;
-  });
+    polygon = e.overlay
+  })
 
-  return drawingManager;
+  setupGPXImport(map)
+
+  return drawingManager
 }

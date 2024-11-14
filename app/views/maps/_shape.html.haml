@@ -1,4 +1,9 @@
-%h2 Obrys mapy
+%h2
+  - case @map.map_family
+  - when Map::MAP_FAMILY_MAP
+    = "Obrys mapy"
+  - when Map::MAP_FAMILY_EMBARGO
+    = "Obrys embarga"
 
 - if map.shape_as_coords.empty?
 

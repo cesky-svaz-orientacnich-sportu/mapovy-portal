@@ -1,0 +1,50 @@
+%h1 Přidat embargo
+
+- if @map.errors.any?
+  %ul.map_errors.bs-callout.bs-callout-danger
+    - @map.errors.messages.each do |key, err|
+      %li
+        %strong= Map.human_attribute_name(key)
+        #{err * " a "}
+
+= nested_form_for @map, :html => {:id => 'map_form', :role => 'form', :multipart => true} do |f|
+  %h2= t("mapserver.embargoBasicData")
+  = render :partial => 'form_fields_embargo', :locals => {:f => f}
+
+  %h2 Obrys embarga
+  = render :partial => 'form_inline_map', :locals => {:f => f}
+
+  %div(style="margin-top:20px;margin-bottom:40px;")
+    %button(type="button" class="btn btn-primary submit-btn") Uložit embargo
+
+:javascript
+  let polygon
+  var map
+
+  $(function() {
+    map = setupMap(document.getElementById('inline_map_canvas'), false)
+    setupMapEditor(map)
+    setPolygon(map)
+    setupMapEditorSubmit()
+    fixMapHeight($('#inline_map_canvas'))
+
+    $("#map_oris_event_id").select2({
+      allowClear: true,
+      theme: 'bootstrap',
+      width: '100%'
+    })
+  })
+
+- if @map.shape_json.blank?
+  :javascript
+    function setPolygon(themap) {}
+- else
+  :javascript
+    function setPolygon(themap) {
+      const coordList = [#{(JSON[@map.shape_json].map{|x| %{new google.maps.LatLng("#{x[0]}", "#{x[1]}")}} * ", ").html_safe}]
+      polygon = new google.maps.Polygon({
+        paths: coordList,
+        editable: true
+      })
+      polygon.setMap(themap)
+    }

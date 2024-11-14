@@ -39,93 +39,67 @@
   %div.bs-callout.bs-callout-danger
     Mapa nebyla schválena, koordinátor (krajský kartograf) žádá vydavatele o doplnění.
 
-%h2= t("mapserver.mapBasicData")
+%h2
+  - case @map.map_family
+  - when Map::MAP_FAMILY_MAP
+    = t("mapserver.mapBasicData")
+  - when Map::MAP_FAMILY_EMBARGO
+    = t("mapserver.embargoBasicData")
 
 - if @map.map_family == Map::MAP_FAMILY_EMBARGO
-
   = render partial: 'maps/info_table_embargo', locals: {map: @map}
-
 - elsif @map.state == Map::STATE_PROPOSED
-
   = render partial: 'maps/info_table_proposal', locals: {map: @map}
-
 - elsif @map.state == Map::STATE_APPROVED
-
   = render partial: 'maps/info_table_proposal', locals: {map: @map}
-
   - if @map.authorized_organizer?(current_user)
     %div.bs-callout.bs-callout-success
       %p Čeká se na doplnění informací vydavatelem (po vydání mapy).
       = button_to "Doplnit záznam", [:complete, @map], method: 'get', class: "btn btn-success"
-
 - elsif @map.state == Map::STATE_FINAL_CHANGE_REQUESTED
-
   - if @map.authorized_organizer?(current_user)
     %div.bs-callout.bs-callout-danger
       %p Záznam byl koordinátorem / krajským kartografem #{print_user @map.approved_by, true} vrácen k doplnění.
       = button_to "Opravit / doplnit záznam", [:complete, @map], method: 'get', class: "btn btn-danger"
       %p= (@map.record_log.split("\n") * "<br />").html_safe
-
   = render partial: 'maps/info_table', locals: {map: @map}
-
 - elsif @map.state == Map::STATE_CHANGE_REQUESTED
-
   - if @map.authorized_organizer?(current_user)
     %div.bs-callout.bs-callout-danger
       %p Žádost byla koordinátorem / krajským kartografem #{print_user @map.approved_by, true} vrácena k doplnění.
       = button_to "Opravit / doplnit záznam", [:re_register, @map], method: 'get', class: "btn btn-danger", form: {id: 're_register_map_form'}
       %p= (@map.record_log.split("\n") * "<br />").html_safe
-
   = render partial: 'maps/info_table_proposal', locals: {map: @map}
-
 - else
-
   = render :partial => 'maps/info_table', :locals => {:map => @map}
 
 = render :partial => 'maps/shape', :locals => {:map => @map}
 
-%h2= t('mapserver.mapPreview')
+- if @map.map_family == Map::MAP_FAMILY_MAP
+  %h2= t('mapserver.mapPreview')
+  - if @map.has_jpg
+    - if @map.has_jpg?
+      = image_tag @map.preview_path, :style => 'max-width:100%;margin-bottom:20px'
+    - else
+      %div.well Pro tuto mapu není náhled dostupný (chyba na straně serveru).
 
-- if @map.has_jpg
-
-  - if @map.has_jpg?
-    = image_tag @map.preview_path, :style => 'max-width:100%;margin-bottom:20px'
+    - if has_role?(:manager)
+      %div.well.well-sm
+        - if @map.has_original_jpg?
+          = link_to "náhled v plném rozlišení a bez vodoznaku (#{File.basename(@map.preview_full_jpg_filename)}, #{(File.size(@map.preview_full_jpg_filename) / 1024.0).round} kB)", [:original_jpg, @map]
+        - else
+          Náhled bez vodoznaku není na serveru dostupný.
+      %div.well.well-sm
+        - if @map.has_original_preview?
+          = link_to "originál náhledu (#{File.basename(@map.preview_original_filename)}, #{(File.size(@map.preview_original_filename) / 1024.0).round} kB)", [:original_jpg, @map]
+        - else
+          Originál bez vodoznaku není na serveru dostupný.
+    %div.well.well-sm
+      = t("mapserver.previewCopyright")
+      - unless @map.administrator_email.blank?
+        = mail_to @map.administrator_email, icon('envelope', tooltip: 'e-mail na správce mapy')
   - else
-    %div.well Pro tuto mapu není náhled dostupný (chyba na straně serveru).
-
-  - if has_role?(:manager)
-    %div.well.well-sm
-      - if @map.has_original_jpg?
-        = link_to "náhled v plném rozlišení a bez vodoznaku (#{File.basename(@map.preview_full_jpg_filename)}, #{(File.size(@map.preview_full_jpg_filename) / 1024.0).round} kB)", [:original_jpg, @map]
-      - else
-        Náhled bez vodoznaku není na serveru dostupný.
-
-    %div.well.well-sm
-      - if @map.has_original_preview?
-        = link_to "originál náhledu (#{File.basename(@map.preview_original_filename)}, #{(File.size(@map.preview_original_filename) / 1024.0).round} kB)", [:original_jpg, @map]
-      - else
-        Originál bez vodoznaku není na serveru dostupný.
-
-  %div.well.well-sm
-    = t("mapserver.previewCopyright")
-    - unless @map.administrator_email.blank?
-      = mail_to @map.administrator_email, icon('envelope', tooltip: 'e-mail na správce mapy')
-
-- else
-
-  %div.well Pro tuto mapu není náhled dostupný.
-
-/ %h2 OB postupy
-/
-/ - if @map.oris_event
-/   - if @map.oris_event.obpostupy_url.blank?
-/     %div.well Závod #{@map.oris_event} nemá záznam v aplikaci OB postupy.
-/   - else
-/     %div.well= link_to "Přejít na stránku záznamu v OB postupech", @map.oris_event.obpostupy_url
-/     - unless @map.oris_event.obpostupy_map_url.blank?
-/       = image_tag @map.oris_event.obpostupy_map_url, :style => 'max-width:100%'
-/ - else
-/   %div.well Tato mapa není spárována s žádným závodem z ORISu.
+    %div.well Pro tuto mapu není náhled dostupný.
 
 - if [Map::STATE_ARCHIVED, Map::STATE_SAVED_WITHOUT_FILING].include?(@map.state)
   #issue_report.record-detail-report-issue.well

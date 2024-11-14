@@ -22,12 +22,14 @@
 #  unconfirmed_email      :string(255)
 #  oris_registrations     :string(255)
 #  role                   :string(255)
+#  above_role_authorizations :array         default([]), not null
 #  authorized_clubs       :string(255)
 #  authorized_regions     :string(255)
 #  full_name              :string(255)
 #
 
 class User < ApplicationRecord
+  extend ArrayEnum
 
   nilify_blanks
 
@@ -42,6 +44,14 @@ class User < ApplicationRecord
   after_create :notify_create
 
   ROLES = %w{contributor organizer cartographer manager admin}
+
+  array_enum above_role_authorizations: {
+    :embargoes => 1
+  }
+
+  ABOVE_ROLE_AUTHORIZATIONS = {
+    :embargoes => 'správa embarg'
+  }
 
   def name_for_sort
     ary = name.split
@@ -66,6 +76,10 @@ class User < ApplicationRecord
 
   def role_to_s
     (!role.blank?) ? I18n.t("roles.#{role}") : '---'
+  end
+
+  def above_role_authorizations_to_s
+    (!above_role_authorizations.blank?) ? above_role_authorizations.map {|k, v| ABOVE_ROLE_AUTHORIZATIONS[k.to_sym]}.join(', ') : '---'
   end
 
   def check_against_oris_possibly

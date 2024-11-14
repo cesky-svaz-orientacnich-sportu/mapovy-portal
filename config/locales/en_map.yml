@@ -345,9 +345,10 @@ en:
     mapTitle:
       map: "Map"
       embargo: "Embargo"
-    mapBasicData: "Map basic data"
+    mapBasicData: "Basic map data"
     mapAuthors: "Authors"
     mapPreview: "Map preview"
+    embargoBasicData: "Basic embargo data"
 
     controls: "Map browsing controls"
     layers: "O-maps"

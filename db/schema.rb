@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_06_164413) do
+ActiveRecord::Schema[7.0].define(version: 2024_05_06_142603) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgrouting"
   enable_extension "plpgsql"
@@ -216,6 +216,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_06_164413) do
     t.string "authorized_clubs", limit: 255
     t.string "authorized_regions", limit: 255
     t.string "full_name", limit: 255
+    t.integer "above_role_authorizations", default: [], null: false, array: true
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

@@ -152,4 +152,17 @@ class ApiController < ApplicationController
     end
   end
 
+  def get_upcoming_embargoes
+    maps = Map.where(map_family: 'embargo', embargo_until: 1.day.ago..).where.not(oris_event_id: nil)
+    respond_to do |format|
+      format.json do
+        if maps.any?
+          render json: {status: 'success', data: maps.map{|map| {oris_id: OrisEvent.find(map.oris_event_id).oris_id, url: url_for(map)}}}.to_json
+        else
+          render json: {status: 'error', message: "No embargoes found"}.to_json
+        end
+      end
+    end
+  end
+
 end

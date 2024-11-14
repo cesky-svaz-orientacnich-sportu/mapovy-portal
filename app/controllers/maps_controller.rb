@@ -62,13 +62,13 @@ class MapsController < ApplicationController
   require 'fileutils'
 
   before_action :require_admin, only: [:destroy]
-  before_action :require_manager, only: [:racematch]
+  before_action :require_manager, only: [:racematch, :new_embargo]
   before_action :require_contributor, only: [:edit, :new, :create, :remove]
   before_action :require_organizer, only: [:register]
   before_action :require_cartographer, only: [:authorize_proposal, :reject_proposal, :authorize_completion, :reject_completion]
   before_action :require_any_user, only: [:my_approved]
 
-  before_action :use_map, only: [:new, :show, :edit, :register, :re_register, :complete, :create, :update]
+  before_action :use_map, only: [:new, :new_embargo, :show, :edit, :register, :re_register, :complete, :create, :update]
 
   before_action :set_paper_trail_whodunnit
 
@@ -109,6 +109,15 @@ class MapsController < ApplicationController
     end
     @disable_blocking = true # map created without registrations isn't eligible for blocking
     @map = Map.new(created_by_id: current_user.id, map_family: Map::MAP_FAMILY_MAP, state: state, patron_accuracy: 'authored', year_accuracy: 'authored')
+  end
+
+  def new_embargo
+    @map = Map.new(
+      created_by_id: current_user.id,
+      map_family: Map::MAP_FAMILY_EMBARGO,
+      state: Map::STATE_NON_MAP,
+      patron_accuracy: 'authored',
+      year_accuracy: 'authored')
   end
 
   def compare

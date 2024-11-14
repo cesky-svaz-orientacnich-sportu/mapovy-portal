@@ -1,6 +1,6 @@
 source "http://rubygems.org"
 
-ruby "2.7.6"
+ruby "3.1.2"
 
 gem 'activerecord-postgis-adapter'
 gem "autoprefixer-rails", "~> 10.4" # vendor prefixin CSS
@@ -46,6 +46,7 @@ gem "turnout", "~> 2.5"
 gem "uuidtools", "~> 2.2"
 gem "webpacker", "~> 5.4"
 gem 'whenever', "~> 1.0", require: false
+gem "array_enum", "~> 1.5"
 
 group :test, :development do
   gem "rspec-rails", "~> 6.0"

@@ -1,6 +1,7 @@
 # Change Log
 
 ## [Unreleased]
+- Ruby 3.1.2
 
 ## [2.3.9] - 2023-12-25
 - use new ČÚZK map tiles
