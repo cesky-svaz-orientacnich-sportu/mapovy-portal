@@ -1,6 +1,7 @@
 # Change Log
 
 ## [Unreleased]
+- Ruby 3.1.7
 
 ## [2.4.0] - 2024-11-14
 - Ruby 3.1.2
