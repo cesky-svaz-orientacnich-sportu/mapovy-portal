@@ -31,7 +31,10 @@
 
 en:
   mapserver:
-    title: "Czech Orienteering Federation Map Portal"
+    cancelSearch: "cancel search"
+
+    title: "Map Portal – Czech Orienteering"
+    title_short: "Maps"
     header_menu:
       archive: "Map browser"
       maps: "Map registry"
@@ -316,7 +319,7 @@ en:
       embargo:
         info_title: 'Embargo until'
 
-    mainLogoTitle: "Czech Orienteering Federation Map Portal"
+    mainLogoTitle: "Map Portal – Czech Orienteering"
     searchBoxForm: "Map name"
     search: "Search"
     advancedSearch: "Advanced Search"
@@ -334,9 +337,11 @@ en:
 
     advancedSearchYearFrom: "from"
     advancedSearchYearTo: "to"
+    advancedSearchScale: "Scale"
     advancedSearchAuthor: "Author"
     advancedSearchGPS: "GPS"
     advancedSearchGPStext: "fill as: (latitude,longitude)"
+    advancedSearchPlace: 'Location'
     advancedSearchDistance: "Distance"
     advancedSearchDistanceText: "in km (default 5)"
     advancedSearchClose: "Close advanced search"

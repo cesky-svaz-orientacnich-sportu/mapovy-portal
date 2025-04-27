@@ -1,3 +1,5 @@
+@import "settings/colors";
+
 .map-controls {
 	overflow-y: auto;
 	position: absolute;
@@ -8,8 +10,8 @@
 	max-width: calc(100vw - 24px);
 	max-height: 100%;
 	max-height: calc(100% - 24px);
-	border: 1px solid #b5b6b6;
-	background-color: #f1f1f1;
+	border: 1px solid $o-night-60;
+	background-color: $o-beige;
 
 	.separator {
 		height: 1px;
@@ -129,7 +131,7 @@
 	z-index: 1;
 	display: flex;
 	padding-left: 0;
-	border: 1px solid #b5b6b6;
+	border: 1px solid $o-night-60;
 	list-style: none;
 
 	li:not(:last-child) {

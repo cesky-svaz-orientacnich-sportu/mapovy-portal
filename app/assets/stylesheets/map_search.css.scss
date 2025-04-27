@@ -1,8 +1,10 @@
+@import "settings/colors";
+
 .contentText {
 	padding: 10px;
 
 	h1, h2 {
-		color: #D93C00;
+		color: $o-orange;
 		font-size: 16px;
 		font-weight: bold;
 		line-height: 18px;
@@ -120,7 +122,7 @@
 		padding: 10px 20px 10px 16px;
 		border: 0;
 		font-size: 16px;
-		background-color: #d93c00;
+		background-color: $o-orange-60;
 		color: #fff;
 
 		&::before {
@@ -164,8 +166,8 @@
 	flex-grow: 0;
 	flex-shrink: 0;
 	max-width: 100%;
-	border-right: 1px solid #b5b6b6;
-	background-color: #fff;
+	border-right: 1px solid $o-night-60;
+	background-color: $o-beige;
 
 	@media (min-width: 43em) {
 		overflow-y: auto;
@@ -187,18 +189,22 @@
 		padding: 0 24px 10px;
 		border-top: 1px solid #fff;
 		border-bottom: 1px solid #cbcccc;
-		background-color: #f1f1f1;
+		background-color: $o-bg;
 	}
 
 	.content > ul > li:hover {
 		background: #fff;
 
 		h3 a {
-			color: #d93c00;
+			color: $o-orange;
 		}
 
 		span {
 			border-color: #fff;
+		}
+
+		table {
+			background: inherit;
 		}
 	}
 
@@ -292,7 +298,7 @@
 	font-size: 13px;
 	text-decoration: none;
 	background: url('/img/bg-arrow.png') no-repeat 0 2px;
-	color: #b0b1b1;
+	color: $o-night-60;
 }
 
 .search-result-header-links {
@@ -358,7 +364,7 @@
 	border: 0;
 	line-height: 15px;
 	font-size: 14px;
-	background: #d93c00;
+	background: $o-orange-60;
 	color: #fff;
 
 	&[disabled] {

@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 class MapStateMailer < ActionMailer::Base
-  default from: "\"Mapový portál ČSOS\" <mapovyportal@orientacnisporty.cz>"
-  
+  default from: "\"Mapový portál\" <mapovyportal@ceskyorientak.cz>"
+
   def map_proposed(map)
     @map = map
     mail(to: map.authorized_cartographers.map(&:email), cc: User.where(role: 'admin').map(&:email), subject: "Nový požadavek na evidenci mapy #{@map}")
@@ -23,7 +23,7 @@ class MapStateMailer < ActionMailer::Base
     @comment = comment
     mail(to: map.created_by.email, cc: User.where(role: 'admin').map(&:email), subject: "Požadavek na evidenci mapy #{@map} vrácen k doplnění")
   end
-  
+
   def map_completed(map)
     @map = map
     mail(to: map.authorized_cartographers.map(&:email), cc: User.where(role: 'admin').map(&:email), subject: "Doplněny údaje k mapě #{@map}")
@@ -34,7 +34,7 @@ class MapStateMailer < ActionMailer::Base
     @comment = comment
     mail(to: map.created_by.email, cc: User.where(role: 'admin').map(&:email), subject: "Požadavek na schválení mapy #{@map} vrácen k doplnění")
   end
-  
+
   def reminder_on_proposed(map)
     return if map.last_reminder_sent_at == Date.today
     return unless map.state == Map::STATE_PROPOSED
@@ -50,7 +50,7 @@ class MapStateMailer < ActionMailer::Base
     map.update_attribute :last_reminder_sent_at, Date.today
     mail(to: map.created_by.email, cc: User.where(role: 'admin').map(&:email), subject: "Připomínka -- je potřeba doplnit údaje k mapě #{@map} po závodě")
   end
-  
+
   def reminder_on_requested_change(map)
     return if map.last_reminder_sent_at == Date.today
     return unless map.state == Map::STATE_CHANGE_REQUESTED or map.state == Map::STATE_FINAL_CHANGE_REQUESTED

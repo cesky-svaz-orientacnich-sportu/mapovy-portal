@@ -10,6 +10,8 @@ Mapserver::Application.routes.draw do
 
   root :to => 'map#index'
 
+  get "site.webmanifest", to: "meta#site_webmanifest", defaults: { format: :webmanifest }, as: :site_webmanifest
+
   get '/info/after_sign_up' => "texts#show", name: "#after_sign_up"
   get '/privacy' => "texts#show", name: "privacy"
 

@@ -53,7 +53,8 @@ cs:
       - Odstranit vrchol polygonu nelze.
       - Náhrada celého polygonu novým: Nakresli druhý polygon, po jeho uzavření první polygon zmizí.
 
-    title: "Mapový portál ČSOS"
+    title: "Mapový portál – Český orienťák"
+    title_short: "Mapy"
     header_menu:
       archive: "Prohlížení map"
       convergence: "Pro kartografy"

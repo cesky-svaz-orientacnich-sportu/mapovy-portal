@@ -1,4 +1,15 @@
+@import "colors";
+
 $grid-float-breakpoint: 64em;
 $grid-float-breakpoint-max: (($grid-float-breakpoint * 16 - 1) / 16);
-$navbar-inverse-color: #fff;
+
+$navbar-inverse-color: $o-beige;
+$navbar-inverse-bg: $o-night-90;
+$navbar-inverse-border: $navbar-inverse-bg;
+
 $navbar-inverse-link-color: $navbar-inverse-color;
+$navbar-inverse-link-hover-color: $o-orange;
+
+$navbar-inverse-toggle-hover-bg: $o-night-80;
+$navbar-inverse-toggle-icon-bar-bg: $o-beige;
+$navbar-inverse-toggle-border-color: $o-night-60;

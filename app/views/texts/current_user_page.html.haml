@@ -49,9 +49,9 @@
       %p
         Práva pro přístup se přidělují automaticky na základě informací z ORISu (oprávnění "přispěvatel" pro všechny registrované členy ČSOS a oprávnění "vydavatel" pro ty, kdo mají v ORISu přiděleno klubové právo evidence map).
       %p
-        Požádejte vedoucího klubu o přidělení práva evidence map v ORIS. V případě přetrvávání potíží se obraťte na #{mail_to "mapovyportal@orientacnisporty.cz"}.
+        Požádejte vedoucího klubu o přidělení práva evidence map v ORIS. V případě přetrvávání potíží se obraťte na #{mail_to "mapovyportal@ceskyorientak.cz"}.
       / %p
-      / Pokud účet v ORISu nejste a máte za to, že byste práva k úkonům mít měli, dejte nám vědět na #{mail_to "mapovyportal@orientacnisporty.cz"}. Pokusíme se žádost vyřídit brzy, ale zejména pokud si nebudeme jistí, o koho vlastně jde, to může chvíli trvat.
+      / Pokud účet v ORISu nejste a máte za to, že byste práva k úkonům mít měli, dejte nám vědět na #{mail_to "mapovyportal@ceskyorientak.cz"}. Pokusíme se žádost vyřídit brzy, ale zejména pokud si nebudeme jistí, o koho vlastně jde, to může chvíli trvat.
 
 - if current_user.role == 'contributor'
   %div.panel.panel-primary
@@ -59,7 +59,7 @@
       %h4.panel-title Není přiřazeno oprávnění vydavatel
     %div.panel-body
       %p Práva pro přístup se přidělují automaticky na základě informací z ORISu (oprávnění "přispěvatel" pro všechny registrované členy ČSOS a oprávnění "vydavatel" pro ty, kdo mají v ORISu přiděleno klubové právo evidence map).
-      %p Požádejte vedoucího klubu o přidělení práva evidence map v ORIS. V případě přetrvávání potíží se obraťte na #{mail_to "mapovyportal@orientacnisporty.cz"}.
+      %p Požádejte vedoucího klubu o přidělení práva evidence map v ORIS. V případě přetrvávání potíží se obraťte na #{mail_to "mapovyportal@ceskyorientak.cz"}.
 
 
 - if current_user.oris_registrations.blank?
@@ -70,7 +70,7 @@
       %p
         Pro kombinaci jméno [#{current_user.name}] a email [#{current_user.email}] nevrátil ORIS žádné registrační číslo. Kontrola pomocí jména a emailu je v současnosti jediný způsob, jak ověřit identitu uživatelů.
       %p
-        Změnte si e-mailovou adresu v ORIS (nebo požádejte vedoucího klubu o změnu) na tu, kterou používáte pro registraci do Mapového portálu ČSOS.
+        Změnte si e-mailovou adresu v ORIS (nebo požádejte vedoucího klubu o změnu) na tu, kterou používáte pro registraci do Mapového portálu Českého orienťáku.
 
 .users-my-page-oris.panel.panel-primary
   .panel.panel-heading Ověření proti ORISu

@@ -1,3 +1,5 @@
+@import "settings/colors";
+
 // ===============================================================
 // Browser CSS resets and default styles
 // ===============================================================
@@ -19,9 +21,9 @@ body {
 	padding: 0;
 	line-height: 1.5;
 	font-size: 12px; // TODO: 16px and use relative units everywhere
-	font-family: Arial, sans-serif;
-	background-color: #fff;
-	color: #000;
+	font-family: -apple-system, BlinkMacSystemFont, Arial, Helvetica, sans-serif;
+	background-color: $o-beige;
+	color: $o-night-90;
 }
 
 // ===============================================================
@@ -82,12 +84,11 @@ a:hover {
 
 .content {
 	a:not(.btn-primary) {
-		color:#428bca;
+		color: $o-orange;
 	}
 
 	a:not(.btn-primary):hover {
-		color: red;
-		text-decoration:none;
+		color: $o-orange-60;
 	}
 }
 
@@ -101,7 +102,7 @@ h2 {
 }
 
 h2.orange {
-	color: #D93C00;
+	color: $o-orange;
 }
 
 ul {
@@ -119,7 +120,7 @@ td, th {
 }
 
 th {
-	color:#b0b1b1;
+	color: $o-night-90;
 	font-size:11px;
 	line-height:13px;
 	padding:0 0 2px 0;
@@ -202,9 +203,10 @@ table.dataTable thead tr th+th {
 .bs-callout {
 		padding: 20px;
 		margin: 20px 0;
-		border: 1px solid #eee;
+		border: 1px solid $o-night-40;
 		border-left-width: 5px;
 		border-radius: 3px;
+	background-color: $o-bg;
 }
 .bs-callout h4 {
 		margin-top: 0;

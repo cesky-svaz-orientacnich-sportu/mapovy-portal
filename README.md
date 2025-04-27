@@ -1,4 +1,4 @@
-# Mapový portál ČSOS
+# Mapový portál – Český orienťák
 
 ## Built with
 - [Ruby on Rails](https://rubyonrails.org/)

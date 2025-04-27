@@ -3,7 +3,7 @@ unless Rails.env.development?
   Mapserver::Application.config.middleware.use ExceptionNotification::Rack,
     :email => {
       :email_prefix => "[Mapserver] ",
-      :sender_address => %{"mapserver" <mapovyportal@orientacnisporty.cz>},
+      :sender_address => %{"mapserver" <mapovyportal@ceskyorientak.cz>},
       :exception_recipients => %w{david.pustai@gmail.com}
     }
 

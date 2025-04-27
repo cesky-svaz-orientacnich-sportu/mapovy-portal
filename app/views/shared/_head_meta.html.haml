@@ -1,0 +1,15 @@
+%meta(charset="utf-8")
+%meta(http-equiv="x-ua-compatible" content="ie=edge")
+%meta(name="viewport" content="width=device-width, initial-scale=1")
+
+%title= t('mapserver.title')
+
+%link{ rel: "icon", type: "image/svg+xml", href: "/favicon.svg" }
+%link{ rel: "shortcut icon", href: "/favicon.ico" }
+%link{ rel: "apple-touch-icon", sizes: "180x180", href: "/apple-touch-icon.png" }
+%meta{ name: "apple-mobile-web-app-title", content: I18n.locale === 'cs' ? 'Mapy' : 'Mapserver' }
+%link{ rel: "manifest", href: site_webmanifest_path }
+
+= csrf_meta_tags
+= csp_meta_tag
+

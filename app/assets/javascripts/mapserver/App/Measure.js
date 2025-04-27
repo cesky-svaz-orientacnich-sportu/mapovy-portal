@@ -93,7 +93,7 @@ App.Measure = App.newClass({
                 this.line = new google.maps.Polyline({
                     map: this.map,
                     clickable: false,
-                    strokeColor: "#FF0000",
+                    strokeColor: "#fe5900",
                     strokeOpacity: 1,
                     strokeWeight: 3,
                     path: this.mvcLine

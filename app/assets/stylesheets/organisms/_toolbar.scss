@@ -1,3 +1,5 @@
+@import "settings/colors";
+
 .toolbar {
 	z-index: 9;
 	flex-shrink: 0;
@@ -7,8 +9,8 @@
 	min-height: 70px;
 	width: 100%;
 	padding: 12px;
-	border-bottom: 1px solid #646464;
-	background-color: #f1f1f1;
+	border-bottom: 1px solid $o-night-60;
+	background-color: $o-beige;
 
 	@media (min-width: 50em) {
 		padding: 12px 24px;
@@ -36,6 +38,13 @@
 
 	@media (min-width: 62em) { // ~ $screen-md-min
 		display: inline-block;
+		font-size: 2.5rem;
+		padding: calc(.75em - 12px) calc(.75em - 24px);
+	}
+
+	img {
+		height: 1em;
+		width: auto;
 	}
 }
 

@@ -1,6 +1,6 @@
 # -*- encoding : utf-8 -*-
 class UserMailer < ActionMailer::Base
-  default from: "\"Mapový portál ČSOS\" <mapovyportal@orientacnisporty.cz>"
+  default from: "\"Mapový portál\" <mapovyportal@ceskyorientak.cz>"
 
   def new_user(user)
     @user = user

@@ -1,6 +1,6 @@
 .toolbar
   .toolbar-bar{:class => ("has-search-and-tools" unless @map_title)}
-    = link_to image_tag("/img/mapovy-portal-csos-#{I18n.locale}.png", :alt => t("mapserver.mainLogoTitle"), :title => t("mapserver.mainLogoTitle")), :root, {:class => 'toolbar-logo'}
+    = link_to image_tag("/img/mapovy-portal-logo-#{I18n.locale}.svg", :alt => t("mapserver.mainLogoTitle"), :title => t("mapserver.mainLogoTitle")), :root, {:class => 'toolbar-logo'}
     - if @map_title
       .toolbar-title= @map_title
     - else
@@ -13,7 +13,7 @@
       %ul.tools-list
         / TODO : rename tool-XX to semantic names
         %li= link_to image_tag("/img/tool-01.png", alt: t("mapserver.buttonPrint")), "javascript:void(0)", id: "map_tool_print_button", title: t("mapserver.buttonPrint")
-        %li= mail_to "mapovyportal@orientacnisporty.cz?subject=#{t("mapserver.emailSubject")}", image_tag("/img/tool-02.png", alt: t("mapserver.buttonMail")), title: t("mapserver.buttonMail")
+        %li= mail_to "mapovyportal@ceskyorientak.cz?subject=#{t("mapserver.emailSubject")}", image_tag("/img/tool-02.png", alt: t("mapserver.buttonMail")), title: t("mapserver.buttonMail")
         %li= link_to image_tag("/img/tool-03.png", alt: t("mapserver.buttonUrlLink")), "javascript:void(0)", id: "map_tool_url_button", title: t("mapserver.buttonUrlLink")
         %li= link_to image_tag("/img/tool-04.png", alt: t("mapserver.buttonMeasure")), "javascript:void(0)", id: "map_tool_measure_button", title: t("mapserver.buttonMeasure")
         %li= link_to image_tag("/img/tool-05.png", alt: t("mapserver.buttonHelp")), "javascript:void(0)", id: "map_tool_help_button", title: t("mapserver.buttonHelp")

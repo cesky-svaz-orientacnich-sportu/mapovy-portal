@@ -1,3 +1,5 @@
+@import "settings/colors";
+
 // ===============================================================
 // Flash messages
 // ===============================================================
@@ -11,7 +13,7 @@
 	width: 400px;
 
 	.bs-callout {
-		background-color: #fff;
+		background-color: $o-bg;
 	}
 }
 
@@ -36,7 +38,7 @@
 	}
 
 	h5 {
-		border-bottom: 1px solid red;
+		border-bottom: 1px solid $o-orange;
 	}
 
 	p {
@@ -70,8 +72,8 @@
 // Context menu
 // ===============================================================
 .context_menu {
-	border: 1px solid #b5b6b6;
-	background-color: #f1f1f1;
+	border: 1px solid $o-night-60;
+	background-color: $o-beige;
 }
 
 .context_menu_item {
@@ -80,14 +82,14 @@
 }
 
 .context_menu_item:hover {
-	background-color: #fff;
+	background-color: $o-bg;
 }
 
 .context_menu_separator {
 	height: 1px;
 	margin: 0;
 	padding: 0;
-	background-color: #b5b6b6;
+	background-color: $o-night-60;
 }
 
 // ===============================================================
@@ -97,7 +99,7 @@
 	max-width: 100%;
 	width: 280px;
 	min-height: 85px;
-	background-color: #fff;
+	background-color: $o-bg;
 
 	.header h3 {
 		float: left;
@@ -109,7 +111,7 @@
 		a:focus,
 		a:hover {
 			text-decoration: none;
-			color: #d93c00;
+			color: $o-orange;
 		}
 	}
 
@@ -157,12 +159,12 @@
 .popup {
 	min-height: 86px;
 	width: 272px;
-	border: 1px solid #b5b6b6;
+	border: 1px solid $o-night-60;
 	background: #fff;
 
 	.header {
 		height: 26px;
-		border-bottom: 1px solid #b5b6b6;
+		border-bottom: 1px solid $o-night-60;
 		line-height: 17px;
 		font-size: 13px;
 		font-weight: bold;
@@ -260,5 +262,5 @@ input[type=text] {
 .focus,
 input[type=text]:focus {
 	color: #000;
-	border-color: #de3b04 !important;		;
+	border-color: $o-orange-60 !important;		;
 }

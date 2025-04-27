@@ -1,3 +1,5 @@
+@import "settings/colors";
+
 // ===============================================================
 // Base
 // ===============================================================
@@ -35,9 +37,9 @@
 	z-index: 1;
 	display: block;
 	padding: 8px;
-	border: 1px solid #b5b6b6;
+	border: 1px solid $o-night-60;
 	border-radius: 0;
-	background-color: #f1f1f1;
+	background-color: $o-beige;
 
 	img {
 		width: 22px;
@@ -51,18 +53,14 @@
 	right: 12px;
 	z-index: 8;
 	padding: 12px 32px 10px;
-	border: 1px solid #b5b6b6;
+	border: 1px solid $o-night-60;
 	line-height: 1;
 	font-size: 16px;
 	font-weight: bold;
 	text-align: center;
-	background-color: #da2626;
+	background-color: $o-orange-60;
+	border-color: $o-orange-60;
 	color: #fff;
-
-	&:focus,
-	&:hover {
-		color: yellow;
-	}
 }
 
 // ===============================================================

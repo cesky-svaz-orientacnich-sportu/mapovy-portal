@@ -69,7 +69,7 @@ function setupMap(mapElement, useScrollWheel) {
   map.enableKeyDragZoom({
       key: 'ctrl',
       boxStyle: {
-          border: "4px solid #D93C00",
+          border: "4px solid #fe5900",
           backgroundColor: "transparent",
           opacity: 1.0
       },

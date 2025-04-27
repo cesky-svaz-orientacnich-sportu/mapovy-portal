@@ -1,7 +1,17 @@
 // ===============================================================
 // IMPORT SETTINGS
 // ===============================================================
+@import "settings/colors";
+
 @import "settings/navbar-settings";
+@import "settings/table-settings";
+
+$pagination-active-bg: $o-orange;
+$pagination-active-border: $pagination-active-bg;
+$pagination-active-color: #fff !important;
+
+$well-bg: $o-bg;
+$well-border: $o-night-30;
 
 // ===============================================================
 // IMPORT BOOTSTRAP
