@@ -1,6 +1,6 @@
 .toolbar
   .toolbar-bar{:class => ("has-search-and-tools" unless @map_title)}
-    = link_to image_tag("/img/mapovy-portal-logo-#{I18n.locale}.svg", :alt => t("mapserver.mainLogoTitle"), :title => t("mapserver.mainLogoTitle")), :root, {:class => 'toolbar-logo'}
+    = link_to image_tag("/img/mapovy-portal-logo.svg", :alt => t("mapserver.mainLogoTitle"), :title => t("mapserver.mainLogoTitle")), :root, {:class => 'toolbar-logo'}
     - if @map_title
       .toolbar-title= @map_title
     - else
