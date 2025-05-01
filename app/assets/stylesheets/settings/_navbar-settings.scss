@@ -3,6 +3,10 @@
 $grid-float-breakpoint: 64em;
 $grid-float-breakpoint-max: (($grid-float-breakpoint * 16 - 1) / 16);
 
+$navbar-brand-font-size: 18px;
+$navbar-brand-padding-horizontal: .75em;
+$navbar-brand-padding-vertical: .75em;
+
 $navbar-inverse-color: $o-beige;
 $navbar-inverse-bg: $o-night-90;
 $navbar-inverse-border: $navbar-inverse-bg;

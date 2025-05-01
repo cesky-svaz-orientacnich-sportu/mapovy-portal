@@ -1,3 +1,5 @@
+@import "bootstrap/variables";
+@import "settings/navbar-settings";
 @import "settings/navbar-settings";
 
 .navbar {
@@ -7,9 +9,20 @@
 	font-size: 14px;
 }
 
+@media (min-width: $grid-float-breakpoint) {
+  .navbar-left {
+    margin-left: -$navbar-padding-horizontal;
+  }
+}
+
 .navbar-brand {
 	@media (min-width: $grid-float-breakpoint) {
 		display: none !important;
+	}
+
+	img {
+		height: 100%;
+		width: auto;
 	}
 }
 

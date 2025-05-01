@@ -1,3 +1,4 @@
+@import "settings/navbar-settings";
 @import "settings/colors";
 
 .toolbar {
@@ -12,7 +13,7 @@
 	border-bottom: 1px solid $o-night-60;
 	background-color: $o-beige;
 
-	@media (min-width: 50em) {
+	@media (min-width: $grid-float-breakpoint) {
 		padding: 12px 24px;
 	}
 }
@@ -36,7 +37,7 @@
 .toolbar-logo {
 	display: none;
 
-	@media (min-width: 62em) { // ~ $screen-md-min
+	@media (min-width: $grid-float-breakpoint) {
 		display: inline-block;
 		font-size: 2.5rem;
 		padding: calc(.75em - 12px) calc(.75em - 24px);
