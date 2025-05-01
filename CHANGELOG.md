@@ -1,6 +1,8 @@
 # Change Log
 
 ## [Unreleased]
+
+## [2.5.0] - 2025-05-01
 - Ruby 3.1.7
 - rebrand to Český orienťák
 
