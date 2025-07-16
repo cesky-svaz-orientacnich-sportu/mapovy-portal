@@ -126,7 +126,10 @@ const setupGPXImport = (map) => {
 
     if (e.target && e.target.files) {
       const gpx = await readFile(e.target.files[0])
-      const points = []
+
+	  polygon.setMap(null) // remove old polygon
+
+	  const points = []
       for (const line of gpx.split('\n')) {
         const coords = line.match(/lat="([0-9.]+)".+lon="([0-9.]+)"/)
         if (coords) {
