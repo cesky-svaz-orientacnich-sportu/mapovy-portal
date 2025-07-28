@@ -2,8 +2,9 @@ source "http://rubygems.org"
 
 ruby "3.1.7"
 
-gem "rails", "~> 7.1.5"
-gem 'activerecord-postgis-adapter', "~> 9.0"
+gem "rails", "~> 7.2.2"
+gem "pg", "~> 1.1" # PostgreSQL as the database for Active Record
+gem 'activerecord-postgis-adapter', "~> 10.0" # PosgGis extension for PostgreSQL
 gem "autoprefixer-rails", "~> 10.4" # vendor prefixin CSS
 gem "bootsnap", "~> 1.7"
 gem "bootstrap-sass", "~> 3.4"
@@ -24,7 +25,6 @@ gem "jquery-ui-rails", "~> 6.0"
 gem "kaminari", "~> 1.2"
 gem "kaminari-bootstrap", "~> 3.0"
 gem "magic_encoding", "~> 0.0.2"
-gem "pg", "~> 1.1" # PostgreSQL as the database for Active Record
 gem "nested_form", "~> 0.3"
 gem "nilify_blanks", "~> 1.4"
 gem "nokogiri", "~> 1.13" # XML handling
@@ -32,7 +32,7 @@ gem "omniauth", "~> 2.1"
 gem "omniauth-facebook", "~> 9.0"
 gem "omniauth-google-oauth2", "~> 1.1"
 gem "omniauth-rails_csrf_protection", "~> 1.0"
-gem "paper_trail", "~> 16.0"
+gem "paper_trail", "~> 16.0" # history of changes to records in database
 gem "kt-paperclip", "~> 7.2"
 gem "rails-controller-testing", "~> 1.0"
 gem "RedCloth", "~> 4.3"

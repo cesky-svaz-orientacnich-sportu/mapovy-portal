@@ -9,14 +9,12 @@ Bundler.require(*Rails.groups)
 module Mapserver
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 7.1
+    config.load_defaults 7.2
 
     # Please, add to the `ignore` list any other `lib` subdirectories that do
     # not contain `.rb` files, or that should not be reloaded or eager loaded.
     # Common ones are `templates`, `generators`, or `middleware`, for example.
-    config.autoload_lib(ignore: %w(assets tasks))
-
-    # config.eager_load_paths << Rails.root.join("extras")
+    config.autoload_lib(ignore: %w[assets tasks])
 
     # Configuration for the application, engines, and railties goes here.
     #
@@ -26,6 +24,7 @@ module Mapserver
     config.time_zone = "Prague"
     config.active_record.default_timezone = :local
     config.beginning_of_week = :monday
+    # config.eager_load_paths << Rails.root.join("extras")
 
     config.active_record.encryption.hash_digest_class = OpenSSL::Digest::SHA256
     config.active_record.encryption.support_sha1_for_non_deterministic_encryption = true
