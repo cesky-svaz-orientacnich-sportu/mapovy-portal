@@ -1,10 +1,10 @@
 source "http://rubygems.org"
 
-ruby "3.1.7"
+ruby "3.3.9"
 
-gem "rails", "~> 7.2.2"
+gem "rails", "~> 8.0.2"
 gem "pg", "~> 1.1" # PostgreSQL as the database for Active Record
-gem 'activerecord-postgis-adapter', "~> 10.0" # PosgGis extension for PostgreSQL
+gem 'activerecord-postgis-adapter', "~> 11.0" # PosgGis extension for PostgreSQL
 gem "autoprefixer-rails", "~> 10.4" # vendor prefixin CSS
 gem "bootsnap", "~> 1.7"
 gem "bootstrap-sass", "~> 3.4"
@@ -65,7 +65,6 @@ group :test do
 end
 
 group :development do
-  gem "annotate", "~> 3.2"
   gem "better_errors", "~> 2.9"
   gem "bcrypt_pbkdf", "~> 1.1", require: false
   gem "binding_of_caller", "~> 1.0"

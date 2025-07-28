@@ -1,9 +1,10 @@
 # Change Log
 
 ## [Unreleased]
-- Ruby 3.1.7
+- Ruby 3.3.9
+- Rails 8.0
 - rebrand to Český orienťák
-- Rails 7.2
+- remove Annotate
 
 ## [2.4.0] - 2024-11-14
 - Ruby 3.1.2
