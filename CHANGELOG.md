@@ -3,8 +3,12 @@
 ## [Unreleased]
 - Ruby 3.3.9
 - Rails 8.0
+- update dependencies
+- remove - annotate, turnout
+
+## [2.5.0] - 2025-05-01
+- Ruby 3.1.7
 - rebrand to Český orienťák
-- remove Annotate
 
 ## [2.4.0] - 2024-11-14
 - Ruby 3.1.2
