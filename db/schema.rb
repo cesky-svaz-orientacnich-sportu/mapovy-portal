@@ -10,13 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_05_06_142603) do
+ActiveRecord::Schema[7.1].define(version: 2025_07_28_010113) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgrouting"
   enable_extension "plpgsql"
   enable_extension "postgis"
-  enable_extension "postgis_raster"
-  enable_extension "postgis_topology"
 
   create_table "authorizations", id: :serial, force: :cascade do |t|
     t.string "provider", limit: 255

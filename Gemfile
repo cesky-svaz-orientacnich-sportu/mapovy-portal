@@ -2,7 +2,8 @@ source "http://rubygems.org"
 
 ruby "3.1.7"
 
-gem 'activerecord-postgis-adapter'
+gem "rails", "~> 7.1.5"
+gem 'activerecord-postgis-adapter', "~> 9.0"
 gem "autoprefixer-rails", "~> 10.4" # vendor prefixin CSS
 gem "bootsnap", "~> 1.7"
 gem "bootstrap-sass", "~> 3.4"
@@ -31,9 +32,8 @@ gem "omniauth", "~> 2.1"
 gem "omniauth-facebook", "~> 9.0"
 gem "omniauth-google-oauth2", "~> 1.1"
 gem "omniauth-rails_csrf_protection", "~> 1.0"
-gem "paper_trail", "~> 12.3"
+gem "paper_trail", "~> 16.0"
 gem "kt-paperclip", "~> 7.2"
-gem "rails", "~> 7.0.4"
 gem "rails-controller-testing", "~> 1.0"
 gem "RedCloth", "~> 4.3"
 gem "rgeo", "~> 3.0"
