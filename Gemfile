@@ -46,6 +46,7 @@ gem "uuidtools", "~> 3.0"
 gem "webpacker", "~> 5.4"
 gem 'whenever', "~> 1.0", require: false
 gem "array_enum", "~> 1.5"
+gem 'rack-cors' # CORS handling
 
 group :test, :development do
   gem "rspec-rails", "~> 8.0"
