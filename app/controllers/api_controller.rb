@@ -165,4 +165,16 @@ class ApiController < ApplicationController
     end
   end
 
+  def stats
+    respond_to do |format|
+      format.json do
+        render json: {status: 'success', data: {
+          mapsTotal: Map.visible.where(map_family: Map::MAP_FAMILY_MAP).count,
+          mapsPastYear: Map.visible.where(map_family: Map::MAP_FAMILY_MAP).where('created_at > ?', 1.year.ago).count,
+          authorsTotal: Author.count,
+        }}.to_json
+      end
+    end
+  end
+
 end
