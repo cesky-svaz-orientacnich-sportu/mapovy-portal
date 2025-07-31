@@ -2,6 +2,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
+  before_action :redirect_invalid_locale
   before_action :set_locale
   before_action :store_user_location!, if: :storable_location?
 
@@ -13,12 +14,18 @@ class ApplicationController < ActionController::Base
     @_use_map = true
   end
 
-  def set_locale
-    if params[:locale] and params[:locale] != 'undefined' and !current_user
-      I18n.locale = params[:locale]
-    else
-      I18n.locale = I18n.default_locale
+  def redirect_invalid_locale
+    requested = params[:locale]&.to_sym
+    # admin is only in Czech => logged in users can only use Czech
+    if (requested.present? && !I18n.available_locales.include?(requested)) || (current_user && requested != I18n.default_locale)
+      default_url = url_for(params.merge(locale: I18n.default_locale))
+      redirect_to default_url, status: :found
     end
+  end
+
+  def set_locale
+    requested = params[:locale]&.to_sym
+    I18n.locale = requested.present? ? requested : I18n.default_locale # validation is handled by redirect_invalid_locale
   end
 
   def default_url_options(options={})

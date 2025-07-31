@@ -14,7 +14,7 @@
       .separator
       - Map::MAP_YEARS.each do |f|
         - y1, y2, saturation = *f
-        - c = Color::RGB::SpringGreen.adjust_saturation(saturation).adjust_brightness(saturation)
+        - c = Color::RGB::from_html('#00ff7f').adjust_saturation(saturation).adjust_brightness(saturation)
         %div{:class => Map::DEFAULT_LAYERS.include?(f) ? 'item active' : 'item'}
           %label
             %input{:type => 'checkbox', :checked => Map::DEFAULT_LAYERS.include?(f), :"data-filter-column" => 'ROK', :"data-filter-value1" => (y1 || -9999), :"data-filter-value2" => (y2 || 9999), :onclick => "toc.refresh()"}

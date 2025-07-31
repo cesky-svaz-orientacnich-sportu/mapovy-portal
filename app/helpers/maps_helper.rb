@@ -68,7 +68,7 @@ module MapsHelper
       ).html_safe
     elsif with_help == :edit_short
       (
-        icon('question-circle', popover: I18n.translate("mapserver.map_attribute_form_hints.#{key}", default: I18n.translate("mapserver.map_attribute_descriptions.#{key}")).gsub("\n", "<br />").html_safe, popover_placement: :bottom, popover_trigger: "hover", color: "#9bf")
+        icon('question-circle', popover: I18n.translate("mapserver.map_attribute_form_hints.#{key}").gsub("\n", "<br />").html_safe, popover_placement: :bottom, popover_trigger: "hover", color: "#9bf")
       ).html_safe
     elsif with_help
       (
@@ -86,7 +86,7 @@ module MapsHelper
       (
         I18n.translate("mapserver.author_attributes.#{key}") +
         "&nbsp;" +
-        icon('question-circle', tooltip: I18n.translate("mapserver.author_attribute_hints.#{key}", default: I18n.translate("mapserver.author_attribute_descriptions.#{key}")), tooltip_placement: :bottom, color: "#9bf")
+        icon('question-circle', tooltip: I18n.translate("mapserver.author_attribute_hints.#{key}"), tooltip_placement: :bottom, color: "#9bf")
       ).html_safe
     elsif with_help == :edit_short
       (

@@ -1,74 +1,77 @@
-# -*- encoding : utf-8 -*-
 # == Schema Information
 #
 # Table name: maps
 #
 #  id                        :integer          not null, primary key
-#  title                     :string(255)
-#  patron                    :string(255)
-#  patron_accuracy           :string(255)
-#  year                      :integer
-#  year_accuracy             :string(255)
-#  scale                     :integer
+#  administrator             :text
+#  administrator_email       :string(255)
+#  archive_extra_print_count :integer
 #  archive_print1_class      :string(255)
 #  archive_print2_class      :string(255)
 #  archive_print3_class      :string(255)
-#  archive_extra_print_count :integer
-#  equidistance              :float
-#  identifier_other          :string(255)
-#  locality                  :string(255)
 #  area_size                 :float
-#  issued_by                 :string(255)
-#  printed_by                :string(255)
-#  map_type                  :string(255)
-#  drawing_technique         :string(255)
-#  printing_technique        :string(255)
-#  resource                  :string(255)
-#  main_race_title           :string(255)
-#  main_race_date            :date
-#  administrator             :text
-#  identifier_approval       :string(255)
-#  identifier_filing         :string(255)
-#  note_public               :text
-#  note_internal             :text
-#  preview_identifier        :string(255)
-#  created_at                :datetime         not null
-#  updated_at                :datetime         not null
-#  created_by_id             :integer
-#  map_family                :string(255)
-#  map_sport                 :string(255)
-#  oris_event_id             :integer
-#  non_oris_event_url        :string(255)
-#  shape_json                :text
-#  shape_kml                 :text
-#  georeference              :string(255)
-#  region                    :string(255)
-#  state                     :string(255)
-#  record_log                :text
-#  approved_by_id            :integer
-#  mapping_state             :string(255)
-#  slug                      :string(255)
-#  has_jpg                   :boolean          default(FALSE), not null
-#  has_kml                   :boolean          default(FALSE), not null
-#  administrator_email       :string(255)
-#  last_reminder_sent_at     :date
-#  state_changed_at          :date
-#  completed_by_id           :integer
-#  user_updated_at           :datetime
-#  shape_geom                :geometry
+#  blocking_from             :integer
+#  blocking_reason           :text
+#  blocking_until            :integer
 #  cartographers_for_api     :string(255)
 #  color                     :string(255)
-#  stroke_color              :string(255)
-#  has_embargo               :boolean          default(FALSE), not null
-#  embargo_until             :date
-#  has_competition_area      :boolean          default(FALSE), not null
 #  competition_area_until    :date
+#  drawing_technique         :string(255)
+#  embargo_until             :date
+#  equidistance              :float
+#  georeference              :string(255)
 #  has_blocking              :boolean          default(FALSE), not null
-#  blocking_from             :integer
-#  blocking_until            :integer
-#  blocking_reason           :text
+#  has_competition_area      :boolean          default(FALSE), not null
+#  has_embargo               :boolean          default(FALSE), not null
+#  has_jpg                   :boolean          default(FALSE), not null
+#  has_kml                   :boolean          default(FALSE), not null
+#  identifier_approval       :string(255)
+#  identifier_filing         :string(255)
+#  identifier_other          :string(255)
 #  is_educational            :boolean          default(FALSE), not null
-
+#  issued_by                 :string(255)
+#  last_reminder_sent_at     :date
+#  locality                  :string(255)
+#  main_race_date            :date
+#  main_race_title           :string(255)
+#  map_family                :string(255)
+#  map_sport                 :string(255)
+#  map_type                  :string(255)
+#  mapping_state             :string(255)
+#  non_oris_event_url        :string(255)
+#  note_internal             :text
+#  note_public               :text
+#  patron                    :string(255)
+#  patron_accuracy           :string(255)
+#  preview_identifier        :string(255)
+#  printed_by                :string(255)
+#  printing_technique        :string(255)
+#  record_log                :text
+#  region                    :string(255)
+#  resource                  :string(255)
+#  scale                     :integer
+#  shape_geom                :geometry         geometry, 0
+#  shape_json                :text
+#  shape_kml                 :text
+#  slug                      :string(255)
+#  state                     :string(255)
+#  state_changed_at          :date
+#  stroke_color              :string(255)
+#  title                     :string(255)
+#  user_updated_at           :datetime
+#  year                      :integer
+#  year_accuracy             :string(255)
+#  created_at                :datetime         not null
+#  updated_at                :datetime         not null
+#  approved_by_id            :integer
+#  completed_by_id           :integer
+#  created_by_id             :integer
+#  oris_event_id             :integer
+#
+# Indexes
+#
+#  index_maps_on_slug  (slug) UNIQUE
+#
 class Map < ApplicationRecord
 
   has_paper_trail ignore: [:user_updated_at, :state_changed_at, :last_reminder_sent_at, :shape_geom]
@@ -567,6 +570,7 @@ class Map < ApplicationRecord
     self.cartographers_for_api = cartographers.exists? ? (cartographers.map{|c| "[#{c.role.downcase}:#{c.author_id}]"} * "") : "0"
   end
 
+  # required for WMS
   def set_color
     c = '#CCCCCC'
     if map_family == MAP_FAMILY_MAP
@@ -584,6 +588,7 @@ class Map < ApplicationRecord
     self.color = c
   end
 
+  # required for WMS
   def set_stroke_color
     self.stroke_color = Color::RGB::from_html(self.color).adjust_saturation(1).adjust_brightness(1).html
   end
@@ -733,7 +738,7 @@ class Map < ApplicationRecord
 
     Dir.chdir(File.join(Rails.root, "public")) do
       Bundler.with_unbundled_env do
-        system("rbenv shell 3.1.7 ; ./cream #{self.id}X.#{ext}")
+        system("rbenv shell 3.3.9 ; ./cream #{self.id}X.#{ext}")
       end
     end
 

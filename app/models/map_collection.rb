@@ -4,15 +4,19 @@
 # Table name: map_collections
 #
 #  id                :integer          not null, primary key
+#  description       :text
+#  logo_content_type :string(255)
+#  logo_file_name    :string(255)
+#  logo_file_size    :integer
+#  logo_updated_at   :datetime
+#  slug              :string(255)
 #  title             :string(255)
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
-#  slug              :string(255)
-#  description       :text
-#  logo_file_name    :string(255)
-#  logo_content_type :string(255)
-#  logo_file_size    :integer
-#  logo_updated_at   :datetime
+#
+# Indexes
+#
+#  index_map_collections_on_slug  (slug) UNIQUE
 #
 
 class MapCollection < ApplicationRecord

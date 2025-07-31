@@ -1,0 +1,220 @@
+MAP
+        NAME           "csos_mapserver"
+        STATUS         ON
+        IMAGETYPE      PNG
+        EXTENT         12.116755 48.523836 18.985434 51.053513
+        SIZE           256 256
+        IMAGECOLOR     255 255 255
+
+        PROJECTION
+                "init=epsg:3857"
+        END
+
+        WEB
+                METADATA
+                        "wms_title" "CSOS Mapserver"
+                        "wms_onlineresource" "TODO(url)"
+                        "wms_srs" "EPSG:3857"
+                        "wms_enable_request" "*"
+                        "wms_feature_info_mime_type" "text/html"
+                END
+        END
+
+        LAYER
+                NAME            "maps"
+                STATUS          ON
+                TYPE            POLYGON
+                EXTENT          12.116755 48.523836 18.985434 51.053513
+                CONNECTIONTYPE  POSTGIS
+                CONNECTION      "host=TODO dbname=TODO user=TODO password=TODO port=TODO"
+                VALIDATION
+                        "default_where" "ID < 0"
+                        "where" "^(.*)$"
+                END
+                DATA            "shape_geom from (SELECT id, shape_geom, color, stroke_color FROM maps WHERE %where% AND shape_geom IS NOT NULL ORDER BY year DESC) as subquery USING unique id USING SRID=-1"
+
+                PROJECTION
+                        "init=epsg:3857"
+                END
+
+                METADATA
+                        "wms_title" "maps"
+                        "wms_srs" "EPSG:3857"
+                END
+
+                CLASS
+                        NAME "Default style"
+                        STYLE # polygon
+                                COLOR [color]
+                                OUTLINECOLOR [stroke_color]
+                                OUTLINEWIDTH 2
+                                OPACITY 50
+                        END
+                END
+        END
+
+        LAYER
+                NAME            "maps2"
+                STATUS          ON
+                TYPE            POLYGON
+                EXTENT          12.116755 48.523836 18.985434 51.053513
+                CONNECTIONTYPE  POSTGIS
+                CONNECTION      "host=TODO dbname=TODO user=TODO password=TODO port=TODO"
+                VALIDATION
+                        "default_where" "ID < 0"
+                        "where" "^(.*)$"
+                END
+                DATA            "shape_geom from (SELECT id, shape_geom, color, stroke_color FROM maps WHERE %where% AND shape_geom IS NOT NULL ORDER BY year DESC) as subquery USING unique id USING SRID=-1"
+
+                PROJECTION
+                        "init=epsg:3857"
+                END
+
+                METADATA
+                        "wms_title" "maps"
+                        "wms_srs" "EPSG:3857"
+                END
+
+                CLASS
+                        NAME "Default style"
+                        STYLE # polygon
+                                COLOR [color]
+                                OUTLINECOLOR [stroke_color]
+                                OUTLINEWIDTH 2
+                                OPACITY 50
+                        END
+                END
+        END
+
+        LAYER
+                NAME            "embargoes"
+                STATUS          ON
+                TYPE            POLYGON
+                EXTENT          12.116755 48.523836 18.985434 51.053513
+                CONNECTIONTYPE  POSTGIS
+                CONNECTION      "host=TODO dbname=TODO user=TODO password=TODO port=TODO"
+                VALIDATION
+                        "default_where" "ID < 0"
+                        "where" "^(.*)$"
+                END
+                DATA            "shape_geom from (SELECT id, shape_geom FROM maps WHERE %where% AND shape_geom IS NOT NULL ORDER BY year DESC) as subquery USING unique id USING SRID=-1"
+
+                PROJECTION
+                        "init=epsg:3857"
+                END
+
+                METADATA
+                        "wms_title" "embargoes"
+                        "wms_srs" "EPSG:3857"
+                END
+
+                CLASS
+                        NAME "Default style"
+                        STYLE # polygon
+                                COLOR "#ff0000"
+                                OUTLINECOLOR "#ff0000"
+                                OUTLINEWIDTH 2
+                                OPACITY 30
+                        END
+                END
+        END
+
+        LAYER
+                NAME            "competitionareas"
+                STATUS          ON
+                TYPE            POLYGON
+                EXTENT          12.116755 48.523836 18.985434 51.053513
+                CONNECTIONTYPE  POSTGIS
+                CONNECTION      "host=TODO dbname=TODO user=TODO password=TODO port=TODO"
+                VALIDATION
+                        "default_where" "ID < 0"
+                        "where" "^(.*)$"
+                END
+                DATA            "shape_geom from (SELECT id, shape_geom FROM maps WHERE %where% AND shape_geom IS NOT NULL ORDER BY year DESC) as subquery USING unique id USING SRID=-1"
+
+                PROJECTION
+                        "init=epsg:3857"
+                END
+
+                METADATA
+                        "wms_title" "competitionareas"
+                        "wms_srs" "EPSG:3857"
+                END
+
+                CLASS
+                        NAME "Default style"
+                        STYLE # polygon
+                                COLOR "#ff3300"
+                                OUTLINECOLOR "#ff3300"
+                                OUTLINEWIDTH 2
+                                OPACITY 30
+                        END
+                END
+        END
+
+        LAYER
+                NAME            "blocking"
+                STATUS          ON
+                TYPE            POLYGON
+                EXTENT          12.116755 48.523836 18.985434 51.053513
+                CONNECTIONTYPE  POSTGIS
+                CONNECTION      "host=TODO dbname=TODO user=TODO password=TODO port=TODO"
+                VALIDATION
+                        "default_where" "ID < 0"
+                        "where" "^(.*)$"
+                END
+                DATA            "shape_geom from (SELECT id, shape_geom FROM maps WHERE %where% AND shape_geom IS NOT NULL ORDER BY year DESC) as subquery USING unique id USING SRID=-1"
+
+                PROJECTION
+                        "init=epsg:3857"
+                END
+
+                METADATA
+                        "wms_title" "blocking"
+                        "wms_srs" "EPSG:3857"
+                END
+
+                CLASS
+                        NAME "Default style"
+                        STYLE # polygon
+                                COLOR "#ff00ff"
+                                OUTLINECOLOR "#ff00ff"
+                                OUTLINEWIDTH 2
+                                OPACITY 50
+                        END
+                END
+        END
+
+        LAYER
+                NAME            "highlight"
+                STATUS          ON
+                TYPE            POLYGON
+                EXTENT          12.116755 48.523836 18.985434 51.053513
+                CONNECTIONTYPE  POSTGIS
+                CONNECTION      "host=TODO dbname=TODO user=TODO password=TODO port=TODO"
+                VALIDATION
+                        "default_where" "ID < 0"
+                        "where" "^(.*)$"
+                END
+                DATA            "shape_geom from (SELECT id, shape_geom FROM maps WHERE %where% AND shape_geom IS NOT NULL ORDER BY year DESC) as subquery USING unique id USING SRID=-1"
+
+                PROJECTION
+                        "init=epsg:3857"
+                END
+
+                METADATA
+                        "wms_title" "blocking"
+                        "wms_srs" "EPSG:3857"
+                END
+
+                CLASS
+                        NAME "Default style"
+                        STYLE # polygon
+                                COLOR "#ffff00"
+                                OUTLINECOLOR "#ffff00"
+                                OUTLINEWIDTH 1
+                                OPACITY 50
+                        END
+                END
+        END
+END

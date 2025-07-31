@@ -1,6 +1,12 @@
 # Change Log
 
 ## [Unreleased]
+- Ruby 3.3.9
+- Rails 8.0
+- update dependencies
+- remove - turnout, webpacker
+- API endpoint for stats
+- enable CORS for ceskyorientak.cz
 
 ## [2.5.0] - 2025-05-01
 - Ruby 3.1.7

@@ -25,9 +25,6 @@ set :scm_verbose, true
 # Set correct rbenv path
 set :rbenv_prefix, "RBENV_ROOT=#{fetch(:rbenv_path)} RBENV_VERSION=#{fetch(:rbenv_ruby)} /usr/bin/rbenv exec"
 
-# Set NodeJS version
-set :nvm_node, 'v16.16.0'
-
 # Rails
 
 # You'll probably want to symlink Rails shared files and directories.
