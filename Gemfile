@@ -43,7 +43,6 @@ gem "select2-rails", "~> 4.0"
 gem "sprockets-rails", "~> 3.4"
 gem "to_xls", "~> 1.5"
 gem "uuidtools", "~> 3.0"
-gem "webpacker", "~> 5.4"
 gem 'whenever', "~> 1.0", require: false
 gem "array_enum", "~> 1.5"
 gem 'rack-cors' # CORS handling
@@ -70,10 +69,8 @@ group :development do
   gem "binding_of_caller", "~> 1.0"
   gem "capistrano", "~> 3.17", require: false
   gem "capistrano-db-tasks", "~> 0.6", :require => false
-  gem 'capistrano-nvm', "~> 0.0.7", require: false
   gem "capistrano-rails", "~> 1.6", require: false
   gem "capistrano-rbenv", "~> 2.2", require: false
-  gem "capistrano-yarn", "~> 2.0", require: false
   gem "ed25519", "~> 1.3", require: false
   gem "lorem-ipsum", "~> 0.1"
   gem "thin", "~> 2.0"

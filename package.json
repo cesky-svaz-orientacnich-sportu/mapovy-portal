@@ -1,8 +1,0 @@
-{
-  "dependencies": {
-    "@rails/webpacker": "^5.4.4"
-  },
-  "devDependencies": {
-    "webpack-dev-server": "^4.15.2"
-  }
-}

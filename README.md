@@ -11,8 +11,6 @@
 - [PostgreSQL](https://www.postgresql.org/) with
 	- [PostGIS](https://postgis.net/) extension
 	- [pgRouting](https://pgrouting.org/) extension
-- [NodeJS](https://nodejs.org/en/)
-- [Yarn](https://classic.yarnpkg.com/en/)
 
 ## Install
 1. Configure the dotenv variables according to `.env.template`.
