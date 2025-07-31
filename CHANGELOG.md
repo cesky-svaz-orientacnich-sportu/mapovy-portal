@@ -1,6 +1,8 @@
 # Change Log
 
 ## [Unreleased]
+
+## [2.6.0] - 2025-07-31
 - Ruby 3.3.9
 - Rails 8.0
 - update dependencies
