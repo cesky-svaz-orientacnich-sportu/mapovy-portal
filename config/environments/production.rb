@@ -79,7 +79,7 @@ Rails.application.configure do
   # Specify outgoing SMTP server. Remember to add smtp/* credentials via rails credentials:edit.
   config.action_mailer.smtp_settings = {
     :user_name => ENV["SMTP_USER"],
-    :password => ENV["SMTP_PASSWORD"]
+    :password => ENV["SMTP_PASSWORD"],
     :address => "mta.amagical.net",
     :port => 587,
     :authentication => "plain",
