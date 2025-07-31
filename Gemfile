@@ -68,10 +68,11 @@ group :development do
   gem "bcrypt_pbkdf", "~> 1.1", require: false
   gem "binding_of_caller", "~> 1.0"
   gem "capistrano", "~> 3.17", require: false
-  gem "capistrano-db-tasks", "~> 0.6", :require => false
+  gem "capistrano-db-tasks", "~> 0.6", require: false
   gem "capistrano-rails", "~> 1.6", require: false
   gem "capistrano-rbenv", "~> 2.2", require: false
   gem "ed25519", "~> 1.3", require: false
   gem "lorem-ipsum", "~> 0.1"
   gem "thin", "~> 2.0"
+  gem "annotaterb", "~> 4.17" # model files annotation comments
 end

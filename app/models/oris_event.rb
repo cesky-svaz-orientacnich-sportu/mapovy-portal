@@ -4,16 +4,16 @@
 # Table name: oris_events
 #
 #  id                :integer          not null, primary key
-#  oris_id           :integer
 #  date              :date
-#  title             :string(255)
-#  oris_json         :text(2147483647)
-#  place             :string(255)
+#  obpostupy_map_url :string(255)
+#  obpostupy_url     :string(255)
+#  oris_json         :text
 #  oris_timestamp    :datetime
+#  place             :string(255)
+#  title             :string(255)
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
-#  obpostupy_url     :string(255)
-#  obpostupy_map_url :string(255)
+#  oris_id           :integer
 #
 
 class OrisEvent < ApplicationRecord

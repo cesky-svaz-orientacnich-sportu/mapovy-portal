@@ -80,6 +80,9 @@ GEM
       public_suffix (>= 2.0.2, < 7.0)
     airbrussh (1.5.3)
       sshkit (>= 1.6.1, != 1.7.0)
+    annotaterb (4.17.0)
+      activerecord (>= 6.0.0)
+      activesupport (>= 6.0.0)
     array_enum (1.6.0)
       activemodel
     autoprefixer-rails (10.4.21.0)
@@ -525,6 +528,7 @@ PLATFORMS
 DEPENDENCIES
   RedCloth (~> 4.3)
   activerecord-postgis-adapter (~> 11.0)
+  annotaterb (~> 4.17)
   array_enum (~> 1.5)
   autoprefixer-rails (~> 10.4)
   bcrypt_pbkdf (~> 1.1)

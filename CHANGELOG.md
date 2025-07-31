@@ -4,7 +4,7 @@
 - Ruby 3.3.9
 - Rails 8.0
 - update dependencies
-- remove - annotate, turnout
+- remove - turnout, webpacker
 - API endpoint for stats
 - enable CORS for ceskyorientak.cz
 

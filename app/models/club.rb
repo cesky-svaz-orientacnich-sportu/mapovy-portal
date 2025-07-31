@@ -4,16 +4,21 @@
 # Table name: clubs
 #
 #  id             :integer          not null, primary key
-#  name           :string(255)
 #  abbreviation   :string(255)
-#  region         :string(255)
 #  district       :string(255)
-#  url            :string(255)
 #  division       :string(255)
+#  is_public      :boolean          default(FALSE)
+#  name           :string(255)
+#  oris_data_json :text
+#  region         :string(255)
+#  slug           :string(255)
+#  url            :string(255)
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
-#  oris_data_json :text
-#  slug           :string(255)
+#
+# Indexes
+#
+#  index_clubs_on_slug  (slug) UNIQUE
 #
 
 class Club < ApplicationRecord
