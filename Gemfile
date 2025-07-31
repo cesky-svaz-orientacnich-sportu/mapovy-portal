@@ -4,7 +4,7 @@ ruby "3.3.9"
 
 gem "rails", "~> 8.0.2"
 gem "pg", "~> 1.1" # PostgreSQL as the database for Active Record
-gem 'activerecord-postgis-adapter', "~> 11.0" # PosgGis extension for PostgreSQL
+gem "activerecord-postgis-adapter", "~> 11.0" # PosgGis extension for PostgreSQL
 gem "puma", "~> 6.6"
 gem "autoprefixer-rails", "~> 10.4" # vendor prefixin CSS
 gem "bootsnap", "~> 1.7"
@@ -43,9 +43,9 @@ gem "select2-rails", "~> 4.0"
 gem "sprockets-rails", "~> 3.4"
 gem "to_xls", "~> 1.5"
 gem "uuidtools", "~> 3.0"
-gem 'whenever', "~> 1.0", require: false
+gem "whenever", "~> 1.0", require: false
 gem "array_enum", "~> 1.5"
-gem 'rack-cors' # CORS handling
+gem "rack-cors" # CORS handling
 
 group :test, :development do
   gem "rspec-rails", "~> 8.0"
