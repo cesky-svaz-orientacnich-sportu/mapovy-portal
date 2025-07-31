@@ -7,6 +7,7 @@
 - remove - turnout, webpacker
 - API endpoint for stats
 - enable CORS for ceskyorientak.cz
+- only log warnings and worse
 
 ## [2.5.0] - 2025-05-01
 - Ruby 3.1.7
