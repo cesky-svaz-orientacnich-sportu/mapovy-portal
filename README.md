@@ -29,10 +29,20 @@ bin/rake locale_js
 bin/rails server -b 0.0.0.0
 ```
 
-### Projekt mapserver na Google + API klíče
+## Projekt mapserver na Google + API klíče
 archiv.map.csos@gmail.com
 
 ## Changelog
 In separate file [CHANGELOG.md](CHANGELOG.md). Please [keep a CHANGELOG](http://keepachangelog.com/).
 
 This project adheres to [Semantic Versioning](http://semver.org/).
+
+## Deploy
+1. Update Ruby version on server:
+```sh
+sudo su - <user>
+git -C ~/.rbenv/plugins/ruby-build pull
+rbenv install <version>
+```
+2. `cap <environment> deploy`
+3. If changed, update Ruby version in Apache VH config and restart Apache.
