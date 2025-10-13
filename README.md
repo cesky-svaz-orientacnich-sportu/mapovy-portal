@@ -46,3 +46,8 @@ rbenv install <version>
 ```
 2. `cap <environment> deploy`
 3. If changed, update Ruby version in Apache VH config and restart Apache.
+4. After deploy is stable for few days, remove old unused ruby version:
+```sh
+rbenv versions
+rbenv uninstall <version>
+```
