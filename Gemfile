@@ -5,7 +5,7 @@ ruby "3.3.9"
 gem "rails", "~> 8.0.2"
 gem "pg", "~> 1.1" # PostgreSQL as the database for Active Record
 gem "activerecord-postgis-adapter", "~> 11.0" # PosgGis extension for PostgreSQL
-gem "puma", "~> 6.6"
+gem "puma", "~> 7.0"
 gem "autoprefixer-rails", "~> 10.4" # vendor prefixin CSS
 gem "bootsnap", "~> 1.7"
 gem "bootstrap-sass", "~> 3.4"
