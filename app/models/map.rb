@@ -252,7 +252,7 @@ class Map < ApplicationRecord
             map.oris_event_id = oris_event.id
           end
 
-          oris_url = "https://oris.orientacnisporty.cz/API/?format=json&method=getEvent&id=#{oris_id}"
+          oris_url = "https://oris.ceskyorientak.cz/API/?format=json&method=getEvent&id=#{oris_id}"
           odata = URI.open(oris_url).read rescue nil
           if odata
             puts "Got data from ORIS for #{map} on #{oris_url}"

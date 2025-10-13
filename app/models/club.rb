@@ -62,7 +62,7 @@ class Club < ApplicationRecord
   end
 
   def oris_link
-    "https://oris.orientacnisporty.cz/Klub?id=#{abbreviation}"
+    "https://oris.ceskyorientak.cz/Klub?id=#{abbreviation}"
   end
 
   def self.by_abbreviation(x)
@@ -70,11 +70,11 @@ class Club < ApplicationRecord
   end
 
   def self.oris_url
-    "https://oris.orientacnisporty.cz/API/?format=json&method=getCSOSClubList"
+    "https://oris.ceskyorientak.cz/API/?format=json&method=getCSOSClubList"
   end
 
   def oris_url
-    "https://oris.orientacnisporty.cz/API/?format=json&method=getClub&id=#{abbreviation}"
+    "https://oris.ceskyorientak.cz/API/?format=json&method=getClub&id=#{abbreviation}"
   end
 
   def self.build

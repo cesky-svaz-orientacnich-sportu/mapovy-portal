@@ -17,7 +17,7 @@ module OmniAuth
           require 'digest/md5'
           session['oris.token'] = SecureRandom.hex(24)
         end
-        redirect "https://oris.orientacnisporty.cz/ssologin?cid=#{@id}&uid=#{session['oris.token']}"
+        redirect "https://oris.ceskyorientak.cz/ssologin?cid=#{@id}&uid=#{session['oris.token']}"
       end
 
       uid do
@@ -26,7 +26,7 @@ module OmniAuth
 
       info do
         require 'open-uri'
-        data = URI.open("https://oris.orientacnisporty.cz/API/?format=json&method=ssoUser&cid=#{@id}&csc=#{@secret}&uid=#{session['oris.token']}").read rescue nil
+        data = URI.open("https://oris.ceskyorientak.cz/API/?format=json&method=ssoUser&cid=#{@id}&csc=#{@secret}&uid=#{session['oris.token']}").read rescue nil
         res = {}
         if data
           json = JSON[data] rescue nil

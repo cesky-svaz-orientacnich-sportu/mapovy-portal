@@ -108,7 +108,7 @@ class User < ApplicationRecord
   end
 
   def check_against_oris
-    base = "https://oris.orientacnisporty.cz/API"
+    base = "https://oris.ceskyorientak.cz/API"
     firstname, lastname = *name.split
     par = {:method => 'getRegNum', :format => 'json', :firstname => firstname, :lastname => lastname, :email => email}
     log = []

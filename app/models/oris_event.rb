@@ -102,15 +102,15 @@ class OrisEvent < ApplicationRecord
   end
 
   def self.oris_list_url(year)
-    "https://oris.orientacnisporty.cz/API/?format=json&method=getEventList&all=1&datefrom=#{year}-01-01&dateto=#{year}-12-31"
+    "https://oris.ceskyorientak.cz/API/?format=json&method=getEventList&all=1&datefrom=#{year}-01-01&dateto=#{year}-12-31"
   end
 
   def oris_info_url
-    "https://oris.orientacnisporty.cz/API/?format=json&method=getEvent&id=#{oris_id}"
+    "https://oris.ceskyorientak.cz/API/?format=json&method=getEvent&id=#{oris_id}"
   end
 
   def oris_url
-    "https://oris.orientacnisporty.cz/Zavod?id=#{oris_id}"
+    "https://oris.ceskyorientak.cz/Zavod?id=#{oris_id}"
   end
 
 
