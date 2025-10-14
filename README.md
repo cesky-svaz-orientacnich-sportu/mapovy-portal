@@ -11,6 +11,7 @@
 - [PostgreSQL](https://www.postgresql.org/) with
 	- [PostGIS](https://postgis.net/) extension
 	- [pgRouting](https://pgrouting.org/) extension
+- [Node.js](https://nodejs.org/en) or other JS runtime (optionally installed with [Volta](https://volta.sh/))
 
 ## Install
 1. Configure the dotenv variables according to `.env.template`.
