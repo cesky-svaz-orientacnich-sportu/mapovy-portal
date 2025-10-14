@@ -1,6 +1,8 @@
 # Change Log
 
 ## [Unreleased]
+
+## [2.7.0] - 2025-10-14
 - change domain to mapy.ceskyorientak.cz
 
 ## [2.6.0] - 2025-07-31
