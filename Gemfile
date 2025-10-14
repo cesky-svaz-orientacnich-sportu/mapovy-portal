@@ -54,6 +54,7 @@ end
 
 group :production, :staging do
   gem "execjs", "~> 2.8"
+  gem "mini_racer", "~> 0.19"
   gem "terser", "~> 1.1"
 end
 
