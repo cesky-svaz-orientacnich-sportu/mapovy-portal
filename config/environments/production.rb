@@ -74,7 +74,7 @@ Rails.application.configure do
   # config.action_mailer.raise_delivery_errors = false
 
   # Set host to be used by links generated in mailer templates.
-  config.action_mailer.default_url_options = { host: "mapy.orientacnisporty.cz" }
+  config.action_mailer.default_url_options = { host: "mapy.ceskyorientak.cz" }
 
   # Specify outgoing SMTP server. Remember to add smtp/* credentials via rails credentials:edit.
   config.action_mailer.smtp_settings = {
@@ -106,8 +106,8 @@ Rails.application.configure do
   # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
 
   # asset host (for JPGs et al)
-  config.asset_root_url = "https://mapy.orientacnisporty.cz"
+  config.asset_root_url = "https://mapy.ceskyorientak.cz"
 
-  config.hostname = "https://mapy.orientacnisporty.cz"
-  config.wms_url = "https://mapy-wms.orientacnisporty.cz"
+  config.hostname = "https://mapy.ceskyorientak.cz"
+  config.wms_url = "https://mapy-wms.ceskyorientak.cz"
 end

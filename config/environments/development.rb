@@ -80,7 +80,7 @@ Rails.application.configure do
   config.wms_url = "http://localhost/csos-mapserver-wms"
 
   # asset host (for JPGs et al)
-  config.asset_root_url = "http://mapy.orientacnisporty.cz"
+  config.asset_root_url = "http://mapy.ceskyorientak.cz"
 
   config.action_mailer.default_url_options = { :host => "localhost:3333" }
   config.action_mailer.delivery_method = :smtp

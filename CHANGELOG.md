@@ -1,6 +1,7 @@
 # Change Log
 
 ## [Unreleased]
+- change domain to mapy.ceskyorientak.cz
 
 ## [2.6.0] - 2025-07-31
 - Ruby 3.3.9

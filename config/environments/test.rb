@@ -56,5 +56,5 @@ Rails.application.configure do
   config.wms_url = "http://localhost/csos-mapserver-wms"
 
   # asset host (for JPGs et al)
-  config.asset_root_url = "https://mapy.orientacnisporty.cz"
+  config.asset_root_url = "https://mapy.ceskyorientak.cz"
 end

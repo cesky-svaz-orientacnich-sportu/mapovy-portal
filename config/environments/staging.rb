@@ -119,11 +119,11 @@ Mapserver::Application.configure do
   # ActionMailer::Base.deliveries array.
   config.action_mailer.delivery_method = :test
 
-  config.action_mailer.default_url_options = { :host => "mapy.orientacnisporty.cz" }
+  config.action_mailer.default_url_options = { :host => "mapy.ceskyorientak.cz" }
 
   # asset host (for JPGs et al)
-  config.asset_root_url = "https://mapy-test.orientacnisporty.cz"
+  config.asset_root_url = "https://mapy-test.ceskyorientak.cz"
 
-  config.hostname = "https://mapy-test.orientacnisporty.cz"
-  config.wms_url = "https://mapy-test-wms.orientacnisporty.cz"
+  config.hostname = "https://mapy-test.ceskyorientak.cz"
+  config.wms_url = "https://mapy-wms-test.ceskyorientak.cz"
 end
