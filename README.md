@@ -31,7 +31,7 @@ bin/rails server -b 0.0.0.0
 ```
 
 ## Projekt mapserver na Google + API klíče
-archiv.map.csos@gmail.com
+david.pustai@ceskyorientak.cz
 
 ## Changelog
 In separate file [CHANGELOG.md](CHANGELOG.md). Please [keep a CHANGELOG](http://keepachangelog.com/).
