@@ -14,6 +14,7 @@ gem "coffee-rails", "~> 5.0"
 gem "color", "~> 2.1"
 gem "dalli", "~> 3.2"
 gem "devise", "~> 4.8"
+gem "devise-i18n", "~> 1.15"
 gem "dotenv", "~> 3.0" # env vars management
 gem "exception_notification", "~> 5.0" # get email notifications on exceptions
 gem "friendly_id", "~> 5.4"
@@ -72,6 +73,7 @@ group :development do
   gem "capistrano-rails", "~> 1.6", require: false
   gem "capistrano-rbenv", "~> 2.2", require: false
   gem "ed25519", "~> 1.3", require: false
+  gem 'i18n-tasks', '~> 1.0.15'
   gem "lorem-ipsum", "~> 0.1"
   gem "thin", "~> 2.0"
   gem "annotaterb", "~> 4.17" # model files annotation comments

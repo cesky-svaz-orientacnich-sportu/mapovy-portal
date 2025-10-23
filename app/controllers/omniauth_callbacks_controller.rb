@@ -77,7 +77,7 @@ private
     if auth.nil?
       auth = user.authorizations.build(:provider => provider)
       user.authorizations << auth
-    end   
+    end
     auth.update auth_attr
 
     if user and user.full_name.blank?

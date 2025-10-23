@@ -30,55 +30,55 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  search:
-    table:
-      heading:
-      count:
-    download:
   clubs:
-    oris_link: "Club ORIS link"
-  roles:
-    contributor: přispěvatel
-    organizer: vydavatel
-    cartographer: koordinátor
-    manager: archivář
-    admin: administrátor
+    oris_link: Club ORIS link
   datatable:
-    emptyTable:     "No data available in table"
-    info:           "Showing _START_ to _END_ of _TOTAL_ entries"
-    infoEmpty:      "Showing 0 to 0 of 0 entries"
-    infoFiltered:   "(filtered from _MAX_ total entries)"
-    loadingRecords: "Loading..."
-    processing:     "Processing..."
-    search:         "Search:"
-    search_maps:    "Filter (map title / publisher / ID):"
-    zeroRecords:    "No matching records found"
+    emptyTable: No data available in table
+    info: Showing _START_ to _END_ of _TOTAL_ entries
+    infoEmpty: Showing 0 to 0 of 0 entries
+    infoFiltered: "(filtered from _MAX_ total entries)"
+    loadingRecords: Loading...
     paginate:
       first: "« First"
-      last: "Last »"
-      next: "Next ›"
+      last: Last »
+      next: Next ›
       previous: "‹ Previous"
+    processing: Processing...
+    search: 'Search:'
+    search_maps: 'Filter (map title / publisher / ID):'
+    zeroRecords: No matching records found
+  devise:
+    confirmations:
+      user:
+        confirmed: Účet úspěšně aktivován.
+    mailer:
+      confirmation_instructions:
+        subject: 'MapServer :: account activation'
+      reset_password_instructions:
+        subject: 'MapServer :: forgotten password'
+    omniauth_callbacks:
+      success: Identita úspěšně ověřena.
+    registrations:
+      signed_up_but_unconfirmed: Registrace proběhla v pořádku, ale musíš svůj účet aktivovat kliknutím na odkaz, který dorazí v mailu.
+    sessions:
+      user:
+        signed_in: Sign in successful.
+        signed_out: Sign out successful.
+  roles:
+    admin: administrátor
+    cartographer: koordinátor
+    contributor: přispěvatel
+    manager: archivář
+    organizer: vydavatel
+  search:
+    download:
+    table:
+      count:
+      heading:
   views:
     pagination:
       first: "« First"
-      last: "Last »"
+      last: Last »
+      next: Next ›
       previous: "‹ Previous"
-      next: "Next ›"
       truncate: "…"
-  devise:
-    mailer:
-      confirmation_instructions:
-        subject: "MapServer :: account activation"
-      reset_password_instructions:
-        subject: "MapServer :: forgotten password"
-    sessions:
-      user:
-        signed_in: 'Sign in successful.'
-        signed_out: 'Sign out successful.'
-    confirmations:
-      user:
-        confirmed: 'Účet úspěšně aktivován.'
-    omniauth_callbacks:
-      success: 'Identita úspěšně ověřena.'
-    registrations:
-      signed_up_but_unconfirmed: 'Registrace proběhla v pořádku, ale musíš svůj účet aktivovat kliknutím na odkaz, který dorazí v mailu.'
