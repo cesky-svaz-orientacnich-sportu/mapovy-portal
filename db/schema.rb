@@ -10,17 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_07_28_010113) do
+ActiveRecord::Schema[8.0].define(version: 2025_10_23_023103) do
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pg_catalog.plpgsql"
   enable_extension "pgrouting"
-  enable_extension "plpgsql"
   enable_extension "postgis"
 
   create_table "authorizations", id: :serial, force: :cascade do |t|
     t.string "provider", limit: 255
     t.string "uid", limit: 255
     t.integer "user_id"
-    t.string "token", limit: 255
+    t.text "token"
     t.string "secret", limit: 255
     t.string "name", limit: 255
     t.string "link", limit: 255
@@ -230,5 +230,4 @@ ActiveRecord::Schema[7.1].define(version: 2025_07_28_010113) do
     t.text "object_changes"
     t.index ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id"
   end
-
 end
