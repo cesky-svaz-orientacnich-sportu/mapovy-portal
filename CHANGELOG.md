@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+## [2.7.1] - 2025-10-23
+- fix Google authentication
+- normalize translation files & fix missing Devise i18n
+
 ## [2.7.0] - 2025-10-14
 - change domain to mapy.ceskyorientak.cz
 
