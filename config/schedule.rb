@@ -3,6 +3,10 @@
 
 set :output, "#{path}/log/cron.log"
 
+every 3.minutes do
+  rake "maps:embargo" # for testing only
+end
+
 every 1.day, at: '2:15 am' do
   rake 'oris:events'
 end
