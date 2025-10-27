@@ -1,7 +1,7 @@
 # Use this file to easily define all of your cron jobs.
 # Learn more: http://github.com/javan/whenever
 
-set :output, nil
+set :output, "#{path}/log/cron.log"
 
 every 1.day, at: '2:15 am' do
   rake 'oris:events'
