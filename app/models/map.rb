@@ -218,7 +218,7 @@ class Map < ApplicationRecord
   end
 
   def self.load_embargo(year)
-    url = "https://vybriz.orientacnisporty.cz/api/?method=getEventCoordsList&year=#{year}&orisonly=1"
+    url = "https://vybriz.ceskyorientak.cz/api/?method=getEventCoordsList&year=#{year}&orisonly=1"
     require 'open-uri'
     puts "Opening #{url}"
     data = URI.open(url).read rescue nil
