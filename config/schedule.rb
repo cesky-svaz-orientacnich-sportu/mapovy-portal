@@ -3,10 +3,6 @@
 
 set :output, nil
 
-# every 1.day, at: '1:15 am' do
-#   rake 'oris:obpostupy'
-# end
-
 every 1.day, at: '2:15 am' do
   rake 'oris:events'
 end

@@ -3,17 +3,15 @@
 #
 # Table name: oris_events
 #
-#  id                :integer          not null, primary key
-#  date              :date
-#  obpostupy_map_url :string(255)
-#  obpostupy_url     :string(255)
-#  oris_json         :text
-#  oris_timestamp    :datetime
-#  place             :string(255)
-#  title             :string(255)
-#  created_at        :datetime         not null
-#  updated_at        :datetime         not null
-#  oris_id           :integer
+#  id             :integer          not null, primary key
+#  date           :date
+#  oris_json      :text
+#  oris_timestamp :datetime
+#  place          :string(255)
+#  title          :string(255)
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#  oris_id        :integer
 #
 
 class OrisEvent < ApplicationRecord
@@ -40,43 +38,6 @@ class OrisEvent < ApplicationRecord
     end
     s << " ##{oris_id}"
     s
-  end
-
-  def self.obpostupy_lookup
-    require 'open-uri'
-    require 'nokogiri'
-
-    url = "http://www.obpostupy.cz/index.php"
-    doc = Nokogiri::HTML(URI.open(url).read)
-    if doc and doc.root
-      puts "Loaded obpostupy."
-      doc.root.css("#obsah > table.zavody tr").each do |row|
-        cells = row.css('td')
-        if cells.size == 10
-          if anchor = cells[9].css('a').first
-            link = anchor['href']
-            if link and m = link.match(/Zavod\?id=(\d+)$/)
-              oris_id = m[1].to_i
-              puts "-> oris ID = #{m[1]}"
-              url = "http://www.obpostupy.cz" + cells[2].css('a').first['href']
-              puts " --> #{url}"
-              if e = OrisEvent.where(oris_id: oris_id).first
-                e.update_attribute(:obpostupy_url, url)
-
-                s = URI.open(url).read
-                if m = s.encode('ASCII-8BIT',invalid: :replace, undef: :replace).match(/imageUrl = '\/gadget\/kartat\/(\d+)\.jpg'/)
-                  map_url = "http://www.obpostupy.cz/gadget/kartat/#{m[1]}.jpg"
-                  puts " --> #{map_url}"
-                  if e = OrisEvent.where(oris_id: oris_id).first
-                    e.update_attribute(:obpostupy_map_url, map_url)
-                  end
-                end
-              end
-            end
-          end
-        end
-      end
-    end
   end
 
   def self.fetch(year, only_new = false)

@@ -28,7 +28,6 @@ gem "kaminari-bootstrap", "~> 3.0"
 gem "magic_encoding", "~> 0.0.2"
 gem "nested_form", "~> 0.3"
 gem "nilify_blanks", "~> 1.4"
-gem "nokogiri", "~> 1.13" # XML handling
 gem "omniauth", "~> 2.1"
 gem "omniauth-facebook", "~> 10.0"
 gem "omniauth-google-oauth2", "~> 1.1"
