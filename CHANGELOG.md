@@ -2,6 +2,9 @@
 
 ## [Unreleased]
 
+## [2.7.3] - 2025-10-28
+- fix CRON
+
 ## [2.7.1] - 2025-10-23
 - fix Google authentication
 - normalize translation files & fix missing Devise i18n
