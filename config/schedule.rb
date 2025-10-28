@@ -1,11 +1,9 @@
 # Use this file to easily define all of your cron jobs.
 # Learn more: http://github.com/javan/whenever
 
-set :output, "#{path}/log/cron.log"
+env :PATH, "#{ENV['HOME']}/.rbenv/shims:#{ENV['HOME']}/.rbenv/bin:/usr/local/bin:/usr/bin:/bin"
 
-every 3.minutes do
-  rake "maps:embargo" # for testing only
-end
+set :output, {:error => "#{path}/log/cron_error.log", :standard => nil}
 
 every 1.day, at: '2:15 am' do
   rake 'oris:events'
