@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+## [2.8.0] - 2025-11-05
+- don't send reminder e-mails to admins
+- add reply_to to map state notifications to easily communicate with the author, rather then admins
+
 ## [2.7.3] - 2025-10-28
 - fix CRON
 
