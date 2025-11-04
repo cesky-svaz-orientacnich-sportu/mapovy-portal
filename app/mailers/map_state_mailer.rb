@@ -4,35 +4,35 @@ class MapStateMailer < ActionMailer::Base
 
   def map_proposed(map)
     @map = map
-    mail(to: map.authorized_cartographers.map(&:email), subject: "Nový požadavek na evidenci mapy #{@map}")
+    mail(to: map.authorized_cartographers.map(&:email), reply_to: map.created_by.email, subject: "Nový požadavek na evidenci mapy #{@map}")
   end
 
   def map_changed_after_request(map, region_was)
     @map = map
     @region_was = region_was
-    mail(to: map.authorized_cartographers(region_was).map(&:email), subject: "Doplněný požadavek na evidenci mapy #{@map}")
+    mail(to: map.authorized_cartographers(region_was).map(&:email), reply_to: map.created_by.email, subject: "Doplněný požadavek na evidenci mapy #{@map}")
   end
 
   def map_approved(map)
     @map = map
-    mail(to: map.created_by.email, subject: "Požadavek na evidenci mapy #{@map} přijat")
+    mail(to: map.created_by.email, reply_to: map.approved_by.email, subject: "Požadavek na evidenci mapy #{@map} přijat")
   end
 
   def map_rejected(map, comment)
     @map = map
     @comment = comment
-    mail(to: map.created_by.email, subject: "Požadavek na evidenci mapy #{@map} vrácen k doplnění")
+    mail(to: map.created_by.email, reply_to: map.approved_by.email, subject: "Požadavek na evidenci mapy #{@map} vrácen k doplnění")
   end
 
   def map_completed(map)
     @map = map
-    mail(to: map.authorized_cartographers.map(&:email), subject: "Doplněny údaje k mapě #{@map}")
+    mail(to: map.authorized_cartographers.map(&:email), reply_to: map.completed_by.email, subject: "Doplněny údaje k mapě #{@map}")
   end
 
   def map_completion_rejected(map, comment)
     @map = map
     @comment = comment
-    mail(to: map.created_by.email, subject: "Požadavek na schválení mapy #{@map} vrácen k doplnění")
+    mail(to: map.created_by.email, reply_to: map.approved_by.email, subject: "Požadavek na schválení mapy #{@map} vrácen k doplnění")
   end
 
   def reminder_on_proposed(map)
