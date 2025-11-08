@@ -35,6 +35,15 @@
   var polygon;
   var map;
 
+  function setPolygon(themap) {
+    coordList = [#{@map.shape_json.blank? ? [] : (JSON[@map.shape_json].map{|x| %{new google.maps.LatLng("#{x[0]}", "#{x[1]}")}} * ", ").html_safe}];
+    polygon = new google.maps.Polygon({
+      paths: coordList,
+      editable: true
+    });
+    polygon.setMap(themap);
+  }
+
   $(function() {
     map = setupMap(document.getElementById('inline_map_canvas'), false);
     setupMapEditor(map);
@@ -49,17 +58,3 @@
     });
 
   });
-
-- if @map.shape_json.blank?
-  :javascript
-    function setPolygon(themap) {}
-- else
-  :javascript
-    function setPolygon(themap) {
-      coordList = [#{(JSON[@map.shape_json].map{|x| %{new google.maps.LatLng("#{x[0]}", "#{x[1]}")}} * ", ").html_safe}];
-      polygon = new google.maps.Polygon({
-        paths: coordList,
-        editable: true
-      });
-      polygon.setMap(themap);
-    }

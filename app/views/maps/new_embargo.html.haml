@@ -21,6 +21,15 @@
   let polygon
   var map
 
+  function setPolygon(themap) {
+    const coordList = [#{@map.shape_json.blank? ? [] : (JSON[@map.shape_json].map{|x| %{new google.maps.LatLng("#{x[0]}", "#{x[1]}")}} * ", ").html_safe}]
+    polygon = new google.maps.Polygon({
+      paths: coordList,
+      editable: true
+    })
+    polygon.setMap(themap)
+  }
+
   $(function() {
     map = setupMap(document.getElementById('inline_map_canvas'), false)
     setupMapEditor(map)
@@ -34,17 +43,3 @@
       width: '100%'
     })
   })
-
-- if @map.shape_json.blank?
-  :javascript
-    function setPolygon(themap) {}
-- else
-  :javascript
-    function setPolygon(themap) {
-      const coordList = [#{(JSON[@map.shape_json].map{|x| %{new google.maps.LatLng("#{x[0]}", "#{x[1]}")}} * ", ").html_safe}]
-      polygon = new google.maps.Polygon({
-        paths: coordList,
-        editable: true
-      })
-      polygon.setMap(themap)
-    }
