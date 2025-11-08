@@ -697,6 +697,8 @@ cs:
     search: Vyhledat
     searchBoxForm: Název mapy
     shape_edit_help: |
+      <strong>Nově můžete nahrát obrys přímo z GPX! (tlačítko nad mapou)</strong>
+
       Jsou možné dva režimy (editace a kreslení), přepínátka vpravo nahoře.
       Aktuální režim je indikován zvýrazněním přepínátka a tvarem kurzoru:
       Pacička = editace (posun mapy v okně)
