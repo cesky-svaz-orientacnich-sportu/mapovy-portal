@@ -145,27 +145,12 @@
     %button(type="button" class="btn btn-primary submit-btn" id="map_form_submit_button") Uložit mapu
 
 :javascript
-  var map;
-  var polygon;
-
-  function setPolygon(themap) {
-    coordinates = [#{@map.shape_json.blank? ? [] : (JSON[@map.shape_json].map{|x| %{new google.maps.LatLng("#{x[0]}", "#{x[1]}")}} * ", ").html_safe}];
-    polygon = new google.maps.Polygon({
-      paths: coordinates,
-      editable: true
-    });
-    polygon.setMap(map);
-    var bounds = new google.maps.LatLngBounds();
-    for (var i = 0; i < coordinates.length; i++)
-      bounds.extend(coordinates[i]);
-    if (coordinates.length > 0)
-      map.fitBounds(bounds);
-  }
+  let polygon;
 
   $(function() {
     map = setupMap(document.getElementById('inline_map_canvas'), false);
     setupMapEditor(map);
-    setPolygon(map);
+    setMapPolygon(map, polygon, [#{@map.shape_json.blank? ? [] : (JSON[@map.shape_json].map{|x| %{new google.maps.LatLng("#{x[0]}", "#{x[1]}")}} * ", ").html_safe}]);
     setupMapEditorSubmit();
     fixMapHeight($('#inline_map_canvas'));
 

@@ -32,22 +32,12 @@
     %button(type="button" class="btn btn-primary submit-btn") Uložit mapu
 
 :javascript
-  var polygon;
-  var map;
-
-  function setPolygon(themap) {
-    coordList = [#{@map.shape_json.blank? ? [] : (JSON[@map.shape_json].map{|x| %{new google.maps.LatLng("#{x[0]}", "#{x[1]}")}} * ", ").html_safe}];
-    polygon = new google.maps.Polygon({
-      paths: coordList,
-      editable: true
-    });
-    polygon.setMap(themap);
-  }
+  let polygon;
 
   $(function() {
     map = setupMap(document.getElementById('inline_map_canvas'), false);
     setupMapEditor(map);
-    setPolygon(map);
+    setMapPolygon(map, polygon, [#{@map.shape_json.blank? ? [] : (JSON[@map.shape_json].map{|x| %{new google.maps.LatLng("#{x[0]}", "#{x[1]}")}} * ", ").html_safe}]);
     setupMapEditorSubmit();
     fixMapHeight($('#inline_map_canvas'));
 

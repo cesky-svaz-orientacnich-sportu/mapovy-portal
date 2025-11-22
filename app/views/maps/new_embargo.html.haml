@@ -18,28 +18,18 @@
     %button(type="button" class="btn btn-primary submit-btn") Uložit embargo
 
 :javascript
-  let polygon
-  var map
-
-  function setPolygon(themap) {
-    const coordList = [#{@map.shape_json.blank? ? [] : (JSON[@map.shape_json].map{|x| %{new google.maps.LatLng("#{x[0]}", "#{x[1]}")}} * ", ").html_safe}]
-    polygon = new google.maps.Polygon({
-      paths: coordList,
-      editable: true
-    })
-    polygon.setMap(themap)
-  }
+  let polygon;
 
   $(function() {
-    map = setupMap(document.getElementById('inline_map_canvas'), false)
-    setupMapEditor(map)
-    setPolygon(map)
+    map = setupMap(document.getElementById('inline_map_canvas'), false);
+    setupMapEditor(map);
+    setMapPolygon(map, polygon, [#{@map.shape_json.blank? ? [] : (JSON[@map.shape_json].map{|x| %{new google.maps.LatLng("#{x[0]}", "#{x[1]}")}} * ", ").html_safe}]);
     setupMapEditorSubmit()
-    fixMapHeight($('#inline_map_canvas'))
+    fixMapHeight($('#inline_map_canvas'));
 
     $("#map_oris_event_id").select2({
       allowClear: true,
       theme: 'bootstrap',
       width: '100%'
-    })
+    });
   })

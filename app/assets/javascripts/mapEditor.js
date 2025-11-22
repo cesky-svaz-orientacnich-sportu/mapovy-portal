@@ -182,3 +182,19 @@ function setupMapEditor(map) {
 
 	return drawingManager
 }
+
+function setMapPolygon(map, polygon, coordinates) {
+	polygon = new google.maps.Polygon({
+		paths: coordinates,
+		editable: true
+	});
+	polygon.setMap(map);
+
+	if (coordinates[0].length > 0) {
+		const bounds = new google.maps.LatLngBounds();
+		for (let i = 0; i < coordinates.length; i++) {
+			bounds.extend(coordinates[i]);
+		}
+		map.fitBounds(bounds);
+	}
+}
