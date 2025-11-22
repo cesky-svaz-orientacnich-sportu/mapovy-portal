@@ -124,7 +124,9 @@ const setupGPXImport = (map) => {
 		if (e.target && e.target.files) {
 			const gpx = await readFile(e.target.files[0])
 
-			polygon.setMap(null) // remove old polygon
+			if ("setMap" in polygon) {
+				polygon.setMap(null) // remove old polygon
+			}
 
 			const points = []
 			for (const line of gpx.split('\n')) {
@@ -134,17 +136,7 @@ const setupGPXImport = (map) => {
 				}
 			}
 			if (points.length) {
-				polygon = new google.maps.Polygon({
-					paths: points,
-					editable: true
-				})
-				polygon.setMap(map)
-
-				const bounds = new google.maps.LatLngBounds()
-				for (const point of points) {
-					bounds.extend(point)
-				}
-				map.fitBounds(bounds)
+				polygon = setMapPolygon(map, polygon, points, true);
 			}
 			$loading.remove()
 			$mapLoading.remove()
@@ -183,18 +175,20 @@ function setupMapEditor(map) {
 	return drawingManager
 }
 
-function setMapPolygon(map, polygon, coordinates) {
+function setMapPolygon(map, polygon, coordinates, editable = true) {
 	polygon = new google.maps.Polygon({
 		paths: coordinates,
-		editable: true
+		editable: editable
 	});
 	polygon.setMap(map);
 
-	if (coordinates[0].length > 0) {
+	if (coordinates.length) {
 		const bounds = new google.maps.LatLngBounds();
-		for (let i = 0; i < coordinates.length; i++) {
-			bounds.extend(coordinates[i]);
+		for (const point of coordinates) {
+			bounds.extend(point);
 		}
 		map.fitBounds(bounds);
 	}
+
+	return polygon;
 }

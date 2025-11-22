@@ -51,23 +51,11 @@
   %div#inline_map_canvas(style="width:100%;min-height:400px;height:400px")
 
   :javascript
-    var polygon;
-    var map;
+    let polygon;
 
-    $( window ).load(function() {
-
+    $(window).load(function() {
       map = setupMap(document.getElementById('inline_map_canvas'), false);
-
-      coordList = [#{(@map.shape_as_coords.map{|x| %{new google.maps.LatLng("#{x[1]}", "#{x[0]}")}} * ", ").html_safe}];
-      polygon = new google.maps.Polygon({
-        paths: coordList
-      });
-      polygon.setMap(map);
-      var bounds = new google.maps.LatLngBounds();
-      for (var i = 0; i < coordList.length; i++)
-        bounds.extend(coordList[i]);
-      map.fitBounds(bounds);
-
+      polygon = setMapPolygon(map, polygon, [#{@map.shape_json.blank? ? nil : (JSON[@map.shape_json].map{|x| %{new google.maps.LatLng("#{x[0]}", "#{x[1]}")}} * ", ").html_safe}], false);
     });
 
 %h2 Náhled

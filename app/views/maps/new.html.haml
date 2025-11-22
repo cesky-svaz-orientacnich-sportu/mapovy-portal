@@ -37,7 +37,7 @@
   $(function() {
     map = setupMap(document.getElementById('inline_map_canvas'), false);
     setupMapEditor(map);
-    setMapPolygon(map, polygon, [#{@map.shape_json.blank? ? [] : (JSON[@map.shape_json].map{|x| %{new google.maps.LatLng("#{x[0]}", "#{x[1]}")}} * ", ").html_safe}]);
+    polygon = setMapPolygon(map, polygon, [#{@map.shape_json.blank? ? nil : (JSON[@map.shape_json].map{|x| %{new google.maps.LatLng("#{x[0]}", "#{x[1]}")}} * ", ").html_safe}]);
     setupMapEditorSubmit();
     fixMapHeight($('#inline_map_canvas'));
 
