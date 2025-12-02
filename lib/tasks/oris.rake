@@ -13,14 +13,16 @@ namespace :oris do
   task :events => :environment do
     OrisEvent.fetch(Date.today.year, true)
     OrisEvent.fetch(Date.today.year+1, true)
+    OrisEvent.fetch(Date.today.year+2, true)
   end
   task :events_history => :environment do
-    (2013..Date.today.year+1).each do |y|
+    (2013..Date.today.year+2).each do |y|
       OrisEvent.fetch(y, true)
     end
   end
   task :events_all => :environment do
     OrisEvent.fetch(Date.today.year, false)
     OrisEvent.fetch(Date.today.year+1, false)
+    OrisEvent.fetch(Date.today.year+2, false)
   end
 end
